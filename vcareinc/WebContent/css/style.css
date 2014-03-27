@@ -1,0 +1,328 @@
+@CHARSET "ISO-8859-1";
+
+body
+{
+	background-color: #fff;
+	font: 15px calibri,sans-serif;
+}
+
+#container
+{
+	width:350px;
+	position: relative;
+	padding: 100px 0px 0px 500px;
+}
+#tabbox
+{
+	height:40px;
+	padding: 0px 200px 0px 200px;
+}
+#panel
+{
+	background-color:#FCFBE3;
+	height:450px;
+	position: absolute;
+	width: 370px;
+	-moz-box-shadow:    0 0 5px #ccc;
+ 	-webkit-box-shadow: 0 0 5px #ccc;
+  	box-shadow:         0 0 5px #ccc;
+}
+
+#panel2
+{
+	background-color:#FCFBE3;
+	height:250px;
+	position: absolute;
+	width: 300px;
+	-moz-box-shadow:    0 0 5px #ccc;
+ 	-webkit-box-shadow: 0 0 5px #ccc;
+  	box-shadow:         0 0 5px #ccc;
+}
+
+#loginbox
+{
+	min-height:200px;
+	text-align: left;
+	padding: 0px 20px 0px 20px;
+}
+#signupbox
+{
+	min-height:200px;
+	text-align: left;
+	padding: 0px 20px 0px 20px;
+}
+
+#forgotPasswordBox
+{
+	min-height:200px;
+	text-align: left;
+	padding: 0px 20px 0px 20px;
+}
+
+#forgotPasswordBox input[type="text"]
+{
+	width: 250px;
+}
+
+#thirdPartyLink
+{
+	text-align: center;
+	padding: 30px;
+}
+
+#button
+{
+	padding: 10px;
+}
+#signButton
+{
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #4CC417;
+    color: #fff;
+    height: 25px;
+    padding: 5px 10px 5px 10px;
+}
+
+#loginButton
+{
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #4CC417;
+    color: #fff;
+    height: 25px;
+    padding: 5px 10px 5px 10px;
+}
+
+#cancelButton
+{
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #B2B2B2;
+    color: #fff;
+    height: 25px;
+    padding: 5px 10px 5px 10px;
+}
+
+#facebook
+{
+	width: 300px;
+	background-color: #3b5999;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+	text-align: center;
+	padding: 5px;
+	color: #fff;
+	height: 20px;
+}
+
+#twitter
+{
+	width: 300px;
+	background-color: #9AE4E8;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+	text-align: center;
+	padding: 5px;
+	color: #fff;
+	height: 20px;
+}
+
+#divider
+{
+	text-align: center;
+	background-color: #000;;
+	height: 2px;
+}
+
+#divider span
+{
+	background-color: #fff;
+	position: relative;
+	top: -0.7em;
+}
+
+
+.tab
+{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	width: 80px;
+	float: left;
+	font-weight: normal;
+	font-size: 15pt;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	color: gray;
+	background-color: #FCFBE3;
+	-moz-box-shadow:    0 0 5px #ccc;
+ 	-webkit-box-shadow: 0 0 5px #ccc;
+  	box-shadow:         inset 0 0 -5px #ccc;
+}
+a
+{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+.signup
+{
+	margin-left:8px;
+}
+
+.login
+{
+	margin-right:8px;
+}
+.select
+{
+	border-bottom-color: #ffffcc;
+ 	color: black;
+ 	background-color: #FCFBE3;
+ 	height: 45px;
+}
+
+.title {
+	color: #fff;
+	font-size: 11px;
+	line-height: 22px;
+}
+
+.navbar {
+	color: #FFFFFF;
+}
+
+.panelgrid
+{
+	padding: 50px 200px 0px 200px;
+}
+
+.homeContent
+{
+	padding: 20px 0px 0px 100px;
+	width: 1000px;
+}
+
+#imageGridNavBox
+{
+	width: 800px;
+	position: absolute;
+	top: 340px;
+	left: 100px;
+	float: left;
+}
+.imageSwapGrid
+{
+	position: relative;
+}
+.imageSwapGridLink 
+{
+	position: absolute;
+	left: 100px;
+	font-weight: bold;
+	font-size: 20pt;
+	top: 20px;
+}
+.imageSwapGridNav
+{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float: left;
+	color: #fff;
+	background-color: grey;
+	padding: 5px 46px 5px 46px;
+}
+.imageSwapGridNavSelect {
+	background-color: #66ccff;
+}
+.signupBox 
+{
+	float: left;
+	width: 200px;
+	background-color: #d3d3ef;
+	height: 400px;
+	margin-top: 30px;
+	text-align: center;
+}
+.signuptips
+{
+	color: #ecf0f1;
+	font-weight: bold;
+	font-size: 12pt;
+}
+.signupBtnPink
+{
+	background-color: #ff69b4;
+	width: 85%;
+	text-align: center;
+	color: #fff;
+	height: 20px;
+	font-size: 10.05px;
+	font-weight: bold;
+}
+.facebookBtn
+{
+	background: url("/vcareinc/resources/images/btn-facebook.png") no-repeat 10px center #7683a8;
+	width: 85%;
+	background-color: #3b5999;
+	text-align: center;
+	color: #fff;
+	height: 20px;
+	font-size: 10.05px;
+	font-weight: bold;
+}
+.content
+{
+	padding: 10px 10px 0px 10px;
+}
+.contentHeader
+{
+	background-color: #457ae6;
+	height: 30px;
+	color: white;
+	padding: 0px 0px 0px 10px;
+	font-weight: bold;
+}
+.contentBody
+{
+	background-color: #F4F4f4;
+	border-color: #dfeaf7;
+	padding: 0px 0px 0px 10px;
+}
+.contentBodyList
+{
+	list-style-type: none;
+	padding: 10px;
+	margin: 0;
+}
+.footer
+{
+	color: #fff;
+	padding: 0px;
+}
+.footerheader
+{
+	font-weight: bold;
+}
+.footerList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	color: #000;
+}
