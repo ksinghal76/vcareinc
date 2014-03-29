@@ -6,7 +6,6 @@
 	<persistence-unit name="userProfile">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.vcareinc.vo.User</class>
-		<class>com.vcareinc.vo.UserRoles</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 	      	<property name="hibernate.hbm2ddl.auto" value="create-drop" />

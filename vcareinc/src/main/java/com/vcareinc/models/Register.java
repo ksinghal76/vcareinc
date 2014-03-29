@@ -2,6 +2,9 @@ package com.vcareinc.models;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class Register implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -10,7 +13,7 @@ public class Register implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String password;
-	private String phoneNumber;
+	private String phonenumber;
 	public String getEmail() {
 		return email;
 	}
@@ -35,16 +38,16 @@ public class Register implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	@Override
 	public String toString() {
 		return "Register [email=" + email + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", password=" + password
-				+ ", phoneNumber=" + phoneNumber + "]";
+				+ ", phonenumber=" + phonenumber + "]";
 	}
 }

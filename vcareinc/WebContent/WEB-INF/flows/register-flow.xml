@@ -12,9 +12,9 @@
 		<if then="register" test="id==null" else="loginSuccess"/>
 	</decision-state>
 	
-	<view-state id="register" view="/WEB-INF/jsf/register.xhtml" model="user">
+	<view-state id="register" view="/WEB-INF/jsf/register.xhtml" model="register">
 		<transition on="submit" to="completeRegisterForm">
-			<evaluate expression="userService.saveOrUpdate(user)"/>
+			<evaluate expression="userService.saveRegister(register)"/>
 		</transition>
 	</view-state>
 	

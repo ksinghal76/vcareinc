@@ -13,12 +13,11 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @Entity
-public class UserRoles implements Serializable {
+public class Role implements Serializable {
 
 	private static final long serialVersionUID = -2859455369294931640L;
 	
 	private Long id;
-	private User user;
 	private String authority;
 	private Timestamp created;
 	private User createdBy;
@@ -30,14 +29,6 @@ public class UserRoles implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	@OneToOne(fetch=FetchType.LAZY)
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
 	}
 	public String getAuthority() {
 		return authority;
@@ -61,8 +52,7 @@ public class UserRoles implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "UserRoles [id=" + id + ", user=" + user + ", authority="
-				+ authority + ", created=" + created + ", createdBy="
-				+ createdBy + "]";
+		return "Role [id=" + id + ", authority=" + authority + ", created="
+				+ created + ", createdBy=" + createdBy + "]";
 	}
 }

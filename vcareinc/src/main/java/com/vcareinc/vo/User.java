@@ -2,11 +2,16 @@ package com.vcareinc.vo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Controller;
@@ -26,6 +31,10 @@ public class User implements Serializable {
 	private Boolean enable;
 	private Timestamp created;
 	private User createdBy;
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ElementCollection(targetClass=Role.class)
+	private Set<Role> roles = new HashSet<Role>();
 	
 	@Id
 	@GeneratedValue
@@ -85,6 +94,15 @@ public class User implements Serializable {
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
+	
+	public boolean addRole(Role role) {
+		return roles.add(role);
+	}
+	
+	public Set<Role> getRoles() {
+		return this.roles;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstname=" + firstname + ", lastname="

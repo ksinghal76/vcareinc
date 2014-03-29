@@ -9,11 +9,15 @@
 		<h:form>
 			<h:panelGrid border="0" columns="2" styleClass="panelgrid">
 				<h:outputText value="#{msg['form.firstname.label']}:"/>
-				<h:inputText id="firstname" value="#{user.firstname}"/>
+				<h:inputText id="firstname" value="#{register.firstname}"/>
 				<h:outputText value="#{msg['form.lastname.label']}:"/>
-				<h:inputText id="lastname" value="#{user.lastname}"/>
+				<h:inputText id="lastname" value="#{register.lastname}"/>
 				<h:outputText value="#{msg['form.email.label']}:"/>
-				<h:inputText id="email" value="#{user.email}"/>
+				<h:inputText id="email" value="#{register.email}"/>
+				<h:outputText value="#{msg['form.phonenumber.label']}:"/>
+				<h:inputText id="phonenumber" value="#{register.phonenumber}"/>
+				<h:outputText value="#{msg['form.password.label']}:"/>
+				<h:inputSecret id="password" value="#{register.password}"/>
 				<h:commandButton id="submit" action="submit" value="#{msg['button.submit.label']}"/>
 			</h:panelGrid>
 		</h:form>
