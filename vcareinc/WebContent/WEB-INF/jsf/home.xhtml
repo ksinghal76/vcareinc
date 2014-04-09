@@ -9,15 +9,15 @@
     	<table cellpadding="0" cellspacing="0" border="0">
     		<tr>
     			<td>
-			    	<div class="homeContent">
+			    	<div>
 				    	<div class="imageSwapGrid">
-				    		<IMG alt="" src="${request.contextPath}/resources/images/searchListingsLogo.jpg" width="897px" border="0" />
-				    		<a href="${request.contextPath}/spring/home" class="imageSwapGridLink"><h:outputText value="#{msg['message.search.listing.label']}"/></a>
+				    		<IMG id="switchImageTab" alt="" src="${request.contextPath}/resources/images/searchListingsLogo.jpg" width="897px" border="0" />
+				    		<a id="switchHrefTab" href="listing" class="imageSwapGridLink"><h:outputText value="#{msg['message.search.listing.label']}"/></a>
 				    		<div id="imageGridNavBox">
-				    			<a href="#" class="imageSwapGridNav imageSwapGridNavSelect"><h:outputText value="#{msg['message.search.listing.label']}"/></a>
-				    			<a href="#" class="imageSwapGridNav"><h:outputText value="#{msg['message.beautyPros.signup.label']}"/></a>
-				    			<a href="#" class="imageSwapGridNav"><h:outputText value="#{msg['message.salons.signup.label']}"/></a>
-				    			<a href="#" class="imageSwapGridNav"><h:outputText value="#{msg['message.schools.students.label']}"/></a>
+				    			<a href="#" id="tab1" onclick="changeImageTab('${request.contextPath}/resources/images/searchListingsLogo.jpg', 'switchImageTab', '1', 'imageSwapGridNavSelect', 4);changeLinkTab('listing', '#{msg['message.search.listing.label']}', 'switchHrefTab');" class="imageSwapGridNav imageSwapGridNavSelect"><h:outputText value="#{msg['message.search.listing.label']}"/></a>
+				    			<a href="#" id="tab2" onclick="changeImageTab('${request.contextPath}/resources/images/sitemgr_photo_5356.jpg', 'switchImageTab', '2', 'imageSwapGridNavSelect', 4);changeLinkTab('beauty', '#{msg['message.beautyPros.signup.label']}', 'switchHrefTab');" class="imageSwapGridNav"><h:outputText value="#{msg['message.beautyPros.signup.label']}"/></a>
+				    			<a href="#" id="tab3" onclick="changeImageTab('${request.contextPath}/resources/images/sitemgr_photo_5359.jpg', 'switchImageTab', '3', 'imageSwapGridNavSelect', 4);changeLinkTab('salon', '#{msg['message.salons.signup.label']}', 'switchHrefTab');" class="imageSwapGridNav"><h:outputText value="#{msg['message.salons.signup.label']}"/></a>
+				    			<a href="#" id="tab4" onclick="changeImageTab('${request.contextPath}/resources/images/sitemgr_photo_5364.jpg', 'switchImageTab', '4', 'imageSwapGridNavSelect', 4);changeLinkTab('schools', '#{msg['message.schools.students.label']}', 'switchHrefTab');" class="imageSwapGridNav"><h:outputText value="#{msg['message.schools.students.label']}"/></a>
 				    		</div>
 				    	</div>
 				    	

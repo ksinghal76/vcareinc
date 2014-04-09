@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class Register implements Serializable {
+public class Register extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

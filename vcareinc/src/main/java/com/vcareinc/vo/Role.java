@@ -17,10 +17,15 @@ public class Role implements Serializable {
 
 	private static final long serialVersionUID = -2859455369294931640L;
 	
+	public enum RoleType{ROLE_USER, ROLE_ADMIN, ROLE_CLIENT};
+	
 	private Long id;
-	private String authority;
+	private RoleType authority;
 	private Timestamp created;
 	private User createdBy;
+	
+	@OneToOne
+	private User user;
 	
 	@Id
 	@GeneratedValue
@@ -30,10 +35,10 @@ public class Role implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getAuthority() {
+	public RoleType getAuthority() {
 		return authority;
 	}
-	public void setAuthority(String authority) {
+	public void setAuthority(RoleType authority) {
 		this.authority = authority;
 	}
 	public Timestamp getCreated() {
@@ -50,9 +55,15 @@ public class Role implements Serializable {
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", authority=" + authority + ", created="
-				+ created + ", createdBy=" + createdBy + "]";
+				+ created + ", createdBy=" + createdBy + ", user=" + user + "]";
 	}
 }

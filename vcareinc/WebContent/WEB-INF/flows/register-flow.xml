@@ -13,9 +13,20 @@
 	</decision-state>
 	
 	<view-state id="register" view="/WEB-INF/jsf/register.xhtml" model="register">
-		<transition on="submit" to="completeRegisterForm">
-			<evaluate expression="userService.saveRegister(register)"/>
-		</transition>
+		<transition on="submit" to="saveRegister"/>
+	</view-state>
+	
+	<action-state id="saveRegister">
+		<evaluate expression="userService.saveRegister(register)"/>
+		<transition to="viewProfile"/>
+		<transition on-exception="com.vcareinc.exceptions.DBException" to="register"/>
+	</action-state>
+	
+	<view-state id="viewProfile" view="/WEB-INF/jsf/userProfile.xhtml" model="register">
+		<on-render>
+			<evaluate expression="userService.findUser(register.email)" result="viewScope.userProfile"/>
+		</on-render>
+		<transition on="submit" to="completeRegisterForm"/>
 	</view-state>
 	
 	<end-state id="completeRegisterForm"/>

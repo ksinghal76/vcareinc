@@ -2,33 +2,22 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:c="http://java.sun.com/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="includes/template.xhtml">
 
     <ui:define name="bodyContent">
-    	<h:panelGroup rendered="#{not empty register.errorConstraintViolation}">
-			<div class="errors">
-				Your register was not successful, Please try again.<br />
-				Reason: <ul>
-							<ui:repeat value="#{register.errorConstraintViolation.toArray()}" var="error">
-								<li><h:outputText value="${error.messageTemplate}"/></li>
-							</ui:repeat> 
-						</ul>
-			</div>
-		</h:panelGroup>
-		<h:form>
+    	<h:form>
 			<h:panelGrid border="0" columns="2" styleClass="panelgrid">
 				<h:outputText value="#{msg['form.firstname.label']}:"/>
-				<h:inputText id="firstname" value="#{register.firstname}"/>
+				<h:outputText id="firstname" value="#{userProfile.firstname}"/>
 				<h:outputText value="#{msg['form.lastname.label']}:"/>
-				<h:inputText id="lastname" value="#{register.lastname}"/>
+				<h:outputText id="lastname" value="#{userProfile.lastname}"/>
 				<h:outputText value="#{msg['form.email.label']}:"/>
-				<h:inputText id="email" value="#{register.email}"/>
+				<h:outputText id="email" value="#{userProfile.email}"/>
 				<h:outputText value="#{msg['form.phonenumber.label']}:"/>
-				<h:inputText id="phonenumber" value="#{register.phonenumber}"/>
+				<h:outputText id="phonenumber" value="#{userProfile.phonenumber}"/>
 				<h:outputText value="#{msg['form.password.label']}:"/>
-				<h:inputSecret id="password" value="#{register.password}"/>
+				<h:outputText id="password" value="#{userProfile.password}"/>
 				<h:commandButton id="submit" action="submit" value="#{msg['button.submit.label']}"/>
 			</h:panelGrid>
 		</h:form>

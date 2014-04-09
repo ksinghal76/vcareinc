@@ -5,39 +5,56 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Controller;
 
 @Controller
 @Entity
+@Table(name="user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1867515118091918594L;
 	
+	@Id
+	@GeneratedValue
 	private Long id;
+	
+	@NotNull
+	@Size(min=5, max=50, message="Firstname must contain between 5 and 50")
 	private String firstname;
+	
+	@NotNull
+	@Size(min=5, max=50, message="Lastname must contain between 5 and 50")
 	private String lastname;
+	
+	@Column(unique=true)
+	@NotNull
+	@Pattern(regexp="^.+@.+\\..+$", message="Email is invalid")
 	private String email;
+	
+	@NotNull
 	private String password;
-	private String phoneNumber;
+	
+	
+	private String phonenumber;
 	private Boolean enable;
 	private Timestamp created;
 	private User createdBy;
+
+	@ManyToMany(fetch=FetchType.EAGER)
+	private final Set<Role> roles = new HashSet<Role>();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@ElementCollection(targetClass=Role.class)
-	private Set<Role> roles = new HashSet<Role>();
-	
-	@Id
-	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +73,7 @@ public class User implements Serializable {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -68,11 +86,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	public Boolean getEnable() {
 		return enable;
@@ -94,20 +112,18 @@ public class User implements Serializable {
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
-	
 	public boolean addRole(Role role) {
 		return roles.add(role);
 	}
-	
 	public Set<Role> getRoles() {
-		return this.roles;
+		return roles;
 	}
-	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstname=" + firstname + ", lastname="
 				+ lastname + ", email=" + email + ", password=" + password
-				+ ", phoneNumber=" + phoneNumber + ", enable=" + enable
-				+ ", created=" + created + ", createdBy=" + createdBy + "]";
+				+ ", phoneNumber=" + phonenumber + ", enable=" + enable
+				+ ", created=" + created + ", createdBy=" + createdBy
+				+ ", roles=" + roles + "]";
 	}
 }
