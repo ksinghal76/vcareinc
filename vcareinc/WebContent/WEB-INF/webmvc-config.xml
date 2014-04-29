@@ -38,6 +38,18 @@
 		<property name="suffix" value=".xhtml" />
 		<property name="order" value="-1"/>
 	</bean>
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="0"/>
+		<property name="mappings">
+			<value>
+				/javax.faces.resource/**=jsfResourceHandler
+				/rfRes/**=jsfResourceHandler
+			</value>
+		</property>
+	</bean>
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+	<bean id="jsfResourceHandler" class="org.springframework.faces.webflow.JsfResourceRequestHandler" />
 
 	<!-- Dispatches requests mapped to org.springframework.web.servlet.mvc.Controller implementations -->
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
@@ -45,5 +57,8 @@
 	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
 		<property name="flowExecutor" ref="flowExecutor" />
+		<property name="ajaxHandler">
+			<bean class="org.springframework.faces.webflow.JsfAjaxHandler"/>
+		</property>
 	</bean>
 </beans>

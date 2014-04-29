@@ -12,6 +12,19 @@ function changeImageTab(imageUrl, tabName, selectedTab, className, totalTab) {
 	$(tabSelected).addClass(className);
 }
 
+function changeImageTab( selectedTab, className, totalTab) {
+	for(var i=1; i<= totalTab; i++) {
+		tabSelected = "#tab" + i;
+		$(tabSelected).removeClass(className);
+		tabSelected = "#liTab" + i;
+		$(tabSelected).removeClass(className);
+	}
+	tabSelected = "#tab" + selectedTab;
+	$(tabSelected).addClass(className);
+	tabSelected = "#liTab" + selectedTab;
+	$(tabSelected).addClass(className);
+}
+
 function changeLinkTab(url, name, tabName) {
 	var urlNm = "#" + tabName;
 	$(urlNm).attr("href", url);

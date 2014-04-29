@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Controller;
 
+@SuppressWarnings("rawtypes")
 @Controller
 public class Register extends BaseModel implements Serializable {
 
@@ -13,7 +14,10 @@ public class Register extends BaseModel implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String password;
+	private String retypePassword;
 	private String phonenumber;
+	private Boolean signupTip;
+	private Boolean agreeTerms;
 	public String getEmail() {
 		return email;
 	}
@@ -38,16 +42,28 @@ public class Register extends BaseModel implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getRetypePassword() {
+		return retypePassword;
+	}
+	public void setRetypePassword(String retypePassword) {
+		this.retypePassword = retypePassword;
+	}
 	public String getPhonenumber() {
 		return phonenumber;
 	}
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
-	@Override
-	public String toString() {
-		return "Register [email=" + email + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", password=" + password
-				+ ", phonenumber=" + phonenumber + "]";
+	public Boolean getSignupTip() {
+		return signupTip;
+	}
+	public void setSignupTip(Boolean signupTip) {
+		this.signupTip = signupTip;
+	}
+	public Boolean getAgreeTerms() {
+		return agreeTerms;
+	}
+	public void setAgreeTerms(Boolean agreeTerms) {
+		this.agreeTerms = agreeTerms;
 	}
 }

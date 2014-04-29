@@ -1,5 +1,15 @@
-@CHARSET "ISO-8859-1"; 
-/* @font-face {
+/*!
+ * Bootstrap v2.3.1
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+ 
+@font-face {
     font-family: 'Montserrat';
     src: url('fonts/montserrat-regular-webfont.eot');
     src: url('fonts/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -307,7 +317,7 @@ a:focus {
   float: left;
   min-height: 1px;
   margin-left: 20px;
-} */
+}
 
 .container,
 .navbar-static-top .container,
@@ -680,7 +690,7 @@ a:focus {
 .container-fluid:after {
   clear: both;
 }
-/* 
+
 p {
   margin: 0 0 10px;
 }
@@ -1173,7 +1183,7 @@ input[type="color"]:focus,
   border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted \9;
-  IE6-9
+  /* IE6-9 */
 }
 
 input[type="radio"],
@@ -1197,10 +1207,10 @@ input[type="checkbox"] {
 select,
 input[type="file"] {
   height: 30px;
-  In IE7, the height of the select element cannot be changed by height, only font-size
+  /* In IE7, the height of the select element cannot be changed by height, only font-size */
 
   *margin-top: 4px;
-  For IE7, add top margin to align select with labels
+  /* For IE7, add top margin to align select with labels */
 
   line-height: 30px;
 }
@@ -1259,7 +1269,7 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   color: #999999;
 }
- */
+
 .radio,
 .checkbox {
   min-height: 20px;
@@ -1313,10 +1323,10 @@ textarea::-webkit-input-placeholder {
 .input-xxlarge {
   width: 530px;
 }
-/* 
+
 input[class*="span"],
 select[class*="span"],
-textarea[class*="span"], */
+textarea[class*="span"],
 .uneditable-input[class*="span"],
 .row-fluid input[class*="span"],
 .row-fluid select[class*="span"],
@@ -1338,13 +1348,13 @@ textarea[class*="span"], */
 .row-fluid .input-append [class*="span"] {
   display: inline-block;
 }
-/* 
+
 input,
 textarea,
 .uneditable-input {
   margin-left: 0;
 }
- */
+
 .controls-row [class*="span"] + [class*="span"] {
   margin-left: 20px;
 }
@@ -1445,7 +1455,7 @@ textarea.span1,
 .controls-row .radio[class*="span"] {
   padding-top: 5px;
 }
-/* 
+
 input[disabled],
 select[disabled],
 textarea[disabled],
@@ -1461,7 +1471,7 @@ input[type="radio"][readonly],
 input[type="checkbox"][readonly] {
   background-color: transparent;
 }
- *//* 
+
 .control-group.warning .control-label,
 .control-group.warning .help-block,
 .control-group.warning .help-inline {
@@ -2054,7 +2064,7 @@ table th[class*="span"],
 
 .table-hover tbody tr.info:hover > td {
   background-color: #c4e3f3;
-} */
+}
 
 [class^="icon-"],
 [class*=" icon-"] {
@@ -2721,13 +2731,15 @@ table th[class*="span"],
   border-bottom: 1px solid #ffffff;
 }
 
+.dropdown-menu > li
+{border-bottom:1px dashed #a8adb1; margin:0 5px;}
 .dropdown-menu > li > a {
   display: block;
   padding: 3px 10px;
   clear: both;
   font-weight: normal;
   line-height: 20px;
-  color: #333333;
+  color: #005e9a;
   white-space: nowrap;
   text-align: left;
 }
@@ -3003,6 +3015,12 @@ table th[class*="span"],
   margin-top: 5px;
 }
 
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
 .btn-primary.active,
 .btn-warning.active,
 .btn-danger.active,
@@ -3134,7 +3152,7 @@ table th[class*="span"],
 .btn-inverse.active {
   background-color: #080808 \9;
 }
-/* 
+
 button.btn,
 input[type="submit"].btn {
   *padding-top: 3px;
@@ -3164,7 +3182,7 @@ input[type="submit"].btn.btn-mini {
   *padding-top: 1px;
   *padding-bottom: 1px;
 }
- */
+
 .btn-link,
 .btn-link:active,
 .btn-link[disabled] {
@@ -5514,162 +5532,4 @@ a.badge:focus {
 
 .affix {
   position: fixed;
-}
-/*!
- * Bootstrap v2.3.1
- *
- * Copyright 2012 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world @twitter by @mdo and @fat.
- */
-
- 
-@font-face {
-    font-family: 'Montserrat';
-    src: url('fonts/montserrat-regular-webfont.eot');
-    src: url('fonts/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/montserrat-regular-webfont.woff') format('woff'),
-         url('fonts/montserrat-regular-webfont.ttf') format('truetype'),
-         url('fonts/montserrat-regular-webfont.svg#montserratregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
- 
-@font-face {
-    font-family: 'Montserrat';
-    src: url('fonts/montserrat-bold-webfont.eot');
-    src: url('fonts/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/montserrat-bold-webfont.woff') format('woff'),
-         url('fonts/montserrat-bold-webfont.ttf') format('truetype'),
-         url('fonts/montserrat-bold-webfont.svg#montserratregular') format('svg');
-    font-weight: bold;
-    font-style: normal;
-
-}
-
-     
-body {
-  margin: 0;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 20px;
-  color: #353535;
-  background-color: #eeeeee;
-  text-rendering: optimizelegibility;
-}
-
-.clearfix, .clear {
-  *zoom: 1;
-}
-
-.clearfix:before,
-.clearfix:after,
-.clear:before,
-.clear:after {
-  display: table;
-  line-height: 0;
-  content: "";
-}
-
-.clearfix:after,
-.clear:after {
-  clear: both;
-}
-
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  background-color: transparent;
-  border: 0;
-}
-
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-/* 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
-  display: block;
-}
-
-audio,
-canvas,
-video {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
-
-audio:not([controls]) {
-  display: none;
-}
-
-html {
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-}
-
-a:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-
-a:hover,
-a:active {
-  outline: 0;
-}
-
-sub,
-sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-img {
-  width: auto\9;
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-  border: 0;
-  -ms-interpolation-mode: bicubic;
-} */
-
-.googleBase img, .gmnoprint img,.jcrop-holder img, .map img{max-width:none!important;}
-
-#crop {max-height:100%; margin-bottom:10px;}
-#crop img {max-width:none!important; max-height:none!important;}
-
-#map_canvas img,
-.google-maps img {
-  max-width: none;
 }

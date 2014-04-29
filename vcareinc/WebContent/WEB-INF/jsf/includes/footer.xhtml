@@ -1,109 +1,81 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:h="http://java.sun.com/jsf/html"
-				xmlns:ui="http://java.sun.com/jsf/facelets">
-	<div id="footer" class="footer-wrapper" style="">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<div id="footer" class="footer-wrapper">
 
-            <div class="container">
-                
-                <div class="row-fluid" style="">
-                    
-                                        
-                    <div class="span3 contact">
-                        
-                        <h4 style="">
-                            Contact                            
-                            <!-- The code below controls the social network links of the footer navigation. -->
-                                                        <small class="pull-right">
-                                                                     <a href="http://www.facebook.com/" target="_blank" title="Find us on Facebook">
-                                        <img src="http://beautypro411.com/theme/default/images/iconography/social-facebook.png" alt=""/>
-                                    </a>
-                                
-                                                                    <a href="http://www.linkedin.com/" target="_blank" title="Find us on LinkedIn">
-                                        <img src="http://beautypro411.com/theme/default/images/iconography/social-linkedin.png" alt="" style=""/>
-                                    </a>
-                                                            </small>
-                            
-                        </h4>
-                        
-                        <ul class="nav">
-                            <li>
-                                <a href="http://beautypro411.com" style="">
-                                    Home                                </a>
-                            </li>
+		<div class="container" style="width: 990px;padding: 0;">
 
-                            <li>
-                                <a href="http://beautypro411.com/advertise.php" style="">
-                                    Advertise                                </a>
-                            </li>
+			<div class="row-fluid">
 
-                            <li>
-                                <a href="http://beautypro411.com/faq.php" style="">
-                                    FAQ                                </a>
-                            </li>
 
-                            <li>
-                                <a href="http://beautypro411.com/sitemap.php">
-                                    Sitemap                                </a>
-                            </li>
+				<div class="span3 contact" style="margin-left: 0;">
 
-                            <li>
-                                <a href="http://beautypro411.com/contactus.php">
-                                    Contact Us                                </a>
-                            </li>
-                        </ul>
+					<h4>
+						Contact
+						<!-- The code below controls the social network links of the footer navigation. -->
+						<small class="pull-right"> <a
+							href="http://www.facebook.com/" target="_blank"
+							title="Find us on Facebook"> <img
+								src="${request.contextPath}/resources/images/social-facebook.png"
+								alt=""/></a> <a href="http://www.linkedin.com/" target="_blank"
+							title="Find us on LinkedIn"> <img
+								src="${request.contextPath}/resources/images/social-linkedin.png"
+								alt=""/></a>
+						</small>
 
-                    </div>
+					</h4>
 
-                    <div class="span3">
-                        <h4 style="">Site Content</h4>
-                        <ul class="nav">
-                            
-    <li>
-        <a href="http://beautypro411.com/listing/" style="">
-            Listings        </a>
-    </li>
+					<ul class="nav" style="padding: 0;">
+						<li><a href="home"> Home </a></li>
 
-        <li>
-        <a href="http://beautypro411.com/event/" style="">
-            Events        </a>
-    </li>
-    
-        <li>
-        <a href="http://beautypro411.com/classified/" style="">
-            Classifieds        </a>
-    </li>
-    
-        <li>
-        <a href="http://beautypro411.com/article/" style="">
-            Articles        </a>
-    </li>
-    
-        <li>
-        <a href="http://beautypro411.com/deal/">
-            Deals        </a>
-    </li>
-    
-        <li>
-        <a href="http://beautypro411.com/blog/" style="">
-            Blog        </a>
-    </li>
-                            </ul>
-                    
-                    </div>
-                    
-                    <div class="span2 pull-right text-right copyright">                       
-                        
-                        <!-- The code below controls the Copyright info  -->
-                                                <p style="">Copyright © 2013 All Rights Reserved</p>
-                        
-                    </div>
-                    
-                </div>                
-               
-                
-            </div>
+						<li><a href="advertise">
+								Advertise </a></li>
 
-        </div>
+						<li><a href="faq"> FAQ </a></li>
+
+						<li><a href="sitemap">
+								Sitemap </a></li>
+
+						<li><a href="contactus">
+								Contact Us </a></li>
+					</ul>
+
+				</div>
+
+				<div class="span3">
+					<h4>Site Content</h4>
+					<ul class="nav" style="padding: 0;">
+
+						<li><a href="listing"> Listings
+						</a></li>
+
+						<li><a href="event"> Events </a></li>
+
+						<li><a href="classified">
+								Classifieds </a></li>
+
+						<li><a href="article"> Articles
+						</a></li>
+
+						<li><a href="deal"> Deals </a></li>
+
+					</ul>
+
+				</div>
+
+				<div class="span2 pull-right text-right copyright">
+
+					<!-- The code below controls the Copyright info  -->
+					<p>Copyright © 2014 All Rights Reserved</p>
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+	</div>
 </ui:composition>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container">
+
+			<div class="container-fluid">
+
+
+				<!--cachemarkerBannerTop-->
+
+				<div class="advertisement-space"></div>
+
+				<!--cachemarkerBannerTop-->
+				<script type="text/javascript">
+
+        function changeForm3EoMndMy(value) {
+            if (value == "edirectory") {
+                $("#popLEdirectory3EoMndMy").addClass('isVisible');
+                $("#popLEdirectory3EoMndMy").removeClass('isHidden');
+
+                $("#popLOpenid3EoMndMy").addClass('isHidden');
+                $("#popLOpenid3EoMndMy").removeClass('isVisible');
+
+                $("#popLFacebook3EoMndMy").addClass('isHidden');
+                $("#popLFacebook3EoMndMy").removeClass('isVisible');
+
+                $("#popLGoogle3EoMndMy").addClass('isHidden');
+                $("#popLGoogle3EoMndMy").removeClass('isVisible');
+            } else if (value == "openid") {
+                $("#popLEdirectory3EoMndMy").addClass('isHidden');
+                $("#popLEdirectory3EoMndMy").removeClass('isVisible');
+
+                $("#popLOpenid3EoMndMy").addClass('isVisible');
+                $("#popLOpenid3EoMndMy").removeClass('isHidden');
+
+                $("#popLFacebook3EoMndMy").addClass('isHidden');
+                $("#popLFacebook3EoMndMy").removeClass('isVisible');
+
+                $("#popLGoogle3EoMndMy").addClass('isHidden');
+                $("#popLGoogle3EoMndMy").removeClass('isVisible');
+            } else if (value == "facebook") {
+                $("#popLEdirectory3EoMndMy").addClass('isHidden');
+                $("#popLEdirectory3EoMndMy").removeClass('isVisible');
+
+                $("#popLOpenid3EoMndMy").addClass('isHidden');
+                $("#popLOpenid3EoMndMy").removeClass('isVisible');
+
+                $("#popLFacebook3EoMndMy").addClass('isVisible');
+                $("#popLFacebook3EoMndMy").removeClass('isHidden');
+
+                $("#popLGoogle3EoMndMy").addClass('isHidden');
+                $("#popLGoogle3EoMndMy").removeClass('isVisible');
+            } else if (value == "google") {
+                $("#popLEdirectory3EoMndMy").addClass('isHidden');
+                $("#popLEdirectory3EoMndMy").removeClass('isVisible');
+
+                $("#popLOpenid3EoMndMy").addClass('isHidden');
+                $("#popLOpenid3EoMndMy").removeClass('isVisible');
+
+                $("#popLFacebook3EoMndMy").addClass('isHidden');
+                $("#popLFacebook3EoMndMy").removeClass('isVisible');
+
+                $("#popLGoogle3EoMndMy").addClass('isVisible');
+                $("#popLGoogle3EoMndMy").removeClass('isHidden');
+            }
+        }
+
+    </script>
+    	
+				<div class="row-fluid">
+
+					<div class="flex-box span12">
+
+						<section class="span4 offset4" style="padding: 10px;">
+
+						<h1 class="text-center" style="ont-weight: normal;line-height: 40px;">Sign in</h1>
+						
+						
+						
+						<div class="selectpicker ">
+							<h:selectOneMenu value="#{signup.loginAccountType}" style=" display:none; width: 220px;height: 30px;line-height: 30px;" styleClass="select" onchange="changeForm3EoMndMy(this.value)">
+								<f:selectItems value="#{signup.loginAccountTypes}" var="loginAccountType" itemValue="#{loginAccountType}" itemLabel="#{loginAccountType.label}"/>
+							</h:selectOneMenu>
+							<!-- <select onchange="changeForm3EoMndMy(this.value)" class="select"
+								style="display: none;width: 220px;height: 30px;line-height: 30px;">
+
+								<option value="#{signup.loginAccountType.DIRECTORY}">Sign in with Directory
+									Account</option>
+
+								<option value="#{signup.loginAccountType.OPENID}">Sign in with OpenID 2.0 Account</option>
+
+								<option value="#{signup.loginAccountType.FACEBOOK}">Sign in with Facebook Account</option>
+
+								<option value="#{signup.loginAccountType.GOOGLE}">Sign in with Google Account</option>
+
+							</select> -->
+							<!-- <div class="btn-group bootstrap-select select" style="display: none;">
+								<button type="button" class="btn dropdown-toggle"
+									data-toggle="dropdown">
+									<div class="filter-option pull-left">Sign in with
+										Directory Account</div>
+									&nbsp;
+									<div class="caret"></div>
+								</button>
+								<div class="dropdown-menu open"
+									style="max-height: 131px; overflow: hidden; min-height: 92px;">
+									<ul class="dropdown-menu inner" role="menu"
+										style="max-height: 119px; overflow-y: auto;">
+										<li rel="0" class="selected"><a tabindex="0" class=""
+											style=""><span class="text">Sign in with Directory
+													Account</span><i class="icon-ok check-mark"></i></a></li>
+										<li rel="1"><a tabindex="0" class="" style=""><span
+												class="text">Sign in with OpenID 2.0 Account</span><i
+												class="icon-ok check-mark"></i></a></li>
+										<li rel="2"><a tabindex="0" class="" style=""><span
+												class="text">Sign in with Facebook Account</span><i
+												class="icon-ok check-mark"></i></a></li>
+										<li rel="3"><a tabindex="0" class="" style=""><span
+												class="text">Sign in with Google Account</span><i
+												class="icon-ok check-mark"></i></a></li>
+									</ul>
+								</div>
+							</div> -->
+						</div>
+						
+						<h:panelGroup rendered="#{not empty signup.errorMsg}">
+							<div class="errors">
+								<h:outputText value="#{signup.errorMsg}"/>
+							</div>
+						</h:panelGroup>
+						<h:form>
+						<div id="popLEdirectory3EoMndMy" class="isVisible">
+								<input type="hidden" name="destiny" value=""/><input
+									type="hidden" name="query" value=""/>
+								<div class="formFieldsLogin">
+									<label for="username">E-mail:</label>
+									<h:inputText id="email" value="#{signup.email}" styleClass="text"/>
+									<!-- <input class="text"
+										type="email" name="email" id="email" value="#{signup.email}"/> --><span
+										class="clear"></span> <label for="password">Password:</label>
+									<h:inputSecret id="password" value="#{signup.password}"/>
+									<!-- <input type="password" name="password" id="password" value="#{signup.password}"/> --><span
+										class="automaticLogin"> <input type="checkbox"
+										name="automatic_login" value="1" class="inputAuto"/>
+											Sign me in automatically </span> <span class="clear"></span>
+									<p class="standardButton" style="color: #080808;line-height: 16px;">
+										<h:commandButton id="submit" action="submit" value="Sign In" style="background-color: #457ae6;color: #FFF;text-transform: uppercase;font-size: 11px;line-height: 16px;" />
+										<!-- <button type="submit" style="background-color: #457ae6;color: #FFF;text-transform: uppercase;font-size: 11px;line-height: 16px;">Sign In</button> -->
+									</p>
+								</div>
+
+
+								<p class="forgotpassword" style="color: #080808;line-height: 16px;">
+									<a href="http://beautypro411.com/members/forgot.php" style="color: #2980b9;text-decoration: none;">Forgot?</a>
+								</p>
+							
+						</div>
+
+						<div id="popLOpenid3EoMndMy" class="isHidden">
+
+								<input type="hidden" name="userform" value="openid"/><input
+									type="hidden" name="destiny" value=""/><input
+									type="hidden" name="query" value=""/>
+								<div class="formFieldsLogin">
+									<label for="username">OpenID URL:</label> <input type="text"
+										class="text" name="openidurl" id="openidurl" value=""/><span
+										class="clear"></span>
+									<p class="standardButton">
+										<button type="submit">Sign In</button>
+									</p>
+								</div>
+
+						</div>
+
+						<div id="popLFacebook3EoMndMy" class="isHidden">
+
+							<div class="button button-facebook">
+								<h2>
+									<a
+										href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&amp;redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fdestiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Findex.php&amp;state=ded109a04b67a3850088891afba0ccb6&amp;scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream">Sign
+										in</a>
+								</h2>
+							</div>
+
+							<p>&nbsp;</p>
+
+						</div>
+
+						<div id="popLGoogle3EoMndMy" class="isHidden">
+
+							<script language="javascript" type="text/javascript">
+		//<![CDATA[	
+		var destiny = 'http://beautypro411.com/members/googleauth.php?login&destiny=http%3A%2F%2Fbeautypro411.com%2Findex.php';
+		function googleLogin(){
+			window.open(destiny, "_top");
+		}
+		//]]>
+	</script>
+
+							<div class="button button-google">
+								<h2>
+									<a href="javascript: void(0);" onclick="googleLogin();">Sign
+										in</a>
+								</h2>
+							</div>
+
+							<p>&nbsp;</p>
+
+						</div>
+
+						<p class="notmember">
+						<!-- <h:commandLink id="goToRegister" action="goToRegister" style="color: #2980b9;text-decoration: none; bgcolor:#fff;" value="Not a member? Sign up now"/> -->
+						<h:commandButton id="goToRegister" action="goToRegister" style="color: #2980b9;text-decoration: none; bgcolor:#fff;" value="Not a member? Sign up now"/>
+						
+							<!-- <a href="${flowExecutionUrl}&amp;_eventId=goToRegister" style="color: #2980b9;text-decoration: none;">Not a
+								member? Sign up now</a> -->
+						</p>
+</h:form>
+						</section>
+					</div>
+
+				</div>
+				
+			</div>
+			<!-- Close container-fluid div -->
+		</div>
+		
+	</ui:define>
+</ui:composition>

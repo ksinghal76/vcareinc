@@ -9,8 +9,19 @@
 	<input name="id"/>
 	
 	<decision-state id="registerOrLoginSuccess">
-		<if then="register" test="id==null" else="loginSuccess"/>
+		<if then="signup" test="id==null" else="loginSuccess"/>
 	</decision-state>
+	
+	<view-state id="signup" view="/WEB-INF/jsf/signin.xhtml" model="signup">
+		<transition on="submit" to="loginAction"/>
+		<transition on="goToRegister" to="register" bind="false"/>
+	</view-state>
+	
+	<action-state id="loginAction">
+		<evaluate expression="userService.loginUser(signup)"/>
+		<transition on="success" to="completeRegisterForm"/>
+		<transition on="fail" to="signup"/>
+	</action-state>
 	
 	<view-state id="register" view="/WEB-INF/jsf/register.xhtml" model="register">
 		<transition on="submit" to="saveRegister"/>

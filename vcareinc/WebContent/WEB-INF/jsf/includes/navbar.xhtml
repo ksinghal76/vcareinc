@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:h="http://java.sun.com/jsf/html"
-				xmlns:ui="http://java.sun.com/jsf/facelets">
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
-	<tr bgcolor="#1d64a3">
-		<td id="tabbox">
-			<span style="float:left;"><a href="home"><h:outputText value="#{msg['message.home.navbar.label']}" styleClass="navbar"/></a></span>
-			<span style="float:left;margin-left: 10px;"><a href="listing"><h:outputText value="#{msg['message.listing.navbar.label']}" styleClass="navbar"/></a></span>
-			<span style="float:right;"><a href="register-flow"><h:outputText value="#{msg['message.signup.navbar.label']}" styleClass="navbar"/></a></span>
-		</td>
-	</tr>
-</table>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<div class="navbar-inner">
+
+		<div class="container" style="width: 990px;">
+
+			<a class="hidden-desktop brand logo" href="http://beautypro411.com/"
+				style="background-image: url('${request.contextPath}/resources/images/img_logo_mobile.png');background: url(${request.contextPath}/resources/images/img-logo.png) no-repeat 0 50%;">
+				BeautyPro411.com </a>
+				
+			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse" onclick="collapseMenu('menu');"> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+			</a> <a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".search-collapse" onclick="collapseMenu('search')">
+				<span class="icon-search"></span>
+			</a>
+
+			<div id="nav-collapse" class="nav-collapse collapse">
+				<ul class="nav" style="list-style: none;">
+					<li class="menuActived" style="line-height: 20px;"><a href="home">Home</a></li>
+
+
+					<li><a href="listing" style="line-height: 20px;">Listings</a></li>
+
+				</ul>
+				<!--cachemarkerUserNavbar-->
+
+
+				<ul class="nav pull-right">
+
+
+					<li class="" style="line-height: 20px;"><a
+						href="register-flow" class="sign-up">Sign
+							up | Login</a></li>
+
+				</ul>
+
+
+				<!--cachemarkerUserNavbar-->
+			</div>
+
+		</div>
+
+	</div>
 </ui:composition>

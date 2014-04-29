@@ -60,6 +60,19 @@
 	    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
 	    <param-value>.xhtml</param-value>
 	</context-param>
+	
+	<!-- Initializing JBoss RichFaces -->
+  <!-- Plugging the "Blue Sky" skin into the project -->
+  <context-param>
+    <param-name>org.richfaces.skin</param-name>
+    <param-value>blueSky</param-value>
+  </context-param>
+ 
+  <!-- Making the RichFaces skin spread to standard HTML controls -->
+  <context-param>
+    <param-name>org.richfaces.enableControlSkinning</param-name>
+    <param-value>false</param-value>
+  </context-param>
 
 	<!-- Serves static resource content from .jar files such as spring-faces.jar -->
 	<servlet>

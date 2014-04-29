@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.models.Register;
-import com.vcareinc.utils.CommonUtils;
+import com.vcareinc.models.Signup;
 import com.vcareinc.vo.Role;
 import com.vcareinc.vo.User;
 
@@ -30,7 +30,39 @@ private Logger log = Logger.getLogger(UserService.class);
 		this.em = em;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("finally")
+	public String loginUser(Signup signup) throws DBException {
+		log.debug(signup.toString());
+		
+		try {
+			clearError(signup);
+			if(signup != null) {
+//				if(signup.getLoginAccountType().equals(Signup.LoginAccountType.DIRECTORY)) {
+					User user = findUser(signup.getEmail());
+					if(user != null) {
+						if(user.getPassword().trim().equals(signup.getPassword())) {
+							signup.setErrorMsg("User Email Successful!!!");
+							return "success";
+						} else {
+							signup.setErrorMsg("User Email/Password invalid!!!");
+							throw new DBException("User Email/Password invalid!!!");
+						}
+					} else {
+						signup.setErrorMsg("User Email does not exists!!!!");
+						throw new DBException("User Email does not exists!!!!");
+					}
+//				}
+			}
+		} catch (Exception e) {
+			signup.setErrorMsg(e.getMessage());
+			throw new DBException(e.getMessage());
+		} finally {
+			return "fail";
+		}
+		
+	}
+	
+	@SuppressWarnings({ "unchecked" })
 	@Transactional(rollbackFor=DBException.class)
 	public void saveRegister(Register register) throws DBException  {
 		log.info(register.toString());
@@ -66,12 +98,19 @@ private Logger log = Logger.getLogger(UserService.class);
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public User findUser(String email) {
-		if(email != null)
-			return (User) em.createQuery("select u from User u where u.email = :email")
-					.setParameter("email", email).getResultList().get(0);
-		return null;
+		User user = null;
+		if(email != null) {
+			List<User> usrLst = em.createQuery("select u from User u where u.email = :email")
+					.setParameter("email", email).getResultList();
+			if(usrLst != null && usrLst.size() > 0) {
+				user = usrLst.get(0);
+			}
+		}
+		
+		return user;
 	}
 	
 	@SuppressWarnings("unchecked")

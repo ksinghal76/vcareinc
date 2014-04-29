@@ -43,11 +43,9 @@
 	<!-- Installs a listener to apply Spring Security authorities -->
 	<bean id="securityFlowExecutionListener" class="org.springframework.webflow.security.SecurityFlowExecutionListener" />
 	
-	<!-- 
-	<faces:resources/>
 	
+	<!-- <faces:resources/>
 	<bean class="org.springframework.faces.webflow.JsfFlowHandlerAdapter">
 		<property name="flowExecutor" ref="flowExecutor"/>
-	</bean>
- 	-->
+	</bean> -->
 </beans>

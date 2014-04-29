@@ -1,42 +1,604 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="includes/template.xhtml">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="includes/template.xhtml">
 
-    <ui:define name="bodyContent">
-    	<table cellpadding="0" cellspacing="0" border="0" width="100%">
-    		<tr>
-    			<td>
-    				<table cellpadding="0" cellspacing="0" border="0" width="100%" class="content">
-    					<tr>
-    						<td class="contentHeader" width="70%">
-    							FEATURED LISTINGS
-    						</td>
-    						<td width="1%">&nbsp;</td>
-    						<td class="contentHeader">
-    							BROWSE BY CATEGORY &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More
-    						</td>
-    					</tr>
-    					<tr valign="top">
-    						<td class="contentBody">
-    							AbcDef...
-    						</td>
-    						<td>&nbsp;</td>
-    						<td class="contentBody">
-    							<ul class="contentBodyList">
-    								<li>Beauty Schools(2)</li>
-    								<li>Beauty Supply(1)</li>
-    								<li>Beauty Fitness(4401)</li>
-    								<li>Cosmetologist(2)</li>
-    								<li>Health(1)</li>
-    							</ul>
-    						</td>
-    					</tr>
-    				</table>
-				</td>
-			</tr>
-	    </table>
+	<ui:define name="bodyContent">
+		<div class="well container">
+
+			<div class="container-fluid">
+
+				<p class="breadcrumb" style="color: #080808;line-height: 16px;">
+					<a href="home" title="Home" style="color: #2980b9;text-decoration: none;">Home</a><span
+						class="split">&nbsp;&nbsp;/&nbsp;&nbsp;</span>Listings
+				</p>
+
+				<!--cachemarkerBannerTop-->
+
+				<div class="advertisement-space"></div>
+
+				<!--cachemarkerBannerTop-->
+				<div class="row-fluid span12">
+
+					<div class="span9" style="margin-left: 0;display: block;float: left;min-height: 30px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;">
+
+						<!--cachemarkerFeaturedListing2-->
+						<div class="row-fluid flex-box-group color-3" style="border-color: #dfeaf7;background-color: #F4F4f4;">
+
+							<h2 class="h2Header">Featured Listings</h2>
+
+							<div class="row-fluid">
+
+								<div class="span6" style="margin-left: 0;">
+
+									<section style="padding: 10px;">
+									<h5 style="color: #353535;font-weight: normal;font-size: 14px;margin: 0; padding: 0;">
+										<a
+											href="http://beautypro411.com/listing/aspen-total-fitness.html" style="color: #353535;text-decoration: none;">
+											Aspen Total Fitness </a>
+									</h5>
+
+									<a
+										href="http://beautypro411.com/listing/aspen-total-fitness.html" style="color: #457ae6;text-decoration: none;">
+										<span class="no-image"></span>
+									</a>
+
+									<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Soaring
+										through all the galaxies. In search of Earth, flying in to the
+										night. Ulysses, Ulysses - Fighting evil and tyranny, with all
+										his power, and with all of his might.</p>
+									</section>
+
+								</div>
+
+
+								<div class="span6">
+
+									<section style="padding: 10px;">
+									<h5 style="color: #353535;font-weight: normal;font-size: 14px;margin: 0; padding: 0;">
+										<a
+											href="http://beautypro411.com/listing/plastic-and-reconstructive-surgery.html" style="color: #353535;text-decoration: none;">
+											Plastic and Reconstructive Surgery </a>
+									</h5>
+
+									<a
+										href="http://beautypro411.com/listing/plastic-and-reconstructive-surgery.html" style="color: #457ae6;text-decoration: none;">
+										<span class="no-image"></span>
+									</a>
+
+									<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Ten years
+										ago a crack commando unit was sent to prison by a military
+										court for a crime they didn't commit. These men promptly
+										escaped from a maximum security stockade to the Los Angeles
+										underground.</p>
+									</section>
+
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+						<div class="row-fluid">
+
+
+							<div class="span4 flex-box color-3" style="margin-left: 0;">
+
+								<h2 class="h2Header">Featured Listing</h2>
+
+								<a
+									href="http://beautypro411.com/listing/dental-care-clinic.html" style="color: #457ae6;text-decoration: none;">
+									<img width="217" height="123"
+									src="http://beautypro411.com/custom/domain_1/image_files/19_photo_3338.png"
+									alt="Dental Care Clinic" title="Dental Care Clinic" border="0"/>
+								</a>
+
+								<section style="padding: 10px;">
+								<h5 style="color: #353535;font-weight: normal;font-size: 14px;">
+									<a
+										href="http://beautypro411.com/listing/dental-care-clinic.html" style="color: #353535;text-decoration: none;">
+										Dental Care Clinic </a>
+								</h5>
+
+								<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Ten years
+									ago a crack commando unit was sent to prison by a military
+									court for a crime they didn't commit. These men promptly
+									escaped from a maximum security stockade to the Los Angeles
+									underground.</p>
+								</section>
+							</div>
+
+
+
+							<div class="span4 flex-box color-3">
+
+								<h2 class="h2Header">Featured Listing</h2>
+
+								<a href="http://beautypro411.com/listing/sea-cruises.html" style="color: #457ae6;text-decoration: none;">
+									<span class="no-image"></span>
+								</a>
+
+								<section style="padding: 10px;">
+								<h5 style="color: #353535;font-weight: normal;font-size: 14px;">
+									<a href="http://beautypro411.com/listing/sea-cruises.html" style="color: #353535;text-decoration: none;">
+										Sea Cruises </a>
+								</h5>
+
+								<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Hey there
+									where ya goin', not exactly knowin', who says you have to call
+									just one place home. He's goin' everywhere, B.J. McKay and his
+									best friend Bear.</p>
+								</section>
+							</div>
+
+
+
+							<div class="span4 flex-box color-3">
+
+								<h2 class="h2Header">Featured Listing</h2>
+
+								<a href="http://beautypro411.com/listing/special-jewelry.html" style="color: #353535;text-decoration: none;">
+									<span class="no-image"></span>
+								</a>
+
+								<section style="padding: 10px;">
+								<h5 style="color: #353535;font-weight: normal;font-size: 14px;">
+									<a href="http://beautypro411.com/listing/special-jewelry.html" style="color: #353535;text-decoration: none;">
+										Special Jewelry </a>
+								</h5>
+
+								<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Just the
+									good ol' boys, never meanin' no harm. Beats all you've ever
+									saw, been in trouble with the law since the day they was born.
+									Straight'nin' the curve, flat'nin' the hills.</p>
+								</section>
+							</div>
+
+
+						</div>
+
+						<!--cachemarkerFeaturedListing2-->
+						<!--cachemarkerFeaturedDeal3-->
+						<div class="row-fluid flex-box color-1">
+
+							<h2 class="h2Header" style="background-color: #5496bf;">
+								Listing with a deal <span>$0.01<b class="divisor"></b>100%
+									OFF
+								</span>
+							</h2>
+
+							<div class="row-fluid" style="">
+
+								<div class="span12" style="margin-left: 0;border-color: #dfeaf7;background-color: #F4F4f4;">
+
+									<div class="span12">
+
+										<aside> <a
+											href="http://beautypro411.com/deal/free-presentations-every-tuesdays.html" style="color: #2980b9;text-decoration: none;">
+
+											<img
+											src="http://beautypro411.com/custom/domain_1/image_files/18_photo_3528.png"
+											alt="Free presentations every Tuesdays"
+											title="Free presentations every Tuesdays" border="0" style="width: 100%;border: none;margin: 0;padding: 0;outline: none;height: auto;max-width: 100%;vertical-align: middle;"/><span>
+												<h4>Free presentations every Tuesdays</h4>
+										</span>
+										</a> </aside>
+
+										<section style="padding: 10px;">
+
+										<h5 style="color: #353535;font-weight: normal;font-size: 14px;line-height: 20px; margin: 0;">
+											<a
+												href="http://beautypro411.com/listing/face-to-face-productions.html" style="color: #353535;text-decoration: none;">Face
+												To Face Productions</a>
+										</h5>
+
+										<p style="color: #080808;line-height: 16px;margin: 0;">This is example text for the overview section. Just the
+											good ol' boys, never meanin' no harm. Beats all you've ever
+											saw, been in trouble with the law since the day they was
+											born. Straight'nin' the curve, flat'nin' the hills.</p>
+
+										<footer>
+										<p></p>
+										</footer> </section>
+
+									</div>
+
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+						<div class="row-fluid">
+
+
+							<div class="span4 flex-box color-1" style="margin-left: 0;">
+
+								<h2 class="h2Header" style="background-color: #5496bf;">
+									Featured Deal <span>$60</span>
+								</h2>
+
+								<a href="http://beautypro411.com/deal/60-one-month.html" style="color: #2980b9;text-decoration: none;"> <img
+									src="http://beautypro411.com/custom/domain_1/image_files/3_photo_3482.png"
+									alt="$60.00 - One month" title="$60.00 - One month" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+
+								<section style="padding: 10px;">
+								<h5 style="color: #353535;font-weight: normal;border: none;margin: 0;padding: 0;outline: none;font-size: 14px;">
+									<a href="http://beautypro411.com/deal/60-one-month.html" style="color: #353535;text-decoration: none;">
+										$60.00 - One month </a>
+								</h5>
+
+								<p style="color: #080808;">This is example text for the overview section. One for
+									all and all for one, Muskehounds are always ready. One for all
+									and all for one, helping everybody. One for all and all for
+									one, it's a pretty story.</p>
+								</section>
+							</div>
+
+
+
+							<div class="span4 flex-box color-1">
+
+								<h2 class="h2Header" style="background-color: #5496bf;">
+									Featured Deal <span>$24</span>
+								</h2>
+
+								<a href="http://beautypro411.com/deal/20-off-enjoy.html" style="color: #2980b9;text-decoration: none;"> <img
+									src="http://beautypro411.com/custom/domain_1/image_files/4_photo_3488.png"
+									alt="20% OFF - Enjoy!" title="20% OFF - Enjoy!" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+
+								<section style="padding: 10px;">
+								<h5 style="color: #353535;font-weight: normal;border: none;margin: 0;padding: 0;outline: none;font-size: 14px;">
+									<a href="http://beautypro411.com/deal/20-off-enjoy.html" style="color: #353535;text-decoration: none;">
+										20% OFF - Enjoy! </a>
+								</h5>
+
+								<p style="color: #080808;">This is example text for the overview section. 80 days
+									around the world, we'll find a pot of gold just sitting where
+									the rainbow's ending. Time - we'll fight against the time, and
+									we'll fly on the white wings of the wind.</p>
+								</section>
+							</div>
+
+
+
+							<div class="span4 flex-box color-1">
+
+								<h2 class="h2Header" style="background-color: #5496bf;">
+									Featured Deal <span>$80</span>
+								</h2>
+
+								<a href="http://beautypro411.com/deal/monday-promotion.html" style="color: #2980b9;text-decoration: none;">
+									<img
+									src="http://beautypro411.com/custom/domain_1/image_files/3_photo_3506.png"
+									alt="Monday promotion!" title="Monday promotion!" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/>
+								</a>
+
+								<section style="padding: 10px;">
+								<h5 style="color: #353535;font-weight: normal;border: none;margin: 0;padding: 0;outline: none;font-size: 14px;">
+									<a href="http://beautypro411.com/deal/monday-promotion.html" style="color: #353535;text-decoration: none;">
+										Monday promotion! </a>
+								</h5>
+
+								<p style="color: #080808;">This is example text for the overview section. Knight
+									Rider, a shadowy flight into the dangerous world of a man who
+									does not exist. Michael Knight, a young loner on a crusade to
+									champion the cause of the innocent.</p>
+								</section>
+							</div>
+
+
+						</div>
+
+						<!--cachemarkerFeaturedDeal3-->
+						<div class="row-fluid">
+
+							<div class="span12">
+
+
+								<div class="flex-box-group color-4" style="border-color: #dfeaf7;background-color: #F4F4f4;">
+
+									<h2 style="background-color: #727980; text-transform: uppercase; font-size: 12px; color: #fff; font-weight: bold; line-height: 20px; padding: 7px 0; float: left; width: 100%; text-indent: 10px; clear: both; margin: 0; border: none; outline: none;">Recent Reviews</h2>
+
+
+
+									<section class="item-preview" style="padding: 10px;">
+
+									<h5 style="color: #353535;margin: 0;">
+										<a href="http://beautypro411.com/listing/acapulco-tan.html" style="color: #2980b9;text-decoration: none;">Acapulco
+											Tan</a>
+										<div class="stars-rating" style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #16a085;">
+											<div class="rate-5" style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #fff;"></div>
+										</div>
+									</h5>
+
+									<p style="font-size: 11px;margin: 0;color: #080808;line-height: 16px;">Once a week I visit Acapulco Tan. They're always ready
+										to receive us.</p>
+
+									<b><a
+										href="http://beautypro411.com/profile/daniel-willis.html"
+										title="Dan" style="color: #2980b9;text-decoration: none;">Dan</a></b> </section>
+
+
+									<section class="item-preview" style="padding: 10px;">
+
+									<h5 style="color: #353535;margin: 0;">
+										<a href="http://beautypro411.com/listing/relaxation-spa.html" style="color: #2980b9;text-decoration: none;">Relaxation
+											Spa</a>
+										<div class="stars-rating" style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #16a085;">
+											<div class="rate-4" style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #fff;"></div>
+										</div>
+									</h5>
+
+									<p style="font-size: 11px;margin: 0;color: #080808;line-height: 16px;">At my last visit, my masseuse was really late. But it's
+										still a nice place to relax.</p>
+
+									<b><a
+										href="http://beautypro411.com/profile/layla-donovan.html"
+										title="Layla Donovan" style="color: #2980b9;text-decoration: none;">Layla Donovan</a></b> </section>
+
+
+									<section class="item-preview" style="padding: 10px;">
+
+									<h5 style="color: #353535;margin: 0;">
+										<a
+											href="http://beautypro411.com/listing/the-prettiest-beauty-parlon.html" style="color: #2980b9;text-decoration: none;">The
+											Prettiest Beauty Parlon</a>
+										<div class="stars-rating" style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #16a085;">
+											<div class="rate-5" style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #fff;"></div>
+										</div>
+									</h5>
+
+									<p style="font-size: 11px;margin: 0;color: #080808;line-height: 16px;">I really feel special here. I love your services!</p>
+
+									<b><a
+										href="http://beautypro411.com/profile/chloe-jensen.html"
+										title="Chloe Jensen" style="color: #2980b9;text-decoration: none;">Chloe Jensen</a></b> </section>
+
+
+									<section class="item-preview" style="padding: 10px;">
+
+									<h5 style="color: #353535;margin: 0;">
+										<a href="http://beautypro411.com/listing/workout.html" style="color: #2980b9;text-decoration: none;">Workout</a>
+										<div class="stars-rating" style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #16a085;">
+											<div class="rate-4" style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-gray.png) no-repeat left center scroll #fff;"></div>
+										</div>
+									</h5>
+
+									<p style="font-size: 11px;margin: 0;color: #080808;line-height: 16px;">Workout is one the best options in town!</p>
+
+									<b><a href="http://beautypro411.com/profile/david.html"
+										title="David" style="color: #2980b9;text-decoration: none;">David</a></b> </section>
+
+
+								</div>
+
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="span3">
+
+						<div class="row-fluid">
+
+							<div class="span12 flex-box-list color-3">
+
+								<h2 class="h2Header">
+									Browse by Category <span style="float: right;margin-right: 10px;text-transform: uppercase;font-size: 12px;"><a class="view-more"
+										href="http://beautypro411.com/listing/allcategories.php">more</a></span>
+								</h2>
+
+								<ul class="browse-category" style="padding: 0;">
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/guide/beauty-schools" style="color: #080808;text-decoration: none;">
+											Beauty Schools </a> <span style="color: #c235de;">(2)</span></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/guide/beauty-supply" style="color: #080808;text-decoration: none;">
+											Beauty Supply </a> <span style="color: #c235de;">(3)</span></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/guide/beauty-and-fitness" style="color: #080808;text-decoration: none;">
+											Beauty and Fitness </a> <span style="color: #c235de;">(4403)</span></li>
+
+
+									<li style="width: 100%;"><a href="http://beautypro411.com/listing/guide/braids" style="color: #080808;text-decoration: none;">
+											Braids </a> <span style="color: #c235de;">(2)</span></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/guide/cosmetologist" style="color: #080808;text-decoration: none;">
+											Cosmetologist </a> <span style="color: #c235de;">(3)</span></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/guide/esthetician" style="color: #080808;text-decoration: none;">
+											Esthetician </a> <span style="color: #c235de;">(1)</span></li>
+
+
+									<li style="width: 100%;"><a href="http://beautypro411.com/listing/guide/health" style="color: #080808;text-decoration: none;">
+											Health </a> <span style="color: #c235de;">(1)</span></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/guide/stylist" style="color: #080808;text-decoration: none;">
+											Stylist </a> <span style="color: #c235de;">(2)</span></li>
+
+
+								</ul>
+
+							</div>
+
+						</div>
+
+						<div class="row-fluid">
+
+							<div class="span12 flex-box-list color-1">
+
+								<h2 class="h2Header" style="background-color: #5496bf;">
+									Browse by Location <span><a class="view-more"
+										href="http://beautypro411.com/listing/alllocations.php">more</a></span>
+								</h2>
+
+								<ul class="list-home" style="padding: 0;">
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/georgia/atlanta" style="color: #080808;text-decoration: none;">Atlanta</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/texas/austin" style="color: #080808;text-decoration: none;">Austin</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/new-york/brooklyn" style="color: #080808;text-decoration: none;">Brooklyn</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/illinois/chicago" style="color: #080808;text-decoration: none;">Chicago</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/ohio/cleveland" style="color: #080808;text-decoration: none;">Cleveland</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/texas/dallas" style="color: #080808;text-decoration: none;">Dallas</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/colorado/denver" style="color: #080808;text-decoration: none;">Denver</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/texas/houston" style="color: #080808;text-decoration: none;">Houston</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/nevada/las-vegas" style="color: #080808;text-decoration: none;">Las
+											Vegas</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/california/los-angeles" style="color: #080808;text-decoration: none;">Los
+											Angeles</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/minnesota/minneapolis" style="color: #080808;text-decoration: none;">Minneapolis</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/new-york/new-york" style="color: #080808;text-decoration: none;">New
+											York</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/pennsylvania/philadelphia" style="color: #080808;text-decoration: none;">Philadelphia</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/arizona/phoenix" style="color: #080808;text-decoration: none;">Phoenix</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/pennsylvania/pittsburgh" style="color: #080808;text-decoration: none;">Pittsburgh</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/oregon/portland" style="color: #080808;text-decoration: none;">Portland</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/missouri/saint-louis" style="color: #080808;text-decoration: none;">Saint
+											Louis</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/texas/san-antonio" style="color: #080808;text-decoration: none;">San
+											Antonio</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/california/san-diego" style="color: #080808;text-decoration: none;">San
+											Diego</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/california/san-francisco" style="color: #080808;text-decoration: none;">San
+											Francisco</a></li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/washington/seattle" style="color: #080808;text-decoration: none;">Seattle</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/florida/tampa" style="color: #080808;text-decoration: none;">Tampa</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/arizona/tucson" style="color: #080808;text-decoration: none;">Tucson</a>
+									</li>
+
+
+									<li style="width: 100%;"><a
+										href="http://beautypro411.com/listing/location/united-states/district-of-columbia/washington" style="color: #080808;text-decoration: none;">Washington</a>
+									</li>
+
+
+								</ul>
+
+							</div>
+
+						</div>
+
+
+						<div class="row-fluid visible-desktop">
+							<a class="btn span12 btn-success"
+								href="http://beautypro411.com/listing/results.php">View all
+								listings</a>
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+			</div>
+			<!-- Close container-fluid div -->
+		</div>
 	</ui:define>
 </ui:composition>

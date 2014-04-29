@@ -1,26 +1,269 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:h="http://java.sun.com/jsf/html"
-				xmlns:ui="http://java.sun.com/jsf/facelets">
-	<h:form>
-	<table cellpadding="0" cellspacing="0" border="0" width="100%">
-		<tr bgcolor="#5b9de3">
-			<td width="10%">&nbsp;</td>
-			<td><a href="home"><img src="${request.contextPath}/resources/images/img_logo.png" alt="Image Logo" /></a></td>
-			<td>
-				<table cellpadding="0" cellspacing="0" border="0">
-					<tr>
-						<td><h:outputText value="#{msg['message.lookingfor.label']}" styleClass="title"/></td>
-						<td><h:outputText value="#{msg['message.location.label']}" styleClass="title"/></td>
-					</tr>
-					<tr>
-						<td><h:inputText id="search" value=""/></td>
-						<td><h:inputText id="location" value=""/><h:commandButton id="submit" action="submit" value="#{msg['button.search.label']}"/></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	</h:form>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+		<div class="header-brand container" style="width: 990px;min-height: 102px;">
+
+			<!-- The function "system_getHeaderLogo()" returns a inline style, like style="background-image: url(YOUR LOGO URL HERE)" -->
+			<div class="brand-logo">
+				<a class="brand logo" id="logo-link" href="home"
+					target="_parent" title="BeautyPro411.com"
+					style="background-image: url('${request.contextPath}/resources/images/img_logo.png');margin-left: 2%;font-size: 28px;color: #ffffff;display: block;float: left;padding: 10px 20px 10px;font-weight: 200;text-shadow: 0 1px 0 #ffffff;text-indent: -9999px;background: url(${request.contextPath}/resources/images/img_logo.png) no-repeat 0 50%;">
+					BeautyPro411.com </a>
+			</div>
+
+
+			<form class="form" name="search_form" method="get"
+				action="http://beautypro411.com/classified/results.php">
+
+				<div class="search-advanced">
+
+					<div class="row-fluid">
+
+						<div class="search-button text-center" style="text-align: center;">
+							<button class="btn btn-info btn-search" type="submit" style="background-color: #457ae6;">Search</button>
+						</div>
+
+						<div class="search-location">
+							<label class="title" for="where">Where?</label> <input
+								type="text" name="where" id="where"
+								placeholder="Location to search..." value="" class="ac_input"
+								autocomplete="off"/>
+						</div>
+
+						<div class="search-keyword">
+							<label class="title" for="keyword">What are you looking
+								for?</label> <input type="text" name="keyword" id="keyword"
+								placeholder="Keyword to search..." value="" autocomplete="off"
+								class="ac_input"/>
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div id="divAdvSearchFields" class="hidden-phone advanced-search" style="display: none;">
+
+					<div class="btn-advanced-search text-right" style="text-align: right;">
+
+						<a id="advanced-search-button" href="javascript:void(0);"
+							onclick="showAdvancedSearch('classified', '', true, 0);"
+							class="btn-advanced"> <span id="advanced-search-label" style="color: #2980b9;text-decoration: none;">Advanced
+								Search</span> <span id="advanced-search-label-close"
+							style="display: none">Close</span>
+						</a>
+
+					</div>
+
+					<div class="search-options row-fluid">
+
+						<div class="span12" style="margin-left: 0;">
+
+							<div id="advanced-search" class="advanced-search-box"
+								style="display: none;">
+
+
+								<div class="row-fluid">
+
+									<div class="span2" style="margin-left: 0;width: 14.52991452991453%;display: block;float: left;min-height: 30px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;">
+										<label>Match</label>
+										<div>
+											<input type="radio" name="match" value="exactmatch"
+												class="radio" style="margin: 0;line-height: normal;min-height: 20px;color: #000;"/> Exact Match
+										</div>
+										<div>
+											<input type="radio" name="match" value="anyword"
+												class="radio" style="margin: 0;line-height: normal;min-height: 20px;color: #000;"/> Any Word
+										</div>
+										<div>
+											<input type="radio" name="match" value="allwords"
+												class="radio" style="margin: 0;line-height: normal;min-height: 20px;color: #000;"/> All Words
+										</div>
+									</div>
+
+									<div class="span10 row-fluid selectpicker" style="width: 82.90598290598291%;display: block;float: left;min-height: 30px;margin-left: 2.564102564102564%;box-sizing: border-box;">
+										<div class="span4" style="margin-left: 0;">
+											<label>Category</label>
+											<div id="advanced_search_category_dropdown">
+												<img class="loading_category"
+													src="http://beautypro411.com/theme/default/images/iconography/icon-loading-footer.gif"
+													alt="Wait, Loading..."/>
+											</div>
+										</div>
+
+										<div class="span4">
+											<div id="LocationbaseAdvancedSearch">
+												<label>Location</label>
+
+												<div class="field loading-location" id="div_img_loading_1"
+													style="display: none;">
+													<img
+														src="http://beautypro411.com/theme/default/images/iconography/icon-loading-footer.gif"
+														alt="Wait, Loading..."/>
+												</div>
+
+												<div id="div_location_1">
+
+													<select class="select" name="location_1" id="location_1"
+														onchange="loadLocation('http://beautypro411.com', '1,3,4', 1, 3, this.value, true, 1);"
+														style="display: none;">
+
+														<option id="l_location_1" value="">Select a
+															Country</option>
+
+														<option value="2">Brasil</option>
+
+														<option value="5">England</option>
+
+														<option value="4">Germany</option>
+
+														<option value="3">Spain</option>
+
+														<option value="1">United States</option>
+
+													</select>
+													<div class="btn-group bootstrap-select select">
+														<button type="button" class="btn dropdown-toggle"
+															data-toggle="dropdown" data-id="location_1">
+															<div class="filter-option pull-left">Select a
+																Country</div>
+															&nbsp;
+															<div class="caret"></div>
+														</button>
+														<div class="dropdown-menu open">
+															<ul class="dropdown-menu inner" role="menu">
+																<li rel="0" class="selected"><a tabindex="0"
+																	class="" style=""><span class="text">Select
+																			a Country</span><i class="icon-ok check-mark"></i></a></li>
+																<li rel="1"><a tabindex="0" class="" style=""><span
+																		class="text">Brasil</span><i
+																		class="icon-ok check-mark"></i></a></li>
+																<li rel="2"><a tabindex="0" class="" style=""><span
+																		class="text">England</span><i
+																		class="icon-ok check-mark"></i></a></li>
+																<li rel="3"><a tabindex="0" class="" style=""><span
+																		class="text">Germany</span><i
+																		class="icon-ok check-mark"></i></a></li>
+																<li rel="4"><a tabindex="0" class="" style=""><span
+																		class="text">Spain</span><i class="icon-ok check-mark"></i></a></li>
+																<li rel="5"><a tabindex="0" class="" style=""><span
+																		class="text">United States</span><i
+																		class="icon-ok check-mark"></i></a></li>
+															</ul>
+														</div>
+													</div>
+
+													<div class="field" id="box_no_location_found_1"
+														style="display: none;">&nbsp;</div>
+
+												</div>
+
+
+												<div class="field loading-location" id="div_img_loading_3"
+													style="display: none;">
+													<img
+														src="http://beautypro411.com/theme/default/images/iconography/icon-loading-footer.gif"
+														alt="Wait, Loading..."/>
+												</div>
+
+												<div id="div_location_3" style="display: none;">
+
+													<select class="select" name="location_3" id="location_3"
+														onchange="loadLocation('http://beautypro411.com', '1,3,4', 3, 4, this.value, false, 1);"
+														style="display: none;">
+
+														<option id="l_location_3" value="">Select a State</option>
+
+													</select>
+													<div class="btn-group bootstrap-select select">
+														<button type="button" class="btn dropdown-toggle"
+															data-toggle="dropdown" data-id="location_3">
+															<div class="filter-option pull-left">Select a State</div>
+															&nbsp;
+															<div class="caret"></div>
+														</button>
+														<div class="dropdown-menu open">
+															<ul class="dropdown-menu inner" role="menu">
+																<li rel="0" class="selected"><a tabindex="0"
+																	class="" style=""><span class="text">Select
+																			a State</span><i class="icon-ok check-mark"></i></a></li>
+															</ul>
+														</div>
+													</div>
+
+													<div class="field" id="box_no_location_found_3"
+														style="display: none;">&nbsp;</div>
+
+												</div>
+
+
+												<div class="field loading-location" id="div_img_loading_4"
+													style="display: none;">
+													<img
+														src="http://beautypro411.com/theme/default/images/iconography/icon-loading-footer.gif"
+														alt="Wait, Loading..."/>
+												</div>
+
+												<div id="div_location_4" style="display: none;">
+
+													<select class="select" name="location_4" id="location_4"
+														style="display: none;">
+
+														<option id="l_location_4" value="">Select a City</option>
+
+													</select>
+													<div class="btn-group bootstrap-select select">
+														<button type="button" class="btn dropdown-toggle"
+															data-toggle="dropdown" data-id="location_4">
+															<div class="filter-option pull-left">Select a City</div>
+															&nbsp;
+															<div class="caret"></div>
+														</button>
+														<div class="dropdown-menu open">
+															<ul class="dropdown-menu inner" role="menu">
+																<li rel="0" class="selected"><a tabindex="0"
+																	class="" style=""><span class="text">Select
+																			a City</span><i class="icon-ok check-mark"></i></a></li>
+															</ul>
+														</div>
+													</div>
+
+													<div class="field" id="box_no_location_found_4"
+														style="display: none;">&nbsp;</div>
+
+												</div>
+
+											</div>
+										</div>
+
+										<div class="span4">
+											<label>Zipcode</label>
+											<div class="row-fluid">
+												<div class="span5">
+													<input type="text" name="dist" value="" class="span6"/>
+														Miles of 
+												</div>
+												<div class="span5">
+													<input type="text" name="zip" value="" class="span6"/>
+														Zipcode 
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</form>
+		</div>
 </ui:composition>
