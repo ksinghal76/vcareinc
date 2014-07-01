@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 public class Register extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private String email;
+
+	private String username;
 	private String firstname;
 	private String lastname;
 	private String password;
@@ -18,11 +18,11 @@ public class Register extends BaseModel implements Serializable {
 	private String phonenumber;
 	private Boolean signupTip;
 	private Boolean agreeTerms;
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getFirstname() {
 		return firstname;

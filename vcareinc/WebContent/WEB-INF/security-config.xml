@@ -14,18 +14,20 @@
 		<security:form-login login-page="/spring/login" login-processing-url="/spring/loginProcess" default-target-url="/spring/main" authentication-failure-url="/spring/login?login_error=1" />
 		<security:logout logout-url="/spring/logout" logout-success-url="/spring/logoutSuccess" />
 	</security:http>
-	
+
+	<bean id="customUserDetailsService" class="com.vcareinc.services.securities.CustomUserDetailsService"/>
+
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:jdbc-user-service data-source-ref="dataSource"
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+			<!-- <security:jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select email, password, enable from user where email=?"
-				authorities-by-username-query="select u.email, ur.authority from user u, userRoles ur where u.id = ur.user_id and u.email=?"/>
+				authorities-by-username-query="select u.email, ur.authority from user u, userRoles ur where u.id = ur.user_id and u.email=?"/> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
-    
+
 	<!--
 		Define local authentication provider, a real app would use an external provider (JDBC, LDAP, CAS, etc)
-		
+
 		usernames/passwords are:
 			keith/melbourne
 			erwin/leuven

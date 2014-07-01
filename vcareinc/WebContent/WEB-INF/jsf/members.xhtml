@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+			<div class="container-fluid">
+
+				<p class="breadcrumb">
+					<a href="memberUser">Home</a> / <a
+						href="memberUser">beautypro411</a>
+				</p>
+
+				<ui:include src="includes/memberbar.xhtml"/>
+
+				<div class="content">
+
+
+					<div id="boxWelcome">
+
+						<h2>WELCOME</h2>
+
+						<blockquote class="high">
+
+							<p class="successMessage" id="messageEmail" style="display: none">Your
+								activation e-mail has been sent. Please, check your inbox.</p>
+							<p class="errorMessage" id="messageEmailError"
+								style="display: none"></p>
+
+							<a href="javascript: void(0);" onclick="closeMessage(321);"
+								class="remove"></a>
+
+							<p>Thank you for activating your account. The next step is to
+								complete your profile.</p>
+
+							<a
+								href="http://beautypro411.com/members/account/account.php?id=321">Complete
+								your profile</a>
+						</blockquote>
+
+					</div>
+
+
+					<h2>RECENT ACTIVITY</h2>
+
+
+					<blockquote class="low">
+						<p>You have no recent activity.</p>
+					</blockquote>
+
+
+					<div class="clear"></div>
+
+
+					<h2>Site Items</h2>
+					<blockquote>
+						<div class="dynamicContent">
+							<p>
+								You can <strong>add</strong>, <strong>review</strong> or <strong>update</strong>
+								all your items anytime by selecting one of the links below.
+							</p>
+						</div>
+					</blockquote>
+					<div class="domainItems">
+						<h2 class="domainItemsTitle">beautypro411</h2>
+						<c:forEach items="${listingList}" var="listingLst">
+							<div class="domainItemsList">
+								<div class="itemName">
+
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
+										${listingLst.title} </a>
+								</div>
+								<div class="moduleName">Listing ${listingLst.price.priceType}</div>
+								<div class="statusName">
+									<span class="status-expired">Expired</span>
+								</div>
+								<div class="itemCheckOut">
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
+										Make Your Payment </a>
+								</div>
+							</div>
+						</c:forEach>
+						<c:forEach items="${eventList}" var="eventLst">
+							<div class="domainItemsList">
+								<div class="itemName">
+
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
+										${eventLst.title} </a>
+								</div>
+								<div class="moduleName">Event ${eventLst.price.priceType}</div>
+								<div class="statusName">
+									<span class="status-expired">Expired</span>
+								</div>
+								<div class="itemCheckOut">
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
+										Make Your Payment </a>
+								</div>
+							</div>
+						</c:forEach>
+						<c:forEach items="${articleList}" var="articleLst">
+							<div class="domainItemsList">
+								<div class="itemName">
+
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
+										${articleLst.title} </a>
+								</div>
+								<div class="moduleName">Article ${articleLst.price.priceType}</div>
+								<div class="statusName">
+									<span class="status-expired">Expired</span>
+								</div>
+								<div class="itemCheckOut">
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
+										Make Your Payment </a>
+								</div>
+							</div>
+						</c:forEach>
+						<c:forEach items="${classifiedList}" var="classifiedLst">
+							<div class="domainItemsList">
+								<div class="itemName">
+
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
+										${classifiedLst.title} </a>
+								</div>
+								<div class="moduleName">Classified ${classifiedLst.price.priceType}</div>
+								<div class="statusName">
+									<span class="status-expired">Expired</span>
+								</div>
+								<div class="itemCheckOut">
+									<a href="javascript:void(0)"
+										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
+										Make Your Payment </a>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+
+
+			</div>
+			<!-- Close container-fluid div -->
+
+		</div>
+	</ui:define>
+</ui:composition>

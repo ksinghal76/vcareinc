@@ -6,8 +6,11 @@
 	template="includes/template.xhtml">
 
 	<ui:define name="bodyContent">
-		<div class="well container" style="	min-height: 2050px;">
-			<div class="container-fluid" style="margin: 0;">
+		<div class="well container">
+
+			<div class="container-fluid">
+
+
 				<!--cachemarkerBannerTop-->
 
 				<div class="advertisement-space"></div>
@@ -15,29 +18,29 @@
 				<!--cachemarkerBannerTop-->
 				<div class="row-fluid">
 
-					<div
-						style="margin-left: 0; display: block; float: left; min-height: 30px; -moz-box-sizing: border-box; box-sizing: border-box; width: 74.35897435897436%;">
+
+					<div class="span9">
 
 						<div id="myCarousel" class="carousel">
 
 							<ol class="carousel-indicators">
 
 
-								<li id="liTab1" class="active">
-									<span><a href="#" onclick="changeImageTab('1', 'active', 4);" class="imageSwapGridNav">Search Listings</a></span>
+								<li data-target="#myCarousel" data-slide-to="0" class="active">
+									<span>Search Listings</span>
 								</li>
 
 
-								<li id="liTab2"><span><a href="#" onclick="changeImageTab('2', 'active', 4);" class="imageSwapGridNav">Beauty
-										Pros / Sign Up</a></span></li>
+								<li data-target="#myCarousel" data-slide-to="1"><span>Beauty
+										Pros / Sign Up</span></li>
 
 
-								<li id="liTab3"><span><a href="#" onclick="changeImageTab('3', 'active', 4);" class="imageSwapGridNav">Salons
-										/ Sign Up</a></span></li>
+								<li data-target="#myCarousel" data-slide-to="2"><span>Salons
+										/ Sign Up</span></li>
 
 
-								<li id="liTab4"><span><a href="#" onclick="changeImageTab('4', 'active', 4);" class="imageSwapGridNav">Schools
-										&amp; Students</a></span></li>
+								<li data-target="#myCarousel" data-slide-to="3"><span>Schools
+										&amp; Students</span></li>
 
 
 							</ol>
@@ -46,11 +49,11 @@
 							<div class="carousel-inner">
 
 
-								<div class="item active" id="tab1">
+								<div class="active item">
 
 									<img
 										src="${request.contextPath}/resources/images/sitemgr_photo_5352.jpg"
-										alt="Customers" title="" border="0" class="homeImage" />
+										alt="Customers" title="" border="0"/>
 									<div class="carousel-caption">
 										<h1>
 
@@ -66,12 +69,11 @@
 								</div>
 
 
-								<div class="item" id="tab2">
+								<div class=" item">
 
 									<img
 										src="${request.contextPath}/resources/images/sitemgr_photo_5367.jpg"
-										alt="Read More / Get Listed" title="" border="0"
-										class="homeImage" />
+										alt="Read More / Get Listed" title="" border="0"/>
 									<div class="carousel-caption">
 										<h1>
 
@@ -88,11 +90,11 @@
 								</div>
 
 
-								<div class=" item" id="tab3">
+								<div class=" item">
 
 									<img
 										src="${request.contextPath}/resources/images/sitemgr_photo_5368.jpg"
-										alt="Salons" title="" border="0" class="homeImage" />
+										alt="Salons" title="" border="0"/>
 									<div class="carousel-caption">
 										<h1>
 
@@ -109,12 +111,11 @@
 								</div>
 
 
-								<div class=" item" id="tab4">
+								<div class=" item">
 
 									<img
 										src="${request.contextPath}/resources/images/sitemgr_photo_5369.jpg"
-										alt="Schools &amp; Students" title="" border="0"
-										class="homeImage" />
+										alt="Schools &amp; Students" title="" border="0"/>
 									<div class="carousel-caption">
 										<h1>
 
@@ -138,8 +139,7 @@
 
 
 
-					<div
-						style="display: block; float: left; min-height: 30px; margin-left: 2.564102564102564%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 23.076923076923077%;">
+					<div class="span3">
 
 						<div id="boxNewsletter" class="newsletter">
 
@@ -152,19 +152,15 @@
 										<p>Get beauty tips from our pros, special deals and more.</p>
 									</div>
 									<div id="news_returnMessage" style="display: none;"></div>
-									<input
-										style="display: inline-block; float: none; margin-left: 0; width: 91.45299145299145%;"
-										type="text" id="newsname" placeholder="Name..." /> <input
-										style="display: inline-block; float: none; margin-left: 0; width: 91.45299145299145%;"
-										type="email" id="newsemail" placeholder="E-mail..." />
+									<input class="span11" type="text" id="newsname"
+										placeholder="Name..."/><input class="span11"
+										type="email" id="newsemail" placeholder="E-mail..."/>
 									<button class="btn btn-success btn-large" type="button"
 										onclick="subscribeNewsletter();">Sign Up</button>
 								</form>
 
 
-								<hr
-									style="border-top: 1px solid #dbdbdb; border-bottom: 1px solid #fff; margin: 21px 0 22px; border: 0; text-align: center;" />
-
+								<hr/>
 								<a class="btn btn-facebook btn-large"
 									href="http://www.facebook.com/" target="_blank"><b>Like
 										Us on Facebook</b></a>
@@ -180,46 +176,93 @@
 
 				<div class="row-fluid">
 
-					<div
-						style="margin-left: 0; width: 65.81196581196582%; display: block; float: left; min-height: 30px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;">
+					<div class="span8">
 
 						<div class="row-fluid">
 
 							<div class="span12 flex-box-list color-3">
 
-								<h2 class="h2Header">
+								<h2>
 									Browse by Category <span><a class="view-more"
 										href="http://beautypro411.com/listing/allcategories.php">more</a></span>
 								</h2>
 
-								<ul class="browse-category" style="list-style: none;">
+								<ul class="browse-category">
 
 
-									<li style="width: 33%; float: left;"><a
+									<li><a href="http://beautypro411.com/listing/guide/barber">
+											Barber </a> <span>(9)</span></li>
+
+
+									<li><a
+										href="http://beautypro411.com/listing/guide/beauty-distributor">
+											Beauty Distributor </a> <span>(2)</span></li>
+
+
+									<li><a
 										href="http://beautypro411.com/listing/guide/beauty-schools">
-											Beauty Schools </a> <span style="color: #c235de;">(2)</span></li>
+											Beauty Schools </a> <span>(4)</span></li>
 
 
-									<li style="width: 33%; float: left;"><a
+									<li><a
+										href="http://beautypro411.com/listing/guide/beauty-students-apprentice">
+											Beauty Students/ Apprentice </a> <span>(1)</span></li>
+
+
+									<li><a
 										href="http://beautypro411.com/listing/guide/beauty-supply">
-											Beauty Supply </a> <span style="color: #c235de;">(2)</span></li>
+											Beauty Supply </a> <span>(9)</span></li>
 
 
-									<li style="width: 33%; float: left;"><a
+									<li><a
 										href="http://beautypro411.com/listing/guide/beauty-and-fitness">
-											Beauty and Fitness </a> <span style="color: #c235de;">(4402)</span>
-
-									</li>
+											Beauty and Fitness </a> <span>(4429)</span></li>
 
 
-									<li style="width: 33%; float: left;"><a
+									<li><a href="http://beautypro411.com/listing/guide/braids">
+											Braids </a> <span>(10)</span></li>
+
+
+									<li><a
 										href="http://beautypro411.com/listing/guide/cosmetologist">
-											Cosmetologist </a> <span style="color: #c235de;">(3)</span></li>
+											Cosmetologist </a> <span>(19)</span></li>
 
 
-									<li style="width: 33%; float: left;"><a
-										href="http://beautypro411.com/listing/guide/health">
-											Health </a> <span style="color: #c235de;">(1)</span></li>
+									<li><a
+										href="http://beautypro411.com/listing/guide/esthetician">
+											Esthetician </a> <span>(5)</span></li>
+
+
+									<li><a
+										href="http://beautypro411.com/listing/guide/hair-loss">
+											Hair Loss </a> <span>(1)</span></li>
+
+
+									<li><a href="http://beautypro411.com/listing/guide/health">
+											Health </a> <span>(2)</span></li>
+
+
+									<li><a
+										href="http://beautypro411.com/listing/guide/makeup-artist">
+											Makeup Artist </a> <span>(7)</span></li>
+
+
+									<li><a
+										href="http://beautypro411.com/listing/guide/massage">
+											Massage </a> <span>(2)</span></li>
+
+
+									<li><a href="http://beautypro411.com/listing/guide/spa">
+											Spa </a> <span>(4)</span></li>
+
+
+									<li><a
+										href="http://beautypro411.com/listing/guide/stylist">
+											Stylist </a> <span>(7)</span></li>
+
+
+									<li><a href="http://beautypro411.com/listing/guide/weaves">
+											Weaves </a> <span>(5)</span></li>
 
 
 								</ul>
@@ -233,9 +276,9 @@
 
 							<div class="span12 flex-box-group color-3">
 
-								<h2 class="h2Header">
-									Featured Listings <span><a class="view-more"
-										href="http://beautypro411.com/listing/">See All</a></span>
+								<h2>
+									Featured Listings <a class="view-more"
+										href="http://beautypro411.com/listing/">See All</a>
 								</h2>
 
 								<div class="clearfix"></div>
@@ -245,22 +288,29 @@
 
 									<div class="row-fluid">
 										<section> <aside> <a
-											href="http://beautypro411.com/listing/sea-cruises.html"
-											class="image"> <span class="no-image"></span>
-										</a> </aside>
+											href="http://beautypro411.com/listing/hair-like-me.html"
+											class="image"> <img
+											src="${request.contextPath}/resources/images/sitemgr_photo_5494.jpg"
+											alt="Hair Like Me" title="Hair Like Me" border="0"/></a> </aside>
 
 										<h5>
-											<a href="http://beautypro411.com/listing/sea-cruises.html">
-												Sea Cruises </a>
+											<a href="http://beautypro411.com/listing/hair-like-me.html">
+												Hair Like Me </a>
 										</h5>
 
-										<p>This is example text for the overview section. Hey
-											there where ya goin', not exactly knowin', who says you have
-											to call just one place home. He's goin' everywhere, B.J.
-											McKay and his best friend Bear.</p>
+										<p>HairLikeMe is a business that I provide for those
+											requesting natural styling. I have 15 years experience in
+											Braids, Twists, Locs, and weaves. I work with women, men, and
+											children of all ages.</p>
 
 										<footer>
-										<p></p>
+										<p>
+											in <a
+												href="http://beautypro411.com/listing/guide/beauty-and-fitness">Beauty
+												and Fitness</a>, <a
+												href="http://beautypro411.com/listing/guide/stylist">Stylist</a>,
+											<a href="http://beautypro411.com/listing/guide/braids">Braids</a>
+										</p>
 										</footer> </section>
 
 									</div>
@@ -268,8 +318,7 @@
 
 
 
-									<hr class="box-divisor" />
-
+									<hr class="box-divisor"/>
 									<div class="row-fluid">
 
 
@@ -277,17 +326,14 @@
 											<section>
 											<h5>
 												<a
-													href="http://beautypro411.com/listing/borners-barber-college.html">
-													Borner's Barber College </a>
+													href="http://beautypro411.com/listing/that-hair-place.html">
+													That Hair Place </a>
 											</h5>
 											<a
-												href="http://beautypro411.com/listing/borners-barber-college.html"
-												class="image"> <img
-												src="${request.contextPath}/resources/images/317_photo_5349.jpg"
-												alt="Borner's Barber College"
-												title="Borner's Barber College" border="0" />
+												href="http://beautypro411.com/listing/that-hair-place.html"
+												class="image"> <span class="no-image"></span>
 											</a>
-											<p></p>
+											<p>You're Someone Special at 'That Hair Place!'</p>
 											</section>
 										</div>
 
@@ -298,16 +344,14 @@
 										<div class="span6">
 											<section>
 											<h5>
-												<a
-													href="http://beautypro411.com/listing/history-museum.html">
-													History Museum </a>
+												<a href="http://beautypro411.com/listing/salon-atara.html">
+													Salon Atara </a>
 											</h5>
-											<a href="http://beautypro411.com/listing/history-museum.html"
-												class="image"> <span class="no-image"></span>
-											</a>
-											<p>This is example text for the overview section. Hey
-												there where ya goin', not exactly knowin', who says you have
-												to call just on...</p>
+											<a href="http://beautypro411.com/listing/salon-atara.html"
+												class="image"> <img
+												src="${request.contextPath}/resources/images/sitemgr_photo_5404.jpg"
+												alt="Salon Atara" title="Salon Atara" border="0"/></a>
+											<p>Uniting Classic Designs &amp; Healthy hair</p>
 											</section>
 										</div>
 
@@ -328,7 +372,7 @@
 
 							<div class="span12 flex-box-list color-3">
 
-								<h2 class="h2Header">
+								<h2>
 									Browse by Location <span><a class="view-more"
 										href="http://beautypro411.com/listing/alllocations.php">more</a></span>
 								</h2>
@@ -462,46 +506,42 @@
 
 						</div>
 
-						<div class="row-fluid"
-							style="border-color: #dfeaf7; background-color: #F4F4f4;">
+						<div class="row-fluid">
 							<!--cachemarkerFeaturedDeal-->
 
 							<div class="span12 flex-box color-1">
 
-								<h2 class="h2Header" style="background-color: #5496bf;">
-									Featured Deal <span>$24<b class="divisor"></b>20% OFF
+								<h2>
+									Featured Deal <span>$0.01<b class="divisor"></b>100% OFF
 									</span>
 								</h2>
 
 								<div class="row-fluid">
 
-									<div class="span12 row-fluid" style="margin-left: 0;">
+									<div class="span12 row-fluid">
 
 										<aside class="span8"> <a
-											href="http://beautypro411.com/deal/20-off-enjoy.html"
+											href="http://beautypro411.com/deal/free-presentations-every-tuesdays.html"
 											class="image"> <img
-											src="${request.contextPath}/resources/images/4_photo_3488.png"
-											alt="20% OFF - Enjoy!" title="20% OFF - Enjoy!" border="0"
-											width="100%" /> <span
-											style="left: 0; padding: 20px 0; position: absolute; text-align: center; top: 30%; width: 100%; background: rgba(0, 0, 0, 0.7); pointer-events: none;">
-												<h4
-													style="color: #fff; text-transform: uppercase; font-size: 17px; padding: 1px 4px; font-weight: normal;">20%
-													OFF - Enjoy!</h4>
+											src="${request.contextPath}/resources/images/18_photo_3528.png"
+											alt="Free presentations every Tuesdays"
+											title="Free presentations every Tuesdays" border="0"/><span>
+												<h4>Free presentations every Tuesdays</h4>
 										</span>
 										</a> </aside>
 
-										<section style="padding: 10px;display: block;">
-										<h5
-											style="color: #353535; font-weight: normal; font-size: 14px;">
-											<a href="http://beautypro411.com/deal/20-off-enjoy.html"
-												style="color: #353535;"> Holdridge Flowerland </a>
+										<section>
+
+										<h5>
+											<a
+												href="http://beautypro411.com/deal/free-presentations-every-tuesdays.html">
+												Face To Face Productions </a>
 										</h5>
 
-										<p style="color: #080808; line-height: 16px;">This is
-											example text for the overview section. 80 days around the
-											world, we'll find a pot of gold just sitting where the
-											rainbow's ending. Time - we'll fight against the time, and
-											we'll fly on the white wings of the wind.</p>
+										<p>This is example text for the overview section. Just the
+											good ol' boys, never meanin' no harm. Beats all you've ever
+											saw, been in trouble with the law since the day they was
+											born. Straight'nin' the curve, flat'nin' the hills.</p>
 
 
 										</section>
@@ -518,32 +558,27 @@
 						<div class="row-fluid">
 							<!--cachemarkerFeaturedClassified-->
 
-							<div class="span6 flex-box color-2" style="margin-left: 0;">
+							<div class="span6 flex-box color-2">
 
-								<h2 class="h2Header2">Featured Classified</h2>
+								<h2>Featured Classified</h2>
 
 								<a
 									href="http://beautypro411.com/classified/consulting-business.html"
-									class="image" style="color: #c235de; opacity: 1;"> <img
+									class="image"> <img
 									src="${request.contextPath}/resources/images/sitemgr_photo_3792.png"
 									alt="Consulting Business" title="Consulting Business"
-									border="0"
-									style="width: 100%; height: auto; max-width: 100%; vertical-align: middle;" />
-								</a>
+									border="0"/></a>
 
-								<section style="padding: 10px;display: block;">
-								<h5
-									style="color: #353535; font-weight: normal; font-size: 14px; line-height: 20px;">
+								<section>
+								<h5>
 									<a
-										href="http://beautypro411.com/classified/consulting-business.html"
-										style="color: #353535; text-decoration: none;"> Consulting
-										Business </a>
+										href="http://beautypro411.com/classified/consulting-business.html">
+										Consulting Business </a>
 								</h5>
 
-								<p style="color: #080808; line-height: 16px;">This is
-									example text for the overview section. Hey there where ya
-									goin', not exactly knowin', who says you have to call just
-									on...</p>
+								<p>This is example text for the overview section. Hey there
+									where ya goin', not exactly knowin', who says you have to call
+									just on...</p>
 								</section>
 
 							</div>
@@ -553,29 +588,24 @@
 
 							<div class="span6 flex-box color-2">
 
-								<h2 class="h2Header2">
+								<h2>
 									Featured Article <a class="view-more"
-										href="http://beautypro411.com/article/"
-										style="float: right; margin-right: 10px; color: #fff; font-size: 10px; font-weight: 400; text-transform: capitalize; white-space: nowrap;">See
-										All</a>
+										href="http://beautypro411.com/article/">See All</a>
 								</h2>
 
 								<a href="http://beautypro411.com/article/retirement-plans.html"
-									class="image" style="color: #c235de; text-decoration: none;">
-									<span class="no-image"></span>
+									class="image"> <span class="no-image"></span>
 								</a>
 
-								<section style="padding: 10px;display: block;">
-								<h5
-									style="color: #353535; font-weight: normal; font-size: 14px;">
-									<a href="http://beautypro411.com/article/retirement-plans.html"
-										style="color: #353535; text-decoration: none;"> Retirement
-										Plans </a>
+								<section>
+								<h5>
+									<a href="http://beautypro411.com/article/retirement-plans.html">
+										Retirement Plans </a>
 								</h5>
 
-								<p style="color: #080808; line-height: 16px;">This is
-									example text for the overview section. One for all and all for
-									one, Muskehounds are always ready. One for all and all f...</p>
+								<p>This is example text for the overview section. One for
+									all and all for one, Muskehounds are always ready. One for all
+									and all f...</p>
 								</section>
 
 							</div>
@@ -590,108 +620,77 @@
 
 						<div class="flex-box-group color-4">
 
-							<h2
-								style="background-color: #727980; text-transform: uppercase; font-size: 12px; color: #fff; font-weight: bold; line-height: 20px; padding: 7px 0; float: left; width: 100%; text-indent: 10px; clear: both; margin: 0; border: none; outline: none;">Recent
-								Reviews</h2>
+							<h2>Recent Reviews</h2>
 
 
 
-							<section class="item-preview" style="padding: 10px;">
+							<section class="item-preview">
 
-							<h5 style="margin: 0;">
-								<a href="http://beautypro411.com/listing/acapulco-tan.html"
-									style="color: #2980b9; margin: 0; text-decoration: none;">Acapulco
+							<h5>
+								<a href="http://beautypro411.com/listing/acapulco-tan.html">Acapulco
 									Tan</a>
-								<div class="stars-rating"
-									style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #16a085;">
-									<div class="rate-5"
-										style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #fff;"></div>
+								<div class="stars-rating">
+									<div class="rate-5"></div>
 								</div>
 							</h5>
 
-							<p
-								style="font-size: 11px; color: #080808; line-height: 16px; margin: 0;">Once
-								a week I visit Acapulco Tan. They're always ready to receive us.</p>
+							<p>Once a week I visit Acapulco Tan. They're always ready to
+								receive us.</p>
 
 							<b><a
 								href="http://beautypro411.com/profile/daniel-willis.html"
-								title="Dan"
-								style="color: #2980b9; text-decoration: none; margin: 0;">Dan</a></b>
-
-							</section>
+								title="Dan">Dan</a></b> </section>
 
 
-							<section class="item-preview" style="padding: 10px;">
+							<section class="item-preview">
 
 							<h5>
-								<a href="http://beautypro411.com/listing/relaxation-spa.html"
-									style="color: #2980b9; margin: 0; text-decoration: none;">Relaxation
+								<a href="http://beautypro411.com/listing/relaxation-spa.html">Relaxation
 									Spa</a>
-								<div class="stars-rating"
-									style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #16a085;">
-									<div class="rate-4"
-										style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #fff;"></div>
+								<div class="stars-rating">
+									<div class="rate-4"></div>
 								</div>
 							</h5>
 
-							<p
-								style="font-size: 11px; color: #080808; line-height: 16px; margin: 0;">At
-								my last visit, my masseuse was really late. But it's still a
-								nice place to relax.</p>
+							<p>At my last visit, my masseuse was really late. But it's
+								still a nice place to relax.</p>
 
 							<b><a
 								href="http://beautypro411.com/profile/layla-donovan.html"
-								title="Layla Donovan"
-								style="color: #2980b9; text-decoration: none; margin: 0;">Layla
-									Donovan</a></b> </section>
+								title="Layla Donovan">Layla Donovan</a></b> </section>
 
 
-							<section class="item-preview" style="padding: 10px;">
+							<section class="item-preview">
 
 							<h5>
 								<a
-									href="http://beautypro411.com/listing/the-prettiest-beauty-parlon.html"
-									style="color: #2980b9; margin: 0; text-decoration: none;">The
+									href="http://beautypro411.com/listing/the-prettiest-beauty-parlon.html">The
 									Prettiest Beauty Parlon</a>
-								<div class="stars-rating"
-									style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #16a085;">
-									<div class="rate-5"
-										style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #fff;"></div>
+								<div class="stars-rating">
+									<div class="rate-5"></div>
 								</div>
 							</h5>
 
-							<p
-								style="font-size: 11px; color: #080808; line-height: 16px; margin: 0;">I
-								really feel special here. I love your services!</p>
+							<p>I really feel special here. I love your services!</p>
 
 							<b><a
 								href="http://beautypro411.com/profile/chloe-jensen.html"
-								title="Chloe Jensen"
-								style="color: #2980b9; text-decoration: none; margin: 0;">Chloe
-									Jensen</a></b> </section>
+								title="Chloe Jensen">Chloe Jensen</a></b> </section>
 
 
-							<section class="item-preview" style="padding: 10px;">
+							<section class="item-preview">
 
 							<h5>
-								<a href="http://beautypro411.com/listing/workout.html"
-									style="color: #2980b9; margin: 0; text-decoration: none;">Workout</a>
-								<div class="stars-rating"
-									style="background-color: #5496bf; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #16a085;">
-									<div class="rate-4"
-										style="float: left; height: 13px; background: url(${request.contextPath}/resources/images/mask-stars-white.png) no-repeat left center scroll #fff;"></div>
+								<a href="http://beautypro411.com/listing/workout.html">Workout</a>
+								<div class="stars-rating">
+									<div class="rate-4"></div>
 								</div>
 							</h5>
 
-							<p
-								style="font-size: 11px; color: #080808; line-height: 16px; margin: 0;">Workout
-								is one the best options in town!</p>
+							<p>Workout is one the best options in town!</p>
 
 							<b><a href="http://beautypro411.com/profile/david.html"
-								title="David"
-								style="color: #2980b9; text-decoration: none; margin: 0;">David</a></b>
-
-							</section>
+								title="David">David</a></b> </section>
 
 
 						</div>
@@ -701,32 +700,25 @@
 							<h2>Browse Events by Date</h2>
 							<table class="table-calendar" border="0" cellspacing="4"
 								cellpadding="0" width="100%">
-								<tbody
-									style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+								<tbody>
 									<tr>
-										<td colspan="7" class="pd-0">
-											<table border="0" cellspacing="0" cellpadding="0"
-												width="100%" class="calendar-header">
+										<td colspan="7" class="pd-0"><table border="0"
+												cellspacing="0" cellpadding="0" width="100%"
+												class="calendar-header">
 												<tbody>
 													<tr>
 														<th align="left"><a class="calendar-button left"
-															href="http://beautypro411.com/event/results.php?month=201403&amp;this_date=20140301"
-															style="background-image: url(${request.contextPath}/resources/images/bt-calendar-arrow.png);"></a>
-														</th>
+															href="http://beautypro411.com/event/results.php?month=201404&amp;this_date=20140401"></a></th>
 														<th><a
-															href="http://beautypro411.com/event/results.php?month=201404&amp;this_date=20140401"
-															style="color: #2980b9; text-decoration: none; margin: 0;">April
+															href="http://beautypro411.com/event/results.php?month=201405&amp;this_date=20140501">May
 																2014</a></th>
 														<th align="right"><a class="calendar-button right"
-															href="http://beautypro411.com/event/results.php?month=201405&amp;this_date=20140501"
-															style="background-image: url(${request.contextPath}/resources/images/bt-calendar-arrow.png);"></a>
-														</th>
+															href="http://beautypro411.com/event/results.php?month=201406&amp;this_date=20140601"></a></th>
 													</tr>
 												</tbody>
-											</table>
-										</td>
+											</table></td>
 									</tr>
-									<tr style="font-size: 12px;">
+									<tr>
 										<th class="calendar-weekday">S</th>
 										<th class="calendar-weekday">M</th>
 										<th class="calendar-weekday">T</th>
@@ -738,137 +730,113 @@
 									<tr>
 										<td>&nbsp;</td>
 										<td>&nbsp;</td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140401')" class="normal"
-											style="color: #2980b9; text-decoration: none;">01</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140402')" class="normal"
-											style="color: #2980b9; text-decoration: none;">02</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140403')" class="normal"
-											style="color: #2980b9; text-decoration: none;">03</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140404')" class="normal"
-											style="color: #2980b9; text-decoration: none;">04</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140405')" class="normal"
-											style="color: #2980b9; text-decoration: none;">05</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140406')" class="normal"
-											style="color: #2980b9; text-decoration: none;">06</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140407')" class="normal"
-											style="color: #2980b9; text-decoration: none;">07</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140408')" class="normal"
-											style="color: #2980b9; text-decoration: none;">08</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140409')" class="normal"
-											style="color: #2980b9; text-decoration: none;">09</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140410')" class="normal"
-											style="color: #2980b9; text-decoration: none;">10</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140411')" class="today"
-											style="color: #2980b9; text-decoration: none;">11</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140412')" class="normal"
-											style="color: #2980b9; text-decoration: none;">12</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140413')" class="normal"
-											style="color: #2980b9; text-decoration: none;">13</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140414')" class="normal"
-											style="color: #2980b9; text-decoration: none;">14</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140415')" class="normal"
-											style="color: #2980b9; text-decoration: none;">15</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140416')" class="normal"
-											style="color: #2980b9; text-decoration: none;">16</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140417')" class="normal"
-											style="color: #2980b9; text-decoration: none;">17</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140418')" class="normal"
-											style="color: #2980b9; text-decoration: none;">18</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140419')" class="normal"
-											style="color: #2980b9; text-decoration: none;">19</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140420')" class="normal"
-											style="color: #2980b9; text-decoration: none;">20</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140421')" class="normal"
-											style="color: #2980b9; text-decoration: none;">21</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140422')" class="normal"
-											style="color: #2980b9; text-decoration: none;">22</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140423')" class="normal"
-											style="color: #2980b9; text-decoration: none;">23</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140424')" class="normal"
-											style="color: #2980b9; text-decoration: none;">24</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140425')" class="normal"
-											style="color: #2980b9; text-decoration: none;">25</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140426')" class="normal"
-											style="color: #2980b9; text-decoration: none;">26</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140427')" class="normal"
-											style="color: #2980b9; text-decoration: none;">27</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140428')" class="normal"
-											style="color: #2980b9; text-decoration: none;">28</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140429')" class="normal"
-											style="color: #2980b9; text-decoration: none;">29</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140430')" class="normal"
-											style="color: #2980b9; text-decoration: none;">30</a></td>
 										<td>&nbsp;</td>
 										<td>&nbsp;</td>
-										<td>&nbsp;</td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140501')" class="normal">01</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140502')" class="normal">02</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140503')" class="normal">03</a></td>
+									</tr>
+									<tr>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140504')" class="normal">04</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140505')" class="normal">05</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140506')" class="normal">06</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140507')" class="normal">07</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140508')" class="normal">08</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140509')" class="today">09</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140510')" class="normal">10</a></td>
+									</tr>
+									<tr>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140511')" class="normal">11</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140512')" class="normal">12</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140513')" class="normal">13</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140514')" class="normal">14</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140515')" class="normal">15</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140516')" class="normal">16</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140517')" class="normal">17</a></td>
+									</tr>
+									<tr>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140518')" class="normal">18</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140519')" class="normal">19</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140520')" class="normal">20</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140521')" class="normal">21</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140522')" class="normal">22</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140523')" class="normal">23</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140524')" class="normal">24</a></td>
+									</tr>
+									<tr>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140525')" class="normal">25</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140526')" class="normal">26</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140527')" class="normal">27</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140528')" class="normal">28</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140529')" class="normal">29</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140530')" class="normal">30</a></td>
+										<td align="center" width="22" class="calendar-day"><a
+											href="javascript:set_cal_date('20140531')" class="normal">31</a></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-						<div class="flex-box-group daily-calendar" style="float: none;margin:0;">
+						<div class="flex-box-group daily-calendar" style="float: none;">
 
-							<ul class="calendar-event" style="background-color: #5496bf;list-style: none;margin:0;padding: 0;">
-
-
-								<li id="1142014" onclick="getEventsCalendar('11', '4', '2014');"
-									class="active"><b></b><br /> <span>11th</span></li>
+							<ul class="calendar-event">
 
 
-								<li id="1242014" onclick="getEventsCalendar('12', '4', '2014');">
-									<b></b><br /> <span>12th</span>
+								<li id="952014" onclick="getEventsCalendar('9', '5', '2014');"
+									class="active"><b></b><br/>
+								<span>9th</span></li>
+
+
+								<li id="1052014" onclick="getEventsCalendar('10', '5', '2014');">
+									<b></b><br/>
+								<span>10th</span>
 								</li>
 
 
-								<li id="1342014" onclick="getEventsCalendar('13', '4', '2014');">
-									<b></b><br /> <span>13th</span>
+								<li id="1152014" onclick="getEventsCalendar('11', '5', '2014');">
+									<b></b><br/>
+								<span>11th</span>
 								</li>
 
 
-								<li id="1442014" onclick="getEventsCalendar('14', '4', '2014');">
-									<b></b><br /> <span>14th</span>
+								<li id="1252014" onclick="getEventsCalendar('12', '5', '2014');">
+									<b></b><br/>
+								<span>12th</span>
 								</li>
 
 
-								<li id="1642014" onclick="getEventsCalendar('16', '4', '2014');">
-									<b></b><br /> <span>16th</span>
+								<li id="1452014" onclick="getEventsCalendar('14', '5', '2014');">
+									<b></b><br/>
+								<span>14th</span>
 								</li>
 
 
@@ -877,15 +845,15 @@
 							<p class="calendar_loading" style="display: none;"></p>
 
 							<div id="calendar_event">
-								<section class="item-preview" style="padding: 10px;">
+								<section class="item-preview">
 
 								<h5>
 									<a
-										href="http://beautypro411.com/event/heaven-night-club-opening.html" style="color: #2980b9;text-decoration: none;">Heaven
+										href="http://beautypro411.com/event/heaven-night-club-opening.html">Heaven
 										Night Club Opening</a>
 								</h5>
 
-								<p style="color: #080808;margin: 0;">This is example text for the overview section. Ulysses,
+								<p>This is example text for the overview section. Ulysses,
 									Ulysses - Soaring through all the galaxies. In search of Earth,
 									flying in to the night. Ulysses, Ulysses - Fighting evil and
 									tyranny, with all his power, and with all of his might.</p>
@@ -895,21 +863,22 @@
 
 							</div>
 
-							<input type="hidden" id="last_day_click" value="1142014" />
-
+							<input type="hidden" id="last_day_click" value="952014"/>
 						</div>
 
 
 						<script language="javascript" type="text/javascript">
                 $(document).ready(function(){
-                    getEventsCalendar('11', '4', '2014')                });
+                    getEventsCalendar('9', '5', '2014')                });
             </script>
 
 
-						<!--     <script language="javascript" type="text/javascript">
+						<!--  <script language="javascript" type="text/javascript">
 		function set_cal_date(date) {
 			var path = "";
+
 			path = "http://beautypro411.com/event/results.php?this_date="+date+"&search_by_day=true";
+
 			document.location.href = path;
 		}
 	</script>      -->

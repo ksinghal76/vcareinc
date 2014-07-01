@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<script type="text/javascript">
+
+		var interval = 450;
+		var navBar_listing = false;
+		var navBar_banner = false;
+		var navBar_event = false;
+		var navBar_classified = false;
+		var navBar_article = false;
+		var navBar_gallery = false;
+		var navBar_promotion = false;
+		var navBar_checkout = false;
+		var navBar_history = false;
+		var navBar_account = false;
+		                var navBar_discountprogram = false;                            var navBar_healthcarecooperative = false;                            var navBar_financialbenefits = false;                            var navBar_websitebuilder = false;            		$(document).ready(function(){
+
+			$("#navBar_bt_listing").click(function () {
+				controlMenuNavBar ("listing");
+			});
+			$("#navBar_bt_banner").click(function () {
+				controlMenuNavBar ("banner");
+			});
+			$("#navBar_bt_event").click(function () {
+				controlMenuNavBar ("event");
+			});
+			$("#navBar_bt_classified").click(function () {
+				controlMenuNavBar ("classified");
+			});
+			$("#navBar_bt_article").click(function () {
+				controlMenuNavBar ("article");
+			});
+			$("#navBar_bt_gallery").click(function () {
+				controlMenuNavBar ("gallery");
+			});
+			$("#navBar_bt_promotion").click(function () {
+				controlMenuNavBar ("promotion");
+			});
+			$("#navBar_bt_checkout").click(function () {
+				controlMenuNavBar ("checkout");
+			});
+			$("#navBar_bt_history").click(function () {
+				controlMenuNavBar ("history");
+			});
+			$("#navBar_bt_account").click(function () {
+				controlMenuNavBar ("account");
+			});						                    $("#navBar_bt_discountprogram").click(function () {                        controlMenuNavBar ("discountprogram");                    });                                $("#navBar_bt_healthcarecooperative").click(function () {                        controlMenuNavBar ("healthcarecooperative");                    });                                $("#navBar_bt_financialbenefits").click(function () {                        controlMenuNavBar ("financialbenefits");                    });                                $("#navBar_bt_websitebuilder").click(function () {                        controlMenuNavBar ("websitebuilder");                    });            		});
+
+		function controlMenuNavBar (feature) {
+			if (!eval("navBar_"+feature)) {
+				navBar_slideDown (feature);
+            } else {
+				navBar_slideUp (feature);
+            }
+			eval("navBar_"+feature+"= !navBar_"+feature);
+		}
+
+		function navBar_slideDown (feature) {
+			$("#navBar_bt_"+feature).addClass('navBarActive');
+			$("#navBar_submenu_"+feature).slideDown(interval);
+		}
+
+		function navBar_slideUp (feature) {
+			$("#navBar_bt_"+feature).removeClass('navBarActive');
+			$("#navBar_submenu_"+feature).slideUp(interval);
+		}
+
+		function controlActiveMenu(feature) {
+			eval("navBar_"+feature+"= true");
+		}
+
+	</script>
+
+	<script type="text/javascript"> controlActiveMenu('listing')    </script>
+
+	<div class="sidebar">
+
+
+		<div class="user-info">
+			<div class="image">
+				<span class="no-image no-link"></span>
+			</div>
+			<p>
+				${userProfile.firstname} ${userProfile.lastname} <span>Member Since <h:outputText value="${userProfile.created}"><f:convertDateTime pattern="MM/dd/yyyy"/></h:outputText> </span>
+			</p>
+			<p>
+				<a href="http://beautypro411.com/members/account/account.php?id=321"
+					title="Edit my Profile">Edit my Profile</a>
+			</p>
+			<p>
+				<a href="http://beautypro411.com/profile/">View my profile page</a>
+			</p>
+
+		</div>
+
+		<h2>Profile Options</h2>
+
+		<div class="memberMenu">
+			<h2>
+				<a href="http://beautypro411.com/members/account/reviews.php">Reviews</a>
+			</h2>
+
+			<h2>
+				<a href="http://beautypro411.com/members/account/quicklists.php">Favorites</a>
+			</h2>
+
+			<h2>
+				<a href="http://beautypro411.com/members/account/deals.php">Deals
+					Redeemed</a>
+			</h2>
+		</div>
+
+
+		<h2>Sponsor Options</h2>
+
+		<div class="memberMenu">
+
+			<c:forEach var="optionType" items="${conversionManagedBean.optionTypes}">
+				<h2 id="navBar_bt_listing">
+					<a href="javascript:void(0)">${optionType}</a>
+				</h2>
+
+				<ul id="navBar_submenu_listing">
+					<li><a href="${fn:toLowerCase(optionType)}Manage">Manage</a></li>
+					<li><a
+						href="orderListing-flow?optionType=${optionType}">Add</a></li>
+				</ul>
+			</c:forEach>
+
+			<!-- <h2 id="navBar_bt_listing">
+				<a href="javascript:void(0)">Listings</a>
+			</h2>
+
+			<ul id="navBar_submenu_listing">
+				<li><a href="http://beautypro411.com/members/listing/">Manage</a></li>
+				<li><a
+					href="orderListing-flow?optionType=">Add</a></li>
+			</ul>
+
+			<h2 id="navBar_bt_promotion">
+				<a href="javascript:void(0)">Deals</a>
+			</h2>
+			<ul id="navBar_submenu_promotion" style="display: none">
+				<li><a href="http://beautypro411.com/members/deal/">Manage</a></li>
+				<li><a href="http://beautypro411.com/members/deal/deal.php">Add</a></li>
+			</ul>
+
+
+			<h2 id="navBar_bt_event">
+				<a href="javascript:void(0)">Events</a>
+			</h2>
+			<ul id="navBar_submenu_event" style="display: none">
+				<li><a href="http://beautypro411.com/members/event/">Manage</a></li>
+				<li><a
+					href="http://beautypro411.com/members/event/eventlevel.php">Add</a></li>
+			</ul>
+
+
+			<h2 id="navBar_bt_classified">
+				<a href="javascript:void(0)">Classifieds</a>
+			</h2>
+			<ul id="navBar_submenu_classified" style="display: none">
+				<li><a href="http://beautypro411.com/members/classified/">Manage</a></li>
+				<li><a
+					href="http://beautypro411.com/members/classified/classifiedlevel.php">Add</a></li>
+			</ul>
+
+			<h2 id="navBar_bt_article">
+				<a href="javascript:void(0)">Articles</a>
+			</h2>
+			<ul id="navBar_submenu_article" style="display: none">
+				<li><a href="http://beautypro411.com/members/article/">Manage</a></li>
+				<li><a
+					href="http://beautypro411.com/members/article/article.php">Add</a></li>
+			</ul> -->
+
+		</div>
+
+		<h2>Payment Options</h2>
+		<div class="memberMenu">
+			<h2 id="navBar_bt_checkout">
+				<a href="javascript:void(0)">Check Out</a>
+			</h2>
+			<ul id="navBar_submenu_checkout" style="display: none">
+				<li><a href="http://beautypro411.com/members/billing/index.php">Make
+						Your Payment</a></li>
+			</ul>
+
+			<h2 id="navBar_bt_history">
+				<a href="javascript:void(0)">History</a>
+			</h2>
+
+			<ul id="navBar_submenu_history" style="display: none">
+				<li><a
+					href="http://beautypro411.com/members/transactions/index.php">Transaction
+						History</a></li>
+				<li><a
+					href="http://beautypro411.com/members/invoices/index.php">Invoice
+						History</a></li>
+			</ul>
+
+
+		</div>
+
+		<h2>Member Benefits</h2>
+		<div class="memberMenu">
+
+
+			<h2 id="navBar_bt_discountprogram" class="">
+				<a href="https://beautypro.memberdiscounts.co/login" target="_blank">Discount
+					Program</a>
+			</h2>
+			<ul id="navBar_submenu_discountprogram" style="display: none">
+
+			</ul>
+
+
+
+			<h2 id="navBar_bt_healthcarecooperative" class="">
+				<a href="javascript:void(0)">Healthcare Cooperative</a>
+			</h2>
+			<ul id="navBar_submenu_healthcarecooperative" style="display: none">
+
+
+				<li><a href="" target="_blank">Coming Soon !</a></li>
+
+
+			</ul>
+
+
+
+			<h2 id="navBar_bt_financialbenefits" class="">
+				<a href="javascript:void(0)">Financial Benefits</a>
+			</h2>
+			<ul id="navBar_submenu_financialbenefits" style="display: none">
+
+
+				<li><a href="https://apply.phoneswipe.com/?source=23372.2"
+					target="_blank">Credit Card Phone Swipe</a></li>
+
+				<li><a href="" target="_blank">Merchant Services &amp; Cash
+						Advances</a></li>
+
+				<li><a href="" target="_blank">Incorporation &amp; Taxes</a></li>
+
+				<li><a
+					href="  http://beautypro411.com/content/financial-benefits-debit-card.html"
+					target="_blank">Debit Card</a></li>
+
+
+			</ul>
+
+
+
+			<h2 id="navBar_bt_websitebuilder" class="">
+				<a href="javascript:void(0)">Website Builder</a>
+			</h2>
+			<ul id="navBar_submenu_websitebuilder" style="display: none">
+
+
+				<li><a href="" target="_blank">New Submenu</a></li>
+
+
+			</ul>
+
+		</div>
+
+	</div>
+</ui:composition>

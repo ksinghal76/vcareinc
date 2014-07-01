@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container">
+
+			<div class="container-fluid">
+
+				<p class="breadcrumb">
+					<a href="http://beautypro411.com" title="Home">Home</a><span
+						class="split">&nbsp;&nbsp;/&nbsp;&nbsp;</span>Contact Us
+				</p>
+
+				<!--cachemarkerBannerTop-->
+
+				<div class="advertisement-space"></div>
+
+				<!--cachemarkerBannerTop-->
+				<div class="row-fluid">
+
+					<div class="row-fluid">
+						<div class="content-custom">
+							<p>
+								<img style="float: right; margin-left: 5px; margin-right: 5px;"
+									src="http://beautypro411.com/custom/domain_1/image_files/contactus.jpg"
+									alt="Contact Us" width="250" height="246"/>
+							</p>
+							<h2>
+								<span style="font-size: 1.5em;">About Us</span>
+							</h2>
+							<p>
+								<strong>Want to look and feel beautiful? We know you
+									do.</strong>
+							</p>
+							<p>&nbsp;</p>
+							<p>
+								<strong>That’s why we created Beautypro411 -- the one
+									place for you to find and book just the right talent for the
+									job. </strong>
+							</p>
+							<p>&nbsp;</p>
+							<p>Wherever you are, wherever you’re going, If we're not
+								there just make a request we'll be there, Beautypro411 has you
+								covered. Need a top colorist in Colorado? A personal trainer in
+								Peoria? A consummate makeup artist in Milwakee? A rockin’ reiki
+								practitioner in Reno? Or someone to give you a fab updo who is
+								right up your street? You’ll find them all on Beautypro411. It’s
+								your one-stop shop for all the people you need – and can trust –
+								to pamper and preen you to perfection, and keep you looking and
+								feeling your very best</p>
+							<p>&nbsp;</p>
+							<p>Search for your professional by location or specialty.
+								Find them with advanced mapping. Read customer reviews. And even
+								book your appointment on the spot, 24/7 It’s like having your
+								own private staff of beauty and wellness pros at your fingertips</p>
+							<h2>
+								<span style="font-size: 1.5em;"><br/></span>
+							</h2>
+							<h2>
+								<span style="font-size: 1.5em;">Contact Us</span>
+							</h2>
+							<p>beautypro411.com</p>
+							<p>
+								1107 Fair Oaks Ave # 342 <br/>South Pasadena, CA USA 91030
+							</p>
+							<p>
+								<strong>Email: info@beautypro411.com</strong>
+							</p>
+							<p>&nbsp;</p>
+						</div>
+					</div>
+
+					<div class="row-fluid">
+						<div class="span4">
+
+							<div class="contact-form">
+
+
+								<form name="contactusForm" id="contactusForm"
+									action="http://beautypro411.com/contactus.php" method="post"
+									class="form">
+
+									<div class="row-fluid">
+										<div>
+											<label for="name">* Name</label> <input id="name" name="name"
+												value="" type="text" class="text span12"/>
+										</div>
+
+										<div>
+											<label for="email">* E-mail</label> <input id="email"
+												name="email" value="" type="email" class="text span12"/>
+										</div>
+
+										<div>
+											<label for="title">* Subject</label> <input id="title"
+												name="title" value="" type="text" class="text span12"/>
+										</div>
+									</div>
+
+
+
+									<label for="message">* Message</label>
+									<textarea id="message" name="messageBody" rows="5" cols="30"
+										class="textarea span12"></textarea>
+
+
+									<p>Please enter the text you see in the image at the left
+										into the textbox. This is required to prevent automated
+										submission of contact requests.</p>
+									<div class="row-fluid">
+										<div class="captcha">
+											<img class="pull-left"
+												src="http://beautypro411.com/includes/code/captcha.php"
+												border="0" alt="Verification Code image cannot be displayed"
+												title="Verification Code"/><input type="text" value=""
+												name="captchatext" class="text span7 pull-right"/>
+										</div>
+									</div>
+									<div>
+										<button class="btn btn-success span12">Send</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+
+						<div class="span8 contactus"></div>
+					</div>
+
+				</div>
+			</div>
+			<!-- Close container-fluid div -->
+		</div>
+	</ui:define>
+</ui:composition>

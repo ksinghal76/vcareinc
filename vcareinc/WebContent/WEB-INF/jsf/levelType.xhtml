@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+			<div class="container-fluid">
+
+				<p class="breadcrumb">
+					<a href="orderListing-flow">Home</a> / <a
+						href="orderListing-flow">beautypro411</a> / <a
+						href="orderListing-flow"><h:outputText value="${order.optionType}" style="text-transform: capitalize;"/></a> / Add
+				</p>
+
+				<ui:include src="includes/memberbar.xhtml"/>
+				<div class="content">
+
+
+					<h2><h:outputText value="${order.optionType}" style="text-transform: capitalize;"/> Level</h2>
+
+					<!-- <form name="listinglevel"
+						action="/members/listing/listinglevel.php" method="post"
+						enctype="multipart/form-data"> -->
+					<h:form>
+						<input type="hidden" name="id" value=""/><input
+							type="hidden" name="screen" value=""/><input type="hidden"
+							name="letter" value=""/>
+						<table border="0" cellpadding="0" cellspacing="0"
+							class="levelTable">
+
+							<tbody>
+								<tr>
+									<th class="levelTitle">Select <h:outputText value="${order.optionType}" style="text-transform: capitalize;"/> level</th>
+									<td class="levelTopdetail">Prices</td>
+								</tr>
+								<tr>
+									<th class="tableOption" colspan="2"><a
+										href="advertiseController" target="_blank"
+										class="listingOption"><h:outputText value="${order.optionType}" style="text-transform: capitalize;"/> Options</a></th>
+								</tr>
+								<tr>
+
+
+									<td>
+										<table border="0" cellpadding="2" cellspacing="2"
+											class="standardChooseLevel">
+											<tbody>
+												<c:if test="${order.optionType == 'LISTING'}">
+												<tr>
+													<th class="listingLevel">${order.optionType} Type:</th>
+													<td>
+													<!-- <h:selectOneMenu id="listingType">
+														<f:selectItems value="${conversionManagedBean.listingTypes}" var="listingType" itemValue="${listingType}" itemLabel="${listingType}"/>
+													</h:selectOneMenu> -->
+													<SELECT name="listingType">
+														<c:forEach items="${conversionManagedBean.listingTypes}" var="listingType">
+															<option value="${listingType}">${listingType}</option>
+														</c:forEach>
+													</SELECT>
+													<!-- <select name="listingtemplate_id">
+															<option value="">Default</option>
+															<option value="7">Dentist (free)</option>
+															<option value="6">Doctor (free)</option>
+													</select> -->
+													</td>
+												</tr>
+												</c:if>
+
+												<c:forEach items="${order.priceList}" var="price">
+													<tr>
+														<th class="listingLevel">${price.priceType}</th>
+														<td><input type="radio" name="priceType" value="${price.priceType}"
+															style="width: auto;"/></td>
+													</tr>
+												</c:forEach>
+
+												<!-- <tr>
+													<th class="listingLevel">Students</th>
+													<td><input type="radio" name="level" value="70"
+														style="width: auto;"></td>
+												</tr>
+												<tr>
+													<th class="listingLevel">Silver</th>
+													<td><input type="radio" name="level" value="50"
+														style="width: auto;"></td>
+												</tr>
+												<tr>
+													<th class="listingLevel">Gold</th>
+													<td><input type="radio" name="level" value="30"
+														style="width: auto;"></td>
+												</tr>
+												<tr>
+													<th class="listingLevel">Diamond</th>
+													<td><input type="radio" name="level" value="10"
+														checked="" style="width: auto;"></td>
+												</tr> -->
+											</tbody>
+										</table>
+									</td>
+
+
+									<td class="levelPrice">
+										<table border="0" cellpadding="2" cellspacing="2"
+											class="standard-tableSAMPLE">
+											<tbody>
+												<tr>
+												</tr>
+												<c:forEach items="${order.priceList}" var="price">
+													<tr>
+														<th>${price.priceType}:</th>
+														<td><strong>$${price.amount}</strong> per month</td>
+													</tr>
+												</c:forEach>
+												<!-- <tr>
+													<th>Students:</th>
+													<td><strong>$free</strong> per month</td>
+												</tr>
+												<tr>
+													<th>Silver:</th>
+													<td><strong>$19.97</strong> per month</td>
+												</tr>
+												<tr>
+													<th>Gold:</th>
+													<td><strong>$29.97</strong> per month</td>
+												</tr>
+												<tr>
+													<th>Diamond:</th>
+													<td><strong>$39.97</strong> per month</td>
+												</tr> -->
+											</tbody>
+										</table>
+									</td>
+
+								</tr>
+
+							</tbody>
+						</table>
+				<!-- 	</form>
+
+					<form action="http://beautypro411.com/members/listing/index.php"
+						method="post"> -->
+
+						<input type="hidden" name="screen" value=""/><input
+							type="hidden" name="letter" value=""/>
+						<div class="baseButtons">
+
+							<p class="standardButton">
+								<button type="submit" name="_eventId_submit">Submit</button>
+							</p>
+							<p class="standardButton">
+								<button type="submit" name="_eventId_cancel">Cancel</button>
+							</p>
+
+						</div>
+
+					</h:form>
+
+				</div>
+
+
+			</div>
+			<!-- Close container-fluid div -->
+
+		</div>
+	</ui:define>
+</ui:composition>

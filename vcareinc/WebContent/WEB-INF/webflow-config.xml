@@ -12,7 +12,9 @@
            http://www.springframework.org/schema/faces/spring-faces-2.2.xsd">
 
 	<bean name="facesContextListener" class="org.springframework.faces.webflow.FlowFacesContextLifecycleListener" />
-	
+
+	<faces:resources/>
+
 	<!-- Executes flows: the central entry point into the Spring Web Flow system -->
 	<webflow:flow-executor id="flowExecutor">
 		<webflow:flow-execution-listeners>
@@ -21,15 +23,21 @@
 			<webflow:listener ref="securityFlowExecutionListener" />
 		</webflow:flow-execution-listeners>
 	</webflow:flow-executor>
-	
+
 	<!-- The registry of executable flow definitions -->
 	<webflow:flow-registry id="flowRegistry" flow-builder-services="facesFlowBuilderServices" base-path="/WEB-INF/flows">
 		<webflow:flow-location-pattern value="/**/*-flow.xml" />
 	</webflow:flow-registry>
-	
+
+	<bean id="viewFatoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers" ref="faceletsViewResolver"/>
+	</bean>
+
 	<!-- Configures the Spring Web Flow JSF integration -->
-	<faces:flow-builder-services id="facesFlowBuilderServices" development="true" conversion-service="defaultConversionService" />
-	
+	<faces:flow-builder-services id="facesFlowBuilderServices" development="true" conversion-service="defaultConversionService" view-factory-creator="viewFatoryCreator"/>
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
 	<bean id="defaultConversionService" class="org.springframework.binding.convert.service.DefaultConversionService">
 		<constructor-arg ref="applicationConversionService"/>
 	</bean>
@@ -39,11 +47,11 @@
 		<constructor-arg ref="entityManagerFactory" />
 		<constructor-arg ref="transactionManager" />
 	</bean>
-	
+
 	<!-- Installs a listener to apply Spring Security authorities -->
 	<bean id="securityFlowExecutionListener" class="org.springframework.webflow.security.SecurityFlowExecutionListener" />
-	
-	
+
+
 	<!-- <faces:resources/>
 	<bean class="org.springframework.faces.webflow.JsfFlowHandlerAdapter">
 		<property name="flowExecutor" ref="flowExecutor"/>

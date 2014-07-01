@@ -11,4 +11,22 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+	<converter>
+		<converter-for-class>java.lang.Enum</converter-for-class>
+		<converter-class>javax.faces.convert.EnumConverter</converter-class>
+	</converter>
+	<faces-config-extension>
+		<facelets-processing>
+		    <file-extension>.xhtml</file-extension>
+		    <process-as>xhtml</process-as>
+		</facelets-processing>
+	</faces-config-extension>
+<!-- 	<component>
+	   <component-type>net.sf.jsfcomp.acegijsf.Authorize</component-type>
+	   <component-class>net.sf.jsfcomp.acegijsf.Authorize</component-class>
+	</component>
+	<component>
+		<component-type>net.sf.jsfcomp.acegijsf.Authentication</component-type>
+		<component-class>net.sf.jsfcomp.acegijsf.Authentication</component-class>
+	</component> -->
 </faces-config>

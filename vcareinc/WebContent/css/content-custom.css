@@ -1,0 +1,31 @@
+
+.content-full {clear:both;}
+
+.content-custom {color:#999899; clear:both; margin:10px auto 20px; }
+
+.content-custom ol {list-style: decimal}
+.content-custom ul {list-style: disc;}
+
+.content-custom ol,  .content-custom ul {line-height:17px; margin:10px 0 10px 20px;}
+
+.content-custom h1, 
+.content-custom h2, 
+.content-custom h3, 
+.content-custom h4, 
+.content-custom h5, 
+.content-custom h6
+{ color:#353535; background:none; border:none;}
+
+.content-custom h1, 
+.content-custom h2, 
+.content-custom h3 {line-height:36px; text-indent:0;} 
+.content-custom h4, 
+.content-custom h5, 
+.content-custom h6 {line-height:24px;}
+
+.content-custom p {line-height:18px;}
+
+.content-general .content-main .content-custom  h2 {border:none;}
+
+.flex-box .content-custom {margin:10px 0 0;}
+.flex-box .content-custom h2, .flex-box .content-custom h3 {padding:0 10px;}

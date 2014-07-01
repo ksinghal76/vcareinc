@@ -1,0 +1,773 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+        <div class="container-fluid">
+
+                                    <p class="breadcrumb">
+                        <a href="memberUser">Home</a> / <a href="memberUser">beautypro411</a>  / <a href="dealManage">Deals</a> / Add                    </p>
+
+	<ui:include src="includes/memberbar.xhtml"/>
+    <div class="content">
+
+
+        <h2>
+            Add Deal        </h2>
+
+        <!-- <form name="promotion" id="promotion" action="/members/deal/deal.php" method="post" enctype="multipart/form-data"> -->
+        <h:form id="promotion" enctype="multipart/form-data">
+          <!--   <input type="hidden" name="id" value=""/>
+            <input type="hidden" name="listing_id" value=""/>
+            <input type="hidden" name="account_id" id="account_id" value="321"/>
+            <input type="hidden" name="letter" value=""/>
+            <input type="hidden" name="screen" value=""/> -->
+			<ui:include src="includes/errorPageType.xhtml">
+          		<ui:param name="error" value="${dealOrder}"/>
+          	</ui:include>
+
+    <script language="javascript" type="text/javascript">
+<!--
+        function calculateDiscount(){
+
+            var percentage = false;
+            var realvalue = Number($('#real_price_int').val() + "." + $('#real_price_cent').val());
+            var dealvalue = Number($('#deal_price_int').val() + "." + $('#deal_price_cent').val());
+
+            if (document.getElementById("type_percentage").checked){
+                percentage = true;
+            }
+
+            if (realvalue!='NaN' && dealvalue!='NaN' ){
+                if (realvalue<0)
+                    realvalue=realvalue*(-1);
+
+                if (dealvalue<0)
+                    dealvalue=dealvalue*(-1);
+
+                if ((dealvalue>realvalue) && (percentage == false)){
+                    $('#amountDiscountMessage').html("Please enter a minor value on Value with Discount field.");
+                    $('#discountAmount').html('');
+                } else {
+                    $('#amountDiscountMessage').html('');
+                    if (percentage){
+                        discount = realvalue - ((dealvalue*realvalue)/100);
+                    } else {
+                        discount = 100 - ((dealvalue*100)/realvalue);
+                    }
+                    if (!isNaN(discount) && discount>=0){
+                        if (discount > 100 && !percentage)
+                            discount = 100;
+
+                        if (percentage){
+                            $('#discountAmount').html('$'+discount.toFixed(2));
+                        } else {
+                            $('#discountAmount').html(parseInt(discount)+'%');
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        function showAmountType(type, show) {
+            if (type == '%') {
+                document.getElementById('amount_monetary').innerHTML = ':';
+                document.getElementById('amount_percentage').innerHTML = type;
+                document.getElementById('amount_percentage').style.display = '';
+                document.getElementById('label_deal_cent').style.display = 'none';
+                $('#discountAmount').html('');
+                $('#amountDiscountMessage').html('');
+                if (show == "not"){
+                    document.getElementById('deal_price_int').value = '';
+                    document.getElementById('deal_price_cent').value = '';
+                }
+                document.getElementById('deal_price_int').setAttribute('maxlength', 2);
+            } else {
+                document.getElementById('amount_monetary').innerHTML = " ("+type+"):";
+                document.getElementById('amount_percentage').innerHTML = '';
+                document.getElementById('label_deal_cent').style.display = '';
+                $('#discountAmount').html('');
+                $('#amountDiscountMessage').html('');
+                if (show == "not"){
+                    document.getElementById('deal_price_int').value = '';
+                }
+                document.getElementById('deal_price_int').setAttribute('maxlength', 5);
+            }
+        }
+
+        function showDealTime(op, aux){
+            if (op == "up"){
+                $('#img_customtime').html("<img src=\""+DEFAULT_URL+"/images/bg_arrow_close_black.gif\" />");
+                $('#tableDealtime').slideUp('slow');
+            } else {
+                if (aux == "check")
+                $('#visibility2').attr('checked', true);
+                $('#img_customtime').html("<img src=\""+DEFAULT_URL+"/images/bg_arrow_open_black.gif\" />");
+                $('#tableDealtime').slideDown('slow');
+            }
+        }
+
+        function showSearchListing(option_show){
+            if(option_show == 'show'){
+                $("#aux_listing_title").hide('slow');
+                $("#listing_title_tip").show('slow');
+                $("#listing_title").show('slow',function(){
+                    $("#listing_title_cancel_button").show();
+                });
+            }else if(option_show == 'hide'){
+                $("#listing_title_tip").hide('slow');
+                $("#listing_title").hide('slow',function(){
+                    $("#listing_title_cancel_button").hide();
+                });
+                $("#aux_listing_title").show('slow');
+            }else if(option_show == 'empty'){
+
+                /**
+                * Will remove the promotion_id on Listing table
+                */
+                $.post('http://beautypro411.com/includes/code/promotion_attachlisting.php', {
+                    request: 'ajax',
+                    domain_id: '1',
+                    remove_listing: true,
+                    listing_id: 0                    }, function(res){
+                        if(res == "ok"){
+                            $("#listing_title_cancel_button").hide();
+                            $("#listing_title").val('');
+                            $("#listing_id").val(0);
+                    }
+                });
+            }
+        }
+
+        function showListings(acc_id) {
+            var child = document.getElementById("listing_title");
+            var parent = document.getElementById("listing_title_div");
+            var new_title = document.createElement("input");
+
+            parent.removeChild(child);
+            new_title.setAttribute("id", "listing_title");
+            new_title.setAttribute("type", "text");
+            new_title.setAttribute("name", "listing_title");
+            parent.appendChild(new_title);
+
+            $("#aux_listing_title").hide();
+            showSearchListing("empty");
+
+            $('#listing_title').autocomplete(
+                'http://beautypro411.com/includes/code/promotion_attachlisting.php?&domain_id=1&account_id='+acc_id,{
+                delay:1000,
+                dataType:'html',
+                minChars:3,
+                matchSubset:0,
+                selectFirst:0,
+                matchContains:1,
+                cacheLength:100,
+                autoFill:false,
+                maxItemsToShow:100,
+                max:100
+            }).result(function(event, item) {
+                $('#listing_id').val(item[1]);
+            });
+        }
+
+        $(document).ready(function(){
+
+            var field_name = 'promotiondesc';
+            var field_name2 = 'conditions';
+            var count_field_name = 'promotiondesc_remLen';
+            var count_field_name2 = 'conditions_remLen';
+
+            var options = {
+                'maxCharacterSize': 250,
+                'originalStyle': 'originalTextareaInfo',
+                'warningStyle' : 'warningTextareaInfo',
+                'warningNumber': 40,
+                'displayFormat' : '<span><input readonly="readonly" type="text" id="'+count_field_name+'" name="'+count_field_name+'" size="3" maxlength="3" value="#left" class="textcounter" disabled="disabled" /> characters left (including spaces and line breaks)</span>'
+            };
+
+            var options2 = {
+                'maxCharacterSize': 1000,
+                'originalStyle': 'originalTextareaInfo',
+                'warningStyle' : 'warningTextareaInfo',
+                'warningNumber': 40,
+                'displayFormat' : '<span><input readonly="readonly" type="text" id="'+count_field_name2+'" name="'+count_field_name2+'" size="3" maxlength="3" value="#left" class="textcounter" disabled="disabled" /> characters left (including spaces and line breaks)</span>'
+            };
+
+            $('#'+field_name).textareaCount(options);
+            $('#'+field_name2).textareaCount(options2);
+
+
+            $('#listing_title').autocomplete(
+                'http://beautypro411.com/includes/code/promotion_attachlisting.php?&domain_id=1&account_id='+321,{
+                delay:1000,
+                dataType:'html',
+                minChars:3,
+                matchSubset:0,
+                selectFirst:0,
+                matchContains:1,
+                cacheLength:100,
+                autoFill:false,
+                maxItemsToShow:100,
+                max:100
+            }).result(function(event, item) {
+                $('#listing_id').val(item[1]);
+            });
+
+            showAmountType('$','show');
+            calculateDiscount();
+
+            $.mask.definitions['~']='[+-]';
+            $("#real_price_int").mask("9?9999",{placeholder:""});
+            $("#real_price_cent").mask("9?9",{placeholder:""});
+            $("#deal_price_int").mask("9?9999",{placeholder:""});
+            $("#deal_price_cent").mask("9?9",{placeholder:""});
+        });
+-->
+    </script>
+
+
+
+
+<!--
+    <input type="hidden" name="listing_id" id="listing_id" value=""/> -->
+
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table">
+        <tbody><tr class="bigger">
+            <th><i><span>Required field</span></i> Deal Title:</th>
+            <td>
+                <input type="text" name="title" value="${dealOrder.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
+                <span>(Try to use something descriptive, like "10% off of our product" or "3 for the price of two on our product")</span>
+                <input type="hidden" name="friendly_url" id="friendly_url" value="" maxlength="150"/>
+            </td>
+        </tr>
+    </tbody></table>
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table">
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">Information</th>
+        </tr>
+        <tr>
+            <th class="nowrap">
+                Associate with the listing:
+            </th>
+            <td id="listingContent">
+                                <div id="listing_title_div">
+                    <input type="text" name="listingTitle" value="${dealOrder.listingTitle}" id="listingTitle" style="display:block" autocomplete="off" class="ac_input"/>
+                </div>
+                <span id="listing_title_tip" style="display:block">Please type your item title and wait for suggestions of available associations.</span>
+                <span id="listing_title_cancel_button" style="display:none">
+                    <a href="javascript:void(0)" onclick="showSearchListing('hide');">
+                        Cancel                    </a>
+                    |
+                    <a href="javascript:void(0)" onclick="showSearchListing('empty');">
+                        Empty                    </a>
+                </span>
+            </td>
+        </tr>
+
+    </tbody></table>
+
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table">
+
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">
+                Summary Description <span>(maximum 250 characters)</span>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <textarea id="summaryDescription" name="summaryDescription" rows="5" cols="1">${dealOrder.summaryDescription}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="promotiondesc_remLen" name="promotiondesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
+            </td>
+        </tr>
+
+    </tbody></table>
+
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table">
+
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">
+                Description            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <textarea name="description" rows="5">${dealOrder.description}</textarea>
+            </td>
+        </tr>
+
+    </tbody></table>
+
+    <table border="0" cellpadding="0" cellspacing="0" class="standard-table">
+
+        <tbody><tr>
+            <th class="standard-tabletitle">
+                Conditions <span>(maximum 1000 characters)</span>
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <textarea id="conditions" name="conditions" rows="5" cols="1">${dealOrder.conditions}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="conditions_remLen" name="conditions_remLen" size="3" maxlength="3" value="709" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
+            </td>
+        </tr>
+
+    </tbody></table>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="standard-table">
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">
+                Keywords for the search
+                <span>
+                    (maximum 10 keywords)
+                </span>
+                <img src="http://beautypro411.com/images/icon_interrogation.gif" alt="?" title="Include up to 10 keywords with a maximum of 50 characters each." border="0"/>
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2" class="standard-tableContent">
+                <table border="0" cellpadding="0" cellspacing="0" align="center">
+                    <tbody><tr>
+                        <th>Add one keyword or keyword phrase per line. For example:</th>
+                        <td>
+                        Auto Parts<br/>
+                        Tires<br/>
+                        Engine Repair<br/>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="keyword" rows="5">${dealOrder.keyword}</textarea>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table noBackground">
+        <tbody><tr>
+            <th colspan="4" class="standard-tabletitle">
+                Deal Dates            </th>
+        </tr>
+        <tr>
+            <th class="alignTop" style="padding-left:20px;">
+                <i> * <span>Required field</span></i> Start Date:
+            </th>
+            <td>
+                <input type="text" name="startDate" id="startDate" value="${dealOrder.startDate}" style="width:85px" class="hasDatepicker"/><span> (mm/dd/yyyy)</span>
+            </td>
+            <th class="alignTop">
+                <i> * <span>Required field</span></i> End Date:
+            </th>
+            <td style="padding-right:120px;">
+                <input type="text" name="endDate" id="endDate" value="${dealOrder.endDate}" style="width:85px" class="hasDatepicker"/><span> (mm/dd/yyyy)</span>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table noBackground">
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">
+                Visibility            </th>
+        </tr>
+        <tr>
+            <th class="table-subtitle" colspan="4">
+                <i> * <span>Required field</span></i> This deal will show up on searches and nearby feature.
+            </th>
+        </tr>
+        <tr>
+            <td class="center-line">
+
+                <input type="radio" id="visibility1" class="visibility" name="visibility" onclick="showDealTime('up', '');" value="0" checked="checked" style="width:auto"/> <span>24 hours / day</span>
+                <input type="radio" id="visibility2" class="visibility" name="visibility" onclick="showDealTime('down', '');" value="1" style="width:auto"/> <span>Custom Time Period <label id="img_customtime" onclick="showDealTime('down', 'check');" style="cursor:pointer;"><img src="http://beautypro411.com/images/bg_arrow_close_black.gif"/></label></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="table-column">
+                <div class="table-box" id="tableDealtime" style="display:none">
+                    <table>
+                        <tbody><tr>
+                            <th class="alignTop auto-size">
+                                <i> * <span>Required field</span></i> Start Time:
+                            </th>
+                            <td>
+
+<select id="startHour" name="startHour" style="width: 50px;">
+<option value=""></option>
+<c:forEach begin="1" end="12" var="stHr">
+	<c:choose>
+		<c:when test="${stHr == dealOrder.startHour}">
+			<option value="${stHr}" selected="selected">${stHr}</option>
+		</c:when>
+		<c:otherwise>
+			<option value="${stHr}">${stHr}</option>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+</select>
+ :
+<select id="startMinute" name="startMinute" style="width: 50px;">
+<option value=""></option>
+<c:forEach begin="0" end="55" step="5" var="stMn">
+	<c:choose>
+		<c:when test="${stMn == dealOrder.startMinute}">
+			<option value="${stMn}" selected="selected">${stMn}</option>
+		</c:when>
+		<c:otherwise>
+			<option value="${stMn}">${stMn}</option>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+</select>
+<c:choose>
+	<c:when test="${dealOrder.startAmPm == 'am'}">
+		<input type="radio" name="startAmPm" value="am" class="inputRadio" checked="checked"/>
+	</c:when>
+	<c:otherwise>
+		<input type="radio" name="startAmPm" value="am" class="inputRadio"/>
+	</c:otherwise>
+</c:choose> AM
+<c:choose>
+	<c:when test="${dealOrder.startAmPm == 'pm'}">
+		<input type="radio" name="startAmPm" value="pm" class="inputRadio" checked="checked"/>
+	</c:when>
+	<c:otherwise>
+		<input type="radio" name="startAmPm" value="pm" class="inputRadio"/>
+	</c:otherwise>
+</c:choose> PM (hh:mm)                                                                </td>
+                        </tr>
+                        <tr>
+                            <th class="alignTop auto-size">
+                                <i> * <span>Required field</span></i> End Time:
+                            </th>
+                            <td>
+
+<select id="endHour" name="endHour" style="width: 50px;">
+<option value=""></option>
+<c:forEach begin="1" end="12" var="edHr">
+	<c:choose>
+		<c:when test="${edHr == dealOrder.endHour}">
+			<option value="${edHr}" selected="selected">${edHr}</option>
+		</c:when>
+		<c:otherwise>
+			<option value="${edHr}">${edHr}</option>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+</select>
+ :
+<select id="endMinute" name="endMinute" style="width: 50px;">
+<option value=""></option>
+<c:forEach begin="0" end="55" step="5" var="edMn">
+	<c:choose>
+		<c:when test="${edMn == dealOrder.endMinute}">
+			<option value="${edMn}" selected="selected">${edMn}</option>
+		</c:when>
+		<c:otherwise>
+			<option value="${edMn}">${edMn}</option>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+</select>
+<c:choose>
+	<c:when test="${dealOrder.endAmPm == 'am'}">
+		<input type="radio" name="endAmPm" value="am" class="inputRadio" checked="checked"/>
+	</c:when>
+	<c:otherwise>
+		<input type="radio" name="endAmPm" value="am" class="inputRadio"/>
+	</c:otherwise>
+</c:choose> AM
+<c:choose>
+	<c:when test="${dealOrder.endAmPm == 'pm'}">
+		<input type="radio" name="endAmPm" value="pm" class="inputRadio" checked="checked"/>
+	</c:when>
+	<c:otherwise>
+		<input type="radio" name="endAmPm" value="pm" class="inputRadio"/>
+	</c:otherwise>
+</c:choose> PM (hh:mm)                                                                </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+
+
+    <table border="0" cellpadding="2" cellspacing="0" class="standard-table noBackground">
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">
+                Discount information            </th>
+        </tr>
+
+        <tr>
+            <th class="table-subtitle" colspan="4">
+                <i> * <span>Required field</span></i> Enter the value of the item / service you are offering. Choose a discount type (Fixed Value or Percentage), and enter the respective value. Check the calculation and then provide us with the number of offers you wish to make.            </th>
+        </tr>
+
+        <tr>
+            <td class="table-column">
+                <div class="table-box table-box-small">
+                    <table>
+                        <tbody><tr>
+                            <th>
+                                <i> * <span>Required field</span></i> Item Value ($):
+                            </th>
+                            <td>
+                                <input type="text" id="priceNumber" name="priceNumber" value="${dealOrder.priceNumber}" onkeyup="calculateDiscount();" maxlength="5" style="width:55px; text-align:right;"/>
+                                <strong> &nbsp;.&nbsp; </strong>
+                                <input type="text" id="priceDecimal" name="priceDecimal" value="${dealOrder.priceDecimal}" onkeyup="calculateDiscount();" maxlength="2" style="width:20px;"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" class="center-info">
+                            	<c:forEach var="discountType" items="${conversionManagedBean.discountType}">
+                            		<c:choose>
+                            			<c:when test="${discountType == dealOrder.discountType}">
+                            				<input type="radio" id="discountType" name="discountType" value="${discountType}" class="inputCheck" checked="checked" onclick="showAmountType('${discountType.sign}','not');"/>${discountType.text}<br/>
+                            			</c:when>
+                            			<c:otherwise>
+                            				<input type="radio" id="discountType" name="discountType" value="${discountType}" class="inputCheck" onclick="showAmountType('${discountType.sign}','not');"/>${discountType.text}<br/>
+                            			</c:otherwise>
+                            		</c:choose>
+                            	</c:forEach>
+         <!--                        <input type="radio" id="discountType" name="discountType" value="monetary value" class="inputCheck" checked="true" onclick="showAmountType('$','not');"/> Fixed Value Discount                                <br/>
+                                <input type="radio" id="discountType" name="discountType" value="percentage" class="inputCheck" onclick="showAmountType('%','not');"/> Percentage Discount
+ -->
+ 							</td>
+						</tr>
+
+                        <tr>
+                            <th>
+                                <i> * <span>Required field</span></i> Value with Discount                                <label id="amount_monetary"> ($):</label>
+                            </th>
+                            <td>
+                                                                <input type="text" id="discountPriceNumber" name="discountPriceNumber" value="${dealOrder.discountPriceNumber}" onkeyup="calculateDiscount();" maxlength="5" style="width:55px; text-align:right;"/>
+                                <label id="label_deal_cent">
+                                    <strong> &nbsp;.&nbsp; </strong>
+                                    <input type="text" id="discountPriceDecimal" name="discountPriceDecimal" value="${dealOrder.discountPriceDecimal}" onkeyup="calculateDiscount();" maxlength="2" style="width:20px;"/>
+                                </label>
+                                <label id="amount_percentage" style="display:none"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th id="th_label_discount"><strong>Discount (Calculated):</strong></th>
+                            <td>
+                                <span id="discountAmount"></span>
+                                <span id="amountDiscountMessage" class="required"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><i> * <span>Required field</span></i> How many deal would you like to offer:</th>
+                            <td>
+                               <input type="text" name="totalDeal" id="totalDeal" style="width:55px;" maxlength="10" value="${dealOrder.totalDeal}"/>
+                                                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <a href="#" id="crop_window" class="fancy_window_crop" style="display:none"></a><table border="0" cellpadding="2" cellspacing="0" class="standard-table noBackground">
+        <tbody><tr>
+            <th colspan="2" class="standard-tabletitle">
+                Image<span> (690px x 300px) (JPG, GIF or PNG)</span>
+            </th>
+        </tr>
+
+        <tr>
+            <th class="table-subtitle" colspan="4">Please be sure your image is the right size before you upload it, otherwise the image will likely be stretched to fit the site and image quality will be affected.</th>
+        </tr>
+
+
+
+    <script type="text/javascript">
+	//<![CDATA[
+
+        $(document).ready(function() {
+
+
+            //old fancybox (members/sitemgr)
+            $("a.fancy_window_crop").fancybox({
+                'autoDimensions'        : false,
+                'modal'                 : true,
+                'overlayShow'			: true,
+                'overlayOpacity'		: 0.75,
+                'width'                 : 500,
+                'height'                : 460,
+                'titleShow'             : false
+            });
+
+                    });
+
+        // creating an iframe to post the image to generate a preview
+        $('document').ready(function() { $("<iframe name='img_frame' style='display:none;'></iframe>").appendTo('body'); });
+
+        // description : upload the image to the server
+        // notes : 1. send to the iframe created before
+        // 		   2. submit the form to it
+        function UploadImage(form, multi) {
+        	if ( multi ) {
+        		var counter = multi;
+        		var subcrop = multi;
+        	}
+        	else {
+        		var counter = '';
+        		var subcrop = true;
+        	}
+            $("#crop_window").attr("href", 'http://beautypro411.com/includes/forms/form_crop.php?multi=' + counter + '&sitemgrLang=0');
+            $("#crop_window").trigger('click');
+
+        	// clearing error message and removing thumb preview
+        	$('#noImageSpan'+counter).css('display', 'none');
+            // removing pre-cropped images if any
+            if ( '.jcrop-holder' ) {
+	            $('.jcrop-holder').remove();
+	            $('.jcrop-hline').remove();
+	            $('.jcrop-vline').remove();
+	            $('.jcrop-tracker').remove();
+	            $('.jcrop-handle').remove();
+			}
+            // sending image
+            $('#crop_submit').val(subcrop);
+            $('#'+form).attr('target', 'img_frame');
+            $('#'+form).submit();
+            $('#'+form).attr('target', '_self');
+            $('#crop_submit').val(0);
+        }
+
+        // placing an error message if the image format is not allowed
+        function noImage(message, multi) {
+        	if ( multi ) var counter = multi;
+            else var counter = '';
+        	$('#loadingBar').remove();
+			if(message == "type"){
+				$('#errorType').css('display', '');
+			} else if(message == "size") {
+				$('#errorSize').css('display', '');
+			}
+        	$('#noImageSpan'+counter).css('display', '');
+        }
+
+        // set the src of the image to the uploaded one
+        function SetImageFile( pImgSrc, imgWidth, imgHeight, imgType, multi , aspectRat ) {
+            if ( multi ) var counter = multi;
+            else var counter = '';
+            $('#loadingBar').remove();
+            $('#ButtonCropSubmit').css('display', '');
+            $('#imgUpload'+counter).attr('src', pImgSrc);
+            $('#imgUpload'+counter).css('display', '');
+            $('#crop').css('display', '');
+
+            setJcrop(imgWidth, imgHeight, imgType, counter, aspectRat);
+        }
+
+        // creating the Jcrop
+        function setJcrop(imgWidth, imgHeight, imgType, multi, aspectRat) {
+            if ( multi ) var counter = multi;
+            else var counter = '';
+			$('#imgUpload'+counter).Jcrop({
+				onChange: showCoords,
+				onSelect: showCoords,
+				setSelect:   [ (imgWidth/4), (imgHeight/4), (imgWidth/4*3), (imgHeight/4*3) ],
+				aspectRatio: aspectRat,
+				boxWidth: 400,
+				boxHeight: 400,
+				bgColor: 'transparent',
+				fullImageWidth: imgWidth,
+				fullImageHeight: imgHeight
+			});
+            function showCoords(c) {
+                $('#x'+counter).val(c.x);
+                $('#y'+counter).val(c.y);
+                $('#x2'+counter).val(c.x2);
+                $('#y2'+counter).val(c.y2);
+                $('#w'+counter).val(c.w);
+                $('#h'+counter).val(c.h);
+                $('#image_width'+counter).val(imgWidth);
+                $('#image_height'+counter).val(imgHeight);
+                $('#image_type'+counter).val(imgType);
+            };
+        }
+		//]]>
+    </script>
+        <tr>
+            <th class="formLabelAlign">Image Source:<br/><br/></th>
+            <td class="columnFile">
+                <input type="file" name="imageUpload" id="imageUpload" size="50" onchange="UploadImage('promotion');" class="inputExplode"/><span>Maximum file size 1.5 MB. Animated .gif isn't supported.</span>
+               <!--  <input type="hidden" name="image_id" value=""/>
+                                <input type="hidden" name="x" id="x"/>
+                <input type="hidden" name="y" id="y"/>
+                <input type="hidden" name="x2" id="x2"/>
+                <input type="hidden" name="y2" id="y2"/>
+                <input type="hidden" name="w" id="w"/>
+                <input type="hidden" name="h" id="h"/>
+                <input type="hidden" name="image_width" id="image_width"/>
+                <input type="hidden" name="image_height" id="image_height"/>
+                <input type="hidden" name="image_type" id="image_type"/>
+                <input type="hidden" name="crop_submit" id="crop_submit"/> -->
+            </td>
+        </tr>
+    </tbody></table>
+       <!--  </form>
+
+        <form action="http://beautypro411.com/members/deal/index.php" method="get"> -->
+
+            <input type="hidden" name="screen" value=""/>
+            <input type="hidden" name="letter" value=""/>
+
+            <div class="baseButtons">
+
+                <p class="standardButton">
+                    <button type="submit" name="_eventId_submit">Submit</button>
+                </p>
+                <p class="standardButton">
+                    <button type="submit" name="_eventId_cancel">Cancel</button>
+                </p>
+
+            </div>
+		</h:form>
+        <!-- </form> -->
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //DATE PICKER
+
+            $("#startDate").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2014:2024"
+            });
+            $("#endDate").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2014:2024"
+            });
+        });
+    </script>
+
+
+            </div><!-- Close container-fluid div -->
+
+        </div>
+	</ui:define>
+</ui:composition>

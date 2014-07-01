@@ -5,10 +5,11 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich"
+	xmlns:rich="http://richfaces.org/rich"
 	template="includes/template.xhtml">
 
 	<ui:define name="bodyContent">
+		<ui:include src="includes/error.xhtml" />
 		<div class="well container">
 
 			<div class="container-fluid">
@@ -40,34 +41,24 @@
 					<div class="content-custom create-profile cont_100">
 						<h3 class="hidden-desktop">Sign Up with a new Account</h3>
 
-						<div class="cont_50" style="float: left;">
+						<div class="cont_50">
 
 							<h:form>
 								<div>
 									<div class="inputimg">
-										<i class="inpname" style="background: #fff url(${request.contextPath}/resources/images/user.png) no-repeat 3px;"></i><!-- <input type="text" name="first_name"
-											placeholder="First Name" value=""> -->
-											<h:inputText id="firstname" value="#{register.firstname}" label="firstname">
-												<rich:placeholder value="First Name"/>
-											</h:inputText>
+										<i class="inpname"></i><input type="text" name="firstname"
+											placeholder="First Name" value=""/>
 									</div>
-									<div class="inputimg" style="background: #fff url(${request.contextPath}/resources/images/user.png) no-repeat 3px;">
-										<i class="inpname"></i><!-- <input type="text" name="last_name"
-											placeholder="Last Name" value=""> -->
-											<h:inputText id="lastname" value="#{register.lastname}">
-												<rich:placeholder value="Last Name"/>
-											</h:inputText>
+									<div class="inputimg">
+										<i class="inpname"></i><input type="text" name="lastname"
+											placeholder="Last Name" value=""/>
 									</div>
 								</div>
 
 								<div>
 									<div class="inputimg large">
-										<i class="inpemail" style="background: #fff url(${request.contextPath}/resources/images/mail.png) no-repeat 3px;"></i><!-- <input type="text" name="username"
-											placeholder="E-mail" id="username" value="" maxlength="80"
-											onblur="checkUsername(this.value, 'http://beautypro411.com', 'members', 0); populateField(this.value,'email');"> -->
-											<h:inputText id="email" value="#{register.email}">
-												<rich:placeholder value="E-mail"/>
-											</h:inputText>
+										<i class="inpemail"></i><input type="text" name="username"
+											placeholder="E-mail" id="username" value="" maxlength="80"/>
 									</div>
 									<input type="hidden" name="email" id="email" value=""/><label
 										id="checkUsername"></label>
@@ -75,49 +66,40 @@
 
 								<div>
 									<div class="inputimg">
-										<i class="inppassword" style="background: #fff url(${request.contextPath}/resources/images/lock.png) no-repeat 3px;"></i><!-- <input type="password"
-											placeholder="Create Password" name="password" maxlength="50"> -->
-											<h:inputSecret id="password" value="#{register.password}" maxlength="50">
-												<rich:placeholder value="Create Password"/>
-											</h:inputSecret>
+										<i class="inppassword"></i><input type="password"
+											placeholder="Create Password" name="password" maxlength="50"/>
 									</div>
 									<div class="inputimg">
-										<i class="inppassword" style="background: #fff url(${request.contextPath}/resources/images/lock.png) no-repeat 3px;"></i><!-- <input type="password"
-											placeholder="Retype Password" name="retype_password"> -->
-											<h:inputSecret id="retypePassword" value="#{register.retypePassword}" maxlength="50">
-												<rich:placeholder value="Retype Password"/>
-											</h:inputSecret>
+										<i class="inppassword"></i><input type="password"
+											placeholder="Retype Password" name="retypePassword"/>
 									</div>
 								</div>
 
 								<div>
-									<h:selectBooleanCheckbox id="signupTip" value="#{register.signupTip}" styleClass="checkbox"/>
-									<!-- <input type="checkbox" class="checkbox" name="newsletter"
-										value="y" checked=""> --><label>Signup for Beauty
+									<input type="checkbox" class="checkbox" name="signupTip"
+										value="1"/><label>Signup for Beauty
 										Tips</label>
 								</div>
 								<br class="clear"/>
 								<div>
-									<h:selectBooleanCheckbox id="agreeTerms" value="#{register.agreeTerms}" styleClass="checkbox"/>
-									<!-- <input type="checkbox" class="checkbox" name="agree_tou"
-										value="1"> --><label><a rel="nofollow"
+									<input type="checkbox" class="checkbox" name="agreeTerms"
+										value="1"/><label><a rel="nofollow"
 										href="http://beautypro411.com/popup/popup.php?pop_type=terms"
-										class="fancy_window_iframe" style="color: #2980b9;">I agree with the terms of use</a></label>
+										class="fancy_window_iframe">I agree with the terms of use</a></label>
 								</div>
 
 								<br class="clear"/>
 								<p class="standardButton buttoncenter">
-									<h:commandButton id="submit" action="submit" value="Submit"/>
-									<!-- <button type="submit" value="Submit">Submit</button> -->
+									<button type="submit" name="_eventId_submit">Submit</button>
 								</p>
 							</h:form>
 
 						</div>
 
 
-						<!-- <div class="divider"></div>
+						<div class="divider"></div>
 
-						<div class="cont_40">
+						<div class="cont_40" style="display:none;">
 
 							<h3 class="hidden-desktop">Sign In with an existing account</h3>
 
@@ -125,23 +107,24 @@
 								<p>
 
 									<script language="javascript" type="text/javascript">
-                //<![CDATA[
-                document.write('<a  href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fdestiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Fprofile%252F&state=04897fb277650ef64348ac0832e468b5&scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream" class="btn-facebook">Facebook</a>');
-                //]]>
-                </script>
+										//<![CDATA[
+										document
+												.write('<a  href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fdestiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Fprofile%252F&state=5ecb946a4097d5491f4d2ae8797fbc3a&scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream" class="btn-facebook">Facebook</a>');
+										//]]>
+									</script>
 									<a
-										href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&amp;redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fdestiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Fprofile%252F&amp;state=04897fb277650ef64348ac0832e468b5&amp;scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream"
+										href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&amp;redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fdestiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Fprofile%252F&amp;state=5ecb946a4097d5491f4d2ae8797fbc3a&amp;scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream"
 										class="btn-facebook">Facebook</a>
 
 
 									<script language="javascript" type="text/javascript">
-		//<![CDATA[	
-		var destiny = 'http://beautypro411.com/members/googleauth.php?login&destiny=http%3A%2F%2Fbeautypro411.com%2Fprofile%2F';
-		function googleLogin(){
-			window.open(destiny, "_top");
-		}
-		//]]>
-	</script>
+										//<![CDATA[
+										var destiny = 'http://beautypro411.com/members/googleauth.php?login&destiny=http%3A%2F%2Fbeautypro411.com%2Fprofile%2F';
+										function googleLogin() {
+											window.open(destiny, "_top");
+										}
+										//]]>
+									</script>
 
 									<a href="javascript: void(0);" class="btn-google"
 										onclick="googleLogin();">Google</a>
@@ -155,20 +138,20 @@
 								<form class="form" name="formOpenID" method="post"
 									action="http://beautypro411.com/members/login.php?destiny=/profile/">
 
-									<input type="hidden" name="userform" value="openid">
+									<input type="hidden" name="userform" value="openid"/>
 									<p class="standardButton btn-openid">
 
-										<input type="hidden" name="destiny" value=""><input
-											type="hidden" name="query" value=""><input
+										<input type="hidden" name="destiny" value=""/><input
+											type="hidden" name="query" value=""/><input
 											type="text" name="openidurl" id="openidurl" value=""
-											placeholder="Your OpenID">
+											placeholder="Your OpenID"/>
 										<button type="submit">Login</button>
 									</p>
 								</form>
 
 							</div>
 
-						</div> -->
+						</div>
 
 
 					</div>

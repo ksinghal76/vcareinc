@@ -11,22 +11,22 @@ import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Controller;
 
+import com.vcareinc.constants.RoleType;
+
 @Controller
 @Entity
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = -2859455369294931640L;
-	
-	public enum RoleType{ROLE_USER, ROLE_ADMIN, ROLE_CLIENT};
-	
+
 	private Long id;
 	private RoleType authority;
 	private Timestamp created;
 	private User createdBy;
-	
+
 	@OneToOne
 	private User user;
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -47,7 +47,7 @@ public class Role implements Serializable {
 	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
-	
+
 	@OneToOne(fetch=FetchType.LAZY)
 	public User getCreatedBy() {
 		return createdBy;

@@ -73,7 +73,7 @@
         }
 
     </script>
-    	
+
 				<div class="row-fluid">
 
 					<div class="flex-box span12">
@@ -81,9 +81,9 @@
 						<section class="span4 offset4" style="padding: 10px;">
 
 						<h1 class="text-center" style="ont-weight: normal;line-height: 40px;">Sign in</h1>
-						
-						
-						
+
+
+
 						<div class="selectpicker ">
 							<h:selectOneMenu value="#{signup.loginAccountType}" style=" display:none; width: 220px;height: 30px;line-height: 30px;" styleClass="select" onchange="changeForm3EoMndMy(this.value)">
 								<f:selectItems value="#{signup.loginAccountTypes}" var="loginAccountType" itemValue="#{loginAccountType}" itemLabel="#{loginAccountType.label}"/>
@@ -129,7 +129,7 @@
 								</div>
 							</div> -->
 						</div>
-						
+
 						<h:panelGroup rendered="#{not empty signup.errorMsg}">
 							<div class="errors">
 								<h:outputText value="#{signup.errorMsg}"/>
@@ -141,18 +141,17 @@
 									type="hidden" name="query" value=""/>
 								<div class="formFieldsLogin">
 									<label for="username">E-mail:</label>
-									<h:inputText id="email" value="#{signup.email}" styleClass="text"/>
-									<!-- <input class="text"
-										type="email" name="email" id="email" value="#{signup.email}"/> --><span
+									<!-- <h:inputText id="email" value="#{signup.email}" styleClass="text"/> -->
+									<input class="text"
+										type="email" name="email" id="email" value="#{signup.email}"/><span
 										class="clear"></span> <label for="password">Password:</label>
-									<h:inputSecret id="password" value="#{signup.password}"/>
-									<!-- <input type="password" name="password" id="password" value="#{signup.password}"/> --><span
+									<!-- <h:inputSecret id="password" value="#{signup.password}"/> -->
+									<input type="password" name="password" id="password" value="#{signup.password}"/><span
 										class="automaticLogin"> <input type="checkbox"
 										name="automatic_login" value="1" class="inputAuto"/>
 											Sign me in automatically </span> <span class="clear"></span>
 									<p class="standardButton" style="color: #080808;line-height: 16px;">
-										<h:commandButton id="submit" action="submit" value="Sign In" style="background-color: #457ae6;color: #FFF;text-transform: uppercase;font-size: 11px;line-height: 16px;" />
-										<!-- <button type="submit" style="background-color: #457ae6;color: #FFF;text-transform: uppercase;font-size: 11px;line-height: 16px;">Sign In</button> -->
+										<button type="submit" name="_eventId_submit" style="background-color: #457ae6;color: #FFF;text-transform: uppercase;font-size: 11px;line-height: 16px;">Sign In</button>
 									</p>
 								</div>
 
@@ -160,7 +159,7 @@
 								<p class="forgotpassword" style="color: #080808;line-height: 16px;">
 									<a href="http://beautypro411.com/members/forgot.php" style="color: #2980b9;text-decoration: none;">Forgot?</a>
 								</p>
-							
+
 						</div>
 
 						<div id="popLOpenid3EoMndMy" class="isHidden">
@@ -196,7 +195,7 @@
 						<div id="popLGoogle3EoMndMy" class="isHidden">
 
 							<script language="javascript" type="text/javascript">
-		//<![CDATA[	
+		//<![CDATA[
 		var destiny = 'http://beautypro411.com/members/googleauth.php?login&destiny=http%3A%2F%2Fbeautypro411.com%2Findex.php';
 		function googleLogin(){
 			window.open(destiny, "_top");
@@ -216,21 +215,18 @@
 						</div>
 
 						<p class="notmember">
-						<!-- <h:commandLink id="goToRegister" action="goToRegister" style="color: #2980b9;text-decoration: none; bgcolor:#fff;" value="Not a member? Sign up now"/> -->
-						<h:commandButton id="goToRegister" action="goToRegister" style="color: #2980b9;text-decoration: none; bgcolor:#fff;" value="Not a member? Sign up now"/>
-						
-							<!-- <a href="${flowExecutionUrl}&amp;_eventId=goToRegister" style="color: #2980b9;text-decoration: none;">Not a
-								member? Sign up now</a> -->
+							<a href="${flowExecutionUrl}&amp;_eventId=goToRegister" style="color: #2980b9;text-decoration: none;">Not a
+								member? Sign up now</a>
 						</p>
 </h:form>
 						</section>
 					</div>
 
 				</div>
-				
+
 			</div>
 			<!-- Close container-fluid div -->
 		</div>
-		
+
 	</ui:define>
 </ui:composition>

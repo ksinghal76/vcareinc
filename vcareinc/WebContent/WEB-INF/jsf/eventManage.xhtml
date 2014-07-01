@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+        <div class="container-fluid">
+
+                                    <p class="breadcrumb">
+                        <a href="memberUser">Home</a> / <a href="memberUser">beautypro411</a>  / <a href="eventManage">Events</a> / Manage                    </p>
+
+	<ui:include src="includes/memberbar.xhtml"/>
+    <div class="content">
+
+
+        <h2>Manage Events</h2>
+
+
+    <script type="text/javascript">
+        function getValuesBulkEvent(){
+
+            if(document.getElementById('change_no_owner').value == "on"){
+                document.getElementById("account_search_bulk").value = "0";
+            }else if (document.getElementById("account_search_bulk").value) {
+                document.getElementById("account_search_bulk").value = document.getElementById("change_account_id").value;
+            }
+
+            if (document.getElementById("level_bulk").value) {
+                document.getElementById("level_bulk").value = document.getElementById("level").value;
+            }
+
+            if (document.getElementById('delete_all').checked){
+                document.getElementById("bulkSubmit").value = "Submit";
+                dialogBoxBulk('confirm','LANG_SITEMGR_BULK_DELETEQUESTION','Submit','event_setting','200','LANG_SITEMGR_OK','LANG_SITEMGR_CANCEL');
+            } else {
+                document.getElementById("bulkSubmit").value = "Submit";
+                dialogBoxBulk('confirm','LANG_SITEMGR_BULK_DELETEQUESTION2','Submit','event_setting','180','LANG_SITEMGR_OK','LANG_SITEMGR_CANCEL');
+            }
+        }
+
+        function confirmBulk(){
+
+
+            if (document.getElementById('delete_all').checked){
+                document.getElementById("bulkSubmit").value = "Submit";
+                dialogBoxBulk('confirm','LANG_SITEMGR_BULK_DELETEQUESTION','Submit','event_setting','200','LANG_SITEMGR_OK','LANG_SITEMGR_CANCEL');
+            } else {
+                document.getElementById("bulkSubmit").value = "Submit";
+                dialogBoxBulk('confirm','LANG_SITEMGR_BULK_DELETEQUESTION2','Submit','event_setting','180','LANG_SITEMGR_OK','LANG_SITEMGR_CANCEL');
+            }
+        }
+    </script>
+
+
+        <div class="bulkupdate-box">
+
+            <div class="bulkupdate-form">
+
+                <form name="event_setting" id="event_setting" action="/members/event/index.php" method="post">
+
+                    <input type="hidden" name="account_search_bulk" id="account_search_bulk" value=""/>
+                    <input type="hidden" name="level_bulk" id="level_bulk" value=""/>
+                    <input type="hidden" name="bulkSubmit" id="bulkSubmit" value=""/>
+
+                    <div id="table_bulk" style="display: none" class="table-bulkupdate">
+
+
+
+
+<script type="text/javascript" src="http://beautypro411.com/scripts/accountsearch.js"></script>
+
+
+<div id="change_account" style="display:none">
+				<div id="table_accounts_search" style="display: none; width: 96%" class="table_accounts_search">
+
+					<input type="hidden" name="acct_search_field_name" id="acct_search_field_name" value="change_account_id"/>
+
+					<table border="0" cellpadding="0" cellspacing="0" class="searchAccount">
+						<tbody><tr>
+							<th colspan="2" class="searchAccountTitleAccount">LANG_SITEMGR_ACCOUNTSEARCH_SELECT_DEFAULT</th>
+						</tr>
+						<tr>
+							<th>LANG_SITEMGR_LABEL_COMPANY: </th>
+							<td>
+								<input type="text" id="acct_search_company" style="width:250px" name="acct_search_company" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }"/>
+							</td>
+						</tr>
+						<tr>
+							<th class="first_line" style="padding-top: 10px">LANG_SITEMGR_LABEL_USERNAME: </th>
+							<td style="padding-top: 10px">
+								<input type="text" id="acct_search_username" style="width:250px" name="acct_search_username" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align: center; padding-bottom: 5px;">
+								<input style="width:80px" class="input-button-form" type="button" name="acct_search_btn" id="acct_search_btn" value="LANG_SITEMGR_SEARCH" onclick="searchAccount(this.form, 'http://beautypro411.com', 0, 0);"/>         <input style="width:80px" class="input-button-form" type="button" name="acct_cancel_btn" id="acct_reset_btn" value="LANG_SITEMGR_CANCEL" onclick="cancelSearchAccount(0);"/>
+								<input style="width:100px" class="input-button-form" type="button" name="acct_empty_btn" id="acct_empty_btn" value="LANG_SITEMGR_ACCOUNTSEARCH_EMPTY" onclick="emptySearchAccount(0);"/>
+							</td>
+						</tr>
+                      	<tr>
+							<td colspan="2" style="padding: 0 10px 10px 10px;">
+                                <div id="accounts_search" class="div-accounts_search-form-listing accounts_search"></div>
+								<div id="accounts_search_loading" class="div-accounts_search_loading-form-listing accounts_search_loading">LANG_SITEMGR_WAITLOADING</div>
+                                <p class="informationMessage">LANG_SITEMGR_MSG_YOUCANONLYSELECTSPONSO</p>
+							</td>
+						</tr>
+					</tbody></table>
+
+				</div>
+
+				<div id="table_accounts" class="table_accounts">
+
+					<table align="center" border="0" cellspacing="0" cellpadding="0" class="standard-table">
+						<tbody><tr>
+							<th> LANG_SITEMGR_LABEL_ACCOUNT:</th>
+							<td id="selected_account" class="selected_account">			<a style="vertical-align: middle" href="javascript:changeAccount(0)" id="change_account_search"><strong>LANG_SITEMGR_ACCOUNTSEARCH_CLICKHERE</strong></a>
+							</td>
+						</tr>
+					</tbody></table>
+
+				</div></div><div id="bulkDiv" style="display:none"></div>
+<div id="bulkDiv2" style="display:none"></div>
+
+<table class="bulkupdate-table">
+
+			<tbody><tr>
+			<th>LANG_SITEMGR_CHANGELEVEL:</th>
+			<td>
+
+<select id="level" name="level" class="input-dd-form-searchevent">
+<option value="">-- LANG_LABEL_SELECT_ALLLEVELS --</option>
+<option value="50">Silver</option>
+<option value="30">Gold</option>
+<option value="10">Diamond</option>
+</select>
+			</td>
+		</tr>
+
+			<tr>
+			<th>LANG_SITEMGR_CHANGESTATUS:</th>
+			<td>
+
+<select id="status" name="status" class="input-dd-form-searchevent">
+<option value="">-- LANG_LABEL_SELECT_ALLSTATUS --</option>
+<option value="A">Active</option>
+<option value="S">Suspended</option>
+<option value="P">Pending</option>
+</select>
+			</td>
+		</tr>
+
+			<tr>
+			<th>LANG_SITEMGR_CHANGEEXPIRATIONDATE:</th>
+			<td>
+				<input type="text" name="change_renewaldate" id="change_renewaldate" value="" class="input-form-settings hasDatepicker"/>
+				<p><span>(mm/dd/yyyy)</span></p>
+			</td>
+		</tr>
+
+
+	        <tr>
+			<th>Lang_Sitemgr_Lang_Sitemgr_Addcategory:</th>
+                            <td>
+<select id="add_category_id" name="add_category_id" class="input-dd-form-searchevent">
+<option value="">-- LANG_LABEL_SELECT_ALLCATEGORIES --</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option disabled="" value="13">Animals</option>
+<option value="29"> » Exotics</option>
+<option value="30"> » Presentations</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option disabled="" value="4">Arts</option>
+<option value="31"> » Galleries</option>
+<option value="32"> » Shows</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option value="41">Beauty Conventions / Shows</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option disabled="" value="2">Entertainment</option>
+<option value="39"> » Championship</option>
+<option value="9"> » Cinema</option>
+<option value="5"> » Concerts</option>
+<option value="7"> » Night Clubs</option>
+<option value="38"> » Presentations</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option disabled="" value="8">Fair</option>
+<option value="33"> » Antiquities</option>
+<option value="40"> » Beauty</option>
+<option value="34"> » Cars</option>
+<option value="35"> » Technology</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option disabled="" value="11">Food and Dining</option>
+<option value="12"> » Drinks</option>
+<option value="36"> » Festivals</option>
+<option disabled="" value="">--------------------------------------------------</option>
+<option disabled="" value="10">Leisure</option>
+<option value="37"> » Sports</option>
+<option disabled="" value="">--------------------------------------------------</option>
+</select>
+</td>
+
+		</tr>
+
+		<tr id="tr_category" style="display: none">
+			<th>Lang_Sitemgr_Lang_Sitemgr_Removecategory:</th>
+			<td><div id="remove_category"></div></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="delete_all" id="delete_all" class="inputAlign" onclick="disableBulkOptions(document.getElementById('delete_all')); "/>
+				LANG_SITEMGR_DELETE_ALL_SELECTED			</td>
+		</tr>
+
+			    <tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="change_no_owner" id="change_no_owner" class="inputAlign"/>
+				LANG_SITEMGR_NOOWNER				<p><span>&nbsp;(LANG_SITEMGR_ACCOUNTCHANGE_NOOWNER_INFO)</span></p>
+			</td>
+		</tr>
+
+</tbody></table>
+
+<script type="text/javascript">
+
+
+	$(document).ready(function() {
+		//DATE PICKER
+
+		$('#change_renewaldate').datepicker({
+			dateFormat: 'mm/dd/yy',
+			changeMonth: true,
+			changeYear: true,
+            yearRange: '2014:2024'
+		});
+
+		$('#change_expirationdate').datepicker({
+			dateFormat: 'mm/dd/yy',
+			changeMonth: true,
+			changeYear: true,
+            yearRange: '2014:2024'
+		});
+
+	});
+</script>                            <button type="button" name="bulkSubmit" value="Submit" class="stmgr-btn" onclick="javascript:confirmBulk();">LANG_SITEMGR_SUBMIT</button>
+
+                    </div>
+
+                    <div id="idlist"></div>
+
+                </form>
+
+            </div>
+
+            <div id="bulk_check" style="display:none">
+
+                <div class="bulk-checkall">
+                    <input type="checkbox" id="check_all" name="check_all" onclick="checkAll('event', document.getElementById('check_all'), false, 1); removeCategoryDropDown('event', 'http://beautypro411.com');"/>
+
+                    <a class="CheckUncheck" href="javascript:void(0);" onclick="checkAll('event', document.getElementById('check_all'), true, 1); removeCategoryDropDown('event', 'http://beautypro411.com');">
+                        Check / Uncheck All                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    <div class="sitemgr-pagination top-pagination">
+
+                    <div class="pagination-char">
+                <a href="http://beautypro411.com/members/event/index.php?letter=no">#</a><a href="http://beautypro411.com/members/event/index.php?letter=a">A</a><a href="http://beautypro411.com/members/event/index.php?letter=b">B</a><a href="http://beautypro411.com/members/event/index.php?letter=c">C</a><a href="http://beautypro411.com/members/event/index.php?letter=d">D</a><a href="http://beautypro411.com/members/event/index.php?letter=e">E</a><a href="http://beautypro411.com/members/event/index.php?letter=f">F</a><a href="http://beautypro411.com/members/event/index.php?letter=g">G</a><a href="http://beautypro411.com/members/event/index.php?letter=h">H</a><a href="http://beautypro411.com/members/event/index.php?letter=i">I</a><a href="http://beautypro411.com/members/event/index.php?letter=j">J</a><a href="http://beautypro411.com/members/event/index.php?letter=k">K</a><a href="http://beautypro411.com/members/event/index.php?letter=l">L</a><a href="http://beautypro411.com/members/event/index.php?letter=m">M</a><a href="http://beautypro411.com/members/event/index.php?letter=n">N</a><a href="http://beautypro411.com/members/event/index.php?letter=o">O</a><a href="http://beautypro411.com/members/event/index.php?letter=p">P</a><a href="http://beautypro411.com/members/event/index.php?letter=q">Q</a><a href="http://beautypro411.com/members/event/index.php?letter=r">R</a><a href="http://beautypro411.com/members/event/index.php?letter=s">S</a><a href="http://beautypro411.com/members/event/index.php?letter=t">T</a><a href="http://beautypro411.com/members/event/index.php?letter=u">U</a><a href="http://beautypro411.com/members/event/index.php?letter=v">V</a><a href="http://beautypro411.com/members/event/index.php?letter=w">W</a><a href="http://beautypro411.com/members/event/index.php?letter=x">X</a><a href="http://beautypro411.com/members/event/index.php?letter=y">Y</a><a href="http://beautypro411.com/members/event/index.php?letter=z">Z</a>            </div>
+
+        <div class="pagination-results">
+            Found <strong>1</strong> record        </div>
+
+    </div>
+
+
+
+    <form name="item_table">
+
+		<table class="table-itemlist">
+
+            <tbody><tr>
+                <th>
+                    <span>Event Title</span>
+                                            <a href="http://beautypro411.com/members/event/index.php?order_by=title_asc&amp;letter=&amp;screen=">
+                            <i class="sitemgr-icon-arrow-down"></i>
+                        </a>
+                                    </th>
+
+                <th>
+                    <span>Level</span>
+                                            <a href="http://beautypro411.com/members/event/index.php?order_by=level_asc&amp;letter=&amp;screen=">
+                            <i class="sitemgr-icon-arrow-down"></i>
+                        </a>
+                                    </th>
+
+                <th>
+                    <span>Start Date</span>
+                                            <a href="http://beautypro411.com/members/event/index.php?order_by=startdate_asc&amp;letter=&amp;screen=">
+                            <i class="sitemgr-icon-arrow-down"></i>
+                        </a>
+                                    </th>
+
+                                    <th>
+                        <span>Renewal</span>
+                                                    <a href="http://beautypro411.com/members/event/index.php?order_by=renewal_asc&amp;letter=&amp;screen=">
+                            <i class="sitemgr-icon-arrow-down"></i>
+                            </a>
+                                            </th>
+
+
+                <th>
+                    <span>Status</span>
+                                            <a href="http://beautypro411.com/members/event/index.php?order_by=status_asc&amp;letter=&amp;screen=">
+                        <i class="sitemgr-icon-arrow-down"></i>
+                        </a>
+                                    </th>
+
+                <th></th>
+
+                <th>
+                    Options                </th>
+
+            </tr>
+				<c:forEach items="${eventsList}" var="eventsList">
+
+                <tr>
+                    <td>
+                        <input type="checkbox" id="event_id1" name="item_check[]" value="140" class="inputCheck" style="display:none" onclick="removeCategoryDropDown('event', 'http://beautypro411.com');"/>
+                        <a title="My Event" href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[1]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
+                           ${eventsList.title}                       </a>
+                    </td>
+
+                    <td>
+                                                <a href="http://beautypro411.com/members/event/eventlevel.php?id=140&amp;screen=&amp;letter=" class="link-table">Diamond</a>
+                    </td>
+
+                    <td>
+                        <span title="" style="cursor:default">
+                            06/14/2014                        </span>
+                    </td>
+
+                    <td>
+                                                    <span title="New" style="cursor:default">New</span>
+                                            </td>
+
+                    <td>
+                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">Pending</span> </a>
+                    </td>
+
+                    <td nowrap="nowrap">
+
+                        <div class="toolbar-icons-button">
+
+                            <div class="toolbar-icons" style="display: none;">
+
+                                <ul>
+
+                                    <li>
+                                        <a href="http://beautypro411.com/members/event/report.php?id=140&amp;screen=&amp;letter=" class="link-table">
+                                            Traffic Reports                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="http://beautypro411.com/members/event/seocenter.php?id=140&amp;screen=&amp;letter=" class="link-table">
+                                            SEO                                        </a>
+                                    </li>
+
+                                                                        <li>
+                                        <a href="http://beautypro411.com/members/leads/index.php?item_type=event&amp;item_id=140&amp;item_screen=&amp;item_letter=" class="link-table">
+                                            Leads                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="http://beautypro411.com/members/event/delete.php?id=140&amp;screen=&amp;letter=" class="link-table">
+                                            Delete                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div class="toolbararrow"></div>
+
+                        </div>
+
+                    </td>
+
+                    <td nowrap="" class="main-options">
+                        <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[0]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
+                            View                        </a>
+                        <b>|</b>
+                        <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[0]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
+                            Edit                        </a>
+                    </td>
+
+                </tr>
+
+				</c:forEach>
+        </tbody></table>
+
+    </form>
+                            <table width="50%" style="margin: 0 auto 0 auto;">
+                                <tbody><tr>
+                                    <td width="50%">
+                                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="warningBOX">
+                                            <tbody><tr>
+                                                <th><a href="http://beautypro411.com/members/billing/index.php" class="warningBOXcontent">Continue to pay for your event</a></th>
+                                                <!-- <td><a href="http://beautypro411.com/members/billing/index.php"><img src="http://beautypro411.com/images/img_GREENarrow.gif" alt="»" width="39" height="45"/></a></td> -->
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="warningBOXtext">
+                                <tbody><tr>
+                                    <th><img src="${request.contextPath}/resources/images/icon_atention.gif" width="16" height="14" alt="Attention Icon"/></th>
+                                    <td>Events are activated by <strong>Site Manager</strong> only after the process is complete.</td>
+                                </tr>
+                            </tbody></table>
+
+
+    </div>
+
+
+            </div><!-- Close container-fluid div -->
+
+        </div>
+	</ui:define>
+</ui:composition>

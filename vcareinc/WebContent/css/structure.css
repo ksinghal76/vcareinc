@@ -1,431 +1,3 @@
-
-/* body { font-family:Montserrat; }
-
-*
-* Body
-
-
-body {
-    background-color: #EEEEEE;
-}
-
-body.allpopup {
-    background-color: white;
-}
-
-body, body p, .content-custom, 
-.flex-box-list ul li a,
-section.item-preview b ,
-.content-custom h1, .content-custom h2, .content-custom h3, .content-custom h4, .content-custom h5, .content-custom h6 {
-	color:#080808;
-}
-
-
-* LINKS
-
-
-a, a:link, a:visited, .btn, a.btn, .user-info p a, [class*="sidebar"] a,
-section.item-preview a, 
-section.item-preview h5 a {
-    color: #2980b9;
-}
-
-a:hover, a:focus, .btn:hover, a.btn:hover, .user-info p a:hover, .memberMenu h2 a:hover, a.categoryAdd:hover,
-[class*="sidebar"] a:hover {
-    color: #2980b9;
-    opacity:0.8;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-[class*="flex-box"] a:hover, .brand.logo:hover, .share-social a:hover , .button-call a:hover , .button-send a:hover  {
-	opacity:1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-}
-
-a.btn, a.input-button-form,
-.btn-facebook, .btn-google, .btn-id, .btn-twitter, .btn-facebook a, .btn-google a, .btn-twitter a,
-a.btn-facebook, a.btn-twitter, .standardButton a,
-.modal-content-mini > h2 > span > a:hover, .level-preview > h2 > span > a:hover, [class*="flex-box"] h2 > a:hover {
-	color:#fff;
-}
-
-.flex-box .button-facebook h2, .flex-box .button-google h2 {
-    background-color: transparent;
-}
-
-.flex-box .button-google h2 a:hover {
-	background-color:#ddd;
-	color:#111;
-    opacity:0.8;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-
- */
-
-/*#Newsletter*/
-
-.newsletter {background-color:#ecf0f1;}
-
-
-
-/**
-* Footer
-*/
-.footer-wrapper {
-	background-color:#4191e0;
-	border-color:#4191e0;
-	color:#FFFFFF;
-}
-
-.footer-wrapper p, .footer-wrapper h5, .footer-wrapper h3, .footer-wrapper h4 {
-	color:#FFFFFF;
-	border-color:#FFFFFF;
-}
-
-.footer-wrapper .nav a, .footer-wrapper a,  .footer-wrapper a:active ,  .footer-wrapper a:focus {
-	color:#524652;
-	background-color:transparent;
-}
-
-.footer-wrapper .nav a:hover, .footer-wrapper a:hover {
-	color:#524652;
-	opacity:0.8;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-/* 
-*
-* Bootstrap Main Colors
-
-
-[class*="flex-box"] h2, 
-[class*="sidebar"] h2, 
-.modal-content-mini > h2,
-.content-profile .standardSubTitle,
-.box-title h2, .box-title > h3,
-.content > h2,
-.standardStep-Title,
-.order-head > h2,
-.level-preview > h2 {
-    background-color:#457ae6;
-}
-
-[class*="flex-box"] section b, 
-.help-block, .help-inline, .flex-box-list ul li span {
-    color: #c235de;
-}
-
-b.divisor {
-	border-color:white;
- 	opacity:0.8;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-
-
-*****
-**** Background-colors
-
-.calendar-event li.active, 
-.calendar-event li:hover {background-color:#727980; opacity:0.8;}
-
-.color-1 h2, 
-.order-head > h2, 
-.calendar-event li, 
-.stars-rating,
-.calendar-event,
-.domainItemsTitle {background-color:#5496bf;}
-
-.color-2 h2 {background-color:#c235de;}
-
-.color-3 h2, .sidebar h2,
-.button.button-profile h2 a,
-.button.button-profile h2 a:hover,
-.input-button-form, a.input-button-form, 
-.bt-highlight button, .standardButton button, .button h2 a, 
-.content-faq button, .standardButton > a,
-.input-button-form:hover, a.input-button-form:hover, 
-.bt-highlight button:hover, .standardButton button:hover,
-.button h2 a:hover, .content-faq button:hover, .standardButton > a:hover,
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, 
-.dropdown-submenu:hover > a, .dropdown-submenu:focus > a  {background-color:#457ae6;}
-
-.color-4 h2,
-.box-title h2,
-.box-title > h3,
-.standardStep-Title,
-.level-preview > h2,
-.modal-content > h2 {background-color:#727980;}
-
-.color-5 h2 {background-color:#F39C12;}
-
-.color-6 h2, .listing-tag-deal, .deal-tag-small {background-color:#D35400;}
-
-.color-7 h2 {background-color:#C0392B;}
-
-
-
-*****
-**** Font Colors
-
-.color-1 a:hover, .color-1 section h5 a:hover, .color-1 a
-[class*="sidebar"] [class*="icon-caret"] {color:#5496bf;}
-
-.color-2 a:hover, .color-2 section h5 a:hover, .color-2 a, .text-success  {color:#c235de;}
-.color-3 a:hover, .color-3 section h5 a:hover, .color-3 a, .well-small ol, .pagination li > a.active, .text-info  {color:#457ae6;}
-.color-4 a:hover, .color-4 section h5 a:hover, .color-4 a, .box-newsletter h3 {color:#727980;}
-.color-5 a:hover, .color-5 section h5 a:hover, .color-5 a {color:#F39C12;}
-.color-6 a:hover, .color-6 section h5 a:hover, .color-6 a, .text-warning  {color:#D35400;}
-.color-7 a:hover, .color-7 section h5 a:hover, .color-7 a, .text-error {color:#C0392B;}
-
-*
-* Buttons
-
-
-.btn.btn-primary,
-.btn.btn-primary:hover,
-.btn.btn-primary:focus,
-.btn.btn-primary:active,
-.btn.btn-primary.active {
-  background-color: #5496bf;
-}
-
-.btn.btn-info,
-.btn.btn-info:hover,
-.btn.btn-info:focus,
-.btn.btn-info:active,
-.btn.btn-info.active,
-.modal-content .button-profile h2 a, 
-.modal-content .button-profile h2 a:hover {
-  background-color: #457ae6;
-}
-
-.btn.btn-danger,
-.btn.btn-danger:hover,
-.btn.btn-danger:focus,
-.btn.btn-danger:active,
-.btn.btn-danger.active {
-  background-color: #C0392B;
-}
-
-.btn.btn-success ,
-.btn.btn-success:hover,
-.btn.btn-success:focus,
-.btn.btn-success:active,
-.btn.btn-success.active,
-.modal-content button[type="submit"], 
-.modal-content button[type="submit"]:hover {
-  background-color: #c235de;
-}
-.btn.btn-warning, 
-.btn.btn-warning:hover,
-.btn.btn-warning:focus,
-.btn.btn-warning:active,
-.btn.btn-warning.active {
-  background-color: #F39C12;
-}
-.btn.btn-inverse,
-.btn.btn-inverse:hover,
-.btn.btn-inverse:focus,
-.btn.btn-inverse:active,
-.btn.btn-inverse.active,
-.btn:active, 
-.btn-group.open 
-.btn.dropdown-toggle, 
-.btn.active {
-  background-color: #727980;
-}
-
-
-.button.button-profile h2 a:hover,
-.btn.btn-inverse:hover,
-.btn.btn-warning:hover,
-.btn.btn-success:hover,
-.btn.btn-danger:hover, 
-.btn.btn-info:hover,
-.btn.btn-primary:hover,
-.input-button-form:hover, a.input-button-form:hover, 
-.bt-highlight button:hover, .standardButton button:hover,
-.button h2 a:hover, .content-faq button:hover, .standardButton > a:hover,
-.modal-content button[type="submit"]:hover, .modal-content .button-profile h2 a:hover {
-	opacity:0.8;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-	color:white;
-}
-
-.modal-content .button-google h2 a, .modal-content .button-google h2 a:hover,
-.button-google h2 a, a.btn-google  {
-	background-color:#E8E8E8;
-	color:#111;
-}
-
-.button-facebook h2 a, a.btn-facebook, div.btn-facebook, a.btn-facebook:focus, a.btn-facebook:active, 
-.button-facebook h2 a:hover {
-	background-color:#5C6A90;
-}
-
-
-*
-* Carousel 
-
-
-.carousel-indicators {	
-   	background: #727980;
-   	opacity: 0.9;
-}
-
-.carousel-indicators li {
-	box-shadow:-1px 0 0 #727980 inset;
-}
-
-.carousel-indicators li.active {
-	background: #3498db;
-	
-}
-.ie .carousel-indicators {
-	background-color:#727980;
-}
-
-
-
-* TABS
-
-
-.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
-    background-color: #457ae6;
-    border-color: -moz-use-text-color -moz-use-text-color #457ae6;
-}
-
-.nav-tabs {
-    border-color: #457ae6;
-}
-
-.tabs-advertise > .active > a, .tabs-advertise > .active > a:hover, .tabs-advertise > .active > a:focus,
-.profile-tabs > .active > a, .profile-tabs > .active > a:hover, .profile-tabs > .active > a:focus {
-	background-color:#727980;
-}
-
-.nav-tabs > li > a:hover, .nav-tabs > li > a:focus, .tabs-advertise > li > a:hover, .tabs-advertise > li > a:focus, .profile-tabs > li > a:hover, .profile-tabs > li > a:focus {
-    background-color: #457ae6;
-    border-color: #457ae6;
-}
-
-.tabsBase .tabs > li.tabActived > a, .tabsBase .tabs > li > a:hover {
-    background-color: #5496bf; 
-}
-
-
-
-
-
-* RESULTS
-
-
-.name-tag-deal, .name-tag-deal a, .name-tag-deal a:hover {
-	color:white;
-}
-
-PROFILE
-a.delete {
-    background-color: #D35400;
-    color:white;
-}
-
-a.delete:hover {
-    background-color: #D35400;
-    opacity:0.8;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-
-
-MEMBERS
-
-.sidebar .memberMenu h2 {
-	background:none;
-}
-
-.itemCheckOut a {
-    background-color:#457ae6;
-    color:white;
-}
-.itemCheckOut a:hover {
-    background-color:#457ae6;
-    opacity:0.8;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-.status-active {
-    background-color:#c235de;
-}
-
-.status-suspended {
-    background-color:#F39C12;
-}
-
-.status-expired {
-    background-color:#C0392B;
-}
-
-.status-pending {
-    background-color:#D35400;
-}
-
-
-.levelTitle {
-    background-color:#5496bf;
-}
-
-.levelTable .tableOption {
-    background-color:#f3f3f3;
-}
-
-.levelTopdetail {
-    background-color:#5496bf;
-    opacity:0.8;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-}
-
-.standard-table span.categorySuccessMessage, .categorySuccessMessage {
-	color:#5496bf;
-}
-
-
-CLAIM
-.steps-ui.stepActived > span {
-    background-color: #727980;    
-}
-
-.steps-ui.stepActived, .order-head li.active,
-a.mainImageLink.mainImageLinkBK {
-    background-color: #457ae6;
-}
-
-a.ImageEditCaptions:hover, a.ImageDelete:hover, a.mainImageLinkBK:hover {
-	background-color:white;
-}
-
-ORDER
-.orderTotalAmount {
-	color:#5496bf;
-}
-
-*
-* eDirectory - Main System Structure
-*
-* @package			layout
-* @filesource		structure.css
-* @author			Arca Solutions
-*			
-
-
-*************************************************************************************************\
-* Master Reset
-* 
-* Master Reset for all HTML elements
-
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -446,15 +18,15 @@ ol, ul
 table, tbody, tfoot, thead, tr, th, td 
 { border-collapse:collapse; border-spacing:0; margin:0; padding:0; }
 
-*************************************************************************************************\
+/**************************************************************************************************\
 * Global Items
 * 
 * Global Items as Definitions, Classes, Typography and Forms
+*/
 
 
-
-#No-Images
-	.span9 .span4.flex-box  .no-image{height:96px;} Home Listing
+/* #No-Images */
+	.span9 .span4.flex-box  .no-image{height:96px;} /*Home Listing*/
 
     .flex-box.span6 > a > .no-image {height:131px;}
 
@@ -476,7 +48,7 @@ table, tbody, tfoot, thead, tr, th, td
 
 
 
-* Global Classes
+/** Global Classes */
 body {font-family: 'Montserrat', sans-serif;}
 
 .clear
@@ -501,7 +73,7 @@ br.clear
 
 .ie .dropdown-menu {z-index:99999999;}
 
-* #Global classes > Percentual Width
+/** #Global classes > Percentual Width */
 [class^="cont_"],
 [class*=" cont_"] { float:left;}
 
@@ -518,7 +90,7 @@ br.clear
 
 .loading-location {margin:7px 0 7px 12px;}
 
-* #Global classes > Show and Hide
+/** #Global classes > Show and Hide */
 
 .show,
 .show-block
@@ -530,18 +102,18 @@ br.clear
 .isHidden, .controlPhoneHide, .controlFaxHide
 { display: none !important; }
 
-List
+/*List*/
 .list {padding:3px;}
 .list li {display:inline;}
 
-Site content
+/*Site content*/
 .middle-info ul {list-style:disc inside ;}
 .middle-info ol {list-style:decimal inside ;}
 
-#Error Page
+/* #Error Page */
 .error-page {height:145px; width:360px; margin:0 auto}
 
-#No Images
+/* #No Images */
 
 .no-link, .no-link a , .no-link:hover, .no-link a:hover { cursor:default !important;}
 li.no-link:hover{  background-color:transparent!important; }
@@ -560,7 +132,7 @@ li.no-link:hover{  background-color:transparent!important; }
 .banner .no-image {background-size:20%; background-color:#EEEEEE;}
 
 
-*Detail
+/* *Detail*/
 .image .no-image  {height:131px; width:100%;clear:both;}
 
 .featured-item-special .image .no-image {height:127px; width:100%;}
@@ -568,15 +140,15 @@ li.no-link:hover{  background-color:transparent!important; }
 
 .special-item .no-image {height:241px;}
 
-*Best Of
+/* *Best Of */
 .featured-listing .no-image, .content-main .summary .no-image {   height: 144px;  width: 100%;}
 .special-listing .no-image {   height: 295px;  width: 98%; padding:4px; border:1px solid #dedede;}
 
-*Summary item
+/* *Summary item*/
 
 .summary-image .no-image {height:94px;}
 
-*Profile no-image
+/* *Profile no-image*/
 .featured-review .no-image, 
 .review-item .no-image, 
 .sidebar .featured-item .image .no-image,
@@ -584,20 +156,20 @@ li.no-link:hover{  background-color:transparent!important; }
 .user-info .image .no-image{ background:#E7E8E8 url(images/imagery/profile_noimage.png) no-repeat center; height:72px;min-height:72px; width:72px; margin:0;}
 .comment .image .no-image { background:#E7E8E8 url(images/imagery/profile_noimage.png) no-repeat center;cursor:pointer; display:block; min-height:30px; min-width:30px; height:60px; width:60px; border:1px solid #ccc; }
 
-*Deal
+/* *Deal*/
 .content-main .summary-deal .no-image 	{ height:170px ; width:300px !important; }
 .special-deal .image .no-image {height:241px; width:610px;}
 .ie7 .special-deal .image .no-image {width:617px;}
 .detail-deal .no-image {height:266px;}
 
-*Advertise Pages
+/* *Advertise Pages*/
 .level-summary .no-image	{ border:none; height: 133px;   width: 309px; }
 .level-summary .no-image 	{ -moz-border-radius:0; -webkit-border-radius:0; border-radius:0; }
 .level-summary .left .image .no-image 	{ border:none !important; }
 .level-summary .summary-modules .full	{ border:none; margin-right:90px; }
 
 
-* Global classes > Switch button
+/** Global classes > Switch button */
 
 .switchOpen, .switchClose
 {display: block; float: left; height: 15px; overflow: hidden; text-decoration: none; width: 17px;   margin-top: 2px;}
@@ -605,11 +177,11 @@ li.no-link:hover{  background-color:transparent!important; }
 .switchBlank  {display:none;}
 
 
-#System Messages and Alerts
+/* #System Messages and Alerts
 
 	<div class="successMessage"><p>Success!!</p></div>
 
-	
+	*/
 
 	.informationMessage,
 	.errorMessage,
@@ -622,7 +194,7 @@ li.no-link:hover{  background-color:transparent!important; }
 
 
 
-#Typography 
+/* #Typography 
 
 	<h1>h1. Heading 1</h1>
 	<h2>h2. Heading 2</h2>
@@ -632,7 +204,7 @@ li.no-link:hover{  background-color:transparent!important; }
 	<h6>h6. Heading 6</h6>
 
  
-	
+	*/
 
 
 	h1, h2, h3, h4, h5
@@ -643,22 +215,22 @@ li.no-link:hover{  background-color:transparent!important; }
 
 	
 
-#Typography 
+/* #Typography 
 
 	Paragraph 
 	
-	
+	*/
 
 	p
 	{ color:#636363; line-height:16px; }
 
 
 
-#Header Image
+/* #Header Image
  
  <div class="image-bg"></div>
  
-
+ */
 
  .image-bg {
  	position:absolute;
@@ -673,9 +245,9 @@ li.no-link:hover{  background-color:transparent!important; }
  }
 
 
-*************************************************************************************************\
+/**************************************************************************************************\
 * #Forms > Contact form  
- 	
+  */	
 .contactus {margin-top:20px; border:1px solid #ddd;}
 .contactus .map{height:240px; width:98%;margin:4px 1%;}
 .contactus address {margin:10px 0;}
@@ -684,7 +256,7 @@ li.no-link:hover{  background-color:transparent!important; }
 .contact-form > form > p{margin:10px 0 20px;}
 
 
- #Featured Listings
+ /* #Featured Listings
      The Best Of page for Dining Guide
      
 
@@ -706,7 +278,7 @@ li.no-link:hover{  background-color:transparent!important; }
      featured-listing .featured-body btn-success {    margin: 5px 0;}
 
 /* #Special Listing
-
+*/
 
 .featured-listing .span12.special-listing {width: 96.9%;margin: 0 0 10px 2.8%;}
 
@@ -716,9 +288,9 @@ li.no-link:hover{  background-color:transparent!important; }
 .special-listing img.img-polaroid {width:98.5%;}
 
 
-#Reviews
+/* #Reviews
 
-      
+*/      
 
 .review-item {margin:15px 0 20px;}
 .review-item .review-top { padding-bottom:10px;}
@@ -744,7 +316,7 @@ li.no-link:hover{  background-color:transparent!important; }
 
 
 
-Rate Starts
+/*Rate Starts*/
 
 .stars-rating {
 	background:url(images/iconography/mask-stars-white.png) no-repeat  left center scroll #16a085;
@@ -773,7 +345,7 @@ Rate Starts
 .stars-rating .rate-5 {width:0;}
 
 
-Calendar Event
+/*Calendar Event*/
 .calendar-event {
 	width:100%; 
 	position:relative;
@@ -800,9 +372,9 @@ Calendar Event
 .small-calendar li.control {width:10%; height:12px; padding:14px 0;}
 
 
-*
+/**
  #Top Navbar Open
-
+ */
 
  .top-button
  { left: -170px; overflow: visible; position: absolute; top: 0; z-index:3; }
@@ -821,11 +393,11 @@ Calendar Event
  
  
 
-*************************************************************************************************\
+/**************************************************************************************************\
 * Header
 * 
 * Header contents, search, advanced search, banner and other elements.
-
+*/
 
 #header-wrapper
 { clear:both; height:72px; margin:0 auto; overflow:visible; }
@@ -834,7 +406,7 @@ Calendar Event
 { height:58px; margin:0 auto; overflow:visible; padding:7px 0 7px 0; position: relative; width:980px;  z-index:1; }
 
 
-* Header > Navbar
+/** Header > Navbar */
 
 #navbar-wrapper, .wrapper .holderFixes #navbar-wrapper
 { left:0; position:absolute; top:0; width:100%; z-index:1; }
@@ -851,11 +423,11 @@ Calendar Event
 
 
 
-*************************************************************************************************\
+/**************************************************************************************************\
 * #Footer
 * 
 * Footer content, classes, styles.
-
+*/
 
 .footer-wrapper {clear:both;  margin:20px auto 0; overflow:hidden; padding:0;border-top:2px solid #4b4b4b;padding: 20px 0 ; }
 
@@ -867,10 +439,10 @@ Calendar Event
 
 
 
-#Content Structure
+/* #Content Structure
 * 
 * Content structure elements
-
+*/
 .well > .container-fluid {padding-top:5px;padding-bottom:10px;}
 .ie .well > .container-fluid {padding-bottom:10px;}
 
@@ -880,10 +452,10 @@ Calendar Event
 
 .content-wrapper {  display:block; height:auto; }
 
-# Login Page
+/*# Login Page */
 .ie .span4.offset4 .selectpicker .select .dropdown-toggle{width:280px;}
 
-#Tree View
+/* #Tree View*/
 	.categoryTreeview { margin: 10px 2% 20px;  padding:10px 2% 20px; }
 	.categoryTreeview li { clear:both;}	
 	.categoryTreeview li ul { margin:0 0 0 25px; clear:both;}	
@@ -893,7 +465,7 @@ Calendar Event
 	
 	.categorySuccessMessage, .categoryErrorMessage	{display:inline-block; margin-left:3px; text-decoration:none; }	
 
-	#Messages
+	/*#Messages*/
 
 	.fancybox-outer .informationMessage, .fancybox-outer .errorMessage, .fancybox-outer  .successMessage, .fancybox-outer .warningMessage { margin:25px 0 0; }
 
@@ -901,11 +473,11 @@ Calendar Event
 
 	 .fancybox-skin {border-radius:0!important;}
 
-#Top Pagination
+/* #Top Pagination
 	
 	*Line Top
 	
-	
+	*/
 
 	.content-reviews .line-top > div {float:right;} 
 	.line-top .search-info {display: inline-block;  float: none;  max-width: 50%;} 
@@ -921,13 +493,13 @@ Calendar Event
 
 
 
-#Top Pagination
+/* #Top Pagination
 	* Line Bottom
     *Structure
 	*Pagination Controls
 	*Pagination Pages
 	
-	
+	*/
 	.filter{float: left; padding: 1.5px 3px 0 0; width:auto;}
 	.filter p{font-size:11px;float: left; padding: 0px 0 0 6px;}
 	.pagination ul {text-transform:uppercase;}
@@ -955,7 +527,7 @@ Calendar Event
 	.pagination ul.controls > li > a, .pagination ul.pages > li > a {float:none;}
 
 
-#Bottom Pagination
+/* #Bottom Pagination*/
 	.bottom-pagination { float: right; width: 50%;}
 	.content-full-results .bottom-pagination {  width: 65%;}
 	.bottom-pagination-listing .pagination { width: auto; padding-bottom: 10px;float: right; margin-bottom: 10px;}
@@ -965,7 +537,7 @@ Calendar Event
 	.bottom-pagination-listing .results-per-page {width: auto; float: right; margin-top: -3px;}
 	
 
-#Login Form
+/*#Login Form*/
 .formFieldsLogin input.text, .formFieldsLogin input[type="password"] {margin:0 auto; width:96.5%;}
 .formFieldsLogin .automaticLogin{display:block;margin:10px 0;}
 .formFieldsLogin .clear {margin-bottom:10px;}
@@ -979,9 +551,9 @@ section.span4.offset4 .button-google h2 a,
 section.span4.offset4 .button-facebook h2 a
 { width:78.5%; display:block;}
 
-#Flex List
+/* #Flex List
 
-
+*/
 
 .flex-box-list  ul {margin:10px 0 10px 20px; float:left;min-width:90%;}
 .flex-box-list  li,
@@ -1012,7 +584,7 @@ section.span4.offset4 .button-facebook h2 a
 .span1.flex-box-list li
 {width:100%;}
 
-#Category List
+/* #Category List*/
 
 .sidebar-browseby li, .flex-box-list  .list-category li {margin-left:15px;}
 .sidebar-browseby [class*="icon-caret"], .flex-box-list  .list-category [class*="icon-caret"] {margin-left:-15px; margin-right: -3px;}
@@ -1026,10 +598,10 @@ section.span4.offset4 .button-facebook h2 a
 
 .sidebar-browseby {border-top:none;}
 
-General Pages
+/*General Pages*/
 .box-title .summary-small {width: 99.7%;}
 
-#General Page FAQ
+/* #General Page FAQ */
 .content-faq {margin-top:20px; clear:both;}
 .faq-search .row-fluid{padding:5px 0 0;}
 .faq-search h4 {line-height:36px;}
@@ -1038,7 +610,7 @@ General Pages
 .faq-front {float:right;margin:-10px 0 10px;}
 .box-title .content-faq h2  {margin-bottom:0;}
 
-Table for Pagination
+/* Table for Pagination*/
 .pagingContent {width:100%;border-top:1px solid #ddd; border-bottom:1px solid #ddd;}
 .pagingContent > tbody {  line-height: 25px;font-size: 10px;}
 .pagingContent >tbody > tr  {display: inline-block;   width: 47%; padding:0 1%;}
@@ -1056,7 +628,7 @@ Table for Pagination
 .ie .pagingContent table td {float:left;width: 150px;}
 
 
-#All Locations
+/* #All Locations */
 
 .browse-locations {clear:both;}
 .child {margin-left: 5%;}
@@ -1071,7 +643,7 @@ Table for Pagination
 
 
 
-General Page All Categories
+/*General Page All Categories*/
 .box-title  ul.item-select {width:98%; float:left; margin-bottom:20px; margin-top:-20px; padding:10px 1%;}
 .box-title ul.item-select li{width:25%; float:left; padding:5px 0;}
 .box-title ul.item-select li > a{margin-left:18px;}
@@ -1082,13 +654,13 @@ General Page All Categories
 
 .box-title ul.item-select ul.child li{width:100%; float:left; clear:both;}
 
-#General Page Sitemap
+/* #General Page Sitemap*/
  	.sitemap h3 {clear:both; margin-top:20px; float:left; width:100%;}
 
 
-#Checking 
+/* #Checking 
     Featured on Sidebar 
-   
+    */
 
     .featured-checkin .featured-item .image{width: 70px;margin: 4px 16px 0 0;float: left;}
     .featured-checkin .featured-item p {text-align:left;font-size: 11px;line-height: 20px; padding: 0;}
@@ -1097,8 +669,8 @@ General Page All Categories
 	
 	.featured.featured-checkin {border: 1px solid #D5D8DC; padding:10px 30px 10px 10px; float:left; position:relative; width:86%;}
 
-#Twitter 
-
+/* #Twitter 
+*/
 
 .last-tweets ul
 {  padding-top:10px; }
@@ -1120,11 +692,11 @@ General Page All Categories
 
 
 
-#Index options
+/* #Index options
 	
     * Brand
 	* Search bar
-	
+	*/
 	.ie .header-brand {min-height:102px;}
 
 	.brand-logo { float:left; width:42%; display:inline-block; vertical-align:middle;}	
@@ -1179,9 +751,9 @@ General Page All Categories
 
 
 
-#Index options	
+/* #Index options	
 	Featured Columns 
-	
+	*/
 
 
 	.three-columns, .bannerstop{padding:0px; width: 96%;margin:10px auto 20px;}		
@@ -1190,11 +762,11 @@ General Page All Categories
 	.ie .three-columns .rate-stars.pull-right {width:100px;}
 
 
-#Searchbar
+/* #Searchbar
 
 	A search bar with option to advanced search
 	
-	
+	*/
 	.search-options .span12 {min-height:0;}  
 	.advanced-search-box {float:left;padding:10px 1.5%;margin:20px 0;position: relative;min-width:920px; white-space:nowrap;font-size: 10.5px;}
 	
@@ -1202,10 +774,10 @@ General Page All Categories
 	
 	.advanced-search-box .radio {padding-left: 0;}
 
-#Accordion
+/* #Accordion
 
     Accordion style for the Triggers, links and Titles
-   
+    */
 
 
     #accordion { height:auto; margin:20px 0 5px 2px;}
@@ -1214,11 +786,11 @@ General Page All Categories
     {display:block; padding:0 17px; }
     
 
-#Advertisement
+/* #Advertisement
  
   Advertisement classes for banners on Header, Content and Sidebar.
   
- 
+  */
   .advertisement {width: 100%; padding: 5px 0 5px 0;}
   .info-advertise, .advertisement p  { margin: 1px 0 15px; text-align: right;}
 
@@ -1251,7 +823,7 @@ General Page All Categories
 
   .bt-highlight button{  clear: both;  float: right; margin: 0 0 10px;}
   
-  * Popups > Preview Banner
+  /** Popups > Preview Banner */
 
   .previewmember .advertisement .top img{height: 90px; width: 728px;}
   .previewmember .advertisement .bottom img{ height: 60px; width: 468px;}
@@ -1265,16 +837,16 @@ General Page All Categories
   .previewmember .advertisement .bottom { text-align:center; margin-top:30px; }
 
   
-#Advertisement > Sponsored 
-
+/* #Advertisement > Sponsored 
+*/
 
 .sponsored
 {display:block; padding:2px; width:170px; }
 
 		
 
-* Order Page 
-
+/** Order Page 
+*/
 .real-steps {margin:0 auto 40px auto; clear:both;float:left; width:100%;}
 .standardStepAD {margin:10px;}
 .standardStep-Title, .order-head {margin-bottom:30px;}
@@ -1297,14 +869,14 @@ General Page All Categories
 .orderUserTable .standardButton {margin-top:-5px;}
 
 .orderUserTable .button.button-facebook a, .orderUserTable .button.button-google a {  padding: 4px 35px;  width: 180px;}
-* #Popups > TB_window
+/** #Popups > TB_window */
 
 #TB_window
 { background:#FFF !important; } 
 
-#Remove from favorites div 
+/* #Remove from favorites div 
 
-
+*/
 
 .boxFavorites 
 { background: url(images/structure/bg-black-opacity-65.png) repeat; cursor:pointer; float:left; height:23px; position:absolute; width:320px; }
@@ -1320,14 +892,14 @@ General Page All Categories
 { display: inline; position: relative; top: 2px; margin: 0 0 0 5px; }
 
 
-#Input hidden
+/* #Input hidden*/
 .hiddenFile-box {}
 .hiddenFile-box span.hiddenFile{}
 .hiddenFile-box span.hiddenFile input[type="file"]{cursor: pointer;opacity: 0;filter:alpha(opacity=00);padding: 0;margin: -90px 0 0 -155px;width: 145px;height: 134px;position:absolute;}
 .hiddenFile-box span.hiddenFile button {border: 1px solid #ccc;    cursor: pointer;    font-size: 10px;    height: 30px;    outline: medium none;  width: 100px; margin: 5px 0;}
 
 
-#New Member Area
+/* #New Member Area*/
 .member-form .charleft {margin: -3px 20px 10px 0;background-color: #fbfbfb;padding: 4px 10px;} 
 .member-form .charleft span input{background: none repeat scroll 0 0 transparent; border: medium none; margin: 0;  padding: 0;  width: 26px;}
 .textcounter:disabled { color: #000;-webkit-appearance: none;}
@@ -1381,7 +953,7 @@ border-radius:0;
 .identification .inpemail, .create-profile .inpemail{ background:#fff url(images/iconography/mail.png) no-repeat 3px; width:265px; margin-right:0}
 .identification .inppassword, .create-profile .inppassword{ background:#fff url(images/iconography/lock.png) no-repeat 5px;}
 
-#New advertising
+/* #New advertising */
 .order > div {clear:both}
 .order > form > div {float:left;}
 
@@ -1408,7 +980,7 @@ border-radius:0;
 .blockcontinue	#checkoutpayment_total {margin:8px 0 0;}
 
 
-#New advertising  Form	
+/* #New advertising  Form*/	
 .order label {font-size:12px; color:#62707B; line-height: 30px; width:100%;float:left;}
 .order label > span {display: none;position: absolute;font-size: 10px;font-style: normal;display:none; position:static; font-size: 10px;font-weight: normal;padding: 4px;background-color: #f4f4f4;border: 1px solid #ccc; line-height:20px;box-shadow:0px 0px 10px #eee;}
 .order label#checkUsername > span {display: inline;position: relative;padding: 0;background-color: transparent;border:none;margin:0;line-height: 6px;box-shadow:none}
@@ -1418,7 +990,7 @@ border-radius:0;
 .order .option input[type="radio"] {float: left;margin: 9px 15px 0 15px;width:15px;height:15px;}	
 
 
-#Button
+/* #Button*/
 
 bt-highlight {text-align: right ;margin-right: 40px;}
 p.bt-highlight a, p.bt-highlight em { clear: both;    float: right;}
@@ -1426,7 +998,7 @@ p.bt-highlight a, p.bt-highlight em { clear: both;    float: right;}
 .order .biggerbutton button span {width:200px;white-space: pre-wrap;}
 
 
-#Package
+/* #Package*/
 
 .package {width:90%; margin:10px auto;}
 
@@ -1437,7 +1009,7 @@ p.bt-highlight a, p.bt-highlight em { clear: both;    float: right;}
 input { color: #000; }
 .placeholder { color: #aaa; line-height:10px; }
 
-#newsletter
+/* #newsletter*/
 
 .box-newsletter {width:96%; padding:10px 2% 20px;}
 
@@ -1467,25 +1039,25 @@ input { color: #000; }
 .span12 .box-newsletter .news-custom p { margin:3px 0 0;}
 .span12 #news_returnMessage { float: left; margin: 0 19px; width: 658px;}
 
-#Button send Button Call
+/*#Button send Button Call*/
     
     .button-send , .button-call {   clear: none; display: inline-block; width: 18px; height: 18px;vertical-align: middle; }
     .button-send img, .button-call img {opacity:0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";}
 
 
-Video Tab
+/* Video Tab*/
 #content_video iframe {width:100% !important;}
 
 
-App Android
+/*App Android*/
 #smartbanner.android.shown { top:0!important; }
 
-#Media queries
+/* #Media queries
    #RESPONSIVE
 
 	All changes when you want a responsive website
 	
-	
+	*/
 	@media (min-width: 978px) {
 		
 		.header-brand {min-height:102px;}
@@ -1499,7 +1071,7 @@ App Android
 
 	@media (min-width: 768px) and (max-width: 979px) {
 
-		Order Page
+		/*Order Page*/
 		.order .right {
 		    border-color: #fff!important;
 		}
@@ -1532,11 +1104,11 @@ App Android
 	   	 float:none;
 		}
 
-		#Error Page
+		/* #Error Page */
 		.error-page {height:120px; width:230px;}
 
 
-		Calendar
+		/*Calendar*/
 		.span3 .calendar-event li {height: 27px; line-height: 11px; padding: 5px 0 5px 1px; text-align: center; width: 100%;}
 		.span3 .calendar-event li span {margin:0 auto;}
 		.small-calendar li {width:75%;padding:6px 0;}
@@ -1545,18 +1117,18 @@ App Android
 
 
 
-		Logo Brand
+		/*Logo Brand*/
 		.header-brand {display:none;}   
 		.brand.logo {float: left; height: 40px; margin: 0 0 0 2%; padding: 0; width: 50px;}   
 		.navbar-inner { background-image:none; background-color:#252525;}
 		.search-collapse {display:block;}
 		
-		Navabar
+		/*Navabar*/
 		.navbar .btn-navbar {background-color: transparent; background-image: none; color: #FFFFFF;margin: 3px 10px 0 0; padding: 10px;  box-shadow:none;  border:none;  border-radius:0;}
 		.search-advanced .btn.btn-success {background-image:none;background-color:#95c800; color: #FFFFFF;font-size:14px;text-transform: uppercase; text-shadow:none;box-shadow:none;font-weight:600;}
 		
 		
-		No Images
+		/*No Images*/
 		.category-image .no-image {height: 144px;}
 		.three-columns h2 {font-size: 14px !important;}
 		.three-columns .thumbnail .no-image {height: 95px;}
@@ -1578,7 +1150,7 @@ App Android
 		.span8 .span12 section aside span.no-image {height:85px;}
 
 
-		#Banners
+		/*#Banners*/
 		.advertisement .banner {height: 70px;}
 		.advertisement .banner-left {float: left;width: 86%;margin-right: 1%;}
 		.advertisement .banner-right {width: 13%;float: left;}
@@ -1596,14 +1168,14 @@ App Android
 		.advertisement-bottom .banner .banner-google {float:left;}
 		.sponsored {margin: 0 auto;}
 		
-		#Special Listing
+		/*#Special Listing*/
 		.special-listing .listing-info {height: 210px;margin-left: 206px;width: 290px;}
 		.featured-listing .thumbnail .image h3 {width: 230px;}
 		
-		#Calendar
+		/* #Calendar*/
 		.calendar-event li span{max-width:36px; overflow: hidden; display:block; margin:0 auto;}
 		
-		#Lists
+		/* #Lists*/
 		.span8 .span12.flex-box-list li ,
 		.span12.flex-box-list li,
 		.flex-box-list li {
@@ -1617,12 +1189,12 @@ App Android
 			margin: 5px 5px 5px 10px;
 		}
 		
-		#Search
+		/* #Search*/
 		.search-advanced { padding:0; width: 100%;}
 		.search-advanced .row-fluid{
-			display: -webkit-box;      OLD - iOS 6-, Safari 3.1-6
-			display: -moz-box;         OLD - Firefox 19- (buggy but mostly works)
-			display: -ms-flexbox;      TWEENER - IE 10 
+			display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+			display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+			display: -ms-flexbox;      /* TWEENER - IE 10 */ 
 			-moz-box-orient:vertical;
 			-webkit-box-orient:vertical;
 			width: 100%;  
@@ -1667,7 +1239,7 @@ App Android
 		.search-advanced .search-location input, .search-advanced .search-keyword input {  background-image: none; border: medium none; margin: 0 auto; padding: 7px 1%; width: 98%;}    
 		.search-button .btn-search {   float: left; height: 35px; margin: 10px auto; width: 100%;}
 		
-		#Newsletter
+		/*#Newsletter*/
 		.box-newsletter .news-custom p, .newsletter .btn.btn-facebook, .newsletter hr {display:none;}
 		.box-newsletter h3 {line-height:28px;margin-bottom:20px;}
 		
@@ -1684,7 +1256,7 @@ App Android
 
 		.span3 .box-newsletter { min-height: 190px;}
 		
-		#Advanced Search
+		/*#Advanced Search*/
 		.search-options .list-home label {display: inline-block; vertical-align: middle;width:25%; padding-left:2%;}
 		.search-options .advanced-search-box .span9-5 .list-home label {width: 81%;padding-left: 1%;}
 		.search-advanced .span4-5 {width: 67%;margin-left: 0;}
@@ -1702,7 +1274,7 @@ App Android
 		
 		
 		
-		#Pagination
+		/*#Pagination*/
 		.bottom-pagination {  float: right;  width: 70%;}
 		
 		.line-top .search-info {  max-width: 98%;}
@@ -1710,23 +1282,23 @@ App Android
 		.content-full-results .bottom-pagination, .bottom-pagination .pagination {width: 100%;}
 		
 		
-		#Summary
+		/*#Summary*/
 		.level-summary .no-image, .summary span.no-image, .content-main .summary span.no-image {  height: 109px; }
 		
-		#Reviews
+		/*#Reviews*/
 		.review-bottom p { display: block; width: 98%;}
 		.review-bottom p.pull-right {width: 48%;}
 		
 		
 		.content.content-results-filters .informationMessage,  .content.content-results-filters .informationMessage {  margin-left: -200px;}	
 		
-		Contact Us
+		/*Contact Us*/
 		.contact-form .form .captcha img {width: 85px;}
 		
 	}
 	@media (max-width: 767px) {
 
-		* #SignIn
+		/** #SignIn */
 		.flex-box .span4.offset4 {
 			float:none;
 			margin:0 auto;
@@ -1742,7 +1314,7 @@ App Android
 		    margin:auto;
 		}
 
-		Advertise
+		/*Advertise*/
 		.order-head {
 			display:none;
 		}
@@ -1775,50 +1347,50 @@ App Android
 		    width: 95%;
 		}
 
-		Contact Us
+		/*Contact Us*/
 		.contact-form {width:96%; margin:0 2%;}
 
 		.contact-form input {padding:15px 0;}
 		.contact-form .form .captcha img {margin-bottom:10px;}
 
-		#Hidden Claim
+		/*#Hidden Claim*/
 			.real-steps {display:none;}
 
-		#General Pages
+		/*#General Pages*/
 		.box-title ul.item-select li:nth-child(4n+1),
 		.box-title ul.item-select li{
 		    width: 100%;
 		}
 
-		#Error Page
+		/* #Error Page */
 		.error-page {height:140px; width:100%;}
 		.error-page-text table td {width:auto!important;}
-		#Hammertime
+		/* #Hammertime*/
 		#bg-maintenancemode {background-size:100% !important;}
 
 		.search-location input.ac_loading {background: none!important;}
 
 
-		Logo Brand
+		/*Logo Brand*/
 		.header-brand {display:none;}   
 		.brand.logo {float: left; height: 40px; margin: 0 0 0 2%; padding: 0; width: 110px;}   
 		.navbar-inner { background-image:none; background-color:#252525;}
 		
-		Navabar
+		/*Navabar*/
 		.navbar .btn-navbar {background-color: transparent; background-image: none; color: #FFFFFF;margin: 3px 10px 0 0; padding: 10px;  box-shadow:none;  border:none;  border-radius:0;}
 		.search-collapse {display:block; background-color:#383838;}
 
 		
-		No-Images
+		/*No-Images*/
 		.special-listing .no-image {height: 180px;width: 98%;padding: 4px;border: 1px solid #dedede;}
 		.detail-deal .no-image {height: 156px;}
 		.media .summary-image .no-image {display:none;}
 		.span8 .flex-box .span12 > aside.span8 > a > span.no-image {height:143px;}
 		.span8 .flex-box .span12 > aside.span8 {margin-bottom:0;}
-		Background Image    
+		/*Background Image*/    
 		.image-bg {display:none; width:0; height:0;}
 		
-		#Sidebar and Content
+		/*#Sidebar and Content*/
 		.content.side-right{width:100%;}
 		.content, .sidebar {clear: both;float: left;margin: 10px 1%;padding: 0;width: 97.8%;}
 		.content-full .content .content-main {  width: 90%;}
@@ -1826,20 +1398,20 @@ App Android
 		.breadcrumb {  margin: 2px 0 5px; }
 		.content.content-general {width:95%;}
 		
-		#Pagination
+		/*#Pagination*/
 		.top-pagination, .bottom-pagination .pages, .results-per-page {display:none}    
 		.content-full-results .bottom-pagination, .bottom-pagination, .bottom-pagination .pagination {text-align: center;width: 100%;}
 		.pagination ul.controls {text-transform: uppercase;text-align: center;width: 100%;}
 		
-		All Locations
+		/*All Locations*/
 		.link { margin:8px 1%;  width: 22%;}
 		
-		#Search
+		/* #Search*/
 		.search-advanced { padding:0; width: 100%;}
 		.search-advanced .row-fluid{
-			display: -webkit-box;      OLD - iOS 6-, Safari 3.1-6
-			display: -moz-box;         OLD - Firefox 19- (buggy but mostly works)
-			display: -ms-flexbox;      TWEENER - IE 10 
+			display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+			display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+			display: -ms-flexbox;      /* TWEENER - IE 10 */ 
 			-moz-box-orient:vertical;
 			-webkit-box-orient:vertical;
 			width: 96%;  
@@ -1887,7 +1459,7 @@ App Android
 		.search-keyword input.ac_loading {background: none #fff !important; border: medium none; margin: 0 auto;padding: 5px 1%;  width: 98%;}    
 		.search-button .btn-search {   float: left; height: 30px; margin: 10px auto; width: 100%;}
 
-		#Advanced Search
+		/* #Advanced Search*/
 		.search-advanced .span4-5 { margin-left: 0;  width: 100%;}    
 		.search-options .advanced-search-box .span9-5 .list-home label {width: 34%;padding-left: 1%;}    
 		.search-advanced .span7-5 {  width: 100%;}
@@ -1897,7 +1469,7 @@ App Android
 		.content-center .search-advanced.special-bylocation { margin-bottom: 10px; margin-top:10px;  padding: 5px 1%;   width: 93%; }
 		.search-advanced.special-bylocation .list-home > li { width: 50%;}
 		
-		#Banners
+		/*#Banners*/
 		.advertisement {width: 96%; padding: 5px 1% 0; display: inline-block;height: auto;}	
 		.advertisement .banner {height: auto;}    
 		.advertisement .banner-left {float: left;width: 86%;margin-right: 1%;}
@@ -1911,7 +1483,7 @@ App Android
 		.advertisement-bottom .banner-left img {max-height: 60px;max-width: 468px;width:100%; height:auto;}
 		.sponsored {margin: 0 auto;}
 		
-		#Footer
+		/*#Footer*/
 		
 		.footer-wrapper .span3 {
 			margin-left: 2%;
@@ -1929,7 +1501,7 @@ App Android
 
 		.footer-wrapper .copyright, .footer-wrapper .copyright p, .footer-wrapper .copyright h5 {text-align:center;} 
 		
-		#Categories
+		/*#Categories*/
 		.category-image {padding: 0.5%; min-height:0;}
 		.category-image img{height:auto; width:100%}
 		.all-head .category-name {width: 50%;height: auto;padding: 4% 0;margin: 0.8%;background-image:none;}
@@ -1938,13 +1510,13 @@ App Android
 		.allcategories p {min-height: 1px;}
 		.category-link {font-size:14px!important; width: 150px;}
 		
-		#Newsletter
+		/*#Newsletter*/
 		.newsletter {display:none;}
 		
-		#Login
+		/*#Login*/
 		.forgotpassword {float: none;  margin-top: 0;  text-align: center;}
 		
-		#Reviews
+		/*#Reviews*/
 		.review-bottom p { display: block; width: 98%;}
 		.review-bottom p.pull-right {width: 48%;}
 		
@@ -1958,7 +1530,7 @@ App Android
 		}
 
 
-		
+		/**/
 
 		.icon-search {
 			background-image: url("images/iconography/glyphicons-halflings-white.png")!important;
@@ -1974,7 +1546,7 @@ App Android
 
 	@media (max-width: 480px) {
 
-		* #SignIn
+		/** #SignIn */
 		.flex-box .span4.offset4 {
 			float:none;
 			margin:0 auto;
@@ -1988,7 +1560,7 @@ App Android
 		}
 
 		
-		#Lists
+		/*#Lists*/
 		.span8 .span12.flex-box-list li ,
 		.span12.flex-box-list li,
 		.flex-box-list li {
@@ -1997,25 +1569,25 @@ App Android
 		}
 		
 
-		#Search
+		/*#Search*/
 		
-		No-Images
+		/*No-Images*/
 		
 		.special-listing .no-image {height: 100px;width: 98%;padding: 4px;border: 1px solid #dedede;}
 		.category-image .no-image {height: 150px;width: 100%;}
 		
 		.special-listing .listing-info {  margin: 0 auto;  width: 94%;}
 		
-		By location
+		/*By location*/
 		.search-advanced.special-bylocation .list-home > li { width: 100%;}
 		
-		All Locations
+		/*All Locations*/
 		.link { margin:7px 1%;  width: 45%;}
 		
-		#Reviews
+		/*#Reviews*/
 		.review-bottom p.pull-right {width: 98%;}
 		
-		Contact
+		/*Contact*/
 		
 		
 		.fancy_window_login.star-rating {pointer-events:none;}
@@ -2027,7 +1599,7 @@ App Android
 	}
 
 	@media (max-width: 320px) {	   
-		#Lists
+		/*#Lists*/
 		.span8 .span12.flex-box-list li ,
 		.span12.flex-box-list li,
 		.flex-box-list li {
@@ -2040,8 +1612,8 @@ App Android
 		.advertisement {display: none;}	
 		.brand.logo {width: 50px;	min-width:50px;}
 		
-		All Locations
+		/*All Locations*/
 		.link { margin-left: 1%;  width: 98%;}
 
 	}
- */
+

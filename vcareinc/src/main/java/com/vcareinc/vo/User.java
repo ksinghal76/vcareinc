@@ -25,36 +25,46 @@ import org.springframework.stereotype.Controller;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1867515118091918594L;
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@NotNull
-	@Size(min=5, max=50, message="Firstname must contain between 5 and 50")
+	@Size(min=1, max=50, message="Firstname must contain between 1 and 50")
 	private String firstname;
-	
+
 	@NotNull
-	@Size(min=5, max=50, message="Lastname must contain between 5 and 50")
+	@Size(min=1, max=50, message="Lastname must contain between 1 and 50")
 	private String lastname;
-	
-	@Column(unique=true)
+
 	@NotNull
+	@Column(unique=true)
 	@Pattern(regexp="^.+@.+\\..+$", message="Email is invalid")
 	private String email;
-	
+
+	@OneToOne(fetch=FetchType.EAGER)
+	private Address address;
+
 	@NotNull
 	private String password;
-	
-	
+
+	@NotNull
+	private Boolean activate;
+
+	private String companyName;
+
 	private String phonenumber;
+	private String faxNumber;
+	private String url;
 	private Boolean enable;
 	private Timestamp created;
 	private User createdBy;
+	private Boolean resetPassword;
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	private final Set<Role> roles = new HashSet<Role>();
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -73,7 +83,13 @@ public class User implements Serializable {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
+
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -86,11 +102,35 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Boolean getActivate() {
+		return activate;
+	}
+	public void setActivate(Boolean activate) {
+		this.activate = activate;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	public String getPhonenumber() {
 		return phonenumber;
 	}
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
+	}
+	public String getFaxNumber() {
+		return faxNumber;
+	}
+	public void setFaxNumber(String faxNumber) {
+		this.faxNumber = faxNumber;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public Boolean getEnable() {
 		return enable;
@@ -104,7 +144,7 @@ public class User implements Serializable {
 	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
-	
+
 	@OneToOne(fetch=FetchType.LAZY)
 	public User getCreatedBy() {
 		return createdBy;
@@ -118,12 +158,21 @@ public class User implements Serializable {
 	public Set<Role> getRoles() {
 		return roles;
 	}
+	public Boolean getResetPassword() {
+		return resetPassword;
+	}
+	public void setResetPassword(Boolean resetPassword) {
+		this.resetPassword = resetPassword;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", email=" + email + ", password=" + password
-				+ ", phoneNumber=" + phonenumber + ", enable=" + enable
-				+ ", created=" + created + ", createdBy=" + createdBy
-				+ ", roles=" + roles + "]";
+				+ lastname + ", email=" + email + ", address=" + address
+				+ ", password=" + password + ", activate=" + activate
+				+ ", companyName=" + companyName + ", phonenumber="
+				+ phonenumber + ", faxNumber=" + faxNumber + ", url=" + url
+				+ ", enable=" + enable + ", created=" + created
+				+ ", createdBy=" + createdBy + ", resetPassword="
+				+ resetPassword + ", roles=" + roles + "]";
 	}
 }

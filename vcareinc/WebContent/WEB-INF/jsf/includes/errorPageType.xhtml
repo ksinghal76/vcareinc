@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:panelGroup rendered="#{not empty error.errorConstraintViolation}">
+	 <p class="errorMessage">
+	 	<b>The following fields were not filled or contain errors:</b>
+		<ui:repeat value="#{error.errorConstraintViolation.toArray()}" var="errors">
+				<br/>&nbsp;&middot;<h:outputText value="${errors.messageTemplate}"/>
+		</ui:repeat>
+	</p>
+	</h:panelGroup>
+	<!-- <h:panelGroup rendered="#{not empty error.errorMsg}">
+		<div class="errors">
+			<ul>
+				<li><h:outputText value="${error.errorMsg}"/></li>
+			</ul>
+		</div>
+	</h:panelGroup> -->
+</ui:composition>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- <property name="host" value="vcareinc.com"/>
+		<property name="username" value="webmaster"/>
+		<property name="password" value="pinku123"></property> -->
+		<property name="host" value="smtp.sendgrid.net"/><!-- 
+		<property name="username" value="cloudbees_vcareinc"/>
+		<property name="password" value="pinku123"/> -->
+	</bean>
+	
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>
+		<!-- <property name="velocityProperties">
+			<props>
+				<prop key="resource.loader">file</prop>
+				<prop key="file.resource.loader.class">org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
+				<prop key="file.resource.loader.path">${vcareinc.root}/WEB-INF/velocity/</prop>
+				<prop key="file.resource.loader.cache">false</prop>
+			</props>
+		</property> -->
+	</bean>
+	
+	<bean id="fromEmail" class="java.lang.String">
+		<constructor-arg value="Customer"/>
+	</bean>
+	<!-- <bean id="simpleMailService" class="com.vcareinc.services.SimpleMailService">
+		<property name="mailSender" ref="mailSender"/>
+		<property name="velocityEngine" ref="velocityEngine"/>
+		<property name="from" value="ksinghal@gmail.com"/>
+	</bean> -->
+</beans>

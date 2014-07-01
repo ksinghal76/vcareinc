@@ -1,0 +1,1008 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container">
+
+			<div class="container-fluid">
+
+
+				<div class="content content-full">
+
+
+					<script language="javascript" type="text/javascript">
+					<!--
+						function orderCalculate() {
+
+							var xmlhttp;
+
+							try {
+								xmlhttp = new XMLHttpRequest();
+							} catch (e) {
+								try {
+									xmlhttp = new ActiveXObject(
+											"Msxml2.XMLHTTP");
+								} catch (e) {
+									try {
+										xmlhttp = new ActiveXObject(
+												"Microsoft.XMLHTTP");
+									} catch (e) {
+										xmlhttp = false;
+									}
+								}
+							}
+
+							if (document.getElementById("check_out_payment"))
+								document.getElementById("check_out_payment").className = "isHidden";
+							if (document.getElementById("check_out_payment_2"))
+								document.getElementById("check_out_payment_2").className = "isHidden";
+							if (document.getElementById("check_out_free"))
+								document.getElementById("check_out_free").className = "isHidden";
+							if (document.getElementById("check_out_free_2"))
+								document.getElementById("check_out_free_2").className = "isHidden";
+							if (document
+									.getElementById("loadingOrderCalculate"))
+								document
+										.getElementById("loadingOrderCalculate").style.display = "";
+							if (document
+									.getElementById("loadingOrderCalculate"))
+								document
+										.getElementById("loadingOrderCalculate").innerHTML = "Wait, Loading...";
+							if (xmlhttp) {
+								xmlhttp.onreadystatechange = function() {
+									if (xmlhttp.readyState == 4) {
+										if (xmlhttp.status == 200) {
+											var price = xmlhttp.responseText;
+											var arrPrice = price.split("|");
+											var html = "";
+											var tax_status = '';
+											var tax_info = "";
+											if (arrPrice[0] > 0) {
+												if (tax_status == "on") {
+													html += "<strong>Subtotal Amount: </strong>$"
+															+ arrPrice[0]
+																	.substring(
+																			0,
+																			arrPrice[0].length - 2)
+															+ "."
+															+ arrPrice[0]
+																	.substring(
+																			arrPrice[0].length - 2,
+																			arrPrice[0].length);
+													html += "<br /><strong>Tax Amount: </strong>$"
+															+ arrPrice[1]
+																	.substring(
+																			0,
+																			arrPrice[1].length - 2)
+															+ "."
+															+ arrPrice[1]
+																	.substring(
+																			arrPrice[1].length - 2,
+																			arrPrice[1].length);
+													html += "<br /><strong>Total Price: </strong>$"
+															+ arrPrice[2]
+																	.substring(
+																			0,
+																			arrPrice[2].length - 2)
+															+ "."
+															+ arrPrice[2]
+																	.substring(
+																			arrPrice[2].length - 2,
+																			arrPrice[2].length);
+													tax_info = "+10% Sales Tax ("
+															+ "$"
+															+ arrPrice[2]
+																	.substring(
+																			0,
+																			arrPrice[2].length - 2)
+															+ "."
+															+ arrPrice[2]
+																	.substring(
+																			arrPrice[2].length - 2,
+																			arrPrice[2].length)
+															+ ")";
+												} else {
+													html += "<strong>Total Price: </strong>$"
+															+ arrPrice[0]
+																	.substring(
+																			0,
+																			arrPrice[0].length - 2)
+															+ "."
+															+ arrPrice[0]
+																	.substring(
+																			arrPrice[0].length - 2,
+																			arrPrice[0].length);
+												}
+												$('#divTax').addClass(
+														'isVisible');
+												$('#divTax').removeClass(
+														'isHidden');
+												$("#free_item").attr("value",
+														"0");
+												if (document
+														.getElementById("check_out_payment"))
+													document
+															.getElementById("check_out_payment").className = "isVisible";
+												if (document
+														.getElementById("check_out_payment_2"))
+													document
+															.getElementById("check_out_payment_2").className = "isVisible";
+												if (document
+														.getElementById("payment-method"))
+													document
+															.getElementById("payment-method").className = "isVisible";
+												if (document
+														.getElementById("checkoutpayment_total"))
+													document
+															.getElementById("checkoutpayment_total").innerHTML = html;
+											} else {
+												$('#divTax').addClass(
+														'isHidden');
+												$('#divTax').removeClass(
+														'isVisible');
+												$("#free_item").attr("value",
+														"1");
+												if (document
+														.getElementById("check_out_free"))
+													document
+															.getElementById("check_out_free").className = "isVisible";
+												if (document
+														.getElementById("check_out_free_2"))
+													document
+															.getElementById("check_out_free_2").className = "isVisible";
+												if (document
+														.getElementById("payment-method"))
+													document
+															.getElementById("payment-method").className = "isHidden";
+												if (document
+														.getElementById("checkoutfree_total"))
+													document
+															.getElementById("checkoutfree_total").innerHTML = "<strong>Total Price: </strong>$FREE";
+											}
+											if (tax_status == "on")
+												document
+														.getElementById("taxInfo").innerHTML = tax_info;
+											if (document
+													.getElementById("loadingOrderCalculate"))
+												document
+														.getElementById("loadingOrderCalculate").style.display = "none";
+											if (document
+													.getElementById("loadingOrderCalculate"))
+												document
+														.getElementById("loadingOrderCalculate").innerHTML = "";
+										}
+									}
+								}
+								var get_level = "";
+								if (document.order_item.level)
+									get_level = "&level="
+											+ document.order_item.level.value;
+
+								var get_categories = "";
+								if (document.order_item.feed)
+									get_categories = "&categories="
+											+ document.order_item.feed.length;
+
+								var get_listingtemplate_id = "";
+								if (document.order_item.select_listingtemplate_id)
+									get_listingtemplate_id = "&listingtemplate_id="
+											+ document.order_item.select_listingtemplate_id.value;
+
+								var get_discount_id = "";
+								if (document.order_item.discount_id)
+									get_discount_id = document.order_item.discount_id.value;
+
+								var get_type = "";
+								if (document.order_item.type)
+									get_type = "&type="
+											+ document.order_item.type.value;
+
+								var get_expiration_setting = "";
+								if (document.order_item.expiration_setting)
+									get_expiration_setting = "&expiration_setting="
+											+ document.order_item.expiration_setting.value;
+
+								var get_unpaid_impressions = "";
+								if (document.order_item.unpaid_impressions)
+									get_unpaid_impressions = "&unpaid_impressions="
+											+ document.order_item.unpaid_impressions.value;
+
+								xmlhttp.open("GET",
+										"http://beautypro411.com/ordercalculateprice.php?item=listing&item_id=cYEAtEaD"
+												+ get_level + get_categories
+												+ get_listingtemplate_id
+												+ "&discount_id="
+												+ get_discount_id + get_type
+												+ get_expiration_setting
+												+ get_unpaid_impressions, true);
+								xmlhttp.send(null);
+							}
+						}
+
+						function templateSwitch(template) {
+							if (!template)
+								template = 0;
+							var title_template_0 = 'Title * <span>Required field</span>';
+							var title_template_7 = 'Title * <span>Required field</span>';
+							var title_template_6 = 'Doctor/Clinic Name * <span>Required field</span>';
+							document.order_item.listingtemplate_id.value = template;
+							if (document.getElementById("title_label")) {
+								document.getElementById("title_label").innerHTML = eval("title_template_"
+										+ template);
+							}
+							orderCalculate();
+							loadCategoryTree(
+									'template',
+									'listing_',
+									'ListingCategory',
+									0,
+									template,
+									'http://beautypro411.com/edir_core/listing',
+									1);
+							updateFormAction();
+						}
+
+						function updateFormAction() {
+							var levelValue = "";
+							var titleValue = "";
+							var templateValue = "";
+							var categValue = "";
+							var discountValue = "";
+							var packageValue = "";
+							var packageID = "";
+							var startDateValue = "";
+							var endDateValue = "";
+							var expirationValue = "";
+							var advertiseItem = "listing";
+
+							//Get level/type
+							if (document.order_item.level) {
+								levelValue = "level="
+										+ document.order_item.level.value;
+							} else if (document.order_item.type) {
+								levelValue = "type="
+										+ document.order_item.type.value;
+							}
+
+							//Get Title/Caption
+							if (document.order_item.title) {
+								titleValue = "&title="
+										+ urlencode(document.order_item.title.value);
+							} else if (document.order_item.caption) {
+								titleValue = "&caption="
+										+ urlencode(document.order_item.caption.value);
+							}
+
+							//Get expiration setting (banner)
+							if (document.order_item.expiration_setting) {
+								expirationValue = "&expiration_setting="
+										+ document.order_item.expiration_setting.value;
+							}
+
+							//Get Template ID
+							if (document.order_item.select_listingtemplate_id) {
+								templateValue = "&listingtemplate_id="
+										+ document.order_item.select_listingtemplate_id.value;
+							}
+
+							//Get Discount
+							if (document.order_item.discount_id) {
+								discountValue = "&discount_id="
+										+ document.order_item.discount_id.value;
+							}
+
+							//Get Start Date (event)
+							if (document.order_item.start_date) {
+								startDateValue = "&start_date="
+										+ document.order_item.start_date.value;
+							}
+
+							//Get End Date (event)
+							if (document.order_item.end_date) {
+								endDateValue = "&end_date="
+										+ document.order_item.end_date.value;
+							}
+
+							//Get Categories
+							feed = document.order_item.feed;
+							var return_categories = "";
+
+							for (i = 0; i < feed.length; i++) {
+								if (!isNaN(feed.options[i].value)) {
+									if (return_categories.length > 0) {
+										return_categories = return_categories
+												+ "," + feed.options[i].value;
+									} else {
+										return_categories = return_categories
+												+ feed.options[i].value;
+									}
+								}
+							}
+							if (return_categories.length > 0) {
+								categValue = "&return_categories="
+										+ return_categories;
+							}
+
+							//Get package
+							if ($("#using_package").val() == "y") {
+								packageID = $("#aux_package_id").val();
+								packageValue = "&package_id=" + packageID;
+							} else if (advertiseItem == "article") {
+								packageID = "skipPackageOffer";
+								packageValue = "&package_id=" + packageID;
+							}
+
+							if (document.formDirectory != undefined)
+								document.formDirectory.action = "http://beautypro411.com/members/login.php?destiny=/members/listing/listing.php&query="
+										+ levelValue
+										+ templateValue
+										+ titleValue
+										+ categValue
+										+ discountValue
+										+ packageValue
+										+ startDateValue
+										+ endDateValue
+										+ expirationValue;
+							if (document.formOpenID != undefined)
+								document.formOpenID.action = "http://beautypro411.com/members/login.php?destiny=/members/listing/listing.php&query="
+										+ levelValue
+										+ templateValue
+										+ titleValue
+										+ categValue
+										+ discountValue
+										+ packageValue
+										+ startDateValue
+										+ endDateValue
+										+ expirationValue;
+							if (document.formCurrentUser != undefined)
+								document.formCurrentUser.action = "http://beautypro411.com/members/login.php?destiny=/members/listing/listing.php&query="
+										+ levelValue
+										+ templateValue
+										+ titleValue
+										+ categValue
+										+ discountValue
+										+ packageValue
+										+ startDateValue
+										+ endDateValue
+										+ expirationValue;
+
+							$
+									.get(
+											DEFAULT_URL
+													+ "/ordercalculateprice.php",
+											{
+
+												item : "listing",
+
+												item_id : "cYEAtEaD",
+
+												level : document.order_item.level.value,
+
+												title : document.order_item.title.value,
+
+												listingtemplate_id : document.order_item.select_listingtemplate_id.value,
+
+												return_categories : return_categories,
+
+												discount_id : document.order_item.discount_id.value,
+
+												package_id : packageID
+											}, function() {
+											});
+
+						}
+
+						function JS_addCategory(id) {
+							seed = document.order_item.seed;
+							feed = document.order_item.feed;
+							var text = unescapeHTML($("#liContent" + id).html());
+							var flag = true;
+							for (i = 0; i < feed.length; i++) {
+								if (feed.options[i].value == id) {
+									flag = false;
+								}
+								if (!feed.options[i].value) {
+									feed.remove(feed.options[i]);
+								}
+							}
+							if (text && id && flag) {
+								feed.options[feed.length] = new Option(text, id);
+								$('#categoryAdd' + id)
+										.after(
+												"<span class=\"categorySuccessMessage\">Successfully added!</span>")
+										.css('display', 'none');
+								$('.categorySuccessMessage').fadeOut(5000);
+								orderCalculate();
+								updateFormAction();
+							} else {
+								if (!flag) {
+									$('#categoryAdd' + id)
+											.after(
+													"</a> <span class=\"categoryErrorMessage\">Already added</span> </li>");
+								} else {
+									('#categoryAdd' + id)
+											.after("</a> <span class=\"categoryErrorMessage\">Please, select a valid category</span> </li>");
+								}
+							}
+
+							$('#removeCategoriesButton').show();
+
+						}
+
+						function JS_submit() {
+							disableButtons();
+							feed = document.order_item.feed;
+							return_categories = document.order_item.return_categories;
+							if (return_categories.value.length > 0) {
+								return_categories.value = "";
+							}
+							for (i = 0; i < feed.length; i++) {
+								if (!isNaN(feed.options[i].value)) {
+									if (return_categories.value.length > 0) {
+										return_categories.value = return_categories.value
+												+ "," + feed.options[i].value;
+									} else {
+										return_categories.value = return_categories.value
+												+ feed.options[i].value;
+									}
+								}
+							}
+						}
+					//-->
+					</script>
+
+					<div style="display: none">
+
+						<form id="formDirectory" name="formDirectory" method="post"
+							action="http://beautypro411.com/members/login.php?destiny=/members/listing/listing.php&amp;query=level=50&amp;listingtemplate_id=">
+
+							<input type="hidden" name="userform" value="directory"/><input
+								type="hidden" name="advertise" value="yes"/><input
+								type="hidden" name="destiny" value=""/><input
+								type="hidden" name="query" value=""/><input type="hidden"
+								name="username" id="form_username" value=""/><input
+								type="hidden" name="password" id="form_password" value=""/>
+						</form>
+
+
+						<form id="formOpenID" name="formOpenID" method="post"
+							action="http://beautypro411.com/members/login.php?destiny=/members/listing/listing.php&amp;query=level=50&amp;listingtemplate_id=">
+
+							<input type="hidden" name="userform" value="openid"/><input
+								type="hidden" name="advertise" value="yes"/><input
+								type="hidden" name="destiny" value=""/><input
+								type="hidden" name="query" value=""/><input type="hidden"
+								name="openidurl" id="form_openidurl" value=""/>
+						</form>
+
+
+
+					</div>
+
+					<h:form>
+						<input type="hidden" name="advertise" value="yes"/><input
+							type="hidden" name="signup" value="true"/><input
+							type="hidden" name="level" id="level" value="50"/><input
+							type="hidden" name="listingtemplate_id" id="listingtemplate_id"
+							value=""/>
+						<div class="content-main" id="screen1" style="display: none;">
+
+							<div class="order-head">
+								<h2>
+									listing Silver - <i>$19.97</i> per month
+								</h2>
+							</div>
+
+							<div class="order">
+
+								<div id="errorMessage">&nbsp;</div>
+
+								<div id="listing-info">
+
+									<div class="left textright">
+										<h3>Listing Information</h3>
+										<p>What do you want to call your listing? This is normally
+											your company name. Choose a template applicable to your
+											business type if you feel the need too.</p>
+									</div>
+
+									<div class="right">
+
+										<div class="cont_70">
+											<label id="title_label" for="listing-title">Title * <span>Required
+													field</span></label> <input type="text" name="title" id="listing-title"
+												value="" maxlength="100"
+												onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-'); updateFormAction();"/><input
+												type="hidden" name="friendly_url" id="friendly_url" value=""
+												maxlength="150"/>
+										</div>
+
+
+
+										<div class="cont_70">
+											<label for="promocode">Promotional Code</label> <input
+												type="text" id="promocode" name="discount_id" value=""
+												maxlength="10"
+												onblur="orderCalculate(); updateFormAction();"/>
+										</div>
+
+
+
+										<div class="cont_100">
+
+											<label for="listing-template">Listing Type</label> <select
+												name="select_listingtemplate_id"
+												onchange="templateSwitch(this.value);">
+												<option value="">Default</option>
+												<option value="7">Dentist (FREE)</option>
+												<option value="6">Doctor (FREE)</option>
+											</select>
+
+										</div>
+
+
+
+									</div>
+
+								</div>
+
+								<div id="categories">
+
+									<div class="left textright">
+
+										<h3>Categories and sub-categories</h3>
+										<p>
+											<span id="extracategory_note">Categories <strong>FREE:
+													2</strong>. Extra categories/sub-categories cost an <strong>additional
+													$ 10.00</strong> each. Be seen!
+											</span> Maximum of <strong>5</strong> categories allowed.
+										</p>
+
+									</div>
+
+									<div class="right">
+
+										<p class="warningBOXtext">
+											Only select sub-categories that directly apply to your type.<br/>Your
+												listing will automatically appear in the main category of
+												each sub-category you select.
+										</p>
+
+										<div class="cont_50">
+
+											<input type="hidden" name="return_categories" value=""/>
+											<div class="treeView">
+
+												<ul id="listing_categorytree_id_0" class="categoryTreeview">
+													<li class="categoryBullet">Barber <a
+														id="categoryAdd136" href="javascript:void(0);"
+														onclick="JS_addCategory(136);" class="categoryAdd">Add</a></li>
+													<li id="liContent136" style="display: none">Barber</li>
+													<li><a href="javascript:void(0);"
+														onclick="loadCategoryTree('all', 'listing_', 'ListingCategory', 1, 0, 'http://beautypro411.com/edir_core/listing',1);"
+														class="switchOpen" id="listing_opencategorytree_id_1">+</a><a
+														href="javascript:void(0);"
+														onclick="loadCategoryTree('all', 'listing_', 'ListingCategory', 1, 0, 'http://beautypro411.com/edir_core/listing',1);"
+														class="categoryTitle"
+														id="listing_opencategorytree_title_id_1">Beauty and
+															Fitness</a><a href="javascript:void(0);"
+														onclick="closeCategoryTree('listing_', 'ListingCategory', 1, 'http://beautypro411.com');"
+														class="switchClose" id="listing_closecategorytree_id_1"
+														style="display: none;">-</a><a href="javascript:void(0);"
+														onclick="closeCategoryTree('listing_', 'ListingCategory', 1, 'http://beautypro411.com');"
+														class="categoryTitle"
+														id="listing_closecategorytree_title_id_1"
+														style="display: none;">Beauty and Fitness</a>
+														<ul id="listing_categorytree_id_1" style="display: none;"></ul>
+													</li>
+													<li class="categoryBullet">Beauty Distributor <a
+														id="categoryAdd131" href="javascript:void(0);"
+														onclick="JS_addCategory(131);" class="categoryAdd">Add</a></li>
+													<li id="liContent131" style="display: none">Beauty
+														Distributor</li>
+													<li class="categoryBullet">Beauty Schools <a
+														id="categoryAdd132" href="javascript:void(0);"
+														onclick="JS_addCategory(132);" class="categoryAdd">Add</a></li>
+													<li id="liContent132" style="display: none">Beauty
+														Schools</li>
+													<li class="categoryBullet">Beauty Students/ Apprentice
+														<a id="categoryAdd145" href="javascript:void(0);"
+														onclick="JS_addCategory(145);" class="categoryAdd">Add</a>
+													</li>
+													<li id="liContent145" style="display: none">Beauty
+														Students/ Apprentice</li>
+													<li class="categoryBullet">Beauty Supply <a
+														id="categoryAdd130" href="javascript:void(0);"
+														onclick="JS_addCategory(130);" class="categoryAdd">Add</a></li>
+													<li id="liContent130" style="display: none">Beauty
+														Supply</li>
+													<li class="categoryBullet">Braids <a
+														id="categoryAdd140" href="javascript:void(0);"
+														onclick="JS_addCategory(140);" class="categoryAdd">Add</a></li>
+													<li id="liContent140" style="display: none">Braids</li>
+													<li class="categoryBullet">Cosmetologist <a
+														id="categoryAdd133" href="javascript:void(0);"
+														onclick="JS_addCategory(133);" class="categoryAdd">Add</a></li>
+													<li id="liContent133" style="display: none">Cosmetologist</li>
+													<li class="categoryBullet">Esthetician <a
+														id="categoryAdd137" href="javascript:void(0);"
+														onclick="JS_addCategory(137);" class="categoryAdd">Add</a></li>
+													<li id="liContent137" style="display: none">Esthetician</li>
+													<li class="categoryBullet">Hair Loss <a
+														id="categoryAdd144" href="javascript:void(0);"
+														onclick="JS_addCategory(144);" class="categoryAdd">Add</a></li>
+													<li id="liContent144" style="display: none">Hair Loss</li>
+													<li class="categoryBullet">Health <a
+														id="categoryAdd129" href="javascript:void(0);"
+														onclick="JS_addCategory(129);" class="categoryAdd">Add</a></li>
+													<li id="liContent129" style="display: none">Health</li>
+													<li class="categoryBullet">Makeup Artist <a
+														id="categoryAdd139" href="javascript:void(0);"
+														onclick="JS_addCategory(139);" class="categoryAdd">Add</a></li>
+													<li id="liContent139" style="display: none">Makeup
+														Artist</li>
+													<li class="categoryBullet">Massage <a
+														id="categoryAdd135" href="javascript:void(0);"
+														onclick="JS_addCategory(135);" class="categoryAdd">Add</a></li>
+													<li id="liContent135" style="display: none">Massage</li>
+													<li class="categoryBullet">Nutrition <a
+														id="categoryAdd143" href="javascript:void(0);"
+														onclick="JS_addCategory(143);" class="categoryAdd">Add</a></li>
+													<li id="liContent143" style="display: none">Nutrition</li>
+													<li class="categoryBullet">Spa <a id="categoryAdd134"
+														href="javascript:void(0);" onclick="JS_addCategory(134);"
+														class="categoryAdd">Add</a></li>
+													<li id="liContent134" style="display: none">Spa</li>
+													<li><a href="javascript:void(0);"
+														onclick="loadCategoryTree('all', 'listing_', 'ListingCategory', 138, 0, 'http://beautypro411.com/edir_core/listing',1);"
+														class="switchOpen" id="listing_opencategorytree_id_138">+</a><a
+														href="javascript:void(0);"
+														onclick="loadCategoryTree('all', 'listing_', 'ListingCategory', 138, 0, 'http://beautypro411.com/edir_core/listing',1);"
+														class="categoryTitle"
+														id="listing_opencategorytree_title_id_138">Stylist</a><a
+														href="javascript:void(0);"
+														onclick="closeCategoryTree('listing_', 'ListingCategory', 138, 'http://beautypro411.com');"
+														class="switchClose" id="listing_closecategorytree_id_138"
+														style="display: none;">-</a><a href="javascript:void(0);"
+														onclick="closeCategoryTree('listing_', 'ListingCategory', 138, 'http://beautypro411.com');"
+														class="categoryTitle"
+														id="listing_closecategorytree_title_id_138"
+														style="display: none;">Stylist</a>
+														<ul id="listing_categorytree_id_138"
+															style="display: none;"></ul></li>
+													<li class="categoryBullet">Weaves <a
+														id="categoryAdd141" href="javascript:void(0);"
+														onclick="JS_addCategory(141);" class="categoryAdd">Add</a></li>
+													<li id="liContent141" style="display: none">Weaves</li>
+												</ul>
+
+											</div>
+
+										</div>
+
+										<div class="cont_50">
+											<label>Listing Categories * <span>Required
+													field</span></label> <select name="feed" id="feed" multiple="multiple"
+												size="5"><option></option></select>
+											<div class="standardButton" id="removeCategoriesButton"
+												style="display: none;">
+												<a href="javascript:void(0);"
+													onclick="JS_removeCategory(document.order_item.feed, true);">Remove
+													Selected Category</a>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+
+								<div id="payment-method" class="isVisible">
+
+									<div class="left textright">
+										<h3>Payment Method</h3>
+										<p>How do you want to pay us?</p>
+									</div>
+
+									<div class="right">
+										<div class="option">
+											<input type="radio" name="payment_method" value="authorize"
+												id="radio1"/>
+											<div>
+												<label for="radio1">By Credit Card</label>
+											</div>
+											<input type="radio" name="payment_method" value="paypal"
+												id="radio2"/>
+											<div>
+												<label for="radio2">By PayPal</label>
+											</div>
+											<input type="radio" name="payment_method" value="simplepay"
+												id="radio3"/>
+											<div>
+												<label for="radio3">By SimplePay</label>
+											</div>
+											<input type="radio" name="payment_method" value="invoice"
+												id="radio4"/>
+											<div>
+												<label for="radio4">Print Invoice and Mail a Check</label>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+
+								<div class="blockcontinue cont_100">
+
+									<div id="loadingOrderCalculate" class="loadingOrderCalculate"
+										style="display: none;"></div>
+
+									<input type="hidden" name="free_item" id="free_item" value="0"/>
+									<div id="check_out_payment" class="isVisible"/>
+
+										<div class="cont_60 ">
+											<div id="checkoutpayment_total" class="orderTotalAmount">
+												<strong>Total Price: </strong>$19.97
+											</div>
+										</div>
+
+										<div class="cont_40 ">
+											<p class="checkoutButton bt-highlight">
+												<button type="button" id="button1"
+													onclick="nextStep('listing', document.order_item.feed, 'listing-title', false);">Continue</button>
+												<a href="http://beautypro411.com/advertise.php?listing">Or
+													back to previous page</a> <em></em>
+											</p>
+										</div>
+									</div>
+
+
+									<div id="check_out_free" class="isHidden">
+
+										<div class="cont_60 ">
+											<div id="checkoutfree_total" class="orderTotalAmount"></div>
+										</div>
+
+										<div class="cont_40 ">
+											<p class="checkoutButton bt-highlight">
+												<button type="button" id="button2"
+													onclick="nextStep('listing', document.order_item.feed, 'listing-title', false);">Continue</button>
+												<a href="http://beautypro411.com/advertise.php?listing">Or
+													back to previous page</a> <em></em>
+											</p>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+						</h:form>
+						</div>
+
+
+						<div class="content-main" id="screen2" style="">
+<h:form>
+							<div class="order-head">
+								<ol>
+									<li class="textleft active">1 - Identification</li>
+									<li class="textcenter">2 - Check Out</li>
+									<li class="textright">3 - Confirmation</li>
+								</ol>
+							</div>
+
+							<div class="order">
+
+								<div id="identification">
+
+									<div class="left textright">
+										<h3>Are you already a member?</h3>
+										<p>Please, login with your account or sign up today.</p>
+									</div>
+
+									<div class="right">
+
+										<div class="content-custom cont_100 textcenter">
+											<h3 class="cont_50">I'm already a user</h3>
+											<h3 class="cont_50">I'm a new user</h3>
+										</div>
+
+										<div class="clear">&nbsp;</div>
+
+										<div class="cont_100 identification">
+
+											<div class="signup">
+												<label>Login with your BeautyPro411.com account</label>
+
+												<div class="inputimg large">
+													<i class="inpemail"></i><input type="email"
+														name="dir_username" id="dir_username" class=""
+														placeholder="E-mail" value=""/>
+												</div>
+
+												<div class="inputimg large">
+													<i class="inppassword"></i><input type="password"
+														name="dir_password" id="dir_password" class=""
+														placeholder="Password" value=""/>
+												</div>
+
+												<p class="standardButton buttoncenter">
+													<button type="button"
+														onclick="submitForm('formDirectory');">Sign In</button>
+												</p>
+
+
+												<label>Or login with your existing account</label>
+
+												<p>
+
+													<script language="javascript" type="text/javascript">
+														//<![CDATA[
+														document
+																.write('<a  href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fadvertise%3Dyes%26advertise_item%3Dlisting%26item_id%3DcYEAtEaD%26destiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Fmembers%252Flisting%252Flisting.php&state=236a4d48fe55690dbb0ad5ea084f93db&scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream" class="btn-facebook">Facebook</a>');
+														//]]>
+													</script>
+													<a
+														href="https://www.facebook.com/dialog/oauth?client_id=132709406766649&amp;redirect_uri=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Ffacebookauth.php%3Fadvertise%3Dyes%26advertise_item%3Dlisting%26item_id%3DcYEAtEaD%26destiny%3Dhttp%253A%252F%252Fbeautypro411.com%252Fmembers%252Flisting%252Flisting.php&amp;state=236a4d48fe55690dbb0ad5ea084f93db&amp;scope=email%2Cuser_birthday%2Cstatus_update%2Cpublish_stream"
+														class="btn-facebook">Facebook</a>
+
+													<script language="javascript" type="text/javascript">
+														//<![CDATA[
+														var destiny = 'http://beautypro411.com/members/googleauth.php?login&advertise=yes&advertise_item=listing&item_id=cYEAtEaD&destiny=http%3A%2F%2Fbeautypro411.com%2Fmembers%2Flisting%2Flisting.php';
+														function googleLogin() {
+															window.open(
+																	destiny,
+																	"_top");
+														}
+														//]]>
+													</script>
+
+													<a href="javascript: void(0);" class="btn-google"
+														onclick="googleLogin();">Google</a>
+												</p>
+
+
+
+												<label>Or login with your OpenID account</label>
+
+												<div class="standardButton btn-openid">
+													<input type="text" class="openid" name="openidurl"
+														id="openidurl" placeholder="Your OpenID" value=""/>
+													<button type="button" onclick="submitForm('formOpenID');">Sign
+														In</button>
+												</div>
+
+
+											</div>
+
+											<div class="create">
+
+
+												<div>
+													<label>Create a new account now.</label>
+
+													<div>
+														<div class="inputimg">
+															<i class="inpname"></i><input type="text"
+																name="first_name" placeholder="First Name" value=""/>
+														</div>
+														<div class="inputimg">
+															<i class="inpname"></i><input type="text"
+																name="last_name" placeholder="Last Name" value=""/>
+														</div>
+													</div>
+
+
+													<div>
+														<div class="inputimg large">
+															<i class="inpemail"></i><input type="text"
+																name="username" id="usernameSugar" placeholder="E-mail"
+																value="" maxlength="80"
+																onblur="checkUsername(this.value, 'http://beautypro411.com', 'members', 0); populateField(this.value, 'email');"/>
+														</div>
+														<input type="hidden" name="email" id="email" value=""/><label
+															id="checkUsername">&nbsp;</label>
+													</div>
+
+													<div class="cont_50">
+														<div class="inputimg">
+															<i class="inppassword"></i><input type="password"
+																class="" placeholder="Create Password" name="password"
+																maxlength="50"/>
+														</div>
+														<div class="inputimg">
+															<i class="inppassword"></i><input type="password"
+																class="" placeholder="Retype Password"
+																name="retype_password"/>
+														</div>
+													</div>
+
+													<div class="option">
+														<input type="checkbox" class="checkbox" name="newsletter"
+															value="y" checked=""/><label>Signup for
+															Beauty Tips</label>
+													</div>
+
+													<div class="option">
+														<input id="checkterms" type="checkbox" class="checkbox"
+															name="agree_tou" value="1"/><label
+															for="checkterms"><a rel="nofollow"
+															href="http://beautypro411.com/popup/popup.php?pop_type=terms"
+															class="fancy_window_iframe">I agree with the terms of
+																use</a></label>
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+								<div class="blockcontinue cont_100">
+
+
+									<div id="check_out_payment_2" class="isVisible">
+
+										<div class="cont_60 ">&nbsp;</div>
+
+										<div class="cont_40 ">
+											<p class="checkoutButton bt-highlight">
+												<button type="submit" id="button3" name="continue" value="">Continue</button>
+												<a href="javascript: void(0);"
+													onclick="backStep(false, false);">Or back to previous
+													page</a>
+											</p>
+										</div>
+
+									</div>
+
+
+									<div id="check_out_free_2" class="isHidden">
+
+										<div class="cont_60 ">&nbsp;</div>
+
+										<div class="cont_40 ">
+											<p class="checkoutButton bt-highlight">
+												<button type="submit" id="button4" name="checkout"
+													value="Continue">Continue</button>
+												<a href="javascript: void(0);"
+													onclick="backStep(false, false);">Or back to previous
+													page</a>
+											</p>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+</h:form>
+						</div>
+
+
+				</div>
+
+				<script language="javascript" type="text/javascript"
+					src="http://beautypro411.com/scripts/categorytree.js"></script>
+
+				<script language="javascript" type="text/javascript">
+					loadCategoryTree('all', 'listing_', 'ListingCategory', 0,
+							0, 'http://beautypro411.com/edir_core/listing', 1);
+
+					orderCalculate();
+				</script>
+
+
+			</div>
+			<!-- Close container-fluid div -->
+	</ui:define>
+</ui:composition>

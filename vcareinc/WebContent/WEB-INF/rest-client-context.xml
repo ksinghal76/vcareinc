@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <!--   <import resource="classpath:/META-INF/spring/marshaller/jaxb2-marshaller-context.xml"/> -->
+    
+    <context:component-scan base-package="com.vcareinc.services" />
+    
+    <bean id="credentials" class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+    	<constructor-arg value="ksinghal"/>
+    	<constructor-arg value="pinku123"/>
+    </bean>
+    
+    <bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig" factory-method="custom">
+	    <property name="socketTimeout" value="10000" /> 
+	    <property name="connectTimeout" value="10000" /> 
+	</bean>
+	
+	<bean id="requestConfig" factory-bean="requestConfigBuilder" factory-method="build" />
+	
+	<bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+	    <property name="defaultRequestConfig" ref="requestConfig" />
+	</bean>
+	
+	<bean id="httpClient" factory-bean="httpClientBuilder" factory-method="build" />
+    
+<!--     <bean id="httpClient2" class="org.apache.http.impl.client.DefaultHttpClient">
+        <constructor-arg>
+            <bean class="org.apache.http.impl.conn.PoolingClientConnectionManager"/>
+        </constructor-arg>
+    </bean> -->
+    
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+	     <!-- <property name="requestFactory">
+	      <bean id="clientHttpRequestFactory" class="org.springframework.http.client.CommonsClientHttpRequestFactory" />   
+	     </property> -->
+	     <property name="messageConverters">
+	      <list>
+	       <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	        <property name="supportedMediaTypes">
+	         <list>
+	          <bean id="jsonMediaTypeTextPlain" class="org.springframework.http.MediaType">
+	           <constructor-arg value="text"/>
+	          <constructor-arg value="plain"/>
+	          </bean>
+	          <bean id="jsonMediaTypeApplicationJson" class="org.springframework.http.MediaType">
+	           <constructor-arg value="application"/>
+	          <constructor-arg value="json"/>
+	          </bean>
+	         </list>
+	        </property>
+	       </bean>
+	      </list>
+	     </property>  
+	</bean>
+    
+    <!-- <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"
+          p:messageConverters-ref="messageConvertersList">
+        <constructor-arg>
+            <bean class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+                <constructor-arg ref="httpClient"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <util:list id="messageConvertersList">
+        <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"
+              p:supportedMediaTypes="application/xml">
+            <property name="marshaller" ref="marshaller" />
+            <property name="unmarshaller" ref="marshaller" />
+        </bean>
+    </util:list>
+        
+    <beans profile="rest-json">
+        <import resource="classpath:/META-INF/spring/mvc/rest-json-converter-context.xml"/>
+        <import resource="classpath:/META-INF/spring/mvc/rest-json-type-converter-context.xml"/>
+    
+        since id is the same as XML list above, essentially overriding the other list
+        <util:list id="messageConvertersList">
+            <ref bean="mappingJacksonHttpMessageConverterWithType"/>
+        </util:list>
+    </beans> -->
+
+</beans>

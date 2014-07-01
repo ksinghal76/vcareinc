@@ -1,0 +1,18 @@
+<html>
+<body>
+Dear $name,
+
+Thank you for create your profile in BeautyPro411.com (http://beautypro411.com).
+Click on the link below to activate your account.
+
+$url?activation_key=$activationKey
+
+After that, you can login to manage your account with the information below.
+
+E-mail: $email
+Password: $password
+
+Regards
+BeautyPro411.com Team
+</body>
+</html>

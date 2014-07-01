@@ -5,12 +5,19 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import com.vcareinc.services.UserService;
+import com.vcareinc.vo.User;
+
 public class BaseModel<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer errorCode;
 	private String errorMsg;
-	private Set<ConstraintViolation<T>> errorConstraintViolation;
+	private Set<ConstraintViolation<BaseModel<T>>> errorConstraintViolation;
+	private User user;
+
+	private UserService userService;
+
 	public Integer getErrorCode() {
 		return errorCode;
 	}
@@ -23,11 +30,24 @@ public class BaseModel<T> implements Serializable {
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
-	public Set<ConstraintViolation<T>> getErrorConstraintViolation() {
+	public Set<ConstraintViolation<BaseModel<T>>> getErrorConstraintViolation() {
 		return errorConstraintViolation;
 	}
-	public void setErrorConstraintViolation(Set<ConstraintViolation<T>> errorConstraintViolation) {
+	public void setErrorConstraintViolation(Set<ConstraintViolation<BaseModel<T>>> errorConstraintViolation) {
 		this.errorConstraintViolation = errorConstraintViolation;
+	}
+	public User getUser() {
+		user = userService.getUser();
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public UserService getUserService() {
+		return userService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 	@Override
 	public String toString() {

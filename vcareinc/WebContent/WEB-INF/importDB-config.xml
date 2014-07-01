@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<util:constant id="CategoryTypeListing" static-field="com.vcareinc.constants.OptionType.LISTING"/>
+	<util:constant id="CategoryTypeEvent" static-field="com.vcareinc.constants.OptionType.EVENT"/>
+	<util:constant id="CategoryTypeArticle" static-field="com.vcareinc.constants.OptionType.ARTICLE"/>
+	<util:constant id="CategoryTypeClassified" static-field="com.vcareinc.constants.OptionType.CLASSIFIED"/>
+
+	<bean id="CountryFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/country.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.CountryFieldSetMapper"/>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+	<bean id="StateFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/state.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.StateFieldSetMapper"/>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+	<bean id="UserFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/account.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.UserFieldSetMapper"/>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+	<bean id="UserJdbcItemReader" class="org.springframework.batch.item.database.JdbcPagingItemReader" scope="step">
+		<property name="dataSource" ref="dataSource2"/>
+		<property name="queryProvider">
+			<bean class="org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean">
+				<property name="dataSource" ref="dataSource2"/>
+				<property name="selectClause" value="select u.account_id, u.username, u.firstname, u.lastname"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="categoryListingFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/listingcategory.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.CategoryFieldSetMapper">
+						<property name="categoryType" ref="CategoryTypeListing"/>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+
+	<bean id="categoryEventFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/eventcategory.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.CategoryFieldSetMapper">
+						<property name="categoryType" ref="CategoryTypeEvent"/>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+
+	<bean id="categoryClassifiedFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/classifiedcategory.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.CategoryFieldSetMapper">
+						<property name="categoryType" ref="CategoryTypeClassified"/>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+
+	<bean id="categoryArticleFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/articlecategory.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.CategoryFieldSetMapper">
+						<property name="categoryType" ref="CategoryTypeArticle"/>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+
+	<bean id="listings3FileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/listing_0.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.ListingFieldSetMapper"/>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+
+	<bean id="classifiedFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:importFile/classified.csv"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"/>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.vcareinc.mappers.ClassifiedFieldSetMapper"/>
+				</property>
+			</bean>
+		</property>
+		<property name="linesToSkip" value="1"/>
+	</bean>
+
+	<bean id="jpaDBBatchWriter" class="org.springframework.batch.item.database.JpaItemWriter">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+	<!-- <bean id="categoryDBWriter" class="org.springframework.batch.item.support.CompositeItemWriter">
+		<property name="delegates">
+			<list>
+				<ref bean="categoryFileItemReader"/>
+			</list>
+		</property>
+	</bean> -->
+
+	<batch:job id="runBatchDB">
+		<!-- <batch:step id="countryRW" next="stateRW">
+			<batch:tasklet>
+				<batch:chunk reader="CountryFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="stateRW" next="userRW">
+			<batch:tasklet>
+				<batch:chunk reader="StateFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="userRW" next="listingCategoryRW">
+			<batch:tasklet>
+				<batch:chunk reader="UserFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step> -->
+		<batch:step id="listingCategoryRW" next="eventCategoryRW">
+			<batch:tasklet>
+				<batch:chunk reader="categoryListingFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="eventCategoryRW" next="classifiedCategoryRW">
+			<batch:tasklet>
+				<batch:chunk reader="categoryEventFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="classifiedCategoryRW" next="articleCategoryRW">
+			<batch:tasklet>
+				<batch:chunk reader="categoryClassifiedFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="articleCategoryRW">
+			<batch:tasklet>
+				<batch:chunk reader="categoryArticleFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<!-- <batch:step id="listing3RW" next="classifiedRW">
+			<batch:tasklet>
+				<batch:chunk reader="listings3FileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="classifiedRW">
+			<batch:tasklet>
+				<batch:chunk reader="classifiedFileItemReader" writer="jpaDBBatchWriter" commit-interval="1"/>
+			</batch:tasklet>
+		</batch:step> -->
+	</batch:job>
+
+	<batch:job-repository id="jobRepository" data-source="dataSource" transaction-manager="transactionManager" isolation-level-for-create="SERIALIZABLE" table-prefix="BATCH_" max-varchar-length="1000"/>
+
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository"/>
+	</bean>
+
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:org/springframework/batch/core/schema-drop-mysql.sql"/>
+		<jdbc:script location="classpath:org/springframework/batch/core/schema-mysql.sql"/>
+	</jdbc:initialize-database>
+</beans>

@@ -4,30 +4,32 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-import org.springframework.stereotype.Controller;
+import com.vcareinc.constants.OptionType;
 
-@Controller
 @Entity
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	public enum CategoryType{LISTING, EVENT, CLASSIFIED, ARTICLE}
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String name;
 	private String description;
-	private CategoryType categoryType;
+	private OptionType optionType;
+
+	@OneToOne(fetch=FetchType.EAGER)
 	private Category parentCategory;
+	private String pageTitle;
 	private Boolean enable;
 	private Timestamp created;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -46,17 +48,23 @@ public class Category implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public CategoryType getCategoryType() {
-		return categoryType;
+	public OptionType getOptionType() {
+		return optionType;
 	}
-	public void setCategoryType(CategoryType categoryType) {
-		this.categoryType = categoryType;
+	public void setOptionType(OptionType optionType) {
+		this.optionType = optionType;
 	}
 	public Category getParentCategory() {
 		return parentCategory;
 	}
 	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
+	}
+	public String getPageTitle() {
+		return pageTitle;
+	}
+	public void setPageTitle(String pageTitle) {
+		this.pageTitle = pageTitle;
 	}
 	public Boolean getEnable() {
 		return enable;
@@ -73,8 +81,9 @@ public class Category implements Serializable {
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + ", description="
-				+ description + ", categoryType=" + categoryType
-				+ ", parentCategory=" + parentCategory + ", enable=" + enable
-				+ ", created=" + created + "]";
+				+ description + ", categoryType=" + optionType
+				+ ", parentCategory=" + parentCategory + ", pageTitle="
+				+ pageTitle + ", enable=" + enable + ", created=" + created
+				+ "]";
 	}
 }

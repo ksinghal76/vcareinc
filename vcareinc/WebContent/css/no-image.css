@@ -1,0 +1,9 @@
+.no-image{
+	background-image: url('http://beautypro411.com/1020/custom/domain_1/content_files/noimage.gif') !important;
+}
+.ie .no-image { 
+ 
+                                    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( 
+                                            src='http://beautypro411.com/1020/custom/domain_1/content_files/noimage.gif', sizingMethod='scale');
+                                    background-image : none !important;
+                                }

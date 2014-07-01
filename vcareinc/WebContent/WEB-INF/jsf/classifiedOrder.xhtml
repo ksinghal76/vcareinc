@@ -1,0 +1,997 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+        <div class="container-fluid">
+
+                                    <p class="breadcrumb">
+                        <a href="memberUser">Home</a> / <a href="memberUser">beautypro411</a>  / <a href="classifiedManage">Classifieds</a> / Add                    </p>
+
+	<ui:include src="includes/memberbar.xhtml"/>
+	<div class="content">
+
+
+		<h2>Classified Information</h2>
+
+<!-- 		<form name="classified" id="classified" action="/members/classified/classified.php" method="post" enctype="multipart/form-data">
+ -->
+ <h:form enctype="multipart/form-data">
+
+		<!-- 	<input type="hidden" name="ieBugFix" value="1"/>
+
+
+			<input type="hidden" name="process" id="process" value=""/>
+			<input type="hidden" name="id" id="id" value=""/>
+			<input type="hidden" name="account_id" id="account_id" value="321"/>
+			<input type="hidden" name="level" id="level" value="10"/>
+			<input type="hidden" name="screen" id="screen" value=""/>
+			<input type="hidden" name="letter" id="letter" value=""/>
+			<input type="hidden" name="using_package" id="using_package" value="n"/>
+			<input type="hidden" name="package_id" id="package_id" value=""/>
+			<input type="hidden" name="gallery_hash" value="classified_587707004539b144ed850b5.32228852"/> -->
+			<ui:include src="includes/errorPageType.xhtml">
+          		<ui:param name="error" value="${classifiedOrder}"/>
+          	</ui:include>
+
+<script language="javascript" type="text/javascript">
+<!--
+	function JS_addCategory(id) {
+
+		seed = document.classified.seed;
+		feed = document.classified.feed;
+        var text = unescapeHTML($("#liContent"+id).html());
+		var flag=true;
+		for (i=0;i<feed.length;i++)
+			if (feed.options[i].value==id)
+				flag=false;
+
+		if(text && id && flag){
+			feed.options[feed.length] = new Option(text, id);
+			$('#categoryAdd'+id).after("<span class=\"categorySuccessMessage\">Successfully added!</span>").css('display', 'none');
+			$('.categorySuccessMessage').fadeOut(5000);
+		} else {
+			if (!flag) $('#categoryAdd'+id).after("</a> <span class=\"categoryErrorMessage\">Already added</span> </li>");
+			else ('#categoryAdd'+id).after("</a> <span class=\"categoryErrorMessage\">Please, select a valid category</span> </li>");
+		}
+
+		$('#removeCategoriesButton').show();
+
+	}
+
+	function JS_submit() {
+
+		feed = document.classified.feed;
+		return_categories = document.classified.return_categories;
+		if(return_categories.value.length > 0) return_categories.value="";
+
+		for (i=0;i<feed.length;i++) {
+			if (!isNaN(feed.options[i].value)) {
+				if(return_categories.value.length > 0)
+				return_categories.value = return_categories.value + "," + feed.options[i].value;
+				else
+			return_categories.value = return_categories.value + feed.options[i].value;
+			}
+		}
+
+		document.classified.submit();
+	}
+
+	function makeMain(image_id,thumb_id,item_id,temp,item_type) {
+
+		var xmlhttp;
+
+		try {
+			xmlhttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+					xmlhttp = false;
+				}
+			}
+		}
+
+		if (xmlhttp) {
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					if (xmlhttp.status == 200) {
+						response =  xmlhttp.responseText;
+													loadGallery(item_id, "y", "members", "", "true");
+											}
+				}
+			}
+
+			xmlhttp.open("GET", "http://beautypro411.com/makemainimage.php?gallery_hash=classified_587707004539b144ed850b5.32228852&image_id="+image_id+"&thumb_id="+thumb_id+"&item_id="+item_id+"&temp="+temp+"&item_type="+item_type+"&domain_id=1", true);
+			xmlhttp.send(null);
+		}
+	}
+
+
+	function changeMain(image_id,thumb_id,item_id,temp,gallery_id,item_type) {
+
+		var xmlhttp;
+
+		try {
+			xmlhttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+					xmlhttp = false;
+				}
+			}
+		}
+
+		if (xmlhttp) {
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					if (xmlhttp.status == 200) {
+						response =  xmlhttp.responseText;
+						if (response == "error"){
+                            fancy_alert('Your item already has the maximum number of images in the gallery. Delete an existing image to save this one.', 'errorMessage', false, 500, 100, false);
+						}
+													loadGallery(item_id, "y", "members", "", "true");
+											}
+				}
+			}
+
+			xmlhttp.open("GET", "http://beautypro411.com/changemainimage.php?gallery_hash=classified_587707004539b144ed850b5.32228852&image_id="+image_id+"&thumb_id="+thumb_id+"&item_id="+item_id+"&gallery_id="+gallery_id+"&temp="+temp+"&item_type="+item_type+"&domain_id=1"+"&level=10", true);
+			xmlhttp.send(null);
+		}
+	}
+
+
+	function loadGallery(id, new_image, sess, del, main) {
+
+		var xmlhttp;
+
+		try {
+			xmlhttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+					xmlhttp = false;
+				}
+			}
+		}
+
+		if (xmlhttp) {
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					if (xmlhttp.status == 200) {
+							$("#galleryF").html(xmlhttp.responseText);
+
+							if (del != "edit" && del != "editFe"){
+								if (del == "n"){
+									$("#addImage").css("display", "none");
+									$("#galleryF").css("display", "");
+								} else {
+																			if (del) {
+											$("#addImage").css("display", "none");
+											$("#galleryF").css("display", "");
+										} else {
+											$("#addImage").css("display", "");
+											$("#galleryF").css("display", "none");
+										}
+																	}
+							} else {
+								if (del == "edit" || del == "editFe")
+									$("#galleryF").css("display", "");
+							}
+
+							if (main == "true"){
+								$("#galleryF").css("display", "");
+							}
+															$("#galleryF").css("display", "");
+
+							if (xmlhttp.responseText == "no image"){
+								$("#galleryF").css("display", "none");
+							}
+							$("a.fancy_window_imgAdd").fancybox({
+                                'overlayShow'			: true,
+                                'overlayOpacity'		: 0.75,
+                                'autoDimensions'        : false,
+                                'width'                 : 785,
+                                'height'                : 465,
+
+
+                                'padding'               : 0,
+                                'margin'                : 0,
+                                'showCloseButton'       : false,
+
+
+                                'titleShow'             : false
+                            });
+
+                            $("a.fancy_window_imgCaptions").fancybox({
+                                'overlayShow'			: true,
+                                'overlayOpacity'		: 0.75,
+                                'autoDimensions'        : false,
+                                'width'                 : 600,
+                                'height'                : 235,
+
+
+                                'padding'               : 0,
+                                'margin'                : 0,
+                                'showCloseButton'       : false,
+
+
+                                'titleShow'             : false
+                            });
+
+                            $("a.fancy_window_imgDelete").fancybox({
+                                'overlayShow'			: true,
+                                'overlayOpacity'		: 0.75,
+                                'autoDimensions'        : false,
+                                'width'                 : 300,
+                                'height'                : 180,
+
+
+                                'padding'               : 0,
+                                'margin'                : 0,
+                                'showCloseButton'       : false,
+
+
+                                'titleShow'             : false
+                            });
+					}
+				}
+			}
+
+			xmlhttp.open("GET", "http://beautypro411.com/includes/code/returngallery.php?gallery_hash=classified_587707004539b144ed850b5.32228852&domain_id=1&id="+id+"&new_image="+new_image+"&main="+main+"&sess="+sess+"&module=classified&level=10", true);
+			xmlhttp.send(null);
+		}
+	}
+
+	$(document).ready(function(){
+
+        var field_name = 'summarydesc';
+        var count_field_name = 'summarydesc_remLen';
+
+        var options = {
+                    'maxCharacterSize': 250,
+                    'originalStyle': 'originalTextareaInfo',
+                    'warningStyle' : 'warningTextareaInfo',
+                    'warningNumber': 40,
+                    'displayFormat' : '<span><input readonly="readonly" type="text" id="'+count_field_name+'" name="'+count_field_name+'" size="3" maxlength="3" value="#left" class="textcounter" disabled="disabled" /> characters left (including spaces and line breaks)</span>'
+            };
+        $('#'+field_name).textareaCount(options);
+
+        $.mask.definitions['~']='[+-]';
+        $("#price_int").mask("9?999999",{placeholder:""});
+        $("#price_cent").mask("9?9",{placeholder:""});
+
+
+	});
+-->
+</script>
+
+
+<script type="text/javascript" src="http://beautypro411.com/scripts/accountsearch.js"></script>
+
+
+
+
+	<table border="0" cellpadding="0" cellspacing="0" class="standard-table">
+
+		<tbody><tr class="bigger">
+			<th><i><span>Required field</span></i> Classified Title:</th>
+			<td>
+				<input type="text" name="title" value="${classifiedOrder.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
+				<input type="hidden" name="friendly_url" id="friendly_url" value="" maxlength="150"/>
+			</td>
+		</tr>
+            </tbody></table>
+
+
+
+    <table border="0" cellpadding="0" cellspacing="0" class="standard-table">
+		<tbody><tr>
+			<th colspan="2" class="standard-tabletitle">Information</th>
+		</tr>
+
+
+
+                    <tr>
+                <th>Contact Name:</th>
+                <td><input type="text" name="contactName" value="${classifiedOrder.contactName}"/></td>
+            </tr>
+
+        		<tr>
+			<th>Contact Phone:</th>
+			<td><input type="text" name="contactPhoneNumber" value="${classifiedOrder.contactPhoneNumber}"/></td>
+		</tr>
+
+                    <tr>
+                <th>Contact Fax:</th>
+                <td><input type="text" name="contactFax" value="${classifiedOrder.contactFax}"/></td>
+            </tr>
+
+        		<tr>
+			<th>Contact E-mail:</th>
+			<td><input type="text" name="contactEmail" value="${classifiedOrder.contactEmail}"/></td>
+		</tr>
+
+                    <tr>
+                <th>URL:</th>
+                <td>
+               <select name="protocol" class="httpSelect">
+			<c:choose>
+				<c:when test="${classifiedOrder.protocol == 'http://'}">
+					<option value="http://" selected="selected">http://</option>
+				</c:when>
+				<c:otherwise>
+					<option value="http://">http://</option>
+				</c:otherwise>
+			</c:choose>
+
+			<c:choose>
+				<c:when test="${classifiedOrder.protocol == 'https://'}">
+					<option value="https://" selected="selected">https://</option>
+				</c:when>
+				<c:otherwise>
+					<option value="https://">https://</option>
+				</c:otherwise>
+			</c:choose>
+
+			<c:choose>
+				<c:when test="${classifiedOrder.protocol == 'ftp://'}">
+					<option value="ftp://" selected="selected">ftp://</option>
+				</c:when>
+				<c:otherwise>
+					<option value="ftp://">ftp://</option>
+				</c:otherwise>
+			</c:choose>
+			</select>
+                <input type="text" class="httpInput" name="url" value="${classifiedOrder.url}" maxlength="255"/>
+                </td>
+            </tr>
+
+        		<tr>
+			<th>Price:</th>
+			<td>
+				$				<input type="text" name="amountDollar" id="amountDollar" value="${classifiedOrder.amountDollar}" maxlength="7" style="width:55px; text-align:right;"/>
+				<strong> &nbsp;.&nbsp; </strong>
+				<input type="text" name="amountCent" id="amountCent" value="${classifiedOrder.amountCent}" maxlength="2" style="width:20px;"/>
+			</td>
+		</tr>
+        	</tbody></table>
+
+	<table border="0" cellpadding="0" cellspacing="0" class="standard-table nomargin">
+		<tbody><tr>
+			<th colspan="2" class="standard-tabletitle">Location</th>
+		</tr>
+		<tr>
+			<th>Address:</th>
+			<td><input type="text" name="address1" id="address1" onblur="loadMap(document.classified);" value="${classifiedOrder.address1}"/></td>
+		</tr>
+		<tr>
+			<th>Address (optional):</th>
+			<td><input type="text" name="address2" value="${classifiedOrder.address2}"/></td>
+		</tr>
+
+		<tr>
+			<th>Zipcode:</th>
+			<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.classified);" value="${classifiedOrder.zipcode}" maxlength="10"/></td>
+		</tr>
+
+                <tr>
+            <th>Latitude:</th>
+            <td>
+                <input type="text" name="latitude" id="latitude" onblur="loadMap(document.classified, true);" value="${classifiedOrder.latitude}" maxlength="10"/>
+                <span>Ex: 38.830391</span>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Longitude:</th>
+            <td>
+                <input type="text" name="longitude" id="longitude" onblur="loadMap(document.classified, true);" value="${classifiedOrder.longitude}" maxlength="10"/>
+                <span>Ex: -77.196370</span>
+            </td>
+        </tr>
+        	</tbody></table>
+
+			<div id="formsLocation" class="form-location">
+			<table cellpadding="0" cellspacing="0" border="0" class="standard-table standardSIGNUPTable ">
+						<tbody><tr id="div_location_1">
+							<th>
+								<label for="location_1">Country:</label>
+							</th>
+							<td class="field" id="div_img_loading_1" style="display:none;">
+								<img src="http://beautypro411.com/images/content/img_loading_bar.gif" alt="Wait, Loading..."/>
+							</td>
+							<td id="div_select_1" class="field locationSelect">
+							<select class="select" id="country" name="country">
+								<c:forEach items="${order.countryList}" var="countryList">
+									<c:choose>
+										<c:when test="${countryList.id == listingOrder.country}">
+											<option value="${countryList.id}" selected="selected">${countryList.name}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${countryList.id}">${countryList.name}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
+																	<!-- select class="select" name="location_1" id="location_1" onchange="loadLocationSitemgrMembers('http://beautypro411.com', '1,3,4', 1, 3, this.value);  loadMap(document.classified);  ">
+
+									<option id="l_location_1" value="">Select a Country</option>
+									<option value="2">Brasil</option><option value="5">England</option><option value="4">Germany</option><option value="3">Spain</option><option value="1">United States</option>								</select>
+								<div class="field" id="box_no_location_found_1" style="display:none;">No locations found..</div> -->
+							</td>
+							<td class="field">
+								<div id="div_new_location1_link">
+									&nbsp;								</div>
+							</td>
+						</tr>
+
+
+						<tr id="div_location_3">
+							<th>
+								<label for="location_3">State:</label>
+							</th>
+							<td class="field" id="div_img_loading_3" style="display:none;">
+								<img src="http://beautypro411.com/images/content/img_loading_bar.gif" alt="Wait, Loading..."/>
+							</td>
+							<td id="div_select_3" class="field locationSelect">
+							<select class="select" id="state" name="state">
+								<c:forEach items="${order.stateList}" var="stateList">
+									<option value="0">Select a State</option>
+									<c:choose>
+										<c:when test="${stateList.id == listingOrder.state}">
+											<option value="${stateList.id}" selected="selected">${stateList.name}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${stateList.id}">${stateList.name}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
+																	<!-- <select style="display:none" class="select" name="location_3" id="location_3" onchange="loadLocationSitemgrMembers('http://beautypro411.com', '1,3,4', 3, 4, this.value);  loadMap(document.classified);  ">
+
+									<option id="l_location_3" value="">Select a State</option>
+																	</select>
+								<div class="field" id="box_no_location_found_3" style="display:none;">No locations found..</div> -->
+							</td>
+							<td class="field">
+								<!-- <div id="div_new_location3_link">
+																			<a href="javascript:void(0);" onclick="showNewLocationField('3', '1,3,4', true);" style=" cursor: pointer">+ Add a new state</a>
+																	</div> -->
+							</td>
+						</tr>
+
+
+							<!-- <tr id="div_new_location3_field" style="display:none;">
+								<th>
+									<label for="newlocation">Add a new state:</label>
+								</th>
+								<td class="field">
+									<input type="text" name="new_location3_field" id="new_location3_field" value="" onfocus="showNewLocationField('4', '1,3,4', false);" onblur="easyFriendlyUrl(this.value, 'new_location3_friendly', 'a-zA-Z0-9', '-');  loadMap(document.classified); "/>
+									<input type="hidden" name="new_location3_friendly" id="new_location3_friendly" value=""/>
+								</td>
+								<td class="field" colspan="2">
+									<div id="div_new_location3_back">
+										<a href="javascript:void(0);" onclick="hideNewLocationField('3', '1,3,4');" style=" cursor: pointer">- Choose an existing state</a>
+									</div>
+								</td>
+							</tr> -->
+
+						<tr id="div_location_4">
+							<th>
+								<label for="location_4">City:</label>
+							</th>
+							<td class="field" id="div_img_loading_4" style="display:none;">
+								<img src="http://beautypro411.com/images/content/img_loading_bar.gif" alt="Wait, Loading..."/>
+							</td>
+							<td id="div_select_4" class="field locationSelect">
+								<input type="text" id="city" name="city" value="${classifiedOrder.city}"/>
+																	<!-- <select style="display:none" class="select" name="location_4" id="location_4" onchange="loadMap(document.classified);">
+
+									<option id="l_location_4" value="">Select a City</option>
+																	</select>
+								<div class="field" id="box_no_location_found_4" style="display:none;">No locations found..</div> -->
+							</td>
+							<td class="field">
+								<!-- <div id="div_new_location4_link">
+																			<a href="javascript:void(0);" onclick="showNewLocationField('4', '1,3,4', true);" style=" cursor: pointer">+ Add a new city</a>
+																	</div> -->
+							</td>
+						</tr>
+
+
+							<!-- <tr id="div_new_location4_field" style="display:none;">
+								<th>
+									<label for="newlocation">Add a new city:</label>
+								</th>
+								<td class="field">
+									<input type="text" name="new_location4_field" id="new_location4_field" value="" onblur="easyFriendlyUrl(this.value, 'new_location4_friendly', 'a-zA-Z0-9', '-');  loadMap(document.classified); "/>
+									<input type="hidden" name="new_location4_friendly" id="new_location4_friendly" value=""/>
+								</td>
+								<td class="field" colspan="2">
+									<div id="div_new_location4_back">
+										<a href="javascript:void(0);" onclick="hideNewLocationField('4', '1,3,4');" style=" cursor: pointer">- Choose an existing city</a>
+									</div>
+								</td>
+							</tr> -->
+									</tbody></table>
+		</div>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script><script src="http://maps.gstatic.com/intl/en_us/mapfiles/api-3/17/3/main.js" type="text/javascript"></script>
+    <script type="text/javascript">
+<!--
+        var geocoder;
+        var map;
+
+        function displayMapForm(form, show) {
+            var use_lat_long = false;
+            if ($.cookie('showMapForm') == 1 || show) {
+                $('#trMap').css('display', '');
+                $('#map').css('display', '');
+                $('#tipsMap').css('display', '');
+                $('#linkDisplayMap').text('' + showText(LANG_JS_LABEL_HIDEMAP) + '');
+                $.cookie('showMapForm', '0', {expires: 7, path: '/'});
+                if (!show){
+
+                    if (document.getElementById('myLatitudeLongitude').value) {
+                        use_lat_long = true;
+                    }
+
+                    loadMap(form, use_lat_long);
+                }
+            } else {
+                $('#map').css('display', 'none');
+                $('#trMap').css('display', 'none');
+                $('#tipsMap').css('display', 'none');
+                $('#linkDisplayMap').text('' + showText(LANG_JS_LABEL_SHOWMAP) + '');
+                $.cookie('showMapForm', '1', {expires: 7, path: '/'});
+            }
+        }
+
+        function setCoordinates(coord) {
+            var new_lat;
+            var new_long;
+            var aux_latlong;
+
+            document.getElementById('myLatitudeLongitude').value = coord;
+            if (document.getElementById('maptuning_done')) {
+                document.getElementById('maptuning_done').value = "y";
+            }
+            aux_latlong = document.getElementById('myLatitudeLongitude').value;
+            aux_latlong = aux_latlong.replace("(", "").replace(")", "").replace(" ", "").split(',');
+            new_lat = aux_latlong[0];
+            new_long  = aux_latlong[1];
+
+            var num_lat = new Number(new_lat);
+            var num_long = new Number(new_long);
+
+            document.getElementById('latitude').value = num_lat.toFixed(6);
+            document.getElementById('longitude').value = num_long.toFixed(6);
+        }
+
+        function initialize(map_zoom, google_location, latitude, longitude, use_lat_long) {
+
+            geocoder = new google.maps.Geocoder();
+            var myOptions = {
+              zoom: map_zoom,
+              scrollwheel: false,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+            codeAddress(google_location, latitude, longitude, use_lat_long);
+
+            function codeAddress(google_location, latitude, longitude, use_lat_long) {
+                var address = google_location;
+                var marker = new google.maps.Marker({
+                    map: map,
+                    draggable: true
+                });
+
+                if (use_lat_long && latitude && longitude){
+                    var latlng = new google.maps.LatLng(latitude, longitude);
+                    marker.setPosition(latlng);
+                    map.setCenter(latlng);
+                } else {
+                    if (geocoder) {
+                        geocoder.geocode( { 'address': address}, function(results, status) {
+                            if (status != google.maps.GeocoderStatus.OK) {
+                                fancy_alert("Not found. Please, try to specify better your location.", "errorMessage", false, 300, 90, false);
+                            }
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                map.setCenter(results[0].geometry.location);
+                                marker.setPosition(results[0].geometry.location);
+                                setCoordinates(results[0].geometry.location);
+                            }
+                        });
+                    }
+                }
+
+                google.maps.event.addListener(marker, 'dragend', function(event) {
+                    setCoordinates(event.latLng);
+                });
+
+                google.maps.event.addListener(map, 'zoom_changed', function() {
+                    document.getElementById('map_zoom').value = map.getZoom();
+                });
+
+            }
+        }
+
+        function loadMap(form, use_lat_long){
+            var address = document.getElementById('address').value;
+            var zip = document.getElementById('zip_code').value;
+            var location_3 = '';
+            var location_4 = '';
+            var latitude = document.getElementById('latitude').value;
+            var longitude = document.getElementById('longitude').value;
+            var index;
+            var google_location = '';
+            var locations = new Array();
+            var array_index = 0;
+            var callMap = false;
+            var valid_coord = true;
+            var msg_invalid = '';
+
+            if (use_lat_long && latitude && longitude){
+
+                if (!isFinite(latitude) || !isFinite(longitude) || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180){
+
+                    msg_invalid = "<b>The following fields contain errors:</b><br />";
+
+                    if (!isFinite(latitude) || latitude < -90 || latitude > 90){
+                        valid_coord = false;
+                        msg_invalid = msg_invalid + "&#149;&nbsp;Latitude must be a number between -90 and 90.<br />";
+                    }
+                    if (!isFinite(longitude) || longitude < -180 || longitude > 180){
+                        valid_coord = false;
+                        msg_invalid = msg_invalid + "&#149;&nbsp;Longitude must be a number between -180 and 180.<br />";
+                    }
+                }
+
+                if (valid_coord){
+                   callMap = true;
+                } else {
+                   fancy_alert(msg_invalid, "errorMessage", false, 450, 150, false);
+                }
+
+            } else {
+                if (address){
+                    locations[array_index] = address;
+                    array_index++;
+                    callMap = true;
+                }
+
+                if (zip){
+                    locations[array_index] = zip;
+                    array_index++;
+                    callMap = true;
+                }
+
+                if (document.getElementById('location_4')) {
+                    index = form.location_4.selectedIndex;
+                    if (document.getElementById('location_4').options[index].value) {
+                        location_4 = document.getElementById('location_4').options[index].text;
+                        locations[array_index] = location_4;
+                        array_index++;
+                        callMap = true;
+                    }
+                } else if (document.getElementById('city')) {
+                    location_4 = document.getElementById('city').value;
+                    locations[array_index] = location_4;
+                    array_index++;
+                    callMap = true;
+                }
+
+                if (document.getElementById('new_location4_field') && document.getElementById('new_location4_field').value) {
+                        location_4 = document.getElementById('new_location4_field').value;
+                        locations[array_index] = location_4;
+                        array_index++;
+                        callMap = true;
+                }
+
+                if (document.getElementById('location_3')) {
+                    index = form.location_3.selectedIndex;
+                    if (document.getElementById('location_3').options[index].value) {
+                        location_3 = document.getElementById('location_3').options[index].text;
+                        locations[array_index] = location_3;
+                        array_index++;
+                        callMap = true;
+                    }
+                } else if (document.getElementById('state')) {
+                    location_3 = document.getElementById('state').value;
+                    locations[array_index] = location_3;
+                    array_index++;
+                    callMap = true;
+                }
+
+                google_location = locations.join(", ");
+            }
+
+            if (callMap){
+                $("#tableMapTuning").css("display", "");
+                $("#divDisplayMap").css("display", "block");
+                $('#linkDisplayMap').text('' + showText(LANG_JS_LABEL_HIDEMAP) + '');
+                $.cookie('showMapForm', '0', {expires: 7, path: '/'});
+                initialize(15, google_location, latitude, longitude, use_lat_long);
+            } else {
+                if (!latitude && !longitude){
+                    $("#tableMapTuning").css("display", "none");
+                    $("#divDisplayMap").css("display", "none");
+                }
+            }
+        }
+-->
+    </script>        <table cellpadding="0" cellspacing="0" border="0" class="standard-table noMargin" id="tableMapTuning" style="display: none">
+            <tbody><tr>
+                <th colspan="2" class="standard-tabletitle">
+                    Map Tuning
+                    <span style="display: block; white-space: normal;" id="divDisplayMap">
+                        <a id="linkDisplayMap" href="javascript:void(0)" onclick="displayMapForm(document.classified, false);">
+                            Hide Map                        </a>
+                    </span>
+                    <div id="tipsMap">
+                        <span style="text-align: justify;">Use the controls "+" and "-" to adjust the map zoom.</span>
+                        <br/>
+                        <span style="text-align: justify;">Use the arrows to navigate on map.</span>
+                        <br/>
+                        <span style="text-align: justify;">Drag-and-Drop the marker to adjust the location.</span>
+                    </div>
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <div id="map" class="googleBase" style="border: 1px solid #000;">&nbsp;</div>
+                    <input type="hidden" name="latitude_longitude" id="myLatitudeLongitude" value=""/>
+                    <input type="hidden" name="map_zoom" id="map_zoom" value=""/>
+                    <input type="hidden" name="maptuning_done" id="maptuning_done" value=""/>
+                </td>
+            </tr>
+
+        </tbody></table>
+
+
+	<table border="0" cellpadding="0" cellspacing="0" class="standard-table">
+		<tbody><tr>
+			<th colspan="3" class="standard-tabletitle">Images <span>(690px x 300px) (JPG, GIF or PNG)</span></th>
+		</tr>
+
+		<tr id="table_gallery">
+			<th colspan="3" class="Full">
+				<div id="galleryF"><ul></ul></div>
+			</th>
+		</tr>
+
+					<tr>
+                        <td class="alignTop width100">
+								<input type="file" name="imageUpload"/>
+                                            <!-- <a id="uploadimage" href="http://beautypro411.com/popup/popup.php?domain_id=1&amp;pop_type=uploadimage&amp;gallery_hash=classified_587707004539b144ed850b5.32228852&amp;item_type=classified&amp;item_id=0&amp;galleryid=&amp;photos=7&amp;level=10" class="addImageForm input-button-form iframe fancy_window_imgAdd">Add Image</a> -->
+
+                    <span>Maximum file size 1.5 MB. Animated .gif isn't supported.</span>
+
+                                            <p class="informationMessage">This classified will show the maximum of 7 images in the gallery  plus one main image.</p>
+                                    </td>
+            </tr>
+
+	</tbody></table>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="standard-table">
+        <tbody><tr>
+            <th class="standard-tabletitle">
+                Summary Description <span>(maximum 250 characters)</span>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <textarea id="summarydesc" name="summarydesc" rows="5" cols="1">${classifiedOrder.summarydesc}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="standard-table">
+        <tbody><tr>
+            <th class="standard-tabletitle">Detail Description</th>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="detailDescription" rows="5">${classifiedOrderdetailDescription}</textarea>
+            </td>
+        </tr>
+    </tbody></table>
+
+<table cellpadding="0" cellspacing="0" border="0" class="standard-table nomargin">
+    <tbody><tr>
+        <th class="standard-tabletitle">
+            Keywords for the search <span>(maximum 10 keywords)</span>
+            <img src="http://beautypro411.com/images/icon_interrogation.gif" alt="?" title="Include up to 10 keywords with a maximum of 50 characters each." border="0"/>
+        </th>
+    </tr>
+    <tr>
+        <td class="standard-tableContent">
+            <table border="0" cellpadding="0" cellspacing="0" align="center">
+                <tbody><tr>
+                    <th>Add one keyword or keyword phrase per line. For example:</th>
+                    <td>
+                        Auto Parts<br/>
+                        Tires<br/>
+                        Engine Repair<br/>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea name="keyword" rows="5">${classifiedOrder.keyword}</textarea>
+        </td>
+    </tr>
+</tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0" class="standard-table">
+	<tbody><tr>
+		<th colspan="2" class="standard-tabletitle">
+			Categories and sub-categories		</th>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p class="warningBOXtext">Only select sub-categories that directly apply to your type.<br/>Your classified will automatically appear in the main category of each sub-category you select.<br/></p>
+			<p class="warningBOXtext">Maximum of <strong>5</strong> categories allowed.</p>
+		</td>
+	</tr>
+	<input type="hidden" name="return_categories" value=""/>
+	<tr>
+		<td colspan="2" class="treeView">
+			<ul id="browser" class="filetree treeview-famfamfam">
+				<c:forEach items="${order.categoryMap}" var="catMap">
+					<c:choose>
+						<h:outputText value="${fn:length(catMap.value) 	}"/>
+						<c:when test="${fn:length(catMap.value) > 1}">
+							<li><span class="folder">${catMap.key.name}</span>
+							<ul>
+								<c:forEach var="cat" items="${catMap.value}">
+									<c:if test="${cat.name != catMap.key.name}">
+										<li id="${cat.id}"><span class="file">${cat.name}<a catAddId="${cat.id}">Add</a></span></li>
+									</c:if>
+								</c:forEach>
+							</ul>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li id="${catMap.key.id}" class="file">${catMap.key.name} <a catAddId="${catMap.key.id}">Add</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</ul>
+			<!-- <ul id="classified_categorytree_id_0" class="categoryTreeview"><li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 57, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_57">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 57, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_57">Jobs</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 57, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_57" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 57, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_57" style="display: none;">Jobs</a>
+<ul id="classified_categorytree_id_57" style="display: none;"></ul>
+</li>
+<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 102, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_102">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 102, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_102">Merchandise</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 102, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_102" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 102, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_102" style="display: none;">Merchandise</a>
+<ul id="classified_categorytree_id_102" style="display: none;"></ul>
+</li>
+<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 97, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_97">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 97, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_97">Notices</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 97, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_97" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 97, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_97" style="display: none;">Notices</a>
+<ul id="classified_categorytree_id_97" style="display: none;"></ul>
+</li>
+<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 101, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_101">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 101, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_101">Personals</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 101, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_101" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 101, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_101" style="display: none;">Personals</a>
+<ul id="classified_categorytree_id_101" style="display: none;"></ul>
+</li>
+<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 58, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_58">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 58, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_58">Pets</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 58, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_58" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 58, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_58" style="display: none;">Pets</a>
+<ul id="classified_categorytree_id_58" style="display: none;"></ul>
+</li>
+</ul> -->
+			<table width="100%" border="0" cellpadding="0" class="tableCategoriesADDED" cellspacing="0">
+				<tbody><tr>
+					<th colspan="2" class="tableCategoriesTITLE alignLeft"><strong>Classified Categories:</strong></th>
+				</tr>
+				<tr id="msgback2" class="informationMessageShort">
+					<td colspan="2" style="width: auto;"><p><img width="16" height="14" src="http://beautypro411.com/images/icon_atention.gif" alt="Attention" title="Attention"/> Click on "Add" to select categories</p></td>
+				</tr>
+				<tr id="msgback" style="display:none">
+					<td colspan="2"><div><img width="16" height="14" src="http://beautypro411.com/images/icon_atention.gif" alt="Attention" title="Attention"/></div><p>Click at "Add main category" or "Add sub-category" to type your new categories</p></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="tableCategoriesCONTENT"><select name="feed" id="feed" multiple="" size="5" style="width:500px"></select></td>
+				</tr>
+				<tr id="removeCategoriesButton" style="display:none">
+					<td class="tableCategoriesBUTTONS" colspan="2">
+
+						<center>
+							<button class="input-button-form" type="button" value="Remove Selected Category" onclick="JS_removeCategory(document.classified.feed, false);">Remove Selected Category</button>
+						</center>
+
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+</tbody></table>
+
+			<table cellpadding="0" cellspacing="0" border="0" class="standard-table">
+			<tbody><tr>
+				<th colspan="2" class="standard-tabletitle">Promotional Code</th>
+			</tr>
+							<tr>
+					<th>Code:</th>
+					<td><input type="text" name="promotionCode" value="${classifiedOrder.promotionCode}" maxlength="10"/></td>
+				</tr>
+					</tbody></table>
+
+<script language="javascript" type="text/javascript" src="http://beautypro411.com/scripts/categorytree.js"></script>
+
+<script type="text/javascript">
+
+
+	$('input:text[name=classified_price_cent]').keydown(function(e) {
+		if (e.which == 8) {
+			if (this.value == '') {
+				$('input:text[name=classified_price_int]').focus();
+			}
+		}
+	});
+
+	$('input:text[name=classified_price_int]').keydown(function(e) {
+		if (e.which == 8 || e.which == 46) {
+			if ($(this).val() == '') {
+				$('input:text[name=classified_price_cent]').focus();
+			}
+		}
+	});
+
+	loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 0, 0, 'http://beautypro411.com',1);
+
+		loadGallery(0,'y','members','editF', '');
+
+    </script>
+
+			<input type="hidden" name="ieBugFix2" value="1"/>
+
+
+<!-- 		</form> -->
+
+		<br/>
+<!--
+		<form action="http://beautypro411.com/members/classified/index.php" method="post">
+ -->
+			<input type="hidden" name="screen" value=""/>
+			<input type="hidden" name="letter" value=""/>
+
+			<div class="baseButtons">
+
+				<p class="standardButton">
+					<button type="submit" name="_eventId_submit">Submit</button>
+				</p>
+				<p class="standardButton">
+					<button type="submit" name="_eventId_cancel">Cancel</button>
+				</p>
+
+			</div>
+
+		</h:form>
+
+	</div>
+
+
+            </div><!-- Close container-fluid div -->
+
+        </div>
+	</ui:define>
+</ui:composition>

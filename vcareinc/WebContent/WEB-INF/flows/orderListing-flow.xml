@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<on-start>
+		<evaluate expression="requestController.getRequestParameters('optionType', externalContext)" result="flowScope.optionType"/>
+		<evaluate expression="requestController.getRequestParameters('priceType', externalContext)" result="flowScope.priceType"/>
+		<evaluate expression="requestController.getRequestParameters('id', externalContext)" result="flowScope.optionTypeId" />
+	</on-start>
+
+	<subflow-state id="userAccount" subflow="register-flow">
+		<!-- <output name="user"/> -->
+		<transition on="loginSuccess" to="idExists"/>
+	</subflow-state>
+
+	<decision-state id="idExists">
+		<if then="getOptionTypeValue" test="orderService.isOptionTypeIdExists(optionTypeId)" else="levelDecision"/>
+	</decision-state>
+
+	<decision-state id="levelDecision">
+		<if then="levelType" test="orderService.isLevelRequired(optionType, priceType)" else="pageType"/>
+	</decision-state>
+
+	<action-state id="getOptionTypeValue">
+		<evaluate expression="orderService.getPageType(optionType)"/>
+		<transition on="LISTING" to="getListings"/>
+		<transition on="EVENT" to="getEvents"/>
+		<transition on="CLASSIFIED" to="getClassified"/>
+		<transition on="ARTICLE" to="getArticles"/>
+		<transition on="DEAL" to="getDeals"/>
+	</action-state>
+
+	<action-state id="getListings">
+		<evaluate expression="listingService.getListingOrderById(optionTypeId)" result="flowScope.listingOrder"/>
+		<transition to="listingOrder"/>
+	</action-state>
+
+	<action-state id="getEvents">
+		<evaluate expression="eventService.getEventOrderById(optionTypeId)" result="eventOrder" result-type="dataModel"/>
+		<transition to="eventOrder"/>
+	</action-state>
+
+	<action-state id="getClassified">
+		<evaluate expression="classifiedService.getClassifiedOrderById(optionTypeId)" result="flowScope.classifiedOrder"/>
+		<transition to="classifiedOrder"/>
+	</action-state>
+
+	<action-state id="getArticles">
+		<evaluate expression="articleService.getArticleOrderById(optionTypeId)" result="flowScope.articleOrder"/>
+		<transition to="articleOrder"/>
+	</action-state>
+
+	<action-state id="getDeals">
+		<evaluate expression="dealService.getDealOrderById(optionTypeId)" result="flowScope.dealOrder"/>
+		<transition to="dealOrder"/>
+	</action-state>
+
+	<action-state id="pageType">
+		<evaluate expression="orderService.getPageType(optionType)"/>
+		<transition on="LISTING" to="listingOrder"/>
+		<transition on="EVENT" to="eventOrder"/>
+		<transition on="DEAL" to="dealOrder"/>
+		<transition on="CLASSIFIED" to="classifiedOrder"/>
+		<transition on="ARTICLE" to="articleOrder"/>
+	</action-state>
+
+	<view-state id="levelType" view="levelType" model="levelTypeOrder">
+		<secured attributes="ROLE_USER"/>
+		<on-entry>
+			<evaluate expression="orderService.initializeOrder(optionType)" result="viewScope.order"/>
+		</on-entry>
+		<transition on="submit" to="levelTypeAction"/>
+		<transition on="cancel" to="endOrder"/>
+	</view-state>
+
+	<action-state id="levelTypeAction">
+		<set name="flowScope.priceType" value="levelTypeOrder.priceType"/>
+		<transition to="pageType"/>
+	</action-state>
+
+	<view-state id="listingOrder" view="listingOrder" model="listingOrder">
+		<secured attributes="ROLE_USER"/>
+		<on-entry>
+			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
+		</on-entry>
+		<transition on="submit" to="saveListing"/>
+		<transition on="cancel" to="endOrder"/>
+	</view-state>
+
+	<action-state id="saveListing">
+		<evaluate expression="listingService.saveListing(flowRequestContext, listingOrder)"/>
+		<transition to="endOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="listingOrder"/>
+	</action-state>
+
+	<view-state id="dealOrder" view="dealOrder" model="dealOrder">
+		<secured attributes="ROLE_USER"/>
+		<transition on="submit" to="saveDeal"></transition>
+		<transition on="cancel" to="endOrder"/>
+	</view-state>
+
+	<action-state id="saveDeal">
+		<evaluate expression="dealService.saveDeal(flowRequestContext, dealOrder)"/>
+		<transition to="endOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="dealOrder"/>
+	</action-state>
+
+	<view-state id="eventOrder" view="eventOrder" model="eventOrder">
+		<secured attributes="ROLE_USER"/>
+		<on-entry>
+			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
+		</on-entry>
+		<transition on="submit" to="saveEvent"/>
+		<transition on="cancel" to="endOrder"/>
+	</view-state>
+
+	<action-state id="saveEvent">
+		<evaluate expression="eventService.saveEvent(flowRequestContext, eventOrder)"/>
+		<transition to="endOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="eventOrder"/>
+	</action-state>
+
+	<view-state id="classifiedOrder" view="classifiedOrder" model="classifiedOrder">
+		<secured attributes="ROLE_USER"/>
+		<on-entry>
+			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
+		</on-entry>
+		<transition on="submit" to="saveClassified"></transition>
+		<transition on="cancel" to="endOrder"/>
+	</view-state>
+
+	<action-state id="saveClassified">
+		<evaluate expression="classifiedService.saveClassified(flowRequestContext, classifiedOrder)"/>
+		<transition to="endOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="classifiedOrder"/>
+	</action-state>
+
+	<view-state id="articleOrder" view="articleOrder" model="articleOrder">
+		<secured attributes="ROLE_USER"/>
+		<on-entry>
+			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
+		</on-entry>
+		<transition on="submit" to="saveArticle"></transition>
+		<transition on="cancel" to="endOrder"/>
+	</view-state>
+
+	<action-state id="saveArticle">
+		<evaluate expression="articleService.saveArticle(flowRequestContext, articleOrder)"/>
+		<transition to="endOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="articleOrder"/>
+	</action-state>
+
+	<end-state id="endOrder" view="externalRedirect:contextRelative:/spring/memberUser"/>
+
+</flow>

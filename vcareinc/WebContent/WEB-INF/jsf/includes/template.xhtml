@@ -5,22 +5,50 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:c="http://java.sun.com/jsp/jstl/core"
 		xmlns:p="http://primefaces.org/ui"
+		xmlns:sec="http://www.springframework.org/security/tags"
 		xmlns:ui="http://java.sun.com/jsf/facelets">
 <f:view contentType="text/html">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link href="${request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<title>${title}</title>
-<script src="${request.contextPath}/resources/js/jquery-2.1.0.min.js"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap-2.3.1.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap-responsive.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/structure.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/editor_default_structure.css" type="text/css" media="all"/>
+<link href="${request.contextPath}/resources/font-awesome-4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/front.css" type="text/css" media="all"/>
+<link href="${request.contextPath}/resources/css/members.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="${request.contextPath}/resources/css/profile.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="${request.contextPath}/resources/css/content-custom.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="${request.contextPath}/resources/css/color-scheme.css" type="text/css" media="all" rel="stylesheet"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/no-image.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="${request.contextPath}/resources/css/jquery.treeview.css" />
+
+
+<link type="text/css" href="${request.contextPath}/resources/fancyapps-fancyBox/source/jquery.fancybox.css" rel="stylesheet" media="all"/>
+<link type="text/css" href="${request.contextPath}/resources/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="all"/>
+<link type="text/css" href="${request.contextPath}/resources/tapmodo-Jcrop-1902fbc/css/jquery.Jcrop.css" rel="stylesheet" media="all"/>
+
+<script src="${request.contextPath}/resources/js/specialChars.js" type="text/javascript"></script>
 <script type="text/javascript" src="${request.contextPath}/resources/js/general.js"/>
+<script src="${request.contextPath}/resources/js/jquery-2.1.0.min.js"/>
+<!-- Latest compiled and minified JavaScript -->
+<script src="${request.contextPath}/resources/js/bootstrap-2.3.1.js"></script>
+<script src="${request.contextPath}/resources/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+<script src="${request.contextPath}/resources/js/jquery.placeholder.js" type="text/javascript"></script>
+<script src="${request.contextPath}/resources/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="${request.contextPath}/resources/fancyapps-fancyBox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="${request.contextPath}/resources/jquery-cookie/jquery.cookie.js" type="text/javascript"></script>
+<script src="${request.contextPath}/resources/js/jquery.treeview.js" type="text/javascript"></script>
+<title>${title}</title>
 </h:head>
-<body leftmargin="0" topmargin="0" style="background-color:#eeeeee;">
-	<div class="navbar navbar-static-top" style="background-color: #5b9de3;overflow: visible;">
+<body>
+	<div class="navbar navbar-static-top">
 	<ui:insert name="header">
-		<ui:include src="header.xhtml"></ui:include>
+		<ui:include src="header.xhtml"/>
 	</ui:insert>
 	<ui:insert name="navbar">
-		<ui:include src="navbar.xhtml"></ui:include>
+		<ui:include src="navbar.xhtml"/>
 	</ui:insert>
 	</div>
 	<div class="image-bg">
@@ -30,7 +58,7 @@
 		<ui:insert name="bodyContent">Common Body Content</ui:insert>
 	</div>
 	<ui:insert name="footer">
-		<ui:include src="footer.xhtml"></ui:include>
+		<ui:include src="footer.xhtml"/>
 	</ui:insert>
 </body>
 </f:view>

@@ -8,5 +8,9 @@
 	<import resource="webflow-config.xml" />
 	<import resource="data-access-config.xml" />
 	<import resource="security-config.xml" />
-
+	<import resource="rest-client-context.xml"/>
+	<import resource="mail-config.xml"/>
+	<import resource="creditcard-config.xml"/>
+	<import resource="importDB-config.xml"/>
+	<import resource="amazonws-config.xml"/>
 </beans>
