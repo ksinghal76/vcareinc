@@ -14,6 +14,7 @@ import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.DiscountType;
 import com.vcareinc.constants.OptionType;
+import com.vcareinc.constants.StatusType;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
@@ -85,7 +86,10 @@ public class DealService extends BaseService<DealOrder> {
 				FileUpload fileUpload = saveFileUpload(deals.getId(), filename, dealOrder.getImageUpload());
 				deals.setImageUpload(fileUpload);
 			}
+			deals.setStatus(StatusType.ACTIVE);
 			em.persist(deals);
+
+			clearObject(dealOrder);
 		} catch (ValidationException | ParseException e) {
 			throw new ValidationException(e.getMessage());
 		}

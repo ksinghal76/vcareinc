@@ -22,6 +22,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.RoleType;
+import com.vcareinc.constants.StatusType;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.models.Register;
@@ -86,7 +87,7 @@ private Logger log = Logger.getLogger(UserService.class);
 //							acegiAuthenticationService.addUserAuthentication(user.getEmail(), user.getPassword(), user.getRoles(), user);
 							authenticationService.addUserAuthentication(user.getEmail(), user.getPassword(), user.getRoles());
 							session.setAttribute(USER_PROFILE, user);
-							signup.setErrorMsg("User Email Successful!!!");
+//							signup.setErrorMsg("User Email Successful!!!");
 							return "success";
 						} else {
 							signup.setErrorMsg("User Email/Password invalid!!!");
@@ -123,6 +124,7 @@ private Logger log = Logger.getLogger(UserService.class);
 			user.setEmail(register.getUsername());
 			user.setCreated(DateUtils.getCurrentTimeStamp());
 			user.setActivate(Boolean.FALSE);
+			user.setStatus(StatusType.ACTIVE);
 
 			Role role = null;
 			List<Role> roleList = findRole(RoleType.ROLE_USER);

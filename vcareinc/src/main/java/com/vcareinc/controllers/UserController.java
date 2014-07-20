@@ -2,6 +2,8 @@ package com.vcareinc.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,15 +42,9 @@ public class UserController extends BaseMultiActionController {
 	@Autowired
 	private DealService dealService;
 
-//	@RequestMapping(value="/activateUser", method=RequestMethod.GET)
-//	public void activateUser(@RequestParam String activationKey) {
-//		SecureUtils secureUtils = new SecureUtils();
-////		User user = (User) secureUtils.decryptObject(base64Data, base64IV)
-//	}
-
 	@RequestMapping(value="/memberUser")
-	public String memberUser(ModelMap modelMap) {
-		User user = userService.getUser();
+	public String memberUser(ModelMap modelMap, HttpServletRequest request) {
+		User user = userService.getUserProfile(request);
 		List<Listings> listingsList = listingService.getListingByUser(user);
 		List<Events> eventList = eventService.getEventsByUser(user);
 		List<Articles> articlesList = articleService.getArticlesByUser(user);
@@ -60,7 +56,6 @@ public class UserController extends BaseMultiActionController {
 		modelMap.addAttribute("articleList", articlesList);
 		modelMap.addAttribute("classifiedList", classifiedList);
 		modelMap.addAttribute("dealsList", dealsList);
-		modelMap.addAttribute("userService", userService);
 		return "members";
 	}
 

@@ -13,6 +13,7 @@ import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
+import com.vcareinc.constants.StatusType;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
@@ -30,6 +31,7 @@ public class ArticleService extends BaseService<ArticleOrder> {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
 	private UserService userService;
 
 	public OrderService getOrderService() {
@@ -91,13 +93,19 @@ public class ArticleService extends BaseService<ArticleOrder> {
 				FileUpload fileUpload = saveFileUpload(articles.getId(), filename, articleOrder.getImageUpload());
 				articles.setImageUpload(fileUpload);
 			}
+			if(PriceType.valueOf(priceType.name()).equals(PriceType.STUDENTS))
+				articles.setStatus(StatusType.ACTIVE);
+			else
+				articles.setStatus(StatusType.PENDING);
 			em.persist(articles);
+
+			clearObject(articleOrder);
 		} catch (ValidationException e) {
 			throw new ValidationException(e);
 		}
 	}
 
-	public ArticleOrder getArticleOrderById(Integer id) {
+	public ArticleOrder getArticleOrderById(Long id) {
 		ArticleOrder articleOrder = null;
 		Articles articles = getArticlesById(id);
 		if(articles != null) {
@@ -117,11 +125,31 @@ public class ArticleService extends BaseService<ArticleOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Articles getArticlesById(Integer id) {
+	public Articles getArticlesById(Long id) {
 		Articles articles = null;
 		List<Articles> articlesList = em.createQuery("SELECT a FROM Articles a WHERE a.id = :id").setParameter("id", id).getResultList();
 		if(articlesList != null && articlesList.size() > 0)
 			articles = articlesList.get(0);
 		return articles;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Articles> getPendingArticles(RequestContext context) {
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getNativeRequest();
+		User user = userService.getUserProfile(request);
+		return em.createQuery("SELECT a FROM Articles a WHERE a.status = :status and a.user = :user")
+				.setParameter("status", StatusType.PENDING)
+				.setParameter("user", user)
+				.getResultList();
+	}
+
+	public void changeActiveStatusById(String[] idLst) {
+		if(idLst != null && idLst.length > 0) {
+			for(String id : idLst) {
+				Articles articles = getArticlesById(Long.valueOf(id));
+				articles.setStatus(StatusType.ACTIVE);
+				em.persist(articles);
+			}
+		}
 	}
 }

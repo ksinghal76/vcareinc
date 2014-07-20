@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.vcareinc.constants.StatusType;
+
 @Entity
 public class Articles implements Serializable {
 
@@ -38,6 +40,7 @@ public class Articles implements Serializable {
 	private String description;
 	private String content;
 	private String keyword;
+	private StatusType status;
 
 	private PromotionCode promotionCode;
 
@@ -125,6 +128,19 @@ public class Articles implements Serializable {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	/**
+	 * @return the status
+	 */
+	public StatusType getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusType status) {
+		this.status = status;
 	}
 
 	public PromotionCode getPromotionCode() {

@@ -43,7 +43,7 @@ public class BaseService<T> {
 		model = new BaseModel<T>();
 	}
 
-	public void validate(BaseModel<T> model) throws ValidationException {
+	protected void validate(BaseModel<T> model) throws ValidationException {
 		Set<ConstraintViolation<BaseModel<T>>> constraint = validator.validate(model);
 		if(constraint.size() > 0) {
 			model.setErrorConstraintViolation(constraint);

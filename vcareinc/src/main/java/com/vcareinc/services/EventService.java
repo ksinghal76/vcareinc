@@ -18,6 +18,7 @@ import com.vcareinc.constants.DayOfWeek;
 import com.vcareinc.constants.MonthOfYear;
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
+import com.vcareinc.constants.StatusType;
 import com.vcareinc.constants.WeekOfMonth;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
@@ -156,6 +157,10 @@ public class EventService extends BaseService<EventOrder> {
 			events.setSummaryDescription(eventOrder.getSummarydesc());
 			events.setDescription(eventOrder.getDescription());
 			events.setKeyword(eventOrder.getKeyword());
+			if(PriceType.valueOf(priceType.name()).equals(PriceType.STUDENTS))
+				events.setStatus(StatusType.ACTIVE);
+			else
+				events.setStatus(StatusType.PENDING);
 
 //			if(eventOrder.getPromotionCode() != null)
 //				events.setPromotionCode(eventOrder.getPromotionCode());
@@ -229,5 +234,25 @@ public class EventService extends BaseService<EventOrder> {
 		if(eventsList != null && eventsList.size() > 0)
 			events = eventsList.get(0);
 		return events;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Events> getPendingEvents(RequestContext context) {
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getNativeRequest();
+		User user = userService.getUserProfile(request);
+		return em.createQuery("SELECT e FROM Events e WHERE e.status = :status and e.user = :user")
+				.setParameter("status", StatusType.PENDING)
+				.setParameter("user", user)
+				.getResultList();
+	}
+
+	public void changeActiveStatusById(String[] idLst) {
+		if(idLst != null && idLst.length > 0) {
+			for(String id : idLst) {
+				Events events = getEventById(Long.valueOf(id));
+				events.setStatus(StatusType.ACTIVE);
+				em.persist(events);
+			}
+		}
 	}
 }

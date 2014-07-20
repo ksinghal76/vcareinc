@@ -15,6 +15,7 @@ import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
+import com.vcareinc.constants.StatusType;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
@@ -141,7 +142,14 @@ public class ListingService extends BaseService<ListingOrder> {
 				listings.setAdditionalFile(fileUpload2);
 			}
 
+			if(PriceType.valueOf(priceType.name()).equals(PriceType.STUDENTS))
+				listings.setStatus(StatusType.ACTIVE);
+			else
+				listings.setStatus(StatusType.PENDING);
+
 			em.persist(listings);
+
+			clearObject(listingOrder);
 		} catch (ConstraintViolationException e) {
 			listingOrder.setErrorConstraintViolation(e.getConstraintViolations());
 			throw new DBException(e.getMessage());
@@ -196,5 +204,25 @@ public class ListingService extends BaseService<ListingOrder> {
 			}
 		}
 		return listingOrder;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Listings> getPendingListings(RequestContext context) {
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getNativeRequest();
+		User user = userService.getUserProfile(request);
+		return em.createQuery("SELECT l from Listings l WHERE l.status = :status and l.user = :user")
+				.setParameter("status", StatusType.PENDING)
+				.setParameter("user", user)
+				.getResultList();
+	}
+
+	public void changeActiveStatusById(String[] idLst) {
+		if(idLst != null && idLst.length > 0) {
+			for(String id : idLst) {
+				Listings listings = getListingById(Long.valueOf(id));
+				listings.setStatus(StatusType.ACTIVE);
+				em.persist(listings);
+			}
+		}
 	}
 }

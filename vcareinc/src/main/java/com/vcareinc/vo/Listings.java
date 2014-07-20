@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.validator.constraints.Email;
 
 import com.vcareinc.constants.ListingType;
+import com.vcareinc.constants.StatusType;
 
 @Entity
 public class Listings implements Serializable {
@@ -66,6 +67,7 @@ public class Listings implements Serializable {
 	private String location;
 	private Boolean bestService;
 	private Boolean bestValue;
+	private StatusType status;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	private PromotionCode promotionCode;
@@ -263,6 +265,20 @@ public class Listings implements Serializable {
 
 	public void setBestValue(Boolean bestValue) {
 		this.bestValue = bestValue;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public StatusType getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusType status) {
+		this.status = status;
 	}
 
 	public PromotionCode getPromotionCode() {

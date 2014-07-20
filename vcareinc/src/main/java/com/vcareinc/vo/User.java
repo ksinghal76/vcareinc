@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Controller;
 
+import com.vcareinc.constants.StatusType;
+
 @Controller
 @Entity
 @Table(name="user")
@@ -61,6 +63,7 @@ public class User implements Serializable {
 	private Timestamp created;
 	private User createdBy;
 	private Boolean resetPassword;
+	private StatusType status;
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	private final Set<Role> roles = new HashSet<Role>();
@@ -163,6 +166,18 @@ public class User implements Serializable {
 	}
 	public void setResetPassword(Boolean resetPassword) {
 		this.resetPassword = resetPassword;
+	}
+	/**
+	 * @return the status
+	 */
+	public StatusType getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusType status) {
+		this.status = status;
 	}
 	@Override
 	public String toString() {

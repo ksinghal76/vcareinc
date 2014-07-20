@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.stereotype.Controller;
 
+import com.vcareinc.constants.StatusType;
+
 @Controller
 @Entity
 public class Classified implements Serializable {
@@ -51,6 +53,7 @@ public class Classified implements Serializable {
 	private String detailDescription;
 	private String keyword;
 	private PromotionCode promotionCode;
+	private StatusType status;
 
 	@OneToMany
 	private final Set<Category> category = new HashSet<Category>();
@@ -181,6 +184,20 @@ public class Classified implements Serializable {
 
 	public void setPromotionCode(PromotionCode promotionCode) {
 		this.promotionCode = promotionCode;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public StatusType getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusType status) {
+		this.status = status;
 	}
 
 	public Set<Category> getCategory() {

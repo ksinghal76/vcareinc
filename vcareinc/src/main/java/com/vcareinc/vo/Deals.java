@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.vcareinc.constants.DiscountType;
+import com.vcareinc.constants.StatusType;
 
 @Entity
 public class Deals implements Serializable {
@@ -38,6 +39,7 @@ public class Deals implements Serializable {
 	private DiscountType discountType;
 	private Float discountPrice;
 	private Integer totalDeal;
+	private StatusType status;
 
 	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
 	private FileUpload imageUpload;
@@ -130,6 +132,18 @@ public class Deals implements Serializable {
 	}
 	public void setTotalDeal(Integer totalDeal) {
 		this.totalDeal = totalDeal;
+	}
+	/**
+	 * @return the status
+	 */
+	public StatusType getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusType status) {
+		this.status = status;
 	}
 	public FileUpload getImageUpload() {
 		return imageUpload;

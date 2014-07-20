@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Email;
 
 import com.vcareinc.constants.DateRange;
 import com.vcareinc.constants.MonthOfYear;
+import com.vcareinc.constants.StatusType;
 
 @Entity
 public class Events implements Serializable {
@@ -67,6 +68,7 @@ public class Events implements Serializable {
 	private String summaryDescription;
 	private String description;
 	private String keyword;
+	private StatusType status;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	private PromotionCode promotionCode;
@@ -256,6 +258,20 @@ public class Events implements Serializable {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public StatusType getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusType status) {
+		this.status = status;
 	}
 
 	public PromotionCode getPromotionCode() {
