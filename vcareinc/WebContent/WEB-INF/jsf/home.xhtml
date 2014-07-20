@@ -2,6 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="includes/template.xhtml">
 
@@ -278,30 +279,27 @@
 
 								<h2>
 									Featured Listings <a class="view-more"
-										href="http://beautypro411.com/listing/">See All</a>
+										href="listing">See All</a>
 								</h2>
 
 								<div class="clearfix"></div>
 
 								<div class="row-fluid">
-
-
+							
+									<c:if test="${listingLists != null &amp;&amp; listingLists[0] != null}">
 									<div class="row-fluid">
 										<section> <aside> <a
 											href="http://beautypro411.com/listing/hair-like-me.html"
 											class="image"> <img
 											src="${request.contextPath}/resources/images/sitemgr_photo_5494.jpg"
-											alt="Hair Like Me" title="Hair Like Me" border="0"/></a> </aside>
+											alt="${listingLists[0].title}" title="${listingLists[0].title}" border="0"/></a> </aside>
 
 										<h5>
 											<a href="http://beautypro411.com/listing/hair-like-me.html">
-												Hair Like Me </a>
+												${listingLists[0].title} </a>
 										</h5>
 
-										<p>HairLikeMe is a business that I provide for those
-											requesting natural styling. I have 15 years experience in
-											Braids, Twists, Locs, and weaves. I work with women, men, and
-											children of all ages.</p>
+										<p>${listingLists[0].summaryDescription}</p>
 
 										<footer>
 										<p>
@@ -314,47 +312,47 @@
 										</footer> </section>
 
 									</div>
-
+									</c:if>
 
 
 
 									<hr class="box-divisor"/>
 									<div class="row-fluid">
 
-
+										<c:if test="${listingLists != null &amp;&amp; listingLists[1] != null}">
 										<div class="span6">
 											<section>
 											<h5>
 												<a
 													href="http://beautypro411.com/listing/that-hair-place.html">
-													That Hair Place </a>
+													${listingLists[1].title} </a>
 											</h5>
 											<a
 												href="http://beautypro411.com/listing/that-hair-place.html"
 												class="image"> <span class="no-image"></span>
 											</a>
-											<p>You're Someone Special at 'That Hair Place!'</p>
+											<p>${listingLists[1].summaryDescription}</p>
 											</section>
 										</div>
 
+										</c:if>
 
 
-
-
+										<c:if test="${listingLists != null &amp;&amp; listingLists[2] != null}">
 										<div class="span6">
 											<section>
 											<h5>
 												<a href="http://beautypro411.com/listing/salon-atara.html">
-													Salon Atara </a>
+													${listingLists[2].title} </a>
 											</h5>
 											<a href="http://beautypro411.com/listing/salon-atara.html"
 												class="image"> <img
 												src="${request.contextPath}/resources/images/sitemgr_photo_5404.jpg"
 												alt="Salon Atara" title="Salon Atara" border="0"/></a>
-											<p>Uniting Classic Designs &amp; Healthy hair</p>
+											<p>${listingLists[2].summaryDescription}</p>
 											</section>
 										</div>
-
+										</c:if>
 
 									</div>
 
@@ -517,7 +515,7 @@
 								</h2>
 
 								<div class="row-fluid">
-
+									<c:if test="${dealLists != null &amp;&amp; dealLists[0] != null}">
 									<div class="span12 row-fluid">
 
 										<aside class="span8"> <a
@@ -535,18 +533,16 @@
 										<h5>
 											<a
 												href="http://beautypro411.com/deal/free-presentations-every-tuesdays.html">
-												Face To Face Productions </a>
+												${dealLists[0].title} </a>
 										</h5>
 
-										<p>This is example text for the overview section. Just the
-											good ol' boys, never meanin' no harm. Beats all you've ever
-											saw, been in trouble with the law since the day they was
-											born. Straight'nin' the curve, flat'nin' the hills.</p>
+										<p>${dealLists[0].summaryDescription}</p>
 
 
 										</section>
 
 									</div>
+									</c:if>
 
 								</div>
 
@@ -557,7 +553,7 @@
 
 						<div class="row-fluid">
 							<!--cachemarkerFeaturedClassified-->
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[0] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2>Featured Classified</h2>
@@ -566,26 +562,24 @@
 									href="http://beautypro411.com/classified/consulting-business.html"
 									class="image"> <img
 									src="${request.contextPath}/resources/images/sitemgr_photo_3792.png"
-									alt="Consulting Business" title="Consulting Business"
+									alt="${classifiedLists[0].title}" title="${classifiedLists[0].title}"
 									border="0"/></a>
 
 								<section>
 								<h5>
 									<a
 										href="http://beautypro411.com/classified/consulting-business.html">
-										Consulting Business </a>
+										${classifiedLists[0].title} </a>
 								</h5>
 
-								<p>This is example text for the overview section. Hey there
-									where ya goin', not exactly knowin', who says you have to call
-									just on...</p>
+								<p>${classifiedLists[0].summaryDescription}</p>
 								</section>
 
 							</div>
-
+							</c:if>
 							<!--cachemarkerFeaturedClassified-->
 							<!--cachemarkerFeaturedArticle-->
-
+							<c:if test="${articleLists != null &amp;&amp; articleLists[0] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2>
@@ -600,16 +594,14 @@
 								<section>
 								<h5>
 									<a href="http://beautypro411.com/article/retirement-plans.html">
-										Retirement Plans </a>
+										${articleLists[0].title} </a>
 								</h5>
 
-								<p>This is example text for the overview section. One for
-									all and all for one, Muskehounds are always ready. One for all
-									and all f...</p>
+								<p>${articleLists[0].summaryDescription}</p>
 								</section>
 
 							</div>
-
+							</c:if>
 							<!--cachemarkerFeaturedArticle-->
 						</div>
 

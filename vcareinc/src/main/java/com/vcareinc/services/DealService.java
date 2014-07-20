@@ -118,4 +118,12 @@ public class DealService extends BaseService<DealOrder> {
 			deals = dealsList.get(0);
 		return deals;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Deals> getTopDealsLists(Integer numberOfLists) {
+		return em.createQuery("SELECT d FROM Deals d WHERE d.status = :status")
+				.setParameter("status", StatusType.ACTIVE)
+				.setMaxResults(numberOfLists)
+				.getResultList();
+	}
 }

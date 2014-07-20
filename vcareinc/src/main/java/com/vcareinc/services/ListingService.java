@@ -225,4 +225,12 @@ public class ListingService extends BaseService<ListingOrder> {
 			}
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Listings> getTopListingsLists(Integer numberOfLists) {
+		return em.createQuery("SELECT l from Listings l WHERE l.status = :status")
+				.setParameter("status", StatusType.ACTIVE)
+				.setMaxResults(numberOfLists)
+				.getResultList();
+	}
 }

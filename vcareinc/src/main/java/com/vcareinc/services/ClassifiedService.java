@@ -191,4 +191,12 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 			}
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Classified> getTopClassifiedLists(Integer numberOfLists) {
+		return em.createQuery("SELECT c FROM Classified c WHERE c.status = :status")
+				.setParameter("status", StatusType.ACTIVE)
+				.setMaxResults(numberOfLists)
+				.getResultList();
+	}
 }

@@ -255,4 +255,12 @@ public class EventService extends BaseService<EventOrder> {
 			}
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Events> getTopEventLists(Integer numberOfLists) {
+		return em.createQuery("SELECT e FROM Events e WHERE e.status = :status")
+				.setParameter("status", StatusType.ACTIVE)
+				.setMaxResults(numberOfLists)
+				.getResultList();
+	}
 }

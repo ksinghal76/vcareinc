@@ -2,6 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="includes/template.xhtml">
 
@@ -30,14 +31,14 @@
 							<h2 class="h2Header">Featured Listings</h2>
 
 							<div class="row-fluid">
-
+								<c:if test="${listingLists != null &amp;&amp; listingLists[0] != null}">
 								<div class="span6" style="margin-left: 0;">
 
 									<section style="padding: 10px;">
 									<h5 style="color: #353535;font-weight: normal;font-size: 14px;margin: 0; padding: 0;">
 										<a
 											href="http://beautypro411.com/listing/aspen-total-fitness.html" style="color: #353535;text-decoration: none;">
-											Aspen Total Fitness </a>
+											${listingLists[0].title}</a>
 									</h5>
 
 									<a
@@ -45,22 +46,19 @@
 										<span class="no-image"></span>
 									</a>
 
-									<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Soaring
-										through all the galaxies. In search of Earth, flying in to the
-										night. Ulysses, Ulysses - Fighting evil and tyranny, with all
-										his power, and with all of his might.</p>
+									<p style="color: #080808;line-height: 16px;">${listingLists[0].summaryDescription}</p>
 									</section>
 
 								</div>
-
-
+								</c:if>
+								<c:if test="${listingLists != null &amp;&amp; listingLists[1] != null}">
 								<div class="span6">
 
 									<section style="padding: 10px;">
 									<h5 style="color: #353535;font-weight: normal;font-size: 14px;margin: 0; padding: 0;">
 										<a
 											href="http://beautypro411.com/listing/plastic-and-reconstructive-surgery.html" style="color: #353535;text-decoration: none;">
-											Plastic and Reconstructive Surgery </a>
+											${listingLists[1].title}</a>
 									</h5>
 
 									<a
@@ -68,15 +66,11 @@
 										<span class="no-image"></span>
 									</a>
 
-									<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Ten years
-										ago a crack commando unit was sent to prison by a military
-										court for a crime they didn't commit. These men promptly
-										escaped from a maximum security stockade to the Los Angeles
-										underground.</p>
+									<p style="color: #080808;line-height: 16px;">${listingLists[1].summaryDescription}</p>
 									</section>
 
 								</div>
-
+								</c:if>
 
 							</div>
 
@@ -86,7 +80,7 @@
 
 						<div class="row-fluid">
 
-
+							<c:if test="${listingLists != null &amp;&amp; listingLists[2] != null}">
 							<div class="span4 flex-box color-3" style="margin-left: 0;">
 
 								<h2 class="h2Header">Featured Listing</h2>
@@ -95,26 +89,22 @@
 									href="http://beautypro411.com/listing/dental-care-clinic.html" style="color: #457ae6;text-decoration: none;">
 									<img width="217" height="123"
 									src="http://beautypro411.com/custom/domain_1/image_files/19_photo_3338.png"
-									alt="Dental Care Clinic" title="Dental Care Clinic" border="0"/>
+									alt="${listingLists[2].title}" title="${listingLists[2].title}" border="0"/>
 								</a>
 
 								<section style="padding: 10px;">
 								<h5 style="color: #353535;font-weight: normal;font-size: 14px;">
 									<a
 										href="http://beautypro411.com/listing/dental-care-clinic.html" style="color: #353535;text-decoration: none;">
-										Dental Care Clinic </a>
+										${listingLists[2].title}</a>
 								</h5>
 
-								<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Ten years
-									ago a crack commando unit was sent to prison by a military
-									court for a crime they didn't commit. These men promptly
-									escaped from a maximum security stockade to the Los Angeles
-									underground.</p>
+								<p style="color: #080808;line-height: 16px;">${listingLists[2].summaryDescription}</p>
 								</section>
 							</div>
-
-
-
+							</c:if>
+	
+							<c:if test="${listingLists != null &amp;&amp; listingLists[3] != null}">
 							<div class="span4 flex-box color-3">
 
 								<h2 class="h2Header">Featured Listing</h2>
@@ -126,18 +116,15 @@
 								<section style="padding: 10px;">
 								<h5 style="color: #353535;font-weight: normal;font-size: 14px;">
 									<a href="http://beautypro411.com/listing/sea-cruises.html" style="color: #353535;text-decoration: none;">
-										Sea Cruises </a>
+										${listingLists[3].title}</a>
 								</h5>
 
-								<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Hey there
-									where ya goin', not exactly knowin', who says you have to call
-									just one place home. He's goin' everywhere, B.J. McKay and his
-									best friend Bear.</p>
+								<p style="color: #080808;line-height: 16px;">${listingLists[3].summaryDescription}</p>
 								</section>
 							</div>
+							</c:if>
 
-
-
+							<c:if test="${listingLists != null &amp;&amp; listingLists[4] != null}">
 							<div class="span4 flex-box color-3">
 
 								<h2 class="h2Header">Featured Listing</h2>
@@ -149,16 +136,13 @@
 								<section style="padding: 10px;">
 								<h5 style="color: #353535;font-weight: normal;font-size: 14px;">
 									<a href="http://beautypro411.com/listing/special-jewelry.html" style="color: #353535;text-decoration: none;">
-										Special Jewelry </a>
+										${listingLists[4].title}</a>
 								</h5>
 
-								<p style="color: #080808;line-height: 16px;">This is example text for the overview section. Just the
-									good ol' boys, never meanin' no harm. Beats all you've ever
-									saw, been in trouble with the law since the day they was born.
-									Straight'nin' the curve, flat'nin' the hills.</p>
+								<p style="color: #080808;line-height: 16px;">${listingLists[4].summaryDescription}</p>
 								</section>
 							</div>
-
+							</c:if>
 
 						</div>
 
@@ -173,7 +157,7 @@
 							</h2>
 
 							<div class="row-fluid" style="">
-
+								<c:if test="${dealLists != null &amp;&amp; dealLists[0] != null}">
 								<div class="span12" style="margin-left: 0;border-color: #dfeaf7;background-color: #F4F4f4;">
 
 									<div class="span12">
@@ -183,9 +167,9 @@
 
 											<img
 											src="http://beautypro411.com/custom/domain_1/image_files/18_photo_3528.png"
-											alt="Free presentations every Tuesdays"
-											title="Free presentations every Tuesdays" border="0" style="width: 100%;border: none;margin: 0;padding: 0;outline: none;height: auto;max-width: 100%;vertical-align: middle;"/><span>
-												<h4>Free presentations every Tuesdays</h4>
+											alt="${dealLists[0].title}"
+											title="${dealLists[0].title}" border="0" style="width: 100%;border: none;margin: 0;padding: 0;outline: none;height: auto;max-width: 100%;vertical-align: middle;"/><span>
+												<h4>${dealLists[0].title}</h4>
 										</span>
 										</a> </aside>
 
@@ -197,10 +181,7 @@
 												To Face Productions</a>
 										</h5>
 
-										<p style="color: #080808;line-height: 16px;margin: 0;">This is example text for the overview section. Just the
-											good ol' boys, never meanin' no harm. Beats all you've ever
-											saw, been in trouble with the law since the day they was
-											born. Straight'nin' the curve, flat'nin' the hills.</p>
+										<p style="color: #080808;line-height: 16px;margin: 0;">${dealLists[0].summaryDescription}</p>
 
 										<footer>
 										<p></p>
@@ -209,7 +190,7 @@
 									</div>
 
 								</div>
-
+								</c:if>
 
 							</div>
 
@@ -219,7 +200,7 @@
 
 						<div class="row-fluid">
 
-
+							<c:if test="${dealLists != null &amp;&amp; dealLists[1] != null}">
 							<div class="span4 flex-box color-1" style="margin-left: 0;">
 
 								<h2 class="h2Header" style="background-color: #5496bf;">
@@ -228,23 +209,20 @@
 
 								<a href="http://beautypro411.com/deal/60-one-month.html" style="color: #2980b9;text-decoration: none;"> <img
 									src="http://beautypro411.com/custom/domain_1/image_files/3_photo_3482.png"
-									alt="$60.00 - One month" title="$60.00 - One month" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+									alt="${dealLists[1].title}" title="${dealLists[1].title}" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
 
 								<section style="padding: 10px;">
 								<h5 style="color: #353535;font-weight: normal;border: none;margin: 0;padding: 0;outline: none;font-size: 14px;">
 									<a href="http://beautypro411.com/deal/60-one-month.html" style="color: #353535;text-decoration: none;">
-										$60.00 - One month </a>
+										${dealLists[1].title}</a>
 								</h5>
 
-								<p style="color: #080808;">This is example text for the overview section. One for
-									all and all for one, Muskehounds are always ready. One for all
-									and all for one, helping everybody. One for all and all for
-									one, it's a pretty story.</p>
+								<p style="color: #080808;">${dealLists[1].summaryDescription}</p>
 								</section>
 							</div>
+							</c:if>
 
-
-
+							<c:if test="${dealLists != null &amp;&amp; dealLists[2] != null}">
 							<div class="span4 flex-box color-1">
 
 								<h2 class="h2Header" style="background-color: #5496bf;">
@@ -253,23 +231,20 @@
 
 								<a href="http://beautypro411.com/deal/20-off-enjoy.html" style="color: #2980b9;text-decoration: none;"> <img
 									src="http://beautypro411.com/custom/domain_1/image_files/4_photo_3488.png"
-									alt="20% OFF - Enjoy!" title="20% OFF - Enjoy!" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+									alt="${dealLists[2].title}" title="${dealLists[2].title}" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
 
 								<section style="padding: 10px;">
 								<h5 style="color: #353535;font-weight: normal;border: none;margin: 0;padding: 0;outline: none;font-size: 14px;">
 									<a href="http://beautypro411.com/deal/20-off-enjoy.html" style="color: #353535;text-decoration: none;">
-										20% OFF - Enjoy! </a>
+										${dealLists[2].title}</a>
 								</h5>
 
-								<p style="color: #080808;">This is example text for the overview section. 80 days
-									around the world, we'll find a pot of gold just sitting where
-									the rainbow's ending. Time - we'll fight against the time, and
-									we'll fly on the white wings of the wind.</p>
+								<p style="color: #080808;">${dealLists[2].summaryDescription}</p>
 								</section>
 							</div>
+							</c:if>
 
-
-
+							<c:if test="${dealLists != null &amp;&amp; dealLists[3] != null}">
 							<div class="span4 flex-box color-1">
 
 								<h2 class="h2Header" style="background-color: #5496bf;">
@@ -279,22 +254,19 @@
 								<a href="http://beautypro411.com/deal/monday-promotion.html" style="color: #2980b9;text-decoration: none;">
 									<img
 									src="http://beautypro411.com/custom/domain_1/image_files/3_photo_3506.png"
-									alt="Monday promotion!" title="Monday promotion!" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/>
+									alt="${dealLists[3].title}" title="${dealLists[3].title}" border="0" style="width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/>
 								</a>
 
 								<section style="padding: 10px;">
 								<h5 style="color: #353535;font-weight: normal;border: none;margin: 0;padding: 0;outline: none;font-size: 14px;">
 									<a href="http://beautypro411.com/deal/monday-promotion.html" style="color: #353535;text-decoration: none;">
-										Monday promotion! </a>
+										${dealLists[3].title}</a>
 								</h5>
 
-								<p style="color: #080808;">This is example text for the overview section. Knight
-									Rider, a shadowy flight into the dangerous world of a man who
-									does not exist. Michael Knight, a young loner on a crusade to
-									champion the cause of the innocent.</p>
+								<p style="color: #080808;">${dealLists[3].summaryDescription}</p>
 								</section>
 							</div>
-
+							</c:if>
 
 						</div>
 

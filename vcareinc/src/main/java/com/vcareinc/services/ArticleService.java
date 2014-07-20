@@ -152,4 +152,12 @@ public class ArticleService extends BaseService<ArticleOrder> {
 			}
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Articles> getTopArticlesLists(Integer numberOfLists) {
+		return em.createQuery("SELECT a FROM Articles a WHERE a.status = :status")
+			.setParameter("status", StatusType.ACTIVE)
+			.setMaxResults(numberOfLists)
+			.getResultList();
+	}
 }
