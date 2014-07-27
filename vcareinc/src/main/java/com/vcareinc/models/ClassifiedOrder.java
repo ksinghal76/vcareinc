@@ -1,8 +1,13 @@
 package com.vcareinc.models;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.vcareinc.validators.PromotionCode;
 
 @SuppressWarnings("rawtypes")
 @Controller
@@ -10,6 +15,8 @@ public class ClassifiedOrder extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotNull(message="Title is required")
+	@NotEmpty(message="Title is required")
 	private String title;
 	private String contactName;
 	private String contactPhoneNumber;
@@ -40,7 +47,13 @@ public class ClassifiedOrder extends BaseModel {
 	private String summarydesc;
 	private String detailDescription;
 	private String keyword;
+
+	@PromotionCode(message="Promotional Code is expired or invalid. Please try other.")
 	private String promotionCode;
+
+	@NotNull(message="You must select at least one category")
+	private String[] categories;
+
 	public String getTitle() {
 		return title;
 	}
@@ -190,5 +203,17 @@ public class ClassifiedOrder extends BaseModel {
 	 */
 	public void setPromotionCode(String promotionCode) {
 		this.promotionCode = promotionCode;
+	}
+	/**
+	 * @return the categories
+	 */
+	public String[] getCategories() {
+		return categories;
+	}
+	/**
+	 * @param categories the categories to set
+	 */
+	public void setCategories(String[] categories) {
+		this.categories = categories;
 	}
 }

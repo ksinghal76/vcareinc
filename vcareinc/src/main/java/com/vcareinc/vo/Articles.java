@@ -44,7 +44,7 @@ public class Articles implements Serializable {
 
 	private PromotionCode promotionCode;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Price price;
 
 	@OneToMany
@@ -161,5 +161,9 @@ public class Articles implements Serializable {
 
 	public Set<Category> getCategory() {
 		return category;
+	}
+
+	public Boolean addCategory(Category category) {
+		return this.category.add(category);
 	}
 }

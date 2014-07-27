@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <on-start>
+		<evaluate expression="listingService.getPendingListings(flowRequestContext)" result="flowScope.listingsList"/>
+		<evaluate expression="eventService.getPendingEvents(flowRequestContext)" result="flowScope.eventsList"/>
+		<evaluate expression="classifiedService.getPendingClassified(flowRequestContext)" result="flowScope.classifiedList"/>
+		<evaluate expression="articleService.getPendingArticles(flowRequestContext)" result="flowScope.articleList"/>
+		<evaluate expression="billingService.clearObject(billingOrder)"/>
+    </on-start>
+
+    <subflow-state id="userAccount" subflow="register-flow">
+		<transition on="loginSuccess" to="billingManage"/>
+	</subflow-state>
+
+	<view-state id="billingManage" view="billingManage" model="billingOrder">
+	    <transition on="next" to="paymentType"/>
+	</view-state>
+
+	<action-state id="paymentType">
+	    <evaluate expression="billingService.totalAmount(flowRequestContext, billingOrder)" result="flowScope.totalAmount"/>
+		<evaluate expression="billingOrder.paymentMethod" result="flowScope.paymentMethod"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="billingManage"/>
+		<transition on="CREDITCARD" to="creditCardMethod"/>
+		<transition on="PAYPAl" to="creditCardMethod"/>
+		<transition on="SIMPLEPAY" to="creditCardMethod"/>
+		<transition on="INVOICECHECK" to="creditCardMethod"/>
+	</action-state>
+
+	<view-state id="creditCardMethod" view="creditCard" model="creditCardModel">
+	    <transition on="submit" to="saveCreditCard"/>
+	</view-state>
+
+	<action-state id="saveCreditCard">
+	    <evaluate expression="creditCardService.saveCreditCard(flowRequestContext, creditCardModel)"/>
+	    <transition on-exception="com.vcareinc.exceptions.CommonException" to="creditCardMethod"/>
+	    <transition to="endBilling"/>
+	    <on-exit>
+	        <set name="flowScope.billingOrder" value="new com.vcareinc.models.BillingOrder()"/>
+	        <set name="flowScope.creditCardModel" value="new com.vcareinc.models.CreditCardModel()"/>
+	    </on-exit>
+	</action-state>
+
+	<end-state id="endBilling"/>
+</flow>

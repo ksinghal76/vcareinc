@@ -214,17 +214,19 @@ public class CreditCardService extends BaseService<CreditCardModel> {
 			clearObject(creditCardModel);
 
 		} catch (ValidationException | PayPalRESTException | ParseException e) {
-			throw new ValidationException(e.getMessage());
+			e.printStackTrace();
+			creditCardModel.setErrorMsg(e.getMessage());
+			throw new CommonException(e.getMessage());
 		}
 	}
 
 	private String getCreditCardType(String creditCardNumber) {
 		String type = null;
-		if(creditCardNumber.substring(0).equals("3"))
+		if(creditCardNumber.substring(0,1).equals("3"))
 			type = "amex";
-		else if(creditCardNumber.substring(0).equals("4"))
+		else if(creditCardNumber.substring(0,1).equals("4"))
 			type = "visa";
-		else if(creditCardNumber.substring(0).equals("5"))
+		else if(creditCardNumber.substring(0,1).equals("5"))
 			type = "mastercard";
 		else if(creditCardNumber.substring(0,4).equals("6011"))
 			type = "discover";

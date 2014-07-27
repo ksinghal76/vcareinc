@@ -14,11 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Email;
-import org.springframework.stereotype.Controller;
 
 import com.vcareinc.constants.StatusType;
 
-@Controller
 @Entity
 public class Classified implements Serializable {
 
@@ -28,10 +26,10 @@ public class Classified implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private User user;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Price price;
 	private String title;
 	private String contactName;
@@ -204,5 +202,7 @@ public class Classified implements Serializable {
 		return category;
 	}
 
-
+	public Boolean addCategory(Category category) {
+		return this.category.add(category);
+	}
 }

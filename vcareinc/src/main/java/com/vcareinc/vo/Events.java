@@ -286,5 +286,7 @@ public class Events implements Serializable {
 		return category;
 	}
 
-
+	public Boolean addCategory(Category category) {
+		return this.category.add(category);
+	}
 }

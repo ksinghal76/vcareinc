@@ -15,7 +15,7 @@ import com.vcareinc.vo.Events;
 import com.vcareinc.vo.Listings;
 
 @Controller
-public class BillService extends BaseService<BillingOrder> {
+public class BillingService extends BaseService<BillingOrder> {
 
 	@Autowired
 	private UserService userService;

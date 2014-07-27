@@ -11,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PageType;
 import com.vcareinc.constants.PriceType;
+import com.vcareinc.constants.StatusType;
 import com.vcareinc.controllers.ConversionManagedBean;
 import com.vcareinc.models.Order;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Country;
 import com.vcareinc.vo.Price;
+import com.vcareinc.vo.PromotionCode;
 import com.vcareinc.vo.State;
 
 @SuppressWarnings("rawtypes")
@@ -187,5 +189,27 @@ public class OrderService extends BaseService {
 		if(stateList != null && stateList.size() > 0)
 			state = stateList.get(0);
 		return state;
+	}
+
+	public Boolean isPromotionCodeExists(String promotionCodeStr) {
+		PromotionCode promotionCode = getPromotionCode(promotionCodeStr);
+		if(promotionCode != null)
+			return Boolean.TRUE;
+
+		return Boolean.FALSE;
+	}
+
+	@SuppressWarnings("unchecked")
+	public PromotionCode getPromotionCode(String promotionCodeStr) {
+		PromotionCode promotionCode = null;
+		List<PromotionCode> promotionCodeLst = em.createQuery("SELECT p FROM PromotionCode p where p.code = :code and active = :active")
+				.setParameter("code", promotionCodeStr)
+				.setParameter("active", StatusType.ACTIVE)
+				.getResultList();
+
+		if(promotionCodeLst != null && promotionCodeLst.size() > 0)
+			promotionCode = promotionCodeLst.get(0);
+
+		return promotionCode;
 	}
 }

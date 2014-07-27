@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.vcareinc.constants.StatusType;
+
 @Entity
 public class PromotionCode implements Serializable {
 
@@ -17,6 +19,7 @@ public class PromotionCode implements Serializable {
 
 	private String code;
 	private String description;
+	private StatusType active;
 
 	public Integer getId() {
 		return id;
@@ -40,5 +43,19 @@ public class PromotionCode implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the active
+	 */
+	public StatusType getActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(StatusType active) {
+		this.active = active;
 	}
 }

@@ -861,67 +861,39 @@
 	<input type="hidden" name="return_categories" value=""/>
 	<tr>
 		<td colspan="2" class="treeView">
-			<ul id="browser" class="filetree treeview-famfamfam">
-				<c:forEach items="${order.categoryMap}" var="catMap">
-					<c:choose>
-						<h:outputText value="${fn:length(catMap.value) 	}"/>
-						<c:when test="${fn:length(catMap.value) > 1}">
-							<li><span class="folder">${catMap.key.name}</span>
-							<ul>
-								<c:forEach var="cat" items="${catMap.value}">
-									<c:if test="${cat.name != catMap.key.name}">
-										<li id="${cat.id}"><span class="file">${cat.name}<a catAddId="${cat.id}">Add</a></span></li>
-									</c:if>
-								</c:forEach>
-							</ul>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li id="${catMap.key.id}" class="file">${catMap.key.name} <a catAddId="${catMap.key.id}">Add</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</ul>
-			<!-- <ul id="classified_categorytree_id_0" class="categoryTreeview"><li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 57, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_57">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 57, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_57">Jobs</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 57, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_57" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 57, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_57" style="display: none;">Jobs</a>
-<ul id="classified_categorytree_id_57" style="display: none;"></ul>
-</li>
-<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 102, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_102">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 102, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_102">Merchandise</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 102, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_102" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 102, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_102" style="display: none;">Merchandise</a>
-<ul id="classified_categorytree_id_102" style="display: none;"></ul>
-</li>
-<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 97, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_97">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 97, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_97">Notices</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 97, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_97" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 97, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_97" style="display: none;">Notices</a>
-<ul id="classified_categorytree_id_97" style="display: none;"></ul>
-</li>
-<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 101, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_101">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 101, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_101">Personals</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 101, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_101" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 101, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_101" style="display: none;">Personals</a>
-<ul id="classified_categorytree_id_101" style="display: none;"></ul>
-</li>
-<li><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 58, 0, 'http://beautypro411.com',1);" class="switchOpen" id="classified_opencategorytree_id_58">+</a><a href="javascript:void(0);" onclick="loadCategoryTree('all', 'classified_', 'ClassifiedCategory', 58, 0, 'http://beautypro411.com',1);" class="categoryTitle" id="classified_opencategorytree_title_id_58">Pets</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 58, 'http://beautypro411.com');" class="switchClose" id="classified_closecategorytree_id_58" style="display: none;">-</a><a href="javascript:void(0);" onclick="closeCategoryTree('classified_', 'ClassifiedCategory', 58, 'http://beautypro411.com');" class="categoryTitle" id="classified_closecategorytree_title_id_58" style="display: none;">Pets</a>
-<ul id="classified_categorytree_id_58" style="display: none;"></ul>
-</li>
-</ul> -->
-			<table width="100%" border="0" cellpadding="0" class="tableCategoriesADDED" cellspacing="0">
-				<tbody><tr>
-					<th colspan="2" class="tableCategoriesTITLE alignLeft"><strong>Classified Categories:</strong></th>
-				</tr>
-				<tr id="msgback2" class="informationMessageShort">
-					<td colspan="2" style="width: auto;"><p><img width="16" height="14" src="http://beautypro411.com/images/icon_atention.gif" alt="Attention" title="Attention"/> Click on "Add" to select categories</p></td>
-				</tr>
-				<tr id="msgback" style="display:none">
-					<td colspan="2"><div><img width="16" height="14" src="http://beautypro411.com/images/icon_atention.gif" alt="Attention" title="Attention"/></div><p>Click at "Add main category" or "Add sub-category" to type your new categories</p></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="tableCategoriesCONTENT"><select name="feed" id="feed" multiple="" size="5" style="width:500px"></select></td>
-				</tr>
-				<tr id="removeCategoriesButton" style="display:none">
-					<td class="tableCategoriesBUTTONS" colspan="2">
+				<select multiple="multiple" name="categories">
+					<c:forEach items="${order.categoryMap}" var="catMap">
+						<c:choose>
+							<c:when test="${fn:length(catMap.value) > 1}">
+								<option value="-${catMap.key.id}" disabled="disabled">${catMap.key.name}</option>
+									<c:forEach var="cat" items="${catMap.value}">
+										<c:if test="${cat.name != catMap.key.name}">
+											<c:choose>
+												<c:when test="${commonManagedBean.compareCategories(classifiedOrder.categories, cat.id)}">
+													<option value="${cat.id}" selected="selected">&nbsp;&nbsp;${cat.name}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${cat.id}">&nbsp;&nbsp;${cat.name}</option>
+												</c:otherwise>
+											</c:choose>
 
-						<center>
-							<button class="input-button-form" type="button" value="Remove Selected Category" onclick="JS_removeCategory(document.classified.feed, false);">Remove Selected Category</button>
-						</center>
-
-					</td>
-				</tr>
-			</tbody></table>
-		</td>
+										</c:if>
+									</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${commonManagedBean.compareCategories(classifiedOrder.categories, catMap.key.id)}">
+										<option value="${catMap.key.id}" selected="selected">${catMap.key.name}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${catMap.key.id}">${catMap.key.name}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</select>
+			</td>
 	</tr>
 </tbody></table>
 

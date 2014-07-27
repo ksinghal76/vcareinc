@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+        <div class="container-fluid">
+
+                                    <p class="breadcrumb">
+                        <a href="memberUser">Home</a> / <a href="memberUser">beautypro411</a>  / <a href="billing-flow">Payment</a> / Pay                    </p>
+
+	<ui:include src="includes/memberbar.xhtml"/>
+    <div class="content">
+
+
+        <h2>Manage Billing</h2>
+
+		<ui:include src="includes/errorPageType.xhtml">
+       		<ui:param name="error" value="${creditCardModel}"/>
+       	</ui:include>
+
+	<h2 class="standardSubTitle">Billing Information</h2>
+
+	<!-- <ul class="list-view">
+		<li class="list-back"><a href="http://www.beautypro411.com/members/billing/pay.php">Back</a></li>
+	</ul> -->
+
+
+			<table class="standard-tableTOPBLUE" border="0" cellpadding="2" cellspacing="2">
+			<tbody><tr>
+				<th>Listing Name</th>
+				<th width="100">Extra Category</th>
+				<th width="100">Level</th>
+															<th width="120">Promotional Code</th>
+													<th width="70">Renewal</th>
+				<th width="60">Prices</th>
+			</tr>
+			<c:forEach items="${listingsList}" var="listingLst">
+				<c:forEach items="${billingOrder.listingCheck}" var="listingId">
+					<c:if test="${listingLst.id == listingId}">
+						<tr>
+							<td>${listingLst.title}</td>
+							<td style="text-align:center">3</td>
+							<td>${listingLst.price.priceType}</td>
+																				<td style="text-align:center">N/A</td>
+																		<td>08/12/2014</td>
+							<td>${listingLst.price.amount}</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+					</tbody></table>
+
+
+			<table class="standard-tableTOPBLUE" border="1" cellpadding="2" cellspacing="2">
+			<tbody><tr>
+				<th>Event Name</th>
+				<th width="100">Level</th>
+															<th width="120">Promotional Code</th>
+													<th width="70">Renewal</th>
+				<th width="60">Prices</th>
+			</tr>
+			<c:forEach items="${eventsList}" var="eventsLst">
+				<c:forEach items="${billingOrder.eventCheck}" var="eventsId">
+					<c:if test="${eventsLst.id == eventsId}">
+				<tr>
+					<td>${eventsLst.title}</td>
+					<td>${eventsLst.price.priceType}</td>
+																		<td style="text-align:center">N/A</td>
+																<td>08/12/2014</td>
+					<td>${eventsLst.price.amount}</td>
+				</tr>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+					</tbody></table>
+
+
+
+
+			<table class="standard-tableTOPBLUE" border="1" cellpadding="2" cellspacing="2">
+			<tbody><tr>
+				<th>Classified Name</th>
+				<th width="100">Level</th>
+															<th width="120">Promotional Code</th>
+													<th width="70">Renewal</th>
+				<th width="60">Prices</th>
+			</tr>
+			<c:forEach items="${classifiedList}" var="classifiedLst">
+				<c:forEach items="${billingOrder.classifiedCheck}" var="classifiedId">
+					<c:if test="${classifiedLst.id == classifiedId}">
+				<tr>
+					<td>${classifiedLst.title}</td>
+					<td>${classified.price.priceType}</td>
+																		<td style="text-align:center">N/A</td>
+																<td>08/12/2014</td>
+					<td>${classified.price.amount}</td>
+				</tr>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+					</tbody></table>
+
+
+			<table class="standard-tableTOPBLUE" border="1" cellpadding="2" cellspacing="2">
+			<tbody><tr>
+				<th>Article Name</th>
+															<th width="120">Promotional Code</th>
+													<th width="70">Renewal</th>
+				<th width="60">Prices</th>
+			</tr>
+			<c:forEach items="${articleList}" var="articleLst">
+				<c:forEach items="${billingOrder.articleCheck}" var="articleId">
+					<c:if test="${articleLst.id == articleId}">
+				<tr>
+					<td>${articleLst.title}</td>
+																		<td style="text-align:center">N/A</td>
+																<td>08/12/2014</td>
+					<td>${articleLst.price.amount}</td>
+				</tr>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+					</tbody></table>
+
+
+
+
+					<table class="standard-tableTOPBLUE levelTopdetail" border="1" cellpadding="2" cellspacing="2">
+								<tbody><tr>
+					<th width="340" style="text-align:right">Total Price &nbsp;</th>
+					<td>
+						${totalAmount}					</td>
+				</tr>
+			</tbody></table>
+
+		<ul class="list-view">
+			<li class="list-back"><a href="http://www.beautypro411.com/members/billing/pay.php">Back</a></li>
+		</ul>
+
+
+				<script language="javascript" type="text/javascript">
+					<!--
+					function submitOrder() {
+						document.getElementById("authorizebutton").disabled = true;
+						document.authorizeform.submit();
+					}
+					//-->
+				</script>
+
+				<!-- <form name="authorizeform" target="_self" action="http://www.beautypro411.com/members/billing/processpayment.php?payment_method=authorize" method="post">
+ -->
+ 				<h:form>
+					<table align="center" width="95%" cellpadding="2" cellspacing="2" class="standard-table payment-authorize">
+						<tbody><tr>
+							<th colspan="2" class="standard-tabletitle">Billing Info</th>
+						</tr>
+						<tr>
+							<th>* Card Number:</th>
+							<td><input type="text" name="cardNumber" value="${creditCardModel.cardNumber}"/></td>
+						</tr>
+						<tr>
+							<th>* Card Expire date:</th>
+							<td><input type="text" name="expireDate" value="${creditCardModel.expireDate}"/><span>mm/yy</span></td>
+						</tr>
+						<tr>
+							<th>Card Code:</th>
+							<td><input type="text" name="cardCode" value="${creditCardModel.cardCode}"/></td>
+						</tr>
+						<tr>
+							<th colspan="2" class="standard-tabletitle">Customer Info
+						</th></tr>
+						<tr>
+							<th>First Name:</th>
+							<td><input type="text" name="firstName" value="${creditCardModel.firstName}"/></td>
+						</tr>
+						<tr>
+							<th>Last Name:</th>
+							<td><input type="text" name="lastName" value="${creditCardModel.lastName}"/></td>
+						</tr>
+						<tr>
+							<th>Company:</th>
+							<td><input type="text" name="companyName" value="${creditCardModel.companyName}"/></td>
+						</tr>
+						<tr>
+							<th>Address:</th>
+							<td><input type="text" name="address" value="${creditCardModel.address}"/></td>
+						</tr>
+						<tr>
+							<th>City:</th>
+							<td><input type="text" name="city" value="${creditCardModel.city}"/></td>
+						</tr>
+						<tr>
+							<th>State:</th>
+							<td><input type="text" name="state" value="${creditCardModel.state}"/></td>
+						</tr>
+						<tr>
+							<th>Zip:</th>
+							<td><input type="text" name="zipCode" value="${creditCardModel.zipCode}"/></td>
+						</tr>
+						<tr>
+							<th>Country:</th>
+							<td><input type="text" name="country" value="${creditCardModel.country}"/></td>
+						</tr>
+						<tr>
+							<th>Phone:</th>
+							<td><input type="tel" name="phone" value="${creditCardModel.phone}"/></td>
+						</tr>
+						<tr>
+							<th>E-mail:</th>
+							<td><input type="email" name="email" value="${creditCardModel.email}"/></td>
+						</tr>
+					</tbody></table>
+
+					<p class="informationMessage">The installments will be recurring until your credit card expiration (maximum of 36 installments).</p>
+											<p class="standardButton paymentButton">
+							<button type="submit" id="authorizebutton" name="_eventId_submit">Pay By CreditCard</button>
+						</p>
+
+				</h:form>
+
+
+
+
+    </div>
+
+
+            </div><!-- Close container-fluid div -->
+
+        </div>
+	</ui:define>
+</ui:composition>

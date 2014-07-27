@@ -11,7 +11,7 @@
 	</on-start>
 
 	<subflow-state id="userAccount" subflow="register-flow">
-		<transition on="loginSuccess" to="idExists"/>
+	    <transition to="idExists"/>
 	</subflow-state>
 
 	<decision-state id="idExists">
@@ -92,6 +92,9 @@
 		<evaluate expression="listingService.saveListing(flowRequestContext, listingOrder)"/>
 		<transition to="endOrder"/>
 		<transition on-exception="com.vcareinc.exceptions.CommonException" to="listingOrder"/>
+		<on-exit>
+		    <set name="flowScope.listingOrder" value="new com.vcareinc.models.ListingOrder()"/>
+		</on-exit>
 	</action-state>
 
 	<view-state id="dealOrder" view="dealOrder" model="dealOrder">
@@ -104,6 +107,9 @@
 		<evaluate expression="dealService.saveDeal(flowRequestContext, dealOrder)"/>
 		<transition to="endOrder"/>
 		<transition on-exception="com.vcareinc.exceptions.CommonException" to="dealOrder"/>
+		<on-exit>
+		    <set name="flowScope.dealOrder" value="new com.vcareinc.models.DealOrder()"/>
+		</on-exit>
 	</action-state>
 
 	<view-state id="eventOrder" view="eventOrder" model="eventOrder">
@@ -119,6 +125,9 @@
 		<evaluate expression="eventService.saveEvent(flowRequestContext, eventOrder)"/>
 		<transition to="endOrder"/>
 		<transition on-exception="com.vcareinc.exceptions.CommonException" to="eventOrder"/>
+		<on-exit>
+		    <set name="flowScope.eventOrder" value="new com.vcareinc.models.EventOrder()"/>
+		</on-exit>
 	</action-state>
 
 	<view-state id="classifiedOrder" view="classifiedOrder" model="classifiedOrder">
@@ -134,6 +143,9 @@
 		<evaluate expression="classifiedService.saveClassified(flowRequestContext, classifiedOrder)"/>
 		<transition to="endOrder"/>
 		<transition on-exception="com.vcareinc.exceptions.CommonException" to="classifiedOrder"/>
+		<on-exit>
+		    <set name="flowScope.classifiedOrder" value="new com.vcareinc.models.ClassifiedOrder()"/>
+		</on-exit>
 	</action-state>
 
 	<view-state id="articleOrder" view="articleOrder" model="articleOrder">
@@ -149,6 +161,9 @@
 		<evaluate expression="articleService.saveArticle(flowRequestContext, articleOrder)"/>
 		<transition to="endOrder"/>
 		<transition on-exception="com.vcareinc.exceptions.CommonException" to="articleOrder"/>
+		<on-exit>
+		    <set name="flowScope.articleOrder" value="new com.vcareinc.models.ArticleOrder()"/>
+		</on-exit>
 	</action-state>
 
 	<end-state id="endOrder" view="externalRedirect:contextRelative:/spring/memberUser"/>

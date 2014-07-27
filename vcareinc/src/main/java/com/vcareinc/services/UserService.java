@@ -71,46 +71,38 @@ private Logger log = Logger.getLogger(UserService.class);
 		this.authenticationService = authenticationService;
 	}
 
-	@SuppressWarnings("finally")
-	public String loginUser(Signup signup, RequestContext context) throws DBException {
+	public String loginUser(Signup signup, RequestContext context) throws CommonException {
 		log.debug(signup.toString());
 
 		HttpSession session = ((HttpServletRequest) context.getExternalContext().getNativeRequest()).getSession();
 		try {
 			clearError(signup);
 			if(signup != null) {
-//				if(signup.getLoginAccountType().equals(Signup.LoginAccountType.DIRECTORY)) {
-					User user = findUser(signup.getEmail());
-					if(user != null) {
-//						if(user.getPassword().trim().equals(signup.getPassword())) {
-						if(SecureUtils.checkPassword(signup.getPassword().trim(), user.getPassword().trim())) {
-//							acegiAuthenticationService.addUserAuthentication(user.getEmail(), user.getPassword(), user.getRoles(), user);
-							authenticationService.addUserAuthentication(user.getEmail(), user.getPassword(), user.getRoles());
-							session.setAttribute(USER_PROFILE, user);
-//							signup.setErrorMsg("User Email Successful!!!");
-							return "success";
-						} else {
-							signup.setErrorMsg("User Email/Password invalid!!!");
-							throw new DBException("User Email/Password invalid!!!");
-						}
+				User user = findUser(signup.getEmail());
+				if(user != null) {
+					if(SecureUtils.checkPassword(signup.getPassword().trim(), user.getPassword().trim())) {
+						authenticationService.addUserAuthentication(user.getEmail(), user.getPassword(), user.getRoles());
+						session.setAttribute(USER_PROFILE, user);
+
 					} else {
-						signup.setErrorMsg("User Email does not exists!!!!");
-						throw new DBException("User Email does not exists!!!!");
+						signup.setErrorMsg("User Email/Password invalid!!!");
+						throw new DBException("User Email/Password invalid!!!");
 					}
-//				}
+				} else {
+					signup.setErrorMsg("User Email does not exists!!!!");
+					throw new DBException("User Email does not exists!!!!");
+				}
 			}
 		} catch (Exception e) {
 			signup.setErrorMsg(e.getMessage());
 			throw new DBException(e.getMessage());
-		} finally {
-			return "fail";
 		}
-
+		return "success";
 	}
 
 	@SuppressWarnings({ "unchecked" })
 	@Transactional(rollbackFor=DBException.class)
-	public User saveRegister(Register register, RequestContext context) throws DBException  {
+	public User saveRegister(Register register, RequestContext context) throws CommonException  {
 		log.info(register.toString());
 		HttpSession session = ((HttpServletRequest) context.getExternalContext().getNativeRequest()).getSession();
 		User user = new User();

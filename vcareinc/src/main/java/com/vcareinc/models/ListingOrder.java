@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.vcareinc.constants.ContentType;
 import com.vcareinc.validators.FileExtension;
+import com.vcareinc.validators.PromotionCode;
 
 
 @SuppressWarnings("rawtypes")
@@ -71,6 +72,12 @@ public class ListingOrder extends BaseModel {
 	private String location;
 	private Boolean bestService;
 	private Boolean bestValue;
+
+	@PromotionCode(message="Promotional Code is expired or invalid. Please try other.")
+	private String promotionCode;
+
+	@NotNull(message="You must select at least one category")
+	private String[] categories;
 
 	public String getTitle() {
 		return title;
@@ -263,5 +270,29 @@ public class ListingOrder extends BaseModel {
 	}
 	public void setBestValue(Boolean bestValue) {
 		this.bestValue = bestValue;
+	}
+	/**
+	 * @return the promotionCode
+	 */
+	public String getPromotionCode() {
+		return promotionCode;
+	}
+	/**
+	 * @param promotionCode the promotionCode to set
+	 */
+	public void setPromotionCode(String promotionCode) {
+		this.promotionCode = promotionCode;
+	}
+	/**
+	 * @return the categories
+	 */
+	public String[] getCategories() {
+		return categories;
+	}
+	/**
+	 * @param categories the categories to set
+	 */
+	public void setCategories(String[] categories) {
+		this.categories = categories;
 	}
 }

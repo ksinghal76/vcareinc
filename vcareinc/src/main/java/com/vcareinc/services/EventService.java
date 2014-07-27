@@ -2,6 +2,7 @@ package com.vcareinc.services;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,10 +27,12 @@ import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.EventOrder;
 import com.vcareinc.utils.DateUtils;
 import com.vcareinc.vo.Address;
+import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Country;
 import com.vcareinc.vo.Events;
 import com.vcareinc.vo.FileUpload;
 import com.vcareinc.vo.Price;
+import com.vcareinc.vo.PromotionCode;
 import com.vcareinc.vo.State;
 import com.vcareinc.vo.User;
 
@@ -162,8 +165,18 @@ public class EventService extends BaseService<EventOrder> {
 			else
 				events.setStatus(StatusType.PENDING);
 
-//			if(eventOrder.getPromotionCode() != null)
-//				events.setPromotionCode(eventOrder.getPromotionCode());
+			if(eventOrder.getCategories() != null && eventOrder.getCategories().length > 0) {
+				Map<Long, Category> categoryMap = getCategories();
+				for(String categoriesStr : eventOrder.getCategories()) {
+					events.addCategory(categoryMap.get(Long.valueOf(categoriesStr)));
+				}
+			}
+
+			if(eventOrder.getPromotionCode() != null && eventOrder.getPromotionCode().trim().length() > 0) {
+				PromotionCode promotionCode = orderService.getPromotionCode(eventOrder.getPromotionCode());
+				events.setPromotionCode(promotionCode);
+			}
+
 			em.persist(events);
 
 			if(eventOrder.getImageUpload() != null && eventOrder.getImageUpload().getSize() > 0) {
@@ -255,7 +268,7 @@ public class EventService extends BaseService<EventOrder> {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Events> getTopEventLists(Integer numberOfLists) {
 		return em.createQuery("SELECT e FROM Events e WHERE e.status = :status")

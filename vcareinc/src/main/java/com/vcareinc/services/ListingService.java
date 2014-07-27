@@ -1,6 +1,7 @@
 package com.vcareinc.services;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,12 @@ import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ListingOrder;
 import com.vcareinc.vo.Address;
+import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Country;
 import com.vcareinc.vo.FileUpload;
 import com.vcareinc.vo.Listings;
 import com.vcareinc.vo.Price;
+import com.vcareinc.vo.PromotionCode;
 import com.vcareinc.vo.State;
 import com.vcareinc.vo.User;
 
@@ -122,11 +125,20 @@ public class ListingService extends BaseService<ListingOrder> {
 			listings.setHourOfWork(listingOrder.getHourOfWork());
 			listings.setLocation(listingOrder.getLocation());
 
-//			listings.addCategory(null);
 			listings.setBestService(listingOrder.getBestService());
 			listings.setBestValue(listingOrder.getBestValue());
 
-//			listings.setPromotionCode(null);
+			if(listingOrder.getCategories() != null && listingOrder.getCategories().length > 0) {
+				Map<Long, Category> categoryMap = getCategories();
+				for(String categoriesStr : listingOrder.getCategories()) {
+					listings.addCategory(categoryMap.get(Long.valueOf(categoriesStr)));
+				}
+			}
+
+			if(listingOrder.getPromotionCode() != null && listingOrder.getPromotionCode().trim().length() > 0) {
+				PromotionCode promotionCode = orderService.getPromotionCode(listingOrder.getPromotionCode());
+				listings.setPromotionCode(promotionCode);
+			}
 
 			em.persist(listings);
 
@@ -225,7 +237,7 @@ public class ListingService extends BaseService<ListingOrder> {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Listings> getTopListingsLists(Integer numberOfLists) {
 		return em.createQuery("SELECT l from Listings l WHERE l.status = :status")

@@ -1,6 +1,7 @@
 package com.vcareinc.services;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,8 +20,10 @@ import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ArticleOrder;
 import com.vcareinc.vo.Articles;
+import com.vcareinc.vo.Category;
 import com.vcareinc.vo.FileUpload;
 import com.vcareinc.vo.Price;
+import com.vcareinc.vo.PromotionCode;
 import com.vcareinc.vo.User;
 
 @Controller
@@ -84,7 +87,18 @@ public class ArticleService extends BaseService<ArticleOrder> {
 			articles.setDescription(articleOrder.getDescription());
 			articles.setContent(articleOrder.getContent());
 			articles.setKeyword(articleOrder.getKeyword());
-			articles.setPromotionCode(articleOrder.getPromotionCode());
+
+			if(articleOrder.getCategories() != null && articleOrder.getCategories().length > 0) {
+				Map<Long, Category> categoryMap = getCategories();
+				for(String categoriesStr : articleOrder.getCategories()) {
+					articles.addCategory(categoryMap.get(Long.valueOf(categoriesStr)));
+				}
+			}
+
+			if(articleOrder.getPromotionCode() != null && articleOrder.getPromotionCode().trim().length() > 0) {
+				PromotionCode promotionCode = orderService.getPromotionCode(articleOrder.getPromotionCode());
+				articles.setPromotionCode(promotionCode);
+			}
 
 			em.persist(articles);
 
@@ -152,7 +166,7 @@ public class ArticleService extends BaseService<ArticleOrder> {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Articles> getTopArticlesLists(Integer numberOfLists) {
 		return em.createQuery("SELECT a FROM Articles a WHERE a.status = :status")

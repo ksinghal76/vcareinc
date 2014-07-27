@@ -1,8 +1,5 @@
 package com.vcareinc.models;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
@@ -13,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.vcareinc.constants.DateRange;
 import com.vcareinc.constants.DayOfWeek;
 import com.vcareinc.constants.WeekOfMonth;
-import com.vcareinc.vo.Category;
+import com.vcareinc.validators.PromotionCode;
 
 @SuppressWarnings("rawtypes")
 @Controller
@@ -73,9 +70,11 @@ public class EventOrder extends BaseModel {
 	private String description;
 	private String keyword;
 
+	@PromotionCode(message="Promotional Code is expired or invalid. Please try other.")
 	private String promotionCode;
 
-	private final Set<Category> category = new HashSet<Category>();
+	@NotNull(message="You must select at least one category")
+	private String[] categories;
 
 	public String getTitle() {
 		return title;
@@ -381,11 +380,17 @@ public class EventOrder extends BaseModel {
 		return promotionCode;
 	}
 
-	public void setPromotionCode(String promotionCode) {
-		this.promotionCode = promotionCode;
+	/**
+	 * @return the categories
+	 */
+	public String[] getCategories() {
+		return categories;
 	}
 
-	public Set<Category> getCategory() {
-		return category;
+	/**
+	 * @param categories the categories to set
+	 */
+	public void setCategories(String[] categories) {
+		this.categories = categories;
 	}
 }

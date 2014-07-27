@@ -1,4 +1,4 @@
- package com.vcareinc.validators;
+package com.vcareinc.validators;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,18 +10,11 @@ import javax.validation.Constraint;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Constraint(validatedBy=BillingOrderListsValidator.class)
-public @interface BillingOrderLists {
-	String message() default "Please select at least one";
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Constraint(validatedBy=PromotionCodeValidator.class)
+public @interface PromotionCode {
 
-	String[] listingList();
-
-	String[] eventList();
-
-	String [] articleList();
-
-	String[] classifiedList();
+	String message();
 
 	@SuppressWarnings("rawtypes")
 	Class[] groups() default {};

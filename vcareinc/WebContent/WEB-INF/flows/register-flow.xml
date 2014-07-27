@@ -16,7 +16,7 @@
 	<action-state id="loginAction">
 		<evaluate expression="userService.loginUser(signup, flowRequestContext)"/>
 		<transition on="success" to="loginSuccess"/>
-		<transition on="fail" to="signup"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="signup"/>
 	</action-state>
 
 	<view-state id="register" view="register" model="register">
@@ -26,7 +26,7 @@
 	<action-state id="saveRegister">
 		<evaluate expression="userService.saveRegister(register, flowRequestContext)" result="flowScope.userProfile"/>
 		<transition to="completeRegisterForm"/>
-		<transition on-exception="com.vcareinc.exceptions.DBException" to="register"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="register"/>
 	</action-state>
 
 <!-- 	<action-state id="getUser">

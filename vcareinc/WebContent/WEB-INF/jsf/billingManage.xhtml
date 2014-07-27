@@ -1,0 +1,476 @@
+ 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container members">
+
+        <div class="container-fluid">
+
+                                    <p class="breadcrumb">
+                        <a href="memberUser/">Home</a> / <a href="memberUser">beautypro411</a>  / <a href="billManage-flow">Payment</a> / Manage                    </p>
+
+	<ui:include src="includes/memberbar.xhtml"/>
+	<div class="content members">
+
+
+		<h2>Manage Billing</h2>
+		<!-- <form name="" method="post" action="pay.php"> -->
+		<h:form>
+		<ui:include src="includes/errorPageType.xhtml">
+       		<ui:param name="error" value="${billingOrder}"/>
+       	</ui:include>
+		<script>
+		<!--
+			function toggleAll(obj, lnk){
+
+				var value = obj.checked;
+				var trElements = document.getElementsByTagName('tr');
+
+				if(lnk == true){
+					if(value == true){
+						obj.checked = false;
+						value = false;
+					} else {
+						obj.checked = true;
+						value = true;
+					}
+				}
+
+				for(i=0; i < trElements.length ; i++){
+					for(j=0; j < trElements.item(i).childNodes.length; j++){
+						if(trElements.item(i).childNodes[j].firstChild) {
+							if(trElements.item(i).childNodes[j].firstChild.id == "listing_id[]"){
+								if(value == true) {
+									trElements.item(i).childNodes[j].firstChild.checked = true;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-active';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountlisting_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= false;
+											}
+										}
+									}
+								} else {
+									trElements.item(i).childNodes[j].firstChild.checked = false;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountlisting_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= true;
+											}
+										}
+									}
+								}
+							}
+							if(trElements.item(i).childNodes[j].firstChild.id == "event_id[]"){
+								if(value == true) {
+									trElements.item(i).childNodes[j].firstChild.checked = true;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-active';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountevent_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= false;
+											}
+										}
+									}
+								} else {
+									trElements.item(i).childNodes[j].firstChild.checked = false;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountevent_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= true;
+											}
+										}
+									}
+								}
+							}
+							if(trElements.item(i).childNodes[j].firstChild.id == "banner_id[]"){
+								if(value == true) {
+									trElements.item(i).childNodes[j].firstChild.checked = true;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-active';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountbanner_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= false;
+											}
+										}
+									}
+								} else {
+									trElements.item(i).childNodes[j].firstChild.checked = false;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountbanner_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= true;
+											}
+										}
+									}
+								}
+							}
+							if(trElements.item(i).childNodes[j].firstChild.id == "classified_id[]"){
+								if(value == true) {
+									trElements.item(i).childNodes[j].firstChild.checked = true;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-active';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountclassified_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= false;
+											}
+										}
+									}
+								} else {
+									trElements.item(i).childNodes[j].firstChild.checked = false;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountclassified_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= true;
+											}
+										}
+									}
+								}
+							}
+							if(trElements.item(i).childNodes[j].firstChild.id == "article_id[]"){
+								if(value == true) {
+									trElements.item(i).childNodes[j].firstChild.checked = true;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-active';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountarticle_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= false;
+											}
+										}
+									}
+								} else {
+									trElements.item(i).childNodes[j].firstChild.checked = false;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+									for(x=0; x < trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes.length; x++) {
+										if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild){
+											if(trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.name == "discountarticle_id[]"){
+												trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.childNodes[x].firstChild.disabled= true;
+											}
+										}
+									}
+								}
+							}
+							if(trElements.item(i).childNodes[j].firstChild.id == "custom_invoice_id[]"){
+								if(value == true) {
+									trElements.item(i).childNodes[j].firstChild.checked = true;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-active';
+								} else {
+									trElements.item(i).childNodes[j].firstChild.checked = false;
+									trElements.item(i).childNodes[j].firstChild.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+								}
+							}
+						}
+					}
+				}
+			}
+
+			function toggleLinebyChkBox(obj){
+				if (obj.checked == true){
+					obj.parentNode.parentNode.className = 'bg-tablebilling-active';
+					for(x=0; x < obj.parentNode.parentNode.childNodes.length; x++){
+						if(obj.parentNode.parentNode.childNodes[x].firstChild){
+							if ((obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountlisting_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountevent_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountbanner_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountclassified_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountarticle_id[]")) {
+								obj.parentNode.parentNode.childNodes[x].firstChild.disabled= false;
+							}
+						}
+					}
+				} else {
+					obj.parentNode.parentNode.className = 'bg-tablebilling-inactive';
+					for(x=0; x < obj.parentNode.parentNode.childNodes.length; x++){
+						if(obj.parentNode.parentNode.childNodes[x].firstChild){
+							if ((obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountlisting_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountevent_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountbanner_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountclassified_id[]") || (obj.parentNode.parentNode.childNodes[x].firstChild.name == "discountarticle_id[]")) {
+								obj.parentNode.parentNode.childNodes[x].firstChild.disabled= true;
+							}
+						}
+					}
+				}
+			}
+
+			function toggleLine(obj){
+				for(i=0; i < obj.childNodes.length; i++){
+					if(obj.childNodes[i].firstChild) {
+						if(obj.childNodes[i].firstChild.id == "listing_id[]") {
+							if(obj.childNodes[i].firstChild.checked == true) {
+								obj.className = 'bg-tablebilling-inactive';
+								obj.childNodes[i].firstChild.checked = false;
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountlisting_id[]"){
+											obj.childNodes[x].firstChild.disabled= true;
+										}
+									}
+								}
+							} else {
+								obj.childNodes[i].firstChild.checked = true;
+								obj.className = 'bg-tablebilling-active';
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountlisting_id[]"){
+											obj.childNodes[x].firstChild.disabled= false;
+										}
+									}
+								}
+							}
+						}
+						if(obj.childNodes[i].firstChild.id == "event_id[]") {
+							if(obj.childNodes[i].firstChild.checked == true) {
+								obj.className = 'bg-tablebilling-inactive';
+								obj.childNodes[i].firstChild.checked = false;
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountevent_id[]"){
+											obj.childNodes[x].firstChild.disabled= true;
+										}
+									}
+								}
+							} else {
+								obj.childNodes[i].firstChild.checked = true;
+								obj.className = 'bg-tablebilling-active';
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountevent_id[]"){
+											obj.childNodes[x].firstChild.disabled= false;
+										}
+									}
+								}
+							}
+						}
+						if(obj.childNodes[i].firstChild.id == "banner_id[]") {
+							if(obj.childNodes[i].firstChild.checked == true) {
+								obj.className = 'bg-tablebilling-inactive';
+								obj.childNodes[i].firstChild.checked = false;
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountbanner_id[]"){
+											obj.childNodes[x].firstChild.disabled= true;
+										}
+									}
+								}
+							} else {
+								obj.childNodes[i].firstChild.checked = true;
+								obj.className = 'bg-tablebilling-active';
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountbanner_id[]"){
+											obj.childNodes[x].firstChild.disabled= false;
+										}
+									}
+								}
+							}
+						}
+						if(obj.childNodes[i].firstChild.id == "classified_id[]") {
+							if(obj.childNodes[i].firstChild.checked == true) {
+								obj.className = 'bg-tablebilling-inactive';
+								obj.childNodes[i].firstChild.checked = false;
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountclassified_id[]"){
+											obj.childNodes[x].firstChild.disabled= true;
+										}
+									}
+								}
+							} else {
+								obj.childNodes[i].firstChild.checked = true;
+								obj.className = 'bg-tablebilling-active';
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountclassified_id[]"){
+											obj.childNodes[x].firstChild.disabled= false;
+										}
+									}
+								}
+							}
+						}
+						if(obj.childNodes[i].firstChild.id == "article_id[]") {
+							if(obj.childNodes[i].firstChild.checked == true) {
+								obj.className = 'bg-tablebilling-inactive';
+								obj.childNodes[i].firstChild.checked = false;
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountarticle_id[]"){
+											obj.childNodes[x].firstChild.disabled= true;
+										}
+									}
+								}
+							} else {
+								obj.childNodes[i].firstChild.checked = true;
+								obj.className = 'bg-tablebilling-active';
+								for(x=0; x < obj.childNodes.length; x++){
+									if(obj.childNodes[x].firstChild){
+										if(obj.childNodes[x].firstChild.name == "discountarticle_id[]"){
+											obj.childNodes[x].firstChild.disabled= false;
+										}
+									}
+								}
+							}
+						}
+						if(obj.childNodes[i].firstChild.id == "custom_invoice_id[]") {
+							if(obj.childNodes[i].firstChild.checked == true) {
+								obj.className = 'bg-tablebilling-inactive';
+								obj.childNodes[i].firstChild.checked = false;
+							} else {
+								obj.childNodes[i].firstChild.checked = true;
+								obj.className = 'bg-tablebilling-active';
+							}
+						}
+					}
+				}
+			}
+-->
+		</script>
+
+		<table border="0" cellpadding="2" cellspacing="2" class="standard-table tableTOPBLUECheck">
+			<tbody><tr>
+				<th><input type="checkbox" id="toggle_all" name="toggle_all" onclick="toggleAll(this)"/></th>
+				<td><a onclick="toggleAll(document.getElementById('toggle_all'), true)">Check / Uncheck All</a></td>
+			</tr>
+		</tbody></table>
+
+
+			<table border="0" cellpadding="2" cellspacing="2" class="standard-tableTOPBLUE">
+				<tbody><tr>
+					<th width="30">Pay</th>
+					<th>Listing Name</th>
+					<th width="110">Extra Category</th>
+					<th width="100">Level</th>
+																		<th width="140">Promotional Code</th>
+																<th width="70">Renewal</th>
+				</tr>
+				<c:set var="count" value="0"/>
+				<c:forEach items="${listingsList}" var="listingsLst">
+					<tr class="bg-tablebilling-active">
+						<td><input type="checkbox" id="listingCheck" name="listingCheck" value="${listingsLst.id}" checked='${billingOrder.listingCheck[count] == listingsLst.id?"checked":""}' onclick="toggleLinebyChkBox(this)" class="inputCheck"/></td>
+						<td style="text-align: left; cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${listingsLst.title}</td>
+						<td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">3</td>
+						<td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${listingsLst.price.priceType}</td>
+																					<td style="cursor: pointer; color: #CC0000"><input type="text" name="discountListing" value="${billingOrder.discountListing[count]}" style="width:60px;font-size:10px"/>
+																			</td><td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">New</td>
+					</tr>
+					<c:set var="count" value="${count + 1}"/>
+				</c:forEach>
+								</tbody></table>
+
+
+			<table border="0" cellpadding="2" cellspacing="2" class="standard-tableTOPBLUE">
+				<tbody><tr>
+					<th width="30">Pay</th>
+					<th>Event Name</th>
+					<th width="100">Level</th>
+																		<th width="140">Promotional Code</th>
+																<th width="70">Renewal</th>
+				</tr>
+				<c:forEach items="${eventsList}" var="eventsLst">
+									<tr class="bg-tablebilling-active">
+						<td><input type="checkbox" id="eventCheck" name="eventCheck" value="${eventsLst.id}" checked="" onclick="toggleLinebyChkBox(this)" class="inputCheck"/></td>
+						<td style="text-align: left; cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${eventsLst.title}</td>
+						<td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${eventsLst.price.priceType}</td>
+																					<td style="cursor: pointer; color: #CC0000"><input type="text" name="discountEvent" value="" style="width:60px;font-size:10px"/>
+																			</td><td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">New</td>
+					</tr>
+				</c:forEach>
+								</tbody></table>
+
+
+			<table border="0" cellpadding="2" cellspacing="2" class="standard-tableTOPBLUE">
+				<tbody><tr>
+					<th width="30">Pay</th>
+					<th>Classified Name</th>
+					<th width="100">Level</th>
+																		<th width="140">Promotional Code</th>
+																<th width="70">Renewal</th>
+				</tr>
+				<c:forEach items="${classifiedList}" var="classifiedLst">
+									<tr class="bg-tablebilling-active">
+						<td><input type="checkbox" id="classifiedCheck" name="classifiedCheck" value="${classifiedLst.id}" checked="" onclick="toggleLinebyChkBox(this)" class="inputCheck"/></td>
+						<td style="text-align: left; cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${classifiedLst.title}</td>
+						<td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${classifiedLst.price.priceType}</td>
+																					<td style="cursor: pointer; color: #CC0000"><input type="text" name="discountclassified" value="" style="width:60px;font-size:10px"/>
+																			</td><td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">New</td>
+					</tr>
+					</c:forEach>
+								</tbody></table>
+
+
+			<table border="0" cellpadding="2" cellspacing="2" class="standard-tableTOPBLUE">
+				<tbody><tr>
+					<th width="30">Pay</th>
+					<th>Article Name</th>
+																		<th width="140">Promotional Code</th>
+																<th width="70">Renewal</th>
+				</tr>
+					<c:forEach items="${articleList}" var="articleLst">
+									<tr class="bg-tablebilling-active">
+						<td><input type="checkbox" id="articleCheck" name="articleCheck" value="${articleLst.id}" checked="" onclick="toggleLinebyChkBox(this)" class="inputCheck"/></td>
+						<td style="text-align: left; cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">${articleLst.title}</td>
+																					<td style="cursor: pointer; color: #CC0000"><input type="text" name="discountarticle" value="" style="width:60px;font-size:10px"/>
+																			</td><td style="cursor: pointer; color: #CC0000" onclick="toggleLine(this.parentNode)">New</td>
+					</tr>
+					</c:forEach>
+								</tbody></table>
+
+
+	<table class="standard-tableTOPBLUE orderPayment">
+		<tbody><tr>
+			<th colspan="2">Payment Method</th>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<table class="paymentMethods" cellpadding="0" cellspacing="0" align="center">
+					<tbody><tr>
+						<c:forEach items="${conversionManagedBean.paymentMethodTypes}" var="paymentMethodTy">
+							<td width="10"><input style="border:0px" type="radio" name="paymentMethod" value="${paymentMethodTy}" checked='${paymentMethodTy == billingOrder.paymentMethod?"checked":""}'/></td>
+                        	<td><b>${paymentMethodTy.desc}</b></td>
+						</c:forEach>
+                        <!-- <td width="10"><input style="border:0px" type="radio" name="paymentMethod" value="authorize"></td>
+                        <td><b>By Credit Card</b></td>
+
+
+                        <td width="10"><input style="border:0px" type="radio" name="paymentMethod" value="paypal"></td>
+                        <td><b>By PayPal</b></td>
+
+
+                        <td width="10"><input style="border:0px" type="radio" name="paymentMethod" value="simplepay"></td>
+                        <td><b>By SimplePay</b></td>
+
+
+                        <td width="10"><input style="border:0px" type="radio" name="paymentMethod" value="invoice"></td>
+                        <td><b>Print Invoice and Mail a Check</b></td>
+ -->
+
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table>
+
+
+		<br/>
+        <div class="baseButtons">
+			<p class="standardButton">
+				<input type="hidden" name="second_step" id="second_step" value="1" style="display: none"/>
+				<button type="submit" name="_eventId_next">Next</button>
+			</p>
+        </div>
+
+				</h:form>
+	</div>
+
+
+            </div><!-- Close container-fluid div -->
+
+        </div>
+	</ui:define>
+</ui:composition>

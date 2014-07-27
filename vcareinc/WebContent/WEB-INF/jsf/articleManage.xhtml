@@ -59,8 +59,8 @@
 
                 <form name="article_setting" id="article_setting" action="/members/article/index.php" method="post">
 
-                    <input type="hidden" name="account_search_bulk" id="account_search_bulk" value="">
-                    <input type="hidden" name="bulkSubmit" id="bulkSubmit" value="">
+                    <input type="hidden" name="account_search_bulk" id="account_search_bulk" value=""/>
+                    <input type="hidden" name="bulkSubmit" id="bulkSubmit" value=""/>
 
                     <div id="table_bulk" style="display: none" class="table-bulkupdate">
 
@@ -73,7 +73,7 @@
 <div id="change_account" style="display:none">
 				<div id="table_accounts_search" style="display: none; width: 96%" class="table_accounts_search">
 
-					<input type="hidden" name="acct_search_field_name" id="acct_search_field_name" value="change_account_id">
+					<input type="hidden" name="acct_search_field_name" id="acct_search_field_name" value="change_account_id"/>
 
 					<table border="0" cellpadding="0" cellspacing="0" class="searchAccount">
 						<tbody><tr>
@@ -82,19 +82,19 @@
 						<tr>
 							<th>LANG_SITEMGR_LABEL_COMPANY: </th>
 							<td>
-								<input type="text" id="acct_search_company" style="width:250px" name="acct_search_company" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }">
+								<input type="text" id="acct_search_company" style="width:250px" name="acct_search_company" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }"/>
 							</td>
 						</tr>
 						<tr>
 							<th class="first_line" style="padding-top: 10px">LANG_SITEMGR_LABEL_USERNAME: </th>
 							<td style="padding-top: 10px">
-								<input type="text" id="acct_search_username" style="width:250px" name="acct_search_username" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }">
+								<input type="text" id="acct_search_username" style="width:250px" name="acct_search_username" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" style="text-align: center; padding-bottom: 5px;">
-								<input style="width:80px" class="input-button-form" type="button" name="acct_search_btn" id="acct_search_btn" value="LANG_SITEMGR_SEARCH" onclick="searchAccount(this.form, 'http://beautypro411.com', 0, 0);">         <input style="width:80px" class="input-button-form" type="button" name="acct_cancel_btn" id="acct_reset_btn" value="LANG_SITEMGR_CANCEL" onclick="cancelSearchAccount(0);">
-								<input style="width:100px" class="input-button-form" type="button" name="acct_empty_btn" id="acct_empty_btn" value="LANG_SITEMGR_ACCOUNTSEARCH_EMPTY" onclick="emptySearchAccount(0);">
+								<input style="width:80px" class="input-button-form" type="button" name="acct_search_btn" id="acct_search_btn" value="LANG_SITEMGR_SEARCH" onclick="searchAccount(this.form, 'http://beautypro411.com', 0, 0);"/>         <input style="width:80px" class="input-button-form" type="button" name="acct_cancel_btn" id="acct_reset_btn" value="LANG_SITEMGR_CANCEL" onclick="cancelSearchAccount(0);"/>
+								<input style="width:100px" class="input-button-form" type="button" name="acct_empty_btn" id="acct_empty_btn" value="LANG_SITEMGR_ACCOUNTSEARCH_EMPTY" onclick="emptySearchAccount(0);"/>
 							</td>
 						</tr>
                       	<tr>
@@ -113,7 +113,7 @@
 					<table align="center" border="0" cellspacing="0" cellpadding="0" class="standard-table">
 						<tbody><tr>
 							<th> LANG_SITEMGR_LABEL_ACCOUNT:</th>
-							<td id="selected_account" class"selected_account"="">			<a style="vertical-align: middle" href="javascript:changeAccount(0)" id="change_account_search"><strong>LANG_SITEMGR_ACCOUNTSEARCH_CLICKHERE</strong></a>
+							<td id="selected_account" class="selected_account">			<a style="vertical-align: middle" href="javascript:changeAccount(0)" id="change_account_search"><strong>LANG_SITEMGR_ACCOUNTSEARCH_CLICKHERE</strong></a>
 							</td>
 						</tr>
 					</tbody></table>
@@ -140,7 +140,7 @@
 			<tr>
 			<th>LANG_SITEMGR_CHANGEEXPIRATIONDATE:</th>
 			<td>
-				<input type="text" name="change_renewaldate" id="change_renewaldate" value="" class="input-form-settings hasDatepicker">
+				<input type="text" name="change_renewaldate" id="change_renewaldate" value="" class="input-form-settings hasDatepicker"/>
 				<p><span>(mm/dd/yyyy)</span></p>
 			</td>
 		</tr>
@@ -190,13 +190,13 @@
 
 		<tr>
 			<th>&nbsp;</th>
-			<td><input type="checkbox" name="delete_all" id="delete_all" class="inputAlign" onclick="disableBulkOptions(document.getElementById('delete_all')); ">
+			<td><input type="checkbox" name="delete_all" id="delete_all" class="inputAlign" onclick="disableBulkOptions(document.getElementById('delete_all')); "/>
 				LANG_SITEMGR_DELETE_ALL_SELECTED			</td>
 		</tr>
 
 			    <tr>
 			<th>&nbsp;</th>
-			<td><input type="checkbox" name="change_no_owner" id="change_no_owner" class="inputAlign">
+			<td><input type="checkbox" name="change_no_owner" id="change_no_owner" class="inputAlign"/>
 				LANG_SITEMGR_NOOWNER				<p><span>&nbsp;(LANG_SITEMGR_ACCOUNTCHANGE_NOOWNER_INFO)</span></p>
 			</td>
 		</tr>
@@ -237,7 +237,7 @@
             <div id="bulk_check" style="display:none">
 
                  <div class="bulk-checkall">
-                    <input type="checkbox" id="check_all" name="check_all" onclick="checkAll('article', document.getElementById('check_all'), false, 1); removeCategoryDropDown('article', 'http://beautypro411.com');">
+                    <input type="checkbox" id="check_all" name="check_all" onclick="checkAll('article', document.getElementById('check_all'), false, 1); removeCategoryDropDown('article', 'http://beautypro411.com');"/>
 
                     <a class="CheckUncheck" href="javascript:void(0);" onclick="checkAll('article', document.getElementById('check_all'), true, 1); removeCategoryDropDown('article', 'http://beautypro411.com');">
                         Check / Uncheck All                    </a>
@@ -297,8 +297,7 @@
 
                 <tr>
                     <td>
-                        <input type="checkbox" id="article_id1" name="item_check[]" value="20" class="inputCheck" style="display:none" onclick="removeCategoryDropDown('article', 'http://beautypro411.com');">
-                        <a title="My Article" href="http://beautypro411.com/members/article/view.php?id=20&amp;screen=&amp;letter=" class="link-table">
+                       <a title="My Article" href="orderListing-flow?optionType=ARTICLE&amp;id=${articleList.id}&amp;priceType=${articleList.price.priceType}" class="link-table">
                             My Article                        </a>
                     </td>
 
@@ -307,52 +306,16 @@
                                             </td>
 
                     <td>
-                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">Pending</span> </a>
+                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">${articleList.status}</span> </a>
                     </td>
 
-                    <td nowrap="">
-                        <div class="toolbar-icons-button">
-
-                            <div class="toolbar-icons" style="display: none;">
-
-                                <ul>
-
-                                    <li>
-                                        <a href="http://beautypro411.com/members/article/report.php?id=20&amp;screen=&amp;letter=" class="link-table">
-                                            Traffic Reports                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="http://beautypro411.com/members/article/seocenter.php?id=20&amp;screen=&amp;letter=" class="link-table">
-                                            SEO                                        </a>
-                                    </li>
-
-                                                                                <li>Reviews</li>
-                                                                                <li>
-                                            <a href="http://beautypro411.com/members/article/facebook.php?id=20&amp;screen=&amp;letter=" class="link-table">
-                                                Facebook comments                                            </a>
-                                        </li>
-
-                                    <li>
-                                        <a href="http://beautypro411.com/members/article/delete.php?id=20&amp;screen=&amp;letter=" class="link-table">
-                                            Delete                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                            <div class="toolbararrow"></div>
-
-                        </div>
-
-                    </td>
+                    <td nowrap="">&nbsp;</td>
 
                     <td nowrap="" class="main-options">
-                        <a href="http://beautypro411.com/members/article/view.php?id=20&amp;screen=&amp;letter=" class="link-table">
+                        <a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleList.id}&amp;priceType=${articleList.price.priceType}" class="link-table">
                             View                        </a>
                         <b>|</b>
-                        <a href="http://beautypro411.com/members/article/article.php?id=20&amp;screen=&amp;letter=" class="link-table">
+                        <a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleList.id}&amp;priceType=${articleList.price.priceType}" class="link-table">
                             Edit                        </a>
                     </td>
 
@@ -367,9 +330,8 @@
                                     <td width="50%">
                                         <table align="center" border="0" cellpadding="0" cellspacing="0" class="warningBOX">
                                             <tbody><tr>
-                                                <th><a href="http://beautypro411.com/members/billing/index.php" class="warningBOXcontent">Continue to pay for your article</a></th>
-                                                <td><a href="http://beautypro411.com/members/billing/index.php"><img src="http://beautypro411.com/images/img_GREENarrow.gif" alt="»" width="39" height="45"></a></td>
-                                            </tr>
+                                                <th><a href="billing-flow" class="warningBOXcontent">Continue to pay for your article</a></th>
+                                               </tr>
                                         </tbody></table>
                                     </td>
                                 </tr>
@@ -377,8 +339,8 @@
 
                             <table align="center" border="0" cellpadding="0" cellspacing="0" class="warningBOXtext">
                                 <tbody><tr>
-                                    <th><img src="http://beautypro411.com/images/icon_atention.gif" width="16" height="14" alt="Attention Icon"></th>
-                                    <td>Articles are activated by <strong>Site Manager</strong> only after the process is complete.</td>
+                                <th><img src="${request.contextPath}/resources/images/icon_atention.gif" width="16" height="14" alt="Attention Icon"/></th>
+                                     <td>Articles are activated by <strong>Site Manager</strong> only after the process is complete.</td>
                                 </tr>
                             </tbody></table>
 

@@ -1,6 +1,7 @@
 package com.vcareinc.services;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,10 +20,12 @@ import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ClassifiedOrder;
 import com.vcareinc.vo.Address;
+import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Classified;
 import com.vcareinc.vo.Country;
 import com.vcareinc.vo.FileUpload;
 import com.vcareinc.vo.Price;
+import com.vcareinc.vo.PromotionCode;
 import com.vcareinc.vo.State;
 import com.vcareinc.vo.User;
 
@@ -114,7 +117,18 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 			classified.setSummaryDescription(classifiedOrder.getSummarydesc());
 			classified.setDetailDescription(classifiedOrder.getDetailDescription());
 			classified.setKeyword(classifiedOrder.getKeyword());
-//			classified.setPromotionCode(classifiedOrder.getPromotionCode());
+
+			if(classifiedOrder.getCategories() != null && classifiedOrder.getCategories().length > 0) {
+				Map<Long, Category> categoryMap = getCategories();
+				for(String categoriesStr : classifiedOrder.getCategories()) {
+					classified.addCategory(categoryMap.get(Long.valueOf(categoriesStr)));
+				}
+			}
+
+			if(classifiedOrder.getPromotionCode() != null && classifiedOrder.getPromotionCode().trim().length() > 0) {
+				PromotionCode promotionCode = orderService.getPromotionCode(classifiedOrder.getPromotionCode());
+				classified.setPromotionCode(promotionCode);
+			}
 			em.persist(classified);
 
 			if(classifiedOrder.getImageUpload() != null && classifiedOrder.getImageUpload().getSize() > 0) {
@@ -191,7 +205,7 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Classified> getTopClassifiedLists(Integer numberOfLists) {
 		return em.createQuery("SELECT c FROM Classified c WHERE c.status = :status")

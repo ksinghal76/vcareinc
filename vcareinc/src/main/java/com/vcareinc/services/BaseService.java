@@ -1,5 +1,8 @@
 package com.vcareinc.services;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -15,6 +18,7 @@ import com.vcareinc.constants.UploadFileType;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.BaseModel;
 import com.vcareinc.services.amazonws.AmazonS3Service;
+import com.vcareinc.vo.Category;
 import com.vcareinc.vo.FileUpload;
 
 public class BaseService<T> {
@@ -75,5 +79,19 @@ public class BaseService<T> {
 
 	public void setAmazonS3Service(AmazonS3Service amazonS3Service) {
 		this.amazonS3Service = amazonS3Service;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<Long, Category> getCategories() {
+		Map<Long, Category> categoryMap = null;
+		List<Category> categoryLst = em.createQuery("SELECT c FROM Category c").getResultList();
+
+		if(categoryLst != null && categoryLst.size() > 0) {
+			categoryMap = new HashMap<Long, Category>();
+			for(Category category : categoryLst) {
+				categoryMap.put(category.getId(), category);
+			}
+		}
+		return categoryMap;
 	}
 }

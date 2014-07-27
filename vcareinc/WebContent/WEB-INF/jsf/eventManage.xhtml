@@ -342,7 +342,7 @@
                     </td>
 
                     <td>
-                                                <a href="http://beautypro411.com/members/event/eventlevel.php?id=140&amp;screen=&amp;letter=" class="link-table">Diamond</a>
+                                                <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[1]}&amp;priceType=${eventsList.price.priceType}" class="link-table">Diamond</a>
                     </td>
 
                     <td>
@@ -355,46 +355,10 @@
                                             </td>
 
                     <td>
-                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">Pending</span> </a>
+                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">${eventsList.status}</span> </a>
                     </td>
 
-                    <td nowrap="nowrap">
-
-                        <div class="toolbar-icons-button">
-
-                            <div class="toolbar-icons" style="display: none;">
-
-                                <ul>
-
-                                    <li>
-                                        <a href="http://beautypro411.com/members/event/report.php?id=140&amp;screen=&amp;letter=" class="link-table">
-                                            Traffic Reports                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="http://beautypro411.com/members/event/seocenter.php?id=140&amp;screen=&amp;letter=" class="link-table">
-                                            SEO                                        </a>
-                                    </li>
-
-                                                                        <li>
-                                        <a href="http://beautypro411.com/members/leads/index.php?item_type=event&amp;item_id=140&amp;item_screen=&amp;item_letter=" class="link-table">
-                                            Leads                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="http://beautypro411.com/members/event/delete.php?id=140&amp;screen=&amp;letter=" class="link-table">
-                                            Delete                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                            <div class="toolbararrow"></div>
-
-                        </div>
-
-                    </td>
+                    <td nowrap="nowrap">&nbsp;</td>
 
                     <td nowrap="" class="main-options">
                         <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[0]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
@@ -415,9 +379,8 @@
                                     <td width="50%">
                                         <table align="center" border="0" cellpadding="0" cellspacing="0" class="warningBOX">
                                             <tbody><tr>
-                                                <th><a href="http://beautypro411.com/members/billing/index.php" class="warningBOXcontent">Continue to pay for your event</a></th>
-                                                <!-- <td><a href="http://beautypro411.com/members/billing/index.php"><img src="http://beautypro411.com/images/img_GREENarrow.gif" alt="»" width="39" height="45"/></a></td> -->
-                                            </tr>
+                                                <th><a href="billing-flow" class="warningBOXcontent">Continue to pay for your event</a></th>
+                                               </tr>
                                         </tbody></table>
                                     </td>
                                 </tr>

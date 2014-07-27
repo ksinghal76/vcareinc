@@ -11,6 +11,12 @@
 		</ui:repeat>
 	</p>
 	</h:panelGroup>
+	<h:panelGroup rendered="#{not empty error.errorMsg}">
+	 <p class="errorMessage">
+	 	<b>The following fields were not filled or contain errors:</b>
+	 	<br/>&nbsp;&middot;<h:outputText value="${error.errorMsg}"/>
+	</p>
+	</h:panelGroup>
 	<!-- <h:panelGroup rendered="#{not empty error.errorMsg}">
 		<div class="errors">
 			<ul>

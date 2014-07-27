@@ -8,9 +8,7 @@ import com.vcareinc.validators.BillingOrderLists;
 
 @SuppressWarnings("rawtypes")
 @Controller
-@BillingOrderLists.List(value= {
-		@BillingOrderLists(listingList="listingCheck", eventList="eventCheck", articleList="articleCheck", classifiedList="classifiedCheck")
-})
+@BillingOrderLists(listingList="listingCheck", eventList="eventCheck", articleList="articleCheck", classifiedList="classifiedCheck", message="Please select at least one")
 public class BillingOrder extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
