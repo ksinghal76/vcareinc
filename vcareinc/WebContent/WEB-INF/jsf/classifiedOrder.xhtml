@@ -41,7 +41,7 @@
 			<input type="hidden" name="package_id" id="package_id" value=""/>
 			<input type="hidden" name="gallery_hash" value="classified_587707004539b144ed850b5.32228852"/> -->
 			<ui:include src="includes/errorPageType.xhtml">
-          		<ui:param name="error" value="${classifiedOrder}"/>
+          		<ui:param name="error" value="${classifiedVal}"/>
           	</ui:include>
 
 <script language="javascript" type="text/javascript">
@@ -298,7 +298,7 @@
 		<tbody><tr class="bigger">
 			<th><i><span>Required field</span></i> Classified Title:</th>
 			<td>
-				<input type="text" name="title" value="${classifiedOrder.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
+				<input type="text" name="title" value="${classifiedVal.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
 				<input type="hidden" name="friendly_url" id="friendly_url" value="" maxlength="150"/>
 			</td>
 		</tr>
@@ -315,22 +315,22 @@
 
                     <tr>
                 <th>Contact Name:</th>
-                <td><input type="text" name="contactName" value="${classifiedOrder.contactName}"/></td>
+                <td><input type="text" name="contactName" value="${classifiedVal.contactName}"/></td>
             </tr>
 
         		<tr>
 			<th>Contact Phone:</th>
-			<td><input type="text" name="contactPhoneNumber" value="${classifiedOrder.contactPhoneNumber}"/></td>
+			<td><input type="text" name="contactPhoneNumber" value="${classifiedVal.contactPhoneNumber}"/></td>
 		</tr>
 
                     <tr>
                 <th>Contact Fax:</th>
-                <td><input type="text" name="contactFax" value="${classifiedOrder.contactFax}"/></td>
+                <td><input type="text" name="contactFax" value="${classifiedVal.contactFax}"/></td>
             </tr>
 
         		<tr>
 			<th>Contact E-mail:</th>
-			<td><input type="text" name="contactEmail" value="${classifiedOrder.contactEmail}"/></td>
+			<td><input type="text" name="contactEmail" value="${classifiedVal.contactEmail}"/></td>
 		</tr>
 
                     <tr>
@@ -338,7 +338,7 @@
                 <td>
                <select name="protocol" class="httpSelect">
 			<c:choose>
-				<c:when test="${classifiedOrder.protocol == 'http://'}">
+				<c:when test="${classifiedVal.protocol == 'http://'}">
 					<option value="http://" selected="selected">http://</option>
 				</c:when>
 				<c:otherwise>
@@ -347,7 +347,7 @@
 			</c:choose>
 
 			<c:choose>
-				<c:when test="${classifiedOrder.protocol == 'https://'}">
+				<c:when test="${classifiedVal.protocol == 'https://'}">
 					<option value="https://" selected="selected">https://</option>
 				</c:when>
 				<c:otherwise>
@@ -356,7 +356,7 @@
 			</c:choose>
 
 			<c:choose>
-				<c:when test="${classifiedOrder.protocol == 'ftp://'}">
+				<c:when test="${classifiedVal.protocol == 'ftp://'}">
 					<option value="ftp://" selected="selected">ftp://</option>
 				</c:when>
 				<c:otherwise>
@@ -364,16 +364,16 @@
 				</c:otherwise>
 			</c:choose>
 			</select>
-                <input type="text" class="httpInput" name="url" value="${classifiedOrder.url}" maxlength="255"/>
+                <input type="text" class="httpInput" name="url" value="${classifiedVal.url}" maxlength="255"/>
                 </td>
             </tr>
 
         		<tr>
 			<th>Price:</th>
 			<td>
-				$				<input type="text" name="amountDollar" id="amountDollar" value="${classifiedOrder.amountDollar}" maxlength="7" style="width:55px; text-align:right;"/>
+				$				<input type="text" name="amountDollar" id="amountDollar" value="${classifiedVal.amountDollar}" maxlength="7" style="width:55px; text-align:right;"/>
 				<strong> &nbsp;.&nbsp; </strong>
-				<input type="text" name="amountCent" id="amountCent" value="${classifiedOrder.amountCent}" maxlength="2" style="width:20px;"/>
+				<input type="text" name="amountCent" id="amountCent" value="${classifiedVal.amountCent}" maxlength="2" style="width:20px;"/>
 			</td>
 		</tr>
         	</tbody></table>
@@ -384,22 +384,22 @@
 		</tr>
 		<tr>
 			<th>Address:</th>
-			<td><input type="text" name="address1" id="address1" onblur="loadMap(document.classified);" value="${classifiedOrder.address1}"/></td>
+			<td><input type="text" name="address1" id="address1" onblur="loadMap(document.classified);" value="${classifiedVal.address1}"/></td>
 		</tr>
 		<tr>
 			<th>Address (optional):</th>
-			<td><input type="text" name="address2" value="${classifiedOrder.address2}"/></td>
+			<td><input type="text" name="address2" value="${classifiedVal.address2}"/></td>
 		</tr>
 
 		<tr>
 			<th>Zipcode:</th>
-			<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.classified);" value="${classifiedOrder.zipcode}" maxlength="10"/></td>
+			<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.classified);" value="${classifiedVal.zipcode}" maxlength="10"/></td>
 		</tr>
 
                 <tr>
             <th>Latitude:</th>
             <td>
-                <input type="text" name="latitude" id="latitude" onblur="loadMap(document.classified, true);" value="${classifiedOrder.latitude}" maxlength="10"/>
+                <input type="text" name="latitude" id="latitude" onblur="loadMap(document.classified, true);" value="${classifiedVal.latitude}" maxlength="10"/>
                 <span>Ex: 38.830391</span>
             </td>
         </tr>
@@ -407,7 +407,7 @@
         <tr>
             <th>Longitude:</th>
             <td>
-                <input type="text" name="longitude" id="longitude" onblur="loadMap(document.classified, true);" value="${classifiedOrder.longitude}" maxlength="10"/>
+                <input type="text" name="longitude" id="longitude" onblur="loadMap(document.classified, true);" value="${classifiedVal.longitude}" maxlength="10"/>
                 <span>Ex: -77.196370</span>
             </td>
         </tr>
@@ -506,7 +506,7 @@
 								<img src="http://beautypro411.com/images/content/img_loading_bar.gif" alt="Wait, Loading..."/>
 							</td>
 							<td id="div_select_4" class="field locationSelect">
-								<input type="text" id="city" name="city" value="${classifiedOrder.city}"/>
+								<input type="text" id="city" name="city" value="${classifiedVal.city}"/>
 																	<!-- <select style="display:none" class="select" name="location_4" id="location_4" onchange="loadMap(document.classified);">
 
 									<option id="l_location_4" value="">Select a City</option>
@@ -803,7 +803,7 @@
         </tr>
         <tr>
             <td>
-                <textarea id="summarydesc" name="summarydesc" rows="5" cols="1">${classifiedOrder.summarydesc}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
+                <textarea id="summarydesc" name="summarydesc" rows="5" cols="1">${classifiedVal.summarydesc}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
             </td>
         </tr>
     </tbody></table>
@@ -814,7 +814,7 @@
         </tr>
         <tr>
             <td>
-                <textarea name="detailDescription" rows="5">${classifiedOrderdetailDescription}</textarea>
+                <textarea name="detailDescription" rows="5">${classifiedValdetailDescription}</textarea>
             </td>
         </tr>
     </tbody></table>
@@ -842,7 +842,7 @@
     </tr>
     <tr>
         <td>
-            <textarea name="keyword" rows="5">${classifiedOrder.keyword}</textarea>
+            <textarea name="keyword" rows="5">${classifiedVal.keyword}</textarea>
         </td>
     </tr>
 </tbody></table>
@@ -869,7 +869,7 @@
 									<c:forEach var="cat" items="${catMap.value}">
 										<c:if test="${cat.name != catMap.key.name}">
 											<c:choose>
-												<c:when test="${commonManagedBean.compareCategories(classifiedOrder.categories, cat.id)}">
+												<c:when test="${commonManagedBean.compareCategories(classifiedVal.categories, cat.id)}">
 													<option value="${cat.id}" selected="selected">&nbsp;&nbsp;${cat.name}</option>
 												</c:when>
 												<c:otherwise>
@@ -882,7 +882,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-									<c:when test="${commonManagedBean.compareCategories(classifiedOrder.categories, catMap.key.id)}">
+									<c:when test="${commonManagedBean.compareCategories(classifiedVal.categories, catMap.key.id)}">
 										<option value="${catMap.key.id}" selected="selected">${catMap.key.name}</option>
 									</c:when>
 									<c:otherwise>
@@ -903,7 +903,7 @@
 			</tr>
 							<tr>
 					<th>Code:</th>
-					<td><input type="text" name="promotionCode" value="${classifiedOrder.promotionCode}" maxlength="10"/></td>
+					<td><input type="text" name="promotionCode" value="${classifiedVal.promotionCode}" maxlength="10"/></td>
 				</tr>
 					</tbody></table>
 

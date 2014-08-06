@@ -13,7 +13,6 @@ import org.springframework.webflow.execution.RequestContext;
 
 import com.paypal.api.payments.Address;
 import com.paypal.api.payments.Amount;
-import com.paypal.api.payments.AmountDetails;
 import com.paypal.api.payments.CreditCard;
 import com.paypal.api.payments.FundingInstrument;
 import com.paypal.api.payments.Payer;
@@ -159,20 +158,20 @@ public class CreditCardService extends BaseService<CreditCardModel> {
 				throw new ValidationException("Invalid Credit Card");
 			else
 				creditCard.setType(creditCardType);
-			creditCard.setExpireMonth(creditCardModel.getExpireDate().substring(0, 2));
-			creditCard.setExpireYear(creditCardModel.getExpireDate().substring(3, creditCardModel.getExpireDate().length()));
+			creditCard.setExpireMonth(Integer.valueOf(creditCardModel.getExpireDate().substring(0, 2)));
+			creditCard.setExpireYear(Integer.valueOf(creditCardModel.getExpireDate().substring(3, creditCardModel.getExpireDate().length())));
 			creditCard.setCvv2(creditCardModel.getCardCode());
 			creditCard.setFirstName(creditCardModel.getFirstName());
 			creditCard.setLastName(creditCardModel.getLastName());
 			creditCard.setBillingAddress(billingAddress);
 
-			AmountDetails amountDetails = new AmountDetails();
-			amountDetails.setSubtotal(totalAmount.toString());
+//			AmountDetails amountDetails = new AmountDetails();
+//			amountDetails.setSubtotal(totalAmount.toString());
 
 			Amount amount = new Amount();
 			amount.setTotal(totalAmount.toString());
 			amount.setCurrency("USD");
-			amount.setDetails(amountDetails);
+//			amount.setDetails(amountDetails);
 
 			Transaction transaction = new Transaction();
 			transaction.setAmount(amount);

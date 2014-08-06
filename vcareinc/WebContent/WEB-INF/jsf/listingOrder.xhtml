@@ -25,23 +25,8 @@
         <h2>Listing Information</h2>
 
 		<h:form id="listing" enctype="multipart/form-data">
-
-<!--             <input type="hidden" name="ieBugFix" value="1"/>
-
-
-            <input type="hidden" name="process" id="process" value=""/>
-            <input type="hidden" name="id" id="id" value=""/>
-            <input type="hidden" name="listingtemplate_id" id="listingtemplate_id" value=""/>
-            <input type="hidden" name="account_id" id="account_id" value="321"/>
-            <input type="hidden" name="level" id="level" value="10"/>
-            <input type="hidden" name="screen" id="screen" value=""/>
-            <input type="hidden" name="letter" id="letter" value=""/>
-            <input type="hidden" name="using_package" id="using_package" value="y"/>
-            <input type="hidden" name="package_id" id="package_id" value="1"/>
-            <input type="hidden" name="gallery_hash" value="listing_1037336657538cdf3f203851.20031953"/>
- -->
           	<ui:include src="includes/errorPageType.xhtml">
-          		<ui:param name="error" value="${listingOrder}"/>
+          		<ui:param name="error" value="${listingsVal}"/>
           	</ui:include>
 <table cellpadding="0" cellspacing="0" border="0" class="standard-table onebackground">
 
@@ -50,8 +35,7 @@
 			<i><span>Required field</span></i>
 			Listing Title:		</th>
 		<td>
-			<input type="text" name="title" value="${listingOrder.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
-			<input type="hidden" name="friendly_url" id="friendly_url" value="" maxlength="150"/>
+			<input type="text" name="title" value="${listingsVal.title}" maxlength="100"/>
 					</td>
 	</tr>
 
@@ -67,7 +51,7 @@
 	</tr>
             <tr>
 			<th>E-mail:</th>
-			<td><input type="text" name="email" value="${listingOrder.email}" maxlength="50"/></td>
+			<td><input type="text" name="email" value="${listingsVal.email}" maxlength="50"/></td>
 		</tr>
 
             <tr>
@@ -76,7 +60,7 @@
 			<select name="urlProtocol" class="httpSelect">
 
 			<c:choose>
-				<c:when test="${listingOrder.urlProtocol == 'http://'}">
+				<c:when test="${listingsVal.urlProtocol == 'http://'}">
 					<option value="http://" selected="selected">http://</option>
 				</c:when>
 				<c:otherwise>
@@ -85,7 +69,7 @@
 			</c:choose>
 
 			<c:choose>
-				<c:when test="${listingOrder.urlProtocol == 'https://'}">
+				<c:when test="${listingsVal.urlProtocol == 'https://'}">
 					<option value="https://" selected="selected">https://</option>
 				</c:when>
 				<c:otherwise>
@@ -94,7 +78,7 @@
 			</c:choose>
 
 			<c:choose>
-				<c:when test="${listingOrder.urlProtocol == 'ftp://'}">
+				<c:when test="${listingsVal.urlProtocol == 'ftp://'}">
 					<option value="ftp://" selected="selected">ftp://</option>
 				</c:when>
 				<c:otherwise>
@@ -102,32 +86,32 @@
 				</c:otherwise>
 			</c:choose>
 						</select>
-			<input type="text" class="httpInput" name="url" value="${listingOrder.url}" maxlength="255"/>
+			<input type="text" class="httpInput" name="url" value="${listingsVal.url}" maxlength="255"/>
 			</td>
 		</tr>
 		<tr>
 			<th>Display URL (optional):</th>
 			<td>
-                <input type="text" name="displayUrl" value="${listingOrder.displayUrl}" maxlength="255"/>
+                <input type="text" name="displayUrl" value="${listingsVal.displayUrl}" maxlength="255"/>
                 <span>Fill in this field if your URL is too long. Example: "www.example.com" can be shown as "Example".</span>
             </td>
 		</tr>
 
     	<tr>
 		<th>Phone:</th>
-		<td><input type="text" name="phoneNumber" value="${listingOrder.phoneNumber}"/></td>
+		<td><input type="text" name="phoneNumber" value="${listingsVal.phoneNumber}"/></td>
 	</tr>
 
             <tr>
 			<th>Fax:</th>
-			<td><input type="text" name="faxNumber" value="${listingOrder.faxNumber}"/></td>
+			<td><input type="text" name="faxNumber" value="${listingsVal.faxNumber}"/></td>
 		</tr>
 
 
             <tr>
 			<th>Facebook page:</th>
 			<td>
-                <input type="text" name="facebookPage" value="${listingOrder.facebookPage}"/>
+                <input type="text" name="facebookPage" value="${listingsVal.facebookPage}"/>
                 <span>Ex: http://www.facebook.com/fanpage</span>
             </td>
 		</tr>
@@ -141,7 +125,7 @@
 		<th class="wrap">
 			Address Line1:		</th>
 		<td>
-			<input type="text" name="address1" id="address1" onblur="loadMap(document.listing);" value="${listingOrder.address1}" maxlength="50"/>
+			<input type="text" name="address1" id="address1" onblur="loadMap(document.listing);" value="${listingsVal.address1}" maxlength="50"/>
 			<span>
 				Street Address, P.O. box			</span>
 		</td>
@@ -150,7 +134,7 @@
 		<th class="wrap">
 			Address Line2:		</th>
 		<td>
-			<input type="text" name="address2" value="${listingOrder.address2}" maxlength="50"/>
+			<input type="text" name="address2" value="${listingsVal.address2}" maxlength="50"/>
 			<span>
 				Apartment, suite, unit, building, floor, etc.			</span>
 		</td>
@@ -158,12 +142,12 @@
 
 	<tr>
 		<th>Zipcode:</th>
-		<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.listing);" value="${listingOrder.zipcode}" maxlength="10"/></td>
+		<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.listing);" value="${listingsVal.zipcode}" maxlength="10"/></td>
 	</tr>
         <tr>
 		<th>Latitude:</th>
 		<td>
-            <input type="text" name="latitude" id="latitude" onblur="loadMap(document.listing, true);" value="${listingOrder.latitude}" maxlength="10"/>
+            <input type="text" name="latitude" id="latitude" onblur="loadMap(document.listing, true);" value="${listingsVal.latitude}" maxlength="10"/>
             <span>Ex: 38.830391</span>
         </td>
 	</tr>
@@ -171,7 +155,7 @@
     <tr>
 		<th>Longitude:</th>
 		<td>
-            <input type="text" name="longitude" id="longitude" onblur="loadMap(document.listing, true);" value="${listingOrder.longitude}" maxlength="10"/>
+            <input type="text" name="longitude" id="longitude" onblur="loadMap(document.listing, true);" value="${listingsVal.longitude}" maxlength="10"/>
             <span>Ex: -77.196370</span>
         </td>
 	</tr>
@@ -191,7 +175,7 @@
 								<option value="0">Select a Country</option>
 								<c:forEach items="${order.countryList}" var="countryList">
 									<c:choose>
-										<c:when test="${countryList.id == listingOrder.country}">
+										<c:when test="${countryList.id == listingsVal.country}">
 											<option value="${countryList.id}" selected="selected">${countryList.name}</option>
 										</c:when>
 										<c:otherwise>
@@ -225,7 +209,7 @@
 								<option value="0">Select a State</option>
 								<c:forEach items="${order.stateList}" var="stateList">
 									<c:choose>
-										<c:when test="${stateList.id == listingOrder.state}">
+										<c:when test="${stateList.id == listingsVal.state}">
 											<option value="${stateList.id}" selected="selected">${stateList.name}</option>
 										</c:when>
 										<c:otherwise>
@@ -271,7 +255,7 @@
 								<img src="http://beautypro411.com/images/content/img_loading_bar.gif" alt="Wait, Loading..."/>
 							</td>
 							<td id="div_select_4" class="field locationSelect">
-								<input type="text" id="city" name="city" value="${listingOrder.city}"/>
+								<input type="text" id="city" name="city" value="${listingsVal.city}"/>
 																	<!-- <select style="display:none" class="select" name="location_4" id="location_4" onchange="loadMap(document.listing);">
 
 									<option id="l_location_4" value="">Select a City</option>
@@ -346,8 +330,8 @@
                             <tr>
                             <td class="alignTop width100">
 								<input type="file" id="imageUpload" name="imageUpload" value=""/>
-								<c:if test="${not empty listingOrder.imageUploadFilename}">
-									${listingOrder.imageUploadFilename}
+								<c:if test="${not empty listingsVal.imageUploadFilename}">
+									${listingsVal.imageUploadFilename}
 								</c:if>
 
                         <span>Maximum file size 1.5 MB. Animated .gif isn't supported.</span>
@@ -367,7 +351,7 @@
             <tr>
                 <th class="alignTop">Code:</th>
                 <td>
-                    <input type="text" name="videoSnippet" value="${listingOrder.videoSnippet}" class="videoSnippetInput"/>
+                    <input type="text" name="videoSnippet" value="${listingsVal.videoSnippet}" class="videoSnippetInput"/>
                     <span>Maximum video code size supported: 605px x 272px.<br/>If the video code size is bigger than supported video size, it will be modified.</span>
                                             <span><a href="http://beautypro411.com/members/faq.php?keyword=video" target="_blank">Do you have a question about Video Snippet Code? Click here.</a></span>
                                     </td>
@@ -375,7 +359,7 @@
                         <tr>
                 <th>Caption:</th>
                 <td>
-                    <input type="text" maxlength="250" name="videoDescription" value="${listingOrder.videoDescription}"/>
+                    <input type="text" maxlength="250" name="videoDescription" value="${listingsVal.videoDescription}"/>
                 </td>
             </tr>
                     </tbody></table>
@@ -387,9 +371,9 @@
                         <tr>
                 <th class="alignTop">Source:</th>
                 <td class="columnFile">
-                    <input type="file" id="additionalFile" name="additionalFile" size="50" value="${listingOrder.additionalFileFilename}"/>
-                    	<c:if test="${not empty listingOrder.additionalFileFilename}">
-							${listingOrder.additionalFileFilename}
+                    <input type="file" id="additionalFile" name="additionalFile" size="50" value="${listingsVal.additionalFileFilename}"/>
+                    	<c:if test="${not empty listingsVal.additionalFileFilename}">
+							${listingsVal.additionalFileFilename}
 						</c:if>
 					<span>Maximum file size 1.5 MB</span>
                 </td>
@@ -397,7 +381,7 @@
             <tr>
                 <th>Caption:</th>
                 <td>
-                    <input type="text" maxlength="250" name="additionalFileDescription" value="${listingOrder.additionalFileDescription}"/>
+                    <input type="text" maxlength="250" name="additionalFileDescription" value="${listingsVal.additionalFileDescription}"/>
                 </td>
             </tr>
         </tbody></table>
@@ -412,7 +396,7 @@
             </tr>
             <tr>
                 <td>
-                    <textarea id="summaryDescription" name="summaryDescription" rows="5" cols="1">${listingOrder.summaryDescription}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
+                    <textarea id="summaryDescription" name="summaryDescription" rows="5" cols="1">${listingsVal.summaryDescription}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
                 </td>
             </tr>
 
@@ -453,7 +437,7 @@
 
         <tr>
             <td>
-                <textarea name="keyword" rows="5">${listingOrder.keyword}</textarea>
+                <textarea name="keyword" rows="5">${listingsVal.keyword}</textarea>
             </td>
         </tr>
 
@@ -480,7 +464,7 @@
 		</tr>
 		<tr>
 			<td>
-				<textarea name="hourOfWork" rows="5">${listingOrder.hourOfWork}</textarea>
+				<textarea name="hourOfWork" rows="5">${listingsVal.hourOfWork}</textarea>
 			</td>
 		</tr>
 	</tbody></table>
@@ -520,7 +504,7 @@
 									<c:forEach var="cat" items="${catMap.value}">
 										<c:if test="${cat.name != catMap.key.name}">
 											<c:choose>
-												<c:when test="${commonManagedBean.compareCategories(listingOrder.categories, cat.id)}">
+												<c:when test="${commonManagedBean.compareCategories(listingsVal.categories, cat.id)}">
 													<option value="${cat.id}" selected="selected">&nbsp;&nbsp;${cat.name}</option>
 												</c:when>
 												<c:otherwise>
@@ -533,7 +517,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-									<c:when test="${commonManagedBean.compareCategories(listingOrder.categories, catMap.key.id)}">
+									<c:when test="${commonManagedBean.compareCategories(listingsVal.categories, catMap.key.id)}">
 										<option value="${catMap.key.id}" selected="selected">${catMap.key.name}</option>
 									</c:when>
 									<c:otherwise>
@@ -585,7 +569,7 @@
 			</tr>
 							<tr>
 					<th>Code:</th>
-					<td><input type="text" name="promotionCode" value="${listingOrder.promotionCode}" maxlength="10"/></td>
+					<td><input type="text" name="promotionCode" value="${listingsVal.promotionCode}" maxlength="10"/></td>
 				</tr>
 					</tbody></table>
             <input type="hidden" name="ieBugFix2" value="1"/>

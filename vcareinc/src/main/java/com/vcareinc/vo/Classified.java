@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -26,10 +24,10 @@ public class Classified implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private User user;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private Price price;
 	private String title;
 	private String contactName;
@@ -42,10 +40,10 @@ public class Classified implements Serializable {
 	private String url;
 	private Float amount;
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne
 	private Address address;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	@OneToOne
 	private FileUpload imageUpload;
 	private String summaryDescription;
 	private String detailDescription;
@@ -204,5 +202,13 @@ public class Classified implements Serializable {
 
 	public Boolean addCategory(Category category) {
 		return this.category.add(category);
+	}
+
+	public Boolean deleteCategory(Category category) {
+		return this.category.remove(category);
+	}
+
+	public Boolean deleteAllCategory(Set<Category> categories) {
+		return this.category.removeAll(categories);
 	}
 }

@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Email;
@@ -27,12 +25,12 @@ public class Listings implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private User user;
 
 	private ListingType listingType;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private Price price;
 	private String title;
 
@@ -47,16 +45,16 @@ public class Listings implements Serializable {
 
 	private String facebookPage;
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne
 	private Address address;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	@OneToOne
 	private FileUpload imageUpload;
 
 	private String videoSnippet;
 	private String videoDescription;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	@OneToOne
 	private FileUpload additionalFile;
 	private String additionalFileDescription;
 
@@ -69,10 +67,10 @@ public class Listings implements Serializable {
 	private Boolean bestValue;
 	private StatusType status;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private PromotionCode promotionCode;
 
-	@OneToMany
+	@ManyToMany
 	private final Set<Category> category = new HashSet<Category>();
 
 	public Long getId() {
@@ -295,5 +293,13 @@ public class Listings implements Serializable {
 
 	public Boolean addCategory(Category category) {
 		return this.category.add(category);
+	}
+
+	public Boolean deleteCategory(Category category) {
+		return this.category.remove(category);
+	}
+
+	public Boolean deleteAllCategory(Set<Category> categories) {
+		return this.category.removeAll(categories);
 	}
 }

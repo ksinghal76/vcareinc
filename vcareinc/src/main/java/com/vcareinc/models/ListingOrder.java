@@ -1,5 +1,7 @@
 	package com.vcareinc.models;
 
+import java.util.Arrays;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
@@ -294,5 +296,30 @@ public class ListingOrder extends BaseModel {
 	 */
 	public void setCategories(String[] categories) {
 		this.categories = categories;
+	}
+
+	@Override
+	public String toString() {
+		return "ListingOrder [title=" + title + ", email=" + email
+				+ ", urlProtocol=" + urlProtocol + ", url=" + url
+				+ ", displayUrl=" + displayUrl + ", phoneNumber=" + phoneNumber
+				+ ", faxNumber=" + faxNumber + ", facebookPage=" + facebookPage
+				+ ", address1=" + address1 + ", address2=" + address2
+				+ ", zipcode=" + zipcode + ", city=" + city + ", state="
+				+ state + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", country=" + country + ", imageUpload=" + imageUpload
+				+ ", imageUploadFilename=" + imageUploadFilename
+				+ ", imageUploadStream=" + imageUploadStream
+				+ ", videoSnippet=" + videoSnippet + ", videoDescription="
+				+ videoDescription + ", additionalFile=" + additionalFile
+				+ ", additionalFileFilename=" + additionalFileFilename
+				+ ", additionalFileStream=" + additionalFileStream
+				+ ", additionalFileDescription=" + additionalFileDescription
+				+ ", summaryDescription=" + summaryDescription
+				+ ", description=" + description + ", keyword=" + keyword
+				+ ", hourOfWork=" + hourOfWork + ", location=" + location
+				+ ", bestService=" + bestService + ", bestValue=" + bestValue
+				+ ", promotionCode=" + promotionCode + ", categories="
+				+ Arrays.toString(categories) + "]";
 	}
 }

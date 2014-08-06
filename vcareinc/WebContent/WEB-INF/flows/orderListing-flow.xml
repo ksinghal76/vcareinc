@@ -8,21 +8,26 @@
 		<evaluate expression="requestController.getRequestParameters('optionType', externalContext)" result="flowScope.optionType"/>
 		<evaluate expression="requestController.getRequestParameters('priceType', externalContext)" result="flowScope.priceType"/>
 		<evaluate expression="requestController.getRequestParameters('id', externalContext)" result="flowScope.optionTypeId" />
+		<set name="flowScope.listingOrder" value="new com.vcareinc.models.ListingOrder()"/>
+		<set name="flowScope.eventOrder" value="new com.vcareinc.models.EventOrder()"/>
+		<set name="flowScope.classifiedOrder" value="new com.vcareinc.models.ClassifiedOrder()"/>
+		<set name="flowScope.articleOrder" value="new com.vcareinc.models.ArticleOrder()"/>
+		<set name="flowScope.dealOrder" value="new com.vcareinc.models.DealOrder()"></set>
 	</on-start>
 
 	<subflow-state id="userAccount" subflow="register-flow">
-	    <transition to="idExists"/>
+	    <transition to="levelDecision"/>
 	</subflow-state>
 
-	<decision-state id="idExists">
+	<!-- <decision-state id="idExists">
 		<if then="getOptionTypeValue" test="orderService.isOptionTypeIdExists(optionTypeId)" else="levelDecision"/>
-	</decision-state>
+	</decision-state> -->
 
 	<decision-state id="levelDecision">
 		<if then="levelType" test="orderService.isLevelRequired(optionType, priceType)" else="pageType"/>
 	</decision-state>
 
-	<action-state id="getOptionTypeValue">
+	<!-- <action-state id="getOptionTypeValue">
 		<evaluate expression="orderService.getPageType(optionType)"/>
 		<transition on="LISTING" to="getListings"/>
 		<transition on="EVENT" to="getEvents"/>
@@ -30,9 +35,9 @@
 		<transition on="ARTICLE" to="getArticles"/>
 		<transition on="DEAL" to="getDeals"/>
 	</action-state>
-
-	<action-state id="getListings">
-		<evaluate expression="listingService.getListingOrderById(optionTypeId)" result="flowScope.listingOrder"/>
+ -->
+	<!-- <action-state id="getListings">
+		<evaluate expression="listingService.getListingOrderById(optionTypeId)" result="flowScope.listingOrder2"/>
 		<transition to="listingOrder"/>
 	</action-state>
 
@@ -54,15 +59,15 @@
 	<action-state id="getDeals">
 		<evaluate expression="dealService.getDealOrderById(optionTypeId)" result="flowScope.dealOrder"/>
 		<transition to="dealOrder"/>
-	</action-state>
+	</action-state> -->
 
 	<action-state id="pageType">
 		<evaluate expression="orderService.getPageType(optionType)"/>
-		<transition on="LISTING" to="listingOrder"/>
-		<transition on="EVENT" to="eventOrder"/>
-		<transition on="DEAL" to="dealOrder"/>
-		<transition on="CLASSIFIED" to="classifiedOrder"/>
-		<transition on="ARTICLE" to="articleOrder"/>
+		<transition on="LISTING" to="listingOrderView"/>
+		<transition on="EVENT" to="eventOrderView"/>
+		<transition on="DEAL" to="dealOrderView"/>
+		<transition on="CLASSIFIED" to="classifiedOrderView"/>
+		<transition on="ARTICLE" to="articleOrderView"/>
 	</action-state>
 
 	<view-state id="levelType" view="levelType" model="levelTypeOrder">
@@ -79,92 +84,90 @@
 		<transition to="pageType"/>
 	</action-state>
 
-	<view-state id="listingOrder" view="listingOrder" model="listingOrder">
+	<view-state id="listingOrderView" view="listingOrder" model="listingOrder" >
 		<secured attributes="ROLE_USER"/>
 		<on-entry>
+			<evaluate expression="listingService.getListingOrderById(flowRequestContext, optionTypeId)" result="viewScope.listingsVal"/>
 			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
 		</on-entry>
 		<transition on="submit" to="saveListing"/>
-		<transition on="cancel" to="endOrder"/>
+		<transition on="cancel" to="endListingOrder"/>
 	</view-state>
 
 	<action-state id="saveListing">
 		<evaluate expression="listingService.saveListing(flowRequestContext, listingOrder)"/>
-		<transition to="endOrder"/>
-		<transition on-exception="com.vcareinc.exceptions.CommonException" to="listingOrder"/>
-		<on-exit>
-		    <set name="flowScope.listingOrder" value="new com.vcareinc.models.ListingOrder()"/>
-		</on-exit>
+		<transition to="endListingOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="listingOrderView"/>
 	</action-state>
 
-	<view-state id="dealOrder" view="dealOrder" model="dealOrder">
+	<view-state id="dealOrderView" view="dealOrder" model="dealOrder">
 		<secured attributes="ROLE_USER"/>
-		<transition on="submit" to="saveDeal"></transition>
-		<transition on="cancel" to="endOrder"/>
+		<on-entry>
+		    <evaluate expression="dealService.getDealOrderById(flowRequestContext, optionTypeId)" result="viewScope.dealVal"/>
+		</on-entry>
+		<transition on="submit" to="saveDeal"/>
+		<transition on="cancel" to="endDealOrder"/>
 	</view-state>
 
 	<action-state id="saveDeal">
 		<evaluate expression="dealService.saveDeal(flowRequestContext, dealOrder)"/>
-		<transition to="endOrder"/>
-		<transition on-exception="com.vcareinc.exceptions.CommonException" to="dealOrder"/>
-		<on-exit>
-		    <set name="flowScope.dealOrder" value="new com.vcareinc.models.DealOrder()"/>
-		</on-exit>
+		<transition to="endDealOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="dealOrderView"/>
 	</action-state>
 
-	<view-state id="eventOrder" view="eventOrder" model="eventOrder">
+	<view-state id="eventOrderView" view="eventOrder" model="eventOrder">
 		<secured attributes="ROLE_USER"/>
 		<on-entry>
+		    <evaluate expression="eventService.getEventOrderById(flowRequestContext, optionTypeId)" result="viewScope.eventVal"/>
 			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
 		</on-entry>
 		<transition on="submit" to="saveEvent"/>
-		<transition on="cancel" to="endOrder"/>
+		<transition on="cancel" to="endEventOrder"/>
 	</view-state>
 
 	<action-state id="saveEvent">
 		<evaluate expression="eventService.saveEvent(flowRequestContext, eventOrder)"/>
-		<transition to="endOrder"/>
-		<transition on-exception="com.vcareinc.exceptions.CommonException" to="eventOrder"/>
-		<on-exit>
-		    <set name="flowScope.eventOrder" value="new com.vcareinc.models.EventOrder()"/>
-		</on-exit>
+		<transition to="endEventOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="eventOrderView"/>
 	</action-state>
 
-	<view-state id="classifiedOrder" view="classifiedOrder" model="classifiedOrder">
+	<view-state id="classifiedOrderView" view="classifiedOrder" model="classifiedOrder">
 		<secured attributes="ROLE_USER"/>
 		<on-entry>
+		    <evaluate expression="classifiedService.getClassifiedOrderById(flowRequestContext, optionTypeId)" result="viewScope.classifiedVal"/>
 			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
 		</on-entry>
 		<transition on="submit" to="saveClassified"></transition>
-		<transition on="cancel" to="endOrder"/>
+		<transition on="cancel" to="endClassifiedOrder"/>
 	</view-state>
 
 	<action-state id="saveClassified">
 		<evaluate expression="classifiedService.saveClassified(flowRequestContext, classifiedOrder)"/>
-		<transition to="endOrder"/>
-		<transition on-exception="com.vcareinc.exceptions.CommonException" to="classifiedOrder"/>
-		<on-exit>
-		    <set name="flowScope.classifiedOrder" value="new com.vcareinc.models.ClassifiedOrder()"/>
-		</on-exit>
+		<transition to="endClassifiedOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="classifiedOrderView"/>
 	</action-state>
 
-	<view-state id="articleOrder" view="articleOrder" model="articleOrder">
+	<view-state id="articleOrderView" view="articleOrder" model="articleOrder">
 		<secured attributes="ROLE_USER"/>
 		<on-entry>
+		    <evaluate expression="articleService.getArticleOrderById(flowRequestContext, optionTypeId)" result="viewScope.articleVal"/>
 			<evaluate expression="orderService.initializeOrder(optionType, priceType)" result="viewScope.order"/>
 		</on-entry>
 		<transition on="submit" to="saveArticle"></transition>
-		<transition on="cancel" to="endOrder"/>
+		<transition on="cancel" to="endArticleOrder"/>
 	</view-state>
 
 	<action-state id="saveArticle">
 		<evaluate expression="articleService.saveArticle(flowRequestContext, articleOrder)"/>
-		<transition to="endOrder"/>
-		<transition on-exception="com.vcareinc.exceptions.CommonException" to="articleOrder"/>
-		<on-exit>
-		    <set name="flowScope.articleOrder" value="new com.vcareinc.models.ArticleOrder()"/>
-		</on-exit>
+		<transition to="endArticleOrder"/>
+		<transition on-exception="com.vcareinc.exceptions.CommonException" to="articleOrderView"/>
 	</action-state>
+
+	<end-state id="endListingOrder" view="externalRedirect:contextRelative:/spring/listingManage"/>
+	<end-state id="endEventOrder" view="externalRedirect:contextRelative:/spring/eventManage"/>
+	<end-state id="endClassifiedOrder" view="externalRedirect:contextRelative:/spring/classifiedManage"/>
+	<end-state id="endArticleOrder" view="externalRedirect:contextRelative:/spring/articleManage"/>
+	<end-state id="endDealOrder" view="externalRedirect:contextRelative:/spring/dealManage"/>
 
 	<end-state id="endOrder" view="externalRedirect:contextRelative:/spring/memberUser"/>
 

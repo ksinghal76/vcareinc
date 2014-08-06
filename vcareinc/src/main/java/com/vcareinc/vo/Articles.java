@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ public class Articles implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private User user;
 
 	private String title;
@@ -34,7 +33,7 @@ public class Articles implements Serializable {
 	private String url;
 	private Timestamp publicationDate;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	@OneToOne
 	private FileUpload imageUpload;
 
 	private String description;
@@ -44,7 +43,7 @@ public class Articles implements Serializable {
 
 	private PromotionCode promotionCode;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private Price price;
 
 	@OneToMany
@@ -165,5 +164,13 @@ public class Articles implements Serializable {
 
 	public Boolean addCategory(Category category) {
 		return this.category.add(category);
+	}
+
+	public Boolean deleteCategory(Category category) {
+		return this.category.remove(category);
+	}
+
+	public Boolean deleteAllCategory(Set<Category> categories) {
+		return this.category.removeAll(categories);
 	}
 }

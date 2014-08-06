@@ -1,9 +1,6 @@
 package com.vcareinc.models;
 
-import java.sql.Timestamp;
-
-import javax.validation.constraints.NotNull;
-
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,18 +12,18 @@ public class ArticleOrder extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message="Title is required")
+	@NotEmpty(message="Title is required")
 	private String title;
 
 	private String author;
 	private String protocol;
 	private String url;
-	private Timestamp publicationDate;
+	private String publicationDateStr;
 
 	private MultipartFile imageUpload;
 	private String imageUploadFilename;
 
-	@NotNull(message="Abstract is required")
+	@NotEmpty(message="Abstract is required")
 	private String description;
 	private String content;
 	private String keyword;
@@ -34,7 +31,7 @@ public class ArticleOrder extends BaseModel {
 	@PromotionCode(message="Promotional Code is expired or invalid. Please try other.")
 	private String promotionCode;
 
-	@NotNull(message="You must select at least one category")
+	@NotEmpty(message="You must select at least one category")
 	private String[] categories;
 
 	public String getTitle() {
@@ -69,12 +66,12 @@ public class ArticleOrder extends BaseModel {
 		this.url = url;
 	}
 
-	public Timestamp getPublicationDate() {
-		return publicationDate;
+	public String getPublicationDateStr() {
+		return publicationDateStr;
 	}
 
-	public void setPublicationDate(Timestamp publicationDate) {
-		this.publicationDate = publicationDate;
+	public void setPublicationDateStr(String publicationDateStr) {
+		this.publicationDateStr = publicationDateStr;
 	}
 
 	public MultipartFile getImageUpload() {

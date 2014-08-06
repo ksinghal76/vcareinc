@@ -32,6 +32,10 @@
 		<name>SpringSource Enterprise Bundle Repository - Snapshot Releases</name>
 		<url>http://repository.springsource.com/maven/bundles/snapshot</url>
 	</repository>
+	<repository>
+	   <id>EclipseLink</id>
+	   <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+	</repository>
   </repositories>
 
   <properties>
@@ -102,10 +106,15 @@
 		<artifactId>aws-java-sdk</artifactId>
 		<version>1.7.13</version>
 	</dependency>
+	<dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-mapsengine</artifactId>
+      <version>v1-rev31-1.19.0</version>
+    </dependency>
   	<dependency>
 	  <groupId>com.paypal.sdk</groupId>
 	  <artifactId>rest-api-sdk</artifactId>
-	  <version>0.5.2</version>
+	  <version>0.7.1</version>
 	</dependency>
 	<!-- <dependency>
 		<groupId>com.sun.facelets</groupId>

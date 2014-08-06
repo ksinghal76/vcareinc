@@ -1,12 +1,18 @@
 package com.vcareinc.services;
 
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +25,7 @@ import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ArticleOrder;
+import com.vcareinc.utils.DateUtils;
 import com.vcareinc.vo.Articles;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.FileUpload;
@@ -75,18 +82,37 @@ public class ArticleService extends BaseService<ArticleOrder> {
 		Articles articles = new Articles();
 		try {
 			validate(articleOrder);
-			if(id != null && id > 0)
+			if(id != null && id > 0) {
 				articles.setId(id);
-			articles.setUser(user);
-			articles.setPrice(price);
-			articles.setTitle(articleOrder.getTitle());
-			articles.setAuthor(articleOrder.getAuthor());
-			articles.setUrl(articleOrder.getProtocol() + articleOrder.getUrl());
-			articles.setPublicationDate(articleOrder.getPublicationDate());
+				if(articles.getCategory() != null && articles.getCategory().size() > 0) {
+					articles.deleteAllCategory(articles.getCategory());
+				}
+			} else {
+				articles.setUser(user);
+				articles.setPrice(price);
+			}
 
-			articles.setDescription(articleOrder.getDescription());
-			articles.setContent(articleOrder.getContent());
-			articles.setKeyword(articleOrder.getKeyword());
+			if(articleOrder.getTitle() != null && articleOrder.getTitle().trim().length() > 0)
+				articles.setTitle(articleOrder.getTitle());
+
+			if(articleOrder.getAuthor() != null && articleOrder.getAuthor().trim().length() > 0)
+				articles.setAuthor(articleOrder.getAuthor());
+
+			if(articleOrder.getUrl() != null && articleOrder.getUrl().trim().length() > 0)
+				articles.setUrl(articleOrder.getProtocol() + articleOrder.getUrl());
+
+			if(articleOrder.getPublicationDateStr() != null && articleOrder.getPublicationDateStr().trim().length() > 0)
+				articles.setPublicationDate(DateUtils.getTimestamp(articleOrder.getPublicationDateStr()));
+
+			if(articleOrder.getDescription() != null && articleOrder.getDescription().trim().length() > 0)
+				articles.setDescription(articleOrder.getDescription());
+
+			if(articleOrder.getContent() != null && articleOrder.getContent().trim().length() > 0)
+				articles.setContent(articleOrder.getContent());
+
+			if(articleOrder.getKeyword() != null && articleOrder.getKeyword().trim().length() > 0)
+				articles.setKeyword(articleOrder.getKeyword());
+
 
 			if(articleOrder.getCategories() != null && articleOrder.getCategories().length > 0) {
 				Map<Long, Category> categoryMap = getCategories();
@@ -114,22 +140,53 @@ public class ArticleService extends BaseService<ArticleOrder> {
 			em.persist(articles);
 
 			clearObject(articleOrder);
-		} catch (ValidationException e) {
+		} catch (ValidationException | ParseException e) {
 			throw new ValidationException(e);
+		} finally {
+			context.getFlowScope().put("articleOrder", articleOrder);
 		}
 	}
 
-	public ArticleOrder getArticleOrderById(Long id) {
+	@SuppressWarnings("unchecked")
+	public ArticleOrder getArticleOrderById(RequestContext context, Long id) {
 		ArticleOrder articleOrder = null;
-		Articles articles = getArticlesById(id);
-		if(articles != null) {
-			articleOrder = new ArticleOrder();
-			BeanUtils.copyProperties(articles, articleOrder);
+		ArticleOrder articleOrderOld = (ArticleOrder) context.getFlowScope().get("articleOrder");
+		try {
+			if(id != null && id > 0) {
+				Articles articles = getArticlesById(id);
+				if(articles != null) {
+					articleOrder = new ArticleOrder();
+					BeanUtils.copyProperties(articles, articleOrder);
 
-			if(articles.getImageUpload() != null) {
-				articleOrder.setImageUploadFilename(articles.getImageUpload().getClientFilename());
+					if(articles.getPublicationDate() != null) {
+						articleOrder.setPublicationDateStr(DateUtils.getStringforDate(articles.getPublicationDate()));
+					}
+
+					if(articles.getImageUpload() != null) {
+						articleOrder.setImageUploadFilename(articles.getImageUpload().getClientFilename());
+					}
+
+					if(articles.getCategory() != null && articles.getCategory().size() > 0) {
+						String[] strArr = new String[articles.getCategory().size()];
+						int i = 0;
+						for(Category category : articles.getCategory()) {
+							strArr[i++] = String.valueOf(category.getId());
+						}
+						articleOrder.setCategories(strArr);
+					}
+
+					if(articleOrderOld != null) {
+						if(articleOrderOld.getErrorConstraintViolation() != null && articleOrderOld.getErrorConstraintViolation().size() > 0)
+							articleOrder.setErrorConstraintViolation(articleOrderOld.getErrorConstraintViolation());
+					}
+				}
+			} else if(articleOrderOld != null) {
+				articleOrder = articleOrderOld;
 			}
+		} catch (InvocationTargetException | IllegalAccessException e) {
+			e.printStackTrace();
 		}
+
 		return articleOrder;
 	}
 
@@ -138,12 +195,20 @@ public class ArticleService extends BaseService<ArticleOrder> {
 		return em.createQuery("SELECT a FROM Articles a WHERE a.user = :user").setParameter("user", user).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public Articles getArticlesById(Long id) {
 		Articles articles = null;
-		List<Articles> articlesList = em.createQuery("SELECT a FROM Articles a WHERE a.id = :id").setParameter("id", id).getResultList();
-		if(articlesList != null && articlesList.size() > 0)
-			articles = articlesList.get(0);
+		try {
+
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Articles> articleQueries = cb.createQuery(Articles.class);
+			Root<Articles> articleRoot = articleQueries.from(Articles.class);
+			articleRoot.fetch("category");
+			articleQueries.where(cb.equal(articleRoot.get("id"), id));
+
+			articles =  em.createQuery(articleQueries).getSingleResult();
+		} catch (NoResultException e) {
+			e.printStackTrace();
+		}
 		return articles;
 	}
 

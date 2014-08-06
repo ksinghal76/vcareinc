@@ -1,14 +1,19 @@
 package com.vcareinc.services;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,24 +92,53 @@ public class EventService extends BaseService<EventOrder> {
 		try {
 			validate(eventOrder);
 			Events events = new Events();
-			if(id != null && id > 0)
-				events.setId(id);
-			events.setUser(user);
-			events.setPrice(price);
+			Address address = null;
+			if(id != null && id > 0) {
+				events = getEventById(id);
+				address = events.getAddress();
+				if(events.getCategory() != null && events.getCategory().size() > 0) {
+					events.deleteAllCategory(events.getCategory());
+				}
+			} else {
+				events.setUser(user);
+				events.setPrice(price);
+				address = new Address();
+			}
 
-			events.setTitle(eventOrder.getTitle());
-			events.setEmail(eventOrder.getEmail());
-			events.setUrl(eventOrder.getProtocol() + eventOrder.getUrl());
-			events.setPhoneNumber(eventOrder.getPhoneNumber());
-			events.setContactName(eventOrder.getContactName());
+			if(eventOrder.getTitle() != null && eventOrder.getTitle().trim().length() > 0)
+				events.setTitle(eventOrder.getTitle());
 
-			Address address = new Address();
-			address.setLocationName(eventOrder.getLocationName());
-			address.setAddress1(eventOrder.getAddress1());
-			address.setAddress2(eventOrder.getAddress2());
-			address.setCity(eventOrder.getCity());
-			address.setZipcode(eventOrder.getZipcode());
-			address.setLatitude(eventOrder.getLatitude());
+			if(eventOrder.getEmail() != null && eventOrder.getEmail().trim().length() > 0)
+				events.setEmail(eventOrder.getEmail());
+
+			if(eventOrder.getUrl() != null && eventOrder.getUrl().trim().length() > 0)
+				events.setUrl(eventOrder.getProtocol() + eventOrder.getUrl());
+
+			if(eventOrder.getPhoneNumber() != null && eventOrder.getPhoneNumber().trim().length() > 0)
+				events.setPhoneNumber(eventOrder.getPhoneNumber());
+
+			if(eventOrder.getContactName() != null && eventOrder.getContactName().trim().length() > 0)
+				events.setContactName(eventOrder.getContactName());
+
+			if(eventOrder.getLocationName() != null && eventOrder.getLocationName().trim().length() > 0)
+				address.setLocationName(eventOrder.getLocationName());
+
+			if(eventOrder.getAddress1() != null && eventOrder.getAddress1().trim().length() > 0)
+				address.setAddress1(eventOrder.getAddress1());
+
+			if(eventOrder.getAddress2() != null && eventOrder.getAddress2().trim().length() > 0)
+				address.setAddress2(eventOrder.getAddress2());
+
+			if(eventOrder.getCity() != null && eventOrder.getCity().trim().length() > 0)
+				address.setCity(eventOrder.getCity());
+
+			if(eventOrder.getZipcode() != null && eventOrder.getZipcode().trim().length() > 0)
+				address.setZipcode(eventOrder.getZipcode());
+
+			if(eventOrder.getLatitude() != null)
+				address.setLatitude(eventOrder.getLatitude());
+
+			if(eventOrder.getLongitude() != null)
 			address.setLongitude(eventOrder.getLongitude());
 
 			if(eventOrder.getState() != null && Long.valueOf(eventOrder.getState().trim()) > 0) {
@@ -118,7 +152,9 @@ public class EventService extends BaseService<EventOrder> {
 			}
 
 			em.persist(address);
-			events.setAddress(address);
+
+			if(id != null && id > 0)
+				events.setAddress(address);
 
 			if(eventOrder.getStartDate() != null && eventOrder.getStartDate().trim().length() > 0
 					&& eventOrder.getStartHour() != null && eventOrder.getStartHour().trim().length() > 0
@@ -133,7 +169,9 @@ public class EventService extends BaseService<EventOrder> {
 					&& eventOrder.getEndAmPm() != null && eventOrder.getEndAmPm().trim().length() > 0) {
 				events.setEndDate(DateUtils.getTimestamp(eventOrder.getEndDate() + " " + eventOrder.getEndHour() + ":" + eventOrder.getEndMinute() + " " + eventOrder.getEndAmPm(), "MM/dd/yyyy HH:mm a"));
 			}
-			events.setRecurring(eventOrder.getRecurring());
+
+			if(eventOrder.getRecurring() != null)
+				events.setRecurring(eventOrder.getRecurring());
 
 			if(eventOrder.getRecurring() != null && eventOrder.getRecurring()) {
 				if(eventOrder.getEventPeriod().equalsIgnoreCase("until")) {
@@ -157,9 +195,15 @@ public class EventService extends BaseService<EventOrder> {
 				}
 			}
 
-			events.setSummaryDescription(eventOrder.getSummarydesc());
-			events.setDescription(eventOrder.getDescription());
-			events.setKeyword(eventOrder.getKeyword());
+			if(eventOrder.getSummarydesc() != null && eventOrder.getSummarydesc().trim().length() > 0)
+				events.setSummaryDescription(eventOrder.getSummarydesc());
+
+			if(eventOrder.getDescription() != null && eventOrder.getDescription().trim().length() > 0)
+				events.setDescription(eventOrder.getDescription());
+
+			if(eventOrder.getKeyword() != null && eventOrder.getKeyword().trim().length() > 0)
+				events.setKeyword(eventOrder.getKeyword());
+
 			if(PriceType.valueOf(priceType.name()).equals(PriceType.STUDENTS))
 				events.setStatus(StatusType.ACTIVE);
 			else
@@ -185,52 +229,79 @@ public class EventService extends BaseService<EventOrder> {
 				events.setImageUpload(fileUpload);
 			}
 			em.persist(events);
-
-			clearObject(eventOrder);
-
 		} catch (ValidationException | ParseException e) {
 			throw new ValidationException(e);
+		} finally {
+			context.getFlowScope().put("eventOrder", eventOrder);
 		}
 	}
 
-	public EventOrder getEventOrderById(Long id) {
+	@SuppressWarnings("unchecked")
+	public EventOrder getEventOrderById(RequestContext context, Long id) {
 		EventOrder eventOrder = null;
-		Events events = getEventById(id);
-		if(events != null) {
-			eventOrder = new EventOrder();
-			BeanUtils.copyProperties(events, eventOrder);
-		}
+		EventOrder eventOrderOld = (EventOrder) context.getFlowScope().get("eventOrder");
+		try {
+			if(id != null && id > 0) {
+				Events events = getEventById(id);
+				if(events != null) {
+					eventOrder = new EventOrder();
+					BeanUtils.copyProperties(eventOrder, events);
 
-		eventOrder.setProtocol(events.getUrl().substring(0, events.getUrl().indexOf("//")));
-		eventOrder.setUrl(events.getUrl().substring(events.getUrl().indexOf("//"), events.getUrl().length()));
-		eventOrder.setSummarydesc(events.getSummaryDescription());
+					if(events.getUrl() != null && events.getUrl().trim().length() > 0) {
+						eventOrder.setProtocol(events.getUrl().substring(0, events.getUrl().indexOf("//")));
+						eventOrder.setUrl(events.getUrl().substring(events.getUrl().indexOf("//"), events.getUrl().length()));
+					}
 
-		if(events.getDayOfWeek() != null && events.getDayOfWeek().trim().length() > 0) {
-			String[] datOfWkArr = events.getDayOfWeek().split(":");
-			DayOfWeek[] dayOfWeek = new DayOfWeek[datOfWkArr.length];
-			int i = 0;
-			for(String datOfWk : datOfWkArr) {
-				dayOfWeek[i++] = DayOfWeek.valueOf(datOfWk);
+					if(events.getSummaryDescription() != null && events.getSummaryDescription().trim().length() > 0)
+						eventOrder.setSummarydesc(events.getSummaryDescription());
+
+					if(events.getDayOfWeek() != null && events.getDayOfWeek().trim().length() > 0) {
+						String[] datOfWkArr = events.getDayOfWeek().split(":");
+						DayOfWeek[] dayOfWeek = new DayOfWeek[datOfWkArr.length];
+						int i = 0;
+						for(String datOfWk : datOfWkArr) {
+							dayOfWeek[i++] = DayOfWeek.valueOf(datOfWk);
+						}
+						eventOrder.setDayOfWeekcb(dayOfWeek);
+					}
+
+					if(events.getWeekOfMonth() != null && events.getWeekOfMonth().trim().length() > 0) {
+						String[] wkOfMthArr = events.getWeekOfMonth().split(":");
+						WeekOfMonth[] weekOfMonth = new WeekOfMonth[wkOfMthArr.length];
+						int i = 0;
+						for(String wkOfMth : wkOfMthArr) {
+							weekOfMonth[i++] = WeekOfMonth.valueOf(wkOfMth);
+						}
+						eventOrder.setWeekOfMonth(weekOfMonth);
+					}
+
+					if(events.getAddress() != null) {
+						BeanUtils.copyProperties(events.getAddress(), eventOrder);
+					}
+
+					if(events.getImageUpload() != null) {
+						eventOrder.setImageUploadFilename(events.getImageUpload().getClientFilename());
+					}
+
+					if(events.getCategory() != null && events.getCategory().size() > 0) {
+						String[] strArr = new String[events.getCategory().size()];
+						int i = 0;
+						for(Category category : events.getCategory()) {
+							strArr[i++] = String.valueOf(category.getId());
+						}
+						eventOrder.setCategories(strArr);
+					}
+
+					if(eventOrderOld != null) {
+						if(eventOrderOld.getErrorConstraintViolation() != null && eventOrderOld.getErrorConstraintViolation().size() > 0)
+							eventOrder.setErrorConstraintViolation(eventOrderOld.getErrorConstraintViolation());
+					}
+				}
+			} else if(eventOrderOld != null) {
+				eventOrder = eventOrderOld;
 			}
-			eventOrder.setDayOfWeekcb(dayOfWeek);
-		}
-
-		if(events.getWeekOfMonth() != null && events.getWeekOfMonth().trim().length() > 0) {
-			String[] wkOfMthArr = events.getWeekOfMonth().split(":");
-			WeekOfMonth[] weekOfMonth = new WeekOfMonth[wkOfMthArr.length];
-			int i = 0;
-			for(String wkOfMth : wkOfMthArr) {
-				weekOfMonth[i++] = WeekOfMonth.valueOf(wkOfMth);
-			}
-			eventOrder.setWeekOfMonth(weekOfMonth);
-		}
-
-		if(events.getAddress() != null) {
-			BeanUtils.copyProperties(events.getAddress(), eventOrder);
-		}
-
-		if(events.getImageUpload() != null) {
-			eventOrder.setImageUploadFilename(events.getImageUpload().getClientFilename());
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
 		}
 		return eventOrder;
 	}
@@ -240,12 +311,20 @@ public class EventService extends BaseService<EventOrder> {
 		return em.createQuery("SELECT e FROM Events e WHERE e.user = :user").setParameter("user", user).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public Events getEventById(Long id) {
 		Events events = null;
-		List<Events> eventsList = em.createQuery("SELECT e FROM Events e WHERE e.id = :id").setParameter("id", id).getResultList();
-		if(eventsList != null && eventsList.size() > 0)
-			events = eventsList.get(0);
+		try {
+
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Events> eventQueries = cb.createQuery(Events.class);
+			Root<Events> eventRoot = eventQueries.from(Events.class);
+			eventRoot.fetch("category");
+			eventQueries.where(cb.equal(eventRoot.get("id"), id));
+
+			events =  em.createQuery(eventQueries).getSingleResult();
+		} catch (NoResultException e) {
+			e.printStackTrace();
+		}
 		return events;
 	}
 

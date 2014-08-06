@@ -1,12 +1,17 @@
 package com.vcareinc.services;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,27 +84,57 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 		Classified classified = new Classified();
 		try {
 			validate(classifiedOrder);
-			if(id != null && id > 0)
-				classified.setId(id);
-			classified.setUser(user);
-			classified.setPrice(price);
-			classified.setTitle(classifiedOrder.getTitle());
-			classified.setContactName(classifiedOrder.getContactName());
-			classified.setContactPhoneNumber(classifiedOrder.getContactPhoneNumber());
-			classified.setContactFax(classifiedOrder.getContactFax());
-			classified.setContactEmail(classifiedOrder.getContactEmail());
+			Address address = null;
+			if(id != null && id > 0) {
+				classified = getClassifiedById(id);
+				address = classified.getAddress();
+				if(classified.getCategory() != null && classified.getCategory().size() > 0) {
+					classified.deleteAllCategory(classified.getCategory());
+				}
+			} else {
+				address = new Address();
+				classified.setUser(user);
+				classified.setPrice(price);
+			}
 
-			classified.setUrl(classifiedOrder.getProtocol() + classifiedOrder.getUrl());
+			if(classifiedOrder.getTitle() != null && classifiedOrder.getTitle().trim().length() > 0)
+				classified.setTitle(classifiedOrder.getTitle());
+
+			if(classifiedOrder.getContactName() != null && classifiedOrder.getContactName().trim().length() > 0)
+				classified.setContactName(classifiedOrder.getContactName());
+
+			if(classifiedOrder.getContactPhoneNumber() != null && classifiedOrder.getContactPhoneNumber().trim().length() > 0)
+				classified.setContactPhoneNumber(classifiedOrder.getContactPhoneNumber());
+
+			if(classifiedOrder.getContactFax() != null && classifiedOrder.getContactFax().trim().length() > 0)
+				classified.setContactFax(classifiedOrder.getContactFax());
+
+			if(classifiedOrder.getContactEmail() != null && classifiedOrder.getContactEmail().trim().length() > 0)
+				classified.setContactEmail(classifiedOrder.getContactEmail());
+
+			if(classifiedOrder.getUrl() != null && classifiedOrder.getUrl().trim().length() > 0)
+				classified.setUrl(classifiedOrder.getProtocol() + classifiedOrder.getUrl());
+
 			if(classifiedOrder.getAmountDollar() != null && classifiedOrder.getAmountCent() != null)
 				classified.setAmount(new Float(String.valueOf(classifiedOrder.getAmountDollar()) + "." + String.valueOf(classifiedOrder.getAmountCent())));
 
-			Address address = new Address();
-			address.setAddress1(classifiedOrder.getAddress1());
-			address.setAddress2(classifiedOrder.getAddress2());
-			address.setCity(classifiedOrder.getCity());
-			address.setZipcode(classifiedOrder.getZipcode());
-			address.setLatitude(classifiedOrder.getLatitude());
-			address.setLongitude(classifiedOrder.getLongitude());
+			if(classifiedOrder.getAddress1() != null && classifiedOrder.getAddress1().trim().length() > 0)
+				address.setAddress1(classifiedOrder.getAddress1());
+
+			if(classifiedOrder.getAddress2() != null && classifiedOrder.getAddress2().trim().length() > 0)
+				address.setAddress2(classifiedOrder.getAddress2());
+
+			if(classifiedOrder.getCity() != null && classifiedOrder.getCity().trim().length() > 0)
+				address.setCity(classifiedOrder.getCity());
+
+			if(classifiedOrder.getZipcode() != null && classifiedOrder.getZipcode().trim().length() > 0)
+				address.setZipcode(classifiedOrder.getZipcode());
+
+			if(classifiedOrder.getLatitude() != null)
+				address.setLatitude(classifiedOrder.getLatitude());
+
+			if(classifiedOrder.getLongitude() != null)
+				address.setLongitude(classifiedOrder.getLongitude());
 
 			if(classifiedOrder.getState() != null && classifiedOrder.getState().trim().length() > 0 && !classifiedOrder.getState().trim().equals("0")) {
 				State state = orderService.getStateById(Long.valueOf(classifiedOrder.getState()));
@@ -112,11 +147,18 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 			}
 
 			em.persist(address);
-			classified.setAddress(address);
 
-			classified.setSummaryDescription(classifiedOrder.getSummarydesc());
-			classified.setDetailDescription(classifiedOrder.getDetailDescription());
-			classified.setKeyword(classifiedOrder.getKeyword());
+			if(id != null && id > 0)
+				classified.setAddress(address);
+
+			if(classifiedOrder.getSummarydesc() != null && classifiedOrder.getSummarydesc().trim().length() > 0)
+				classified.setSummaryDescription(classifiedOrder.getSummarydesc());
+
+			if(classifiedOrder.getDetailDescription() != null && classifiedOrder.getDetailDescription().trim().length() > 0)
+				classified.setDetailDescription(classifiedOrder.getDetailDescription());
+
+			if(classifiedOrder.getKeyword() != null && classifiedOrder.getKeyword().trim().length() > 0)
+				classified.setKeyword(classifiedOrder.getKeyword());
 
 			if(classifiedOrder.getCategories() != null && classifiedOrder.getCategories().length > 0) {
 				Map<Long, Category> categoryMap = getCategories();
@@ -141,31 +183,60 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 			else
 				classified.setStatus(StatusType.PENDING);
 			em.persist(classified);
-
-			clearObject(classifiedOrder);
 		} catch (ValidationException e) {
 			throw new ValidationException(e);
+		} finally {
+			context.getFlowScope().put("classifiedOrder", classifiedOrder);
 		}
 	}
 
-	public ClassifiedOrder getClassifiedOrderById(Long id) {
+	@SuppressWarnings("unchecked")
+	public ClassifiedOrder getClassifiedOrderById(RequestContext context, Long id) {
 		ClassifiedOrder classifiedOrder = null;
-		Classified classified = getClassifiedById(id);
-		if(classified != null) {
-			classifiedOrder = new ClassifiedOrder();
-			BeanUtils.copyProperties(classified, classifiedOrder);
+		ClassifiedOrder classifiedOrderOld = (ClassifiedOrder) context.getFlowScope().get("classifiedOrder");
 
-			classifiedOrder.setProtocol(classified.getUrl().substring(0, classified.getUrl().indexOf("//")));
-			classifiedOrder.setUrl(classified.getUrl().substring(classified.getUrl().indexOf("//"), classified.getUrl().length()));
-			classifiedOrder.setSummarydesc(classified.getSummaryDescription());
+		try {
+			if(id != null && id > 0) {
+				Classified classified = getClassifiedById(id);
+				if(classified != null) {
+					classifiedOrder = new ClassifiedOrder();
+					BeanUtils.copyProperties(classifiedOrder, classified);
 
-			if(classified.getAddress() != null) {
-				BeanUtils.copyProperties(classified.getAddress(), classifiedOrder);
+					if(classified.getUrl() != null && classified.getUrl().trim().length() > 0) {
+						classifiedOrder.setProtocol(classified.getUrl().substring(0, classified.getUrl().indexOf("//")));
+						classifiedOrder.setUrl(classified.getUrl().substring(classified.getUrl().indexOf("//"), classified.getUrl().length()));
+					}
+
+					if(classified.getSummaryDescription() != null && classified.getSummaryDescription().trim().length() > 0)
+						classifiedOrder.setSummarydesc(classified.getSummaryDescription());
+
+					if(classified.getAddress() != null) {
+						BeanUtils.copyProperties(classified.getAddress(), classifiedOrder);
+					}
+
+					if(classified.getImageUpload() != null) {
+						classifiedOrder.setImageUploadFilename(classified.getImageUpload().getClientFilename());
+					}
+
+					if(classified.getCategory() != null && classified.getCategory().size() > 0) {
+						String[] strArr = new String[classified.getCategory().size()];
+						int i = 0;
+						for(Category category : classified.getCategory()) {
+							strArr[i++] = String.valueOf(category.getId());
+						}
+						classifiedOrder.setCategories(strArr);
+					}
+
+					if(classifiedOrderOld != null) {
+						if(classifiedOrderOld.getErrorConstraintViolation() != null && classifiedOrderOld.getErrorConstraintViolation().size() > 0)
+							classifiedOrder.setErrorConstraintViolation(classifiedOrderOld.getErrorConstraintViolation());
+					}
+				}
+			} else if(classifiedOrderOld != null) {
+				classifiedOrder = classifiedOrderOld;
 			}
-
-			if(classified.getImageUpload() != null) {
-				classifiedOrder.setImageUploadFilename(classified.getImageUpload().getClientFilename());
-			}
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
 		}
 		return classifiedOrder;
 	}
@@ -175,13 +246,20 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 		return em.createQuery("SELECT c FROM Classified c WHERE c.user = :user").setParameter("user", user).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public Classified getClassifiedById(Long id) {
 		Classified classified = null;
-		List<Classified> classifiedList = em.createQuery("SELECT c FROM Classified c WHERE c.id = :id").setParameter("id", id).getResultList();
-		if(classifiedList != null && classifiedList.size() > 0)
-			classified = classifiedList.get(0);
+		try {
 
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Classified> classifiedQueries = cb.createQuery(Classified.class);
+			Root<Classified> classifiedRoot = classifiedQueries.from(Classified.class);
+			classifiedRoot.fetch("category");
+			classifiedQueries.where(cb.equal(classifiedRoot.get("id"), id));
+
+			classified =  em.createQuery(classifiedQueries).getSingleResult();
+		} catch (NoResultException e) {
+			e.printStackTrace();
+		}
 
 		return classified;
 	}

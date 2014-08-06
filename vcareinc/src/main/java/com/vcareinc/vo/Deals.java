@@ -3,9 +3,7 @@ package com.vcareinc.vo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -23,7 +21,7 @@ public class Deals implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private User user;
 
 	private String title;
@@ -41,7 +39,7 @@ public class Deals implements Serializable {
 	private Integer totalDeal;
 	private StatusType status;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	@OneToOne
 	private FileUpload imageUpload;
 	public Long getId() {
 		return id;

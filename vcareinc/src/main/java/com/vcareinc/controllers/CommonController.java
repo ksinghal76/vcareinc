@@ -12,9 +12,13 @@ import com.vcareinc.services.CommonService;
 import com.vcareinc.services.DealService;
 import com.vcareinc.services.EventService;
 import com.vcareinc.services.ListingService;
+import com.vcareinc.services.OrderService;
 
 @Controller
 public class CommonController extends MultiActionController {
+
+	@Autowired
+	private OrderService orderService;
 
 	@Autowired
 	private ListingService listingService;
@@ -36,6 +40,7 @@ public class CommonController extends MultiActionController {
 
 	@RequestMapping("/home")
 	public String home(ModelMap map) {
+		map.addAttribute("allCategories", orderService.getAllCategories());
 		map.addAttribute("listingLists", listingService.getTopListingsLists(3));
 		map.addAttribute("classifiedLists", classifiedService.getTopClassifiedLists(1));
 		map.addAttribute("articleLists", articleService.getTopArticlesLists(1));
@@ -49,6 +54,26 @@ public class CommonController extends MultiActionController {
 		map.addAttribute("listingLists", listingService.getTopListingsLists(5));
 		map.addAttribute("dealLists", dealService.getTopDealsLists(4));
 		return "listing";
+	}
+
+	@RequestMapping("/allCategories")
+	public String allCategories(ModelMap map) {
+		map.addAttribute("allCategories", orderService.getAllCategories());
+		return "allCategories";
+	}
+
+	/**
+	 * @return the orderService
+	 */
+	public OrderService getOrderService() {
+		return orderService;
+	}
+
+	/**
+	 * @param orderService the orderService to set
+	 */
+	public void setOrderService(OrderService orderService) {
+		this.orderService = orderService;
 	}
 
 	public ListingService getListingService() {

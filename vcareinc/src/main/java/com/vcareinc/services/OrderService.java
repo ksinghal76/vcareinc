@@ -5,14 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PageType;
 import com.vcareinc.constants.PriceType;
 import com.vcareinc.constants.StatusType;
 import com.vcareinc.controllers.ConversionManagedBean;
+import com.vcareinc.models.ListingOrder;
 import com.vcareinc.models.Order;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Country;
@@ -24,6 +27,7 @@ import com.vcareinc.vo.State;
 @Controller
 public class OrderService extends BaseService {
 
+	private static final Logger log = Logger.getLogger(OrderService.class);
 
 	@Autowired
 	private ConversionManagedBean conversionManagedBean;
@@ -211,5 +215,37 @@ public class OrderService extends BaseService {
 			promotionCode = promotionCodeLst.get(0);
 
 		return promotionCode;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getAllCategories() {
+		return em.createNativeQuery("SELECT c.id, c.name, \"LISTING\" as optionType, count(*)"
+								+ " FROM category c"
+								+ " inner join listings_category lc on lc.category_id = c.id"
+								+ " group by c.id, c.name, optionType"
+								+ " having count(*) > 0"
+								+ " union"
+								+ " SELECT c.id, c.name, \"CLASSIFIED\" as optionType, count(*)"
+								+ " FROM category c"
+								+ " inner join classified_category cc on cc.category_id = c.id"
+								+ " group by c.id, c.name, optionType"
+								+ " having count(*) > 0"
+								+ " union"
+								+ " SELECT c.id, c.name, \"ARTICLE\" as optionType, count(*)"
+								+ " FROM category c"
+								+ " inner join articles_category ac on ac.category_id = c.id"
+								+ " group by c.id, c.name, optionType"
+								+ " having count(*) > 0"
+								+ " union"
+								+ " SELECT c.id, c.name, \"EVENT\" as optionType, count(*)"
+								+ " FROM category c"
+								+ " inner join events_category ec on ec.category_id = c.id"
+								+ " group by c.id, c.name, optionType"
+								+ " having count(*) > 0").getResultList();
+	}
+
+	public void testingOrder(RequestContext context) {
+		ListingOrder listingOrder = (ListingOrder) context.getFlowScope().get("listingOrder");
+		log.info("Listing Order: " + listingOrder.toString());
 	}
 }

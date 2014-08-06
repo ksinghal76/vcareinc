@@ -25,7 +25,7 @@
 		<evaluate expression="billingOrder.paymentMethod" result="flowScope.paymentMethod"/>
 		<transition on-exception="com.vcareinc.exceptions.CommonException" to="billingManage"/>
 		<transition on="CREDITCARD" to="creditCardMethod"/>
-		<transition on="PAYPAl" to="creditCardMethod"/>
+		<transition on="PAYPAL" to="creditCardMethod"/>
 		<transition on="SIMPLEPAY" to="creditCardMethod"/>
 		<transition on="INVOICECHECK" to="creditCardMethod"/>
 	</action-state>

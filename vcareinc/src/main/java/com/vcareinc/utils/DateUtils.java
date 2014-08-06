@@ -18,4 +18,12 @@ public class DateUtils {
 	public static Timestamp getTimestamp(String date, String dateFormat) throws ParseException {
 		return (new Timestamp(new SimpleDateFormat(dateFormat).parse(date).getTime()));
 	}
+
+	public static String getStringforDate(Timestamp time) {
+		return (new SimpleDateFormat(DATE_FORMAT)).format(time);
+	}
+
+	public static String getStringforDate(Timestamp time, String dateFormat) {
+		return (new SimpleDateFormat(dateFormat)).format(time);
+	}
 }

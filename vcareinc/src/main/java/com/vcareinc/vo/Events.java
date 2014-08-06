@@ -5,9 +5,7 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -30,10 +28,10 @@ public class Events implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private User user;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private Price price;
 	private String title;
 
@@ -44,7 +42,7 @@ public class Events implements Serializable {
 	private String phoneNumber;
 	private String contactName;
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne
 	private Address address;
 
 	private Timestamp startDate;
@@ -60,7 +58,7 @@ public class Events implements Serializable {
 	private String eventPeriod;
 	private Timestamp untilDate;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	@OneToOne
 	private FileUpload imageUpload;
 
 
@@ -70,7 +68,7 @@ public class Events implements Serializable {
 	private String keyword;
 	private StatusType status;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private PromotionCode promotionCode;
 
 	@OneToMany
@@ -288,5 +286,13 @@ public class Events implements Serializable {
 
 	public Boolean addCategory(Category category) {
 		return this.category.add(category);
+	}
+
+	public Boolean deleteCategory(Category category) {
+		return this.category.remove(category);
+	}
+
+	public Boolean deleteAllCategory(Set<Category> categories) {
+		return this.category.removeAll(categories);
 	}
 }

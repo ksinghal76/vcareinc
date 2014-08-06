@@ -184,88 +184,16 @@
 							<div class="span12 flex-box-list color-3">
 
 								<h2>
-									Browse by Category <span><a class="view-more"
-										href="http://beautypro411.com/listing/allcategories.php">more</a></span>
+									Browse by Category <span><a class="view-more" href="allCategories">more</a></span>
 								</h2>
 
 								<ul class="browse-category">
-
-
-									<li><a href="http://beautypro411.com/listing/guide/barber">
-											Barber </a> <span>(9)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/beauty-distributor">
-											Beauty Distributor </a> <span>(2)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/beauty-schools">
-											Beauty Schools </a> <span>(4)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/beauty-students-apprentice">
-											Beauty Students/ Apprentice </a> <span>(1)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/beauty-supply">
-											Beauty Supply </a> <span>(9)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/beauty-and-fitness">
-											Beauty and Fitness </a> <span>(4429)</span></li>
-
-
-									<li><a href="http://beautypro411.com/listing/guide/braids">
-											Braids </a> <span>(10)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/cosmetologist">
-											Cosmetologist </a> <span>(19)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/esthetician">
-											Esthetician </a> <span>(5)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/hair-loss">
-											Hair Loss </a> <span>(1)</span></li>
-
-
-									<li><a href="http://beautypro411.com/listing/guide/health">
-											Health </a> <span>(2)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/makeup-artist">
-											Makeup Artist </a> <span>(7)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/massage">
-											Massage </a> <span>(2)</span></li>
-
-
-									<li><a href="http://beautypro411.com/listing/guide/spa">
-											Spa </a> <span>(4)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/listing/guide/stylist">
-											Stylist </a> <span>(7)</span></li>
-
-
-									<li><a href="http://beautypro411.com/listing/guide/weaves">
-											Weaves </a> <span>(5)</span></li>
-
-
+									<c:if test="${not empty allCategories}">
+										<c:forEach var="categories" items="${allCategories}">
+											<li><a href="listingList?categoryId=${categories[0]}&amp;optionType=${categories[2]}">
+												${categories[1]} </a> <span>(${categories[3]})</span></li>
+										</c:forEach>
+									</c:if>
 								</ul>
 
 							</div>

@@ -38,7 +38,7 @@
             <input type="hidden" name="gallery_hash" value="event_21062077235398ef96bb3133.74099079"/> -->
 
 			<ui:include src="includes/errorPageType.xhtml">
-          		<ui:param name="error" value="${eventOrder}"/>
+          		<ui:param name="error" value="${eventVal}"/>
           	</ui:include>
 
 <script language="javascript" type="text/javascript">
@@ -487,7 +487,7 @@
 	<tbody><tr class="bigger">
 		<th><i><span>Required field</span></i> Event Title:</th>
 		<td>
-			<input type="text" name="title" value="${eventOrder.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
+			<input type="text" name="title" value="${eventVal.title}" maxlength="100" onblur="easyFriendlyUrl(this.value, 'friendly_url', 'a-zA-Z0-9', '-');"/>
 			<input type="hidden" name="friendly_url" id="friendly_url" value="" maxlength="150"/>
 		</td>
 	</tr>
@@ -500,7 +500,7 @@
 	</tr>
 	        <tr>
             <th>E-mail:</th>
-            <td><input type="text" name="email" value="${eventOrder.email}"/></td>
+            <td><input type="text" name="email" value="${eventVal.email}"/></td>
         </tr>
 
 			<tr>
@@ -508,7 +508,7 @@
 			<td>
 			<select name="protocol" class="httpSelect">
 			<c:choose>
-				<c:when test="${eventOrder.protocol == 'http://'}">
+				<c:when test="${eventVal.protocol == 'http://'}">
 					<option value="http://" selected="selected">http://</option>
 				</c:when>
 				<c:otherwise>
@@ -517,7 +517,7 @@
 			</c:choose>
 
 			<c:choose>
-				<c:when test="${eventOrder.protocol == 'https://'}">
+				<c:when test="${eventVal.protocol == 'https://'}">
 					<option value="https://" selected="selected">https://</option>
 				</c:when>
 				<c:otherwise>
@@ -526,7 +526,7 @@
 			</c:choose>
 
 			<c:choose>
-				<c:when test="${eventOrder.protocol == 'ftp://'}">
+				<c:when test="${eventVal.protocol == 'ftp://'}">
 					<option value="ftp://" selected="selected">ftp://</option>
 				</c:when>
 				<c:otherwise>
@@ -534,18 +534,18 @@
 				</c:otherwise>
 			</c:choose>
 			</select>
-			<input type="text" class="httpInput" name="url" value="${eventOrder.url}" maxlength="255"/>
+			<input type="text" class="httpInput" name="url" value="${eventVal.url}" maxlength="255"/>
 			</td>
 		</tr>
 
     	<tr>
 		<th>Phone:</th>
-		<td><input type="text" name="phoneNumber" value="${eventOrder.phoneNumber}"/></td>
+		<td><input type="text" name="phoneNumber" value="${eventVal.phoneNumber}"/></td>
 	</tr>
 
     		<tr>
 			<th>Contact Name:</th>
-			<td><input type="text" name="contactName" value="${eventOrder.contactName}"/></td>
+			<td><input type="text" name="contactName" value="${eventVal.contactName}"/></td>
 		</tr>
     </tbody></table>
 
@@ -555,22 +555,22 @@
 	</tr>
 	<tr>
 		<th>Location Name:</th>
-		<td><input type="text" name="locationName" value="${eventOrder.locationName}"/></td>
+		<td><input type="text" name="locationName" value="${eventVal.locationName}"/></td>
 	</tr>
 	<tr>
 		<th>Street Address:</th>
-		<td><input type="text" name="address1" id="address1" onblur="loadMap(document.form_event);" value="${eventOrder.address1}"/></td>
+		<td><input type="text" name="address1" id="address1" onblur="loadMap(document.form_event);" value="${eventVal.address1}"/></td>
 	</tr>
 
 	<tr>
 		<th>Zipcode:</th>
-		<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.form_event);" value="${eventOrder.zipcode}" maxlength="10"/></td>
+		<td><input type="text" name="zipcode" id="zipcode" onblur="loadMap(document.form_event);" value="${eventVal.zipcode}" maxlength="10"/></td>
 	</tr>
 
         <tr>
 		<th>Latitude:</th>
 		<td>
-            <input type="text" name="latitude" id="latitude" onblur="loadMap(document.form_event, true);" value="${eventOrder.latitude}" maxlength="10"/>
+            <input type="text" name="latitude" id="latitude" onblur="loadMap(document.form_event, true);" value="${eventVal.latitude}" maxlength="10"/>
             <span>Ex: 38.830391</span>
         </td>
 	</tr>
@@ -578,7 +578,7 @@
     <tr>
 		<th>Longitude:</th>
 		<td>
-            <input type="text" name="longitude" id="longitude" onblur="loadMap(document.form_event, true);" value="${eventOrder.longitude}" maxlength="10"/>
+            <input type="text" name="longitude" id="longitude" onblur="loadMap(document.form_event, true);" value="${eventVal.longitude}" maxlength="10"/>
             <span>Ex: -77.196370</span>
         </td>
 	</tr>
@@ -677,7 +677,7 @@
 								<img src="http://beautypro411.com/images/content/img_loading_bar.gif" alt="Wait, Loading..."/>
 							</td>
 							<td id="div_select_4" class="field locationSelect">
-								<input type="text" id="city" name="city" value="${eventOrder.city}"/>
+								<input type="text" id="city" name="city" value="${eventVal.city}"/>
 																	<!-- <select style="display:none" class="select" name="location_4" id="location_4" onchange="loadMap(document.form_event);">
 
 									<option id="l_location_4" value="">Select a City</option>
@@ -949,13 +949,13 @@
     <tr>
         <th class="alignTop"><i> * <span>Required field</span></i> Start Date:</th>
 		<td>
-			<input type="text" name="startDate" id="startDate" value="${eventOrder.startDate}" style="width:80px" class="hasDatepicker"/><span>(mm/dd/yyyy)</span>
+			<input type="text" name="startDate" id="startDate" value="${eventVal.startDate}" style="width:80px" class="hasDatepicker"/><span>(mm/dd/yyyy)</span>
 		</td>
     </tr>
     <tr id="labelEndDate">
         <th class="alignTop"><i> * <span>Required field</span></i> End Date:</th>
         <td>
-			<input type="text" name="endDate" id="endDate" value="${eventOrder.endDate}" style="width:80px" class="hasDatepicker"/><span>(mm/dd/yyyy)</span>
+			<input type="text" name="endDate" id="endDate" value="${eventVal.endDate}" style="width:80px" class="hasDatepicker"/><span>(mm/dd/yyyy)</span>
 		</td>
     </tr>
 </tbody></table>
@@ -969,7 +969,7 @@
 <option value=""></option>
 <c:forEach begin="1" end="12" var="stHr">
 	<c:choose>
-		<c:when test="${stHr == eventOrder.startHour}">
+		<c:when test="${stHr == eventVal.startHour}">
 			<option value="${stHr}" selected="selected">${stHr}</option>
 		</c:when>
 		<c:otherwise>
@@ -983,7 +983,7 @@
 <option value=""></option>
 <c:forEach begin="0" end="55" step="5" var="stMn">
 	<c:choose>
-		<c:when test="${stMn == eventOrder.startMinute}">
+		<c:when test="${stMn == eventVal.startMinute}">
 			<option value="${stMn}" selected="selected">${stMn}</option>
 		</c:when>
 		<c:otherwise>
@@ -993,7 +993,7 @@
 </c:forEach>
 </select>
 <c:choose>
-	<c:when test="${eventOrder.startAmPm == 'am'}">
+	<c:when test="${eventVal.startAmPm == 'am'}">
 		<input type="radio" name="startAmPm" value="am" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1001,7 +1001,7 @@
 	</c:otherwise>
 </c:choose> AM
 <c:choose>
-	<c:when test="${eventOrder.startAmPm == 'pm'}">
+	<c:when test="${eventVal.startAmPm == 'pm'}">
 		<input type="radio" name="startAmPm" value="pm" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1019,7 +1019,7 @@
 <option value=""></option>
 <c:forEach begin="1" end="12" var="edHr">
 	<c:choose>
-		<c:when test="${edHr == eventOrder.endHour}">
+		<c:when test="${edHr == eventVal.endHour}">
 			<option value="${edHr}" selected="selected">${edHr}</option>
 		</c:when>
 		<c:otherwise>
@@ -1034,7 +1034,7 @@
 <option value=""></option>
 <c:forEach begin="0" end="55" step="5" var="edMn">
 	<c:choose>
-		<c:when test="${edMn == eventOrder.endMinute}">
+		<c:when test="${edMn == eventVal.endMinute}">
 			<option value="${edMn}" selected="selected">${edMn}</option>
 		</c:when>
 		<c:otherwise>
@@ -1044,7 +1044,7 @@
 </c:forEach>
 </select>
 <c:choose>
-	<c:when test="${eventOrder.endAmPm == 'am'}">
+	<c:when test="${eventVal.endAmPm == 'am'}">
 		<input type="radio" name="endAmPm" value="am" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1052,7 +1052,7 @@
 	</c:otherwise>
 </c:choose> AM
 <c:choose>
-	<c:when test="${eventOrder.endAmPm == 'pm'}">
+	<c:when test="${eventVal.endAmPm == 'pm'}">
 		<input type="radio" name="endAmPm" value="pm" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1067,7 +1067,7 @@
     <tbody><tr>
         <th>
         	<c:choose>
-        		<c:when test="${eventOrder.recurring}">
+        		<c:when test="${eventVal.recurring}">
         			<input type="checkbox" id="recurring" name="recurring" value="true" onclick="recurringcheck();" checked="checked"/>
         		</c:when>
         		<c:otherwise>
@@ -1090,7 +1090,7 @@
             <select id="period" name="period" style="width:200px;" onchange="chooseperiod(this.value)">
             	<c:forEach var="dateRange" items="${conversionManagedBean.dateRange}">
             		<c:choose>
-	            		<c:when test="${eventOrder.period == dateRange}">
+	            		<c:when test="${eventVal.period == dateRange}">
 	            			<option value="${dateRange}" selected="selected">${dateRange}</option>
 	            		</c:when>
 	            		<c:otherwise>
@@ -1112,7 +1112,7 @@
 				<option value="">Choose Month</option>
 				<c:forEach var="monthOfYear" items="${conversionManagedBean.monthOfYear}">
 					<c:choose>
-						<c:when test="${eventOrder.month == monthOfYear.toString()}">
+						<c:when test="${eventVal.month == monthOfYear.toString()}">
 							<option value="${monthOfYear}" selected="selected"><span style="text-transform: capitalize;">${monthOfYear}</span></option>
 						</c:when>
 						<c:otherwise>
@@ -1138,7 +1138,7 @@
 				  	<c:forEach var="dayOfWeek" items="${conversionManagedBean.dayOfWeek}">
 				  		<c:set var="dayOfWeekExists" value="false"/>
 				  		<c:set var="count" value="0"/>
-				  		<c:forEach var="dayOfWeek2" items="${eventOrder.dayOfWeekcb}">
+				  		<c:forEach var="dayOfWeek2" items="${eventVal.dayOfWeekcb}">
 				  			<c:set var="count" value="${count + 1}"/>
 				  			<c:choose>
 						  		<c:when test="${dayOfWeek2 == dayOfWeek}">
@@ -1167,7 +1167,7 @@
 				  	<c:forEach var="weekOfMonth" items="${conversionManagedBean.weekOfMonth}">
 				  		<c:set var="weekOfMonthExists" value="false"/>
 				  		<c:set var="count" value="0"/>
-				  		<c:forEach var="weekOfMonth2" items="${eventOrder.weekOfMonth}">
+				  		<c:forEach var="weekOfMonth2" items="${eventVal.weekOfMonth}">
 				  			<c:choose>
 				  				<c:when test="${weekOfMonth == weekOfMonth2}">
 				  					<c:set var="weekOfMonthExists" value="true"/>
@@ -1193,7 +1193,7 @@
                     <option value="">Choose Month</option>
                     <c:forEach var="monthOfYear" items="${conversionManagedBean.monthOfYear}">
 						<c:choose>
-							<c:when test="${eventOrder.month2 == monthOfYear}">
+							<c:when test="${eventVal.month2 == monthOfYear}">
 								<option value="${monthOfYear}" selected="selected"><span style="text-transform: capitalize;">${monthOfYear}</span></option>
 							</c:when>
 							<c:otherwise>
@@ -1219,7 +1219,7 @@
           <tbody><tr>
           	<td>
               <input type="radio" id="eventEver" name="eventPeriod" value="ever" checked="checked" class="inputRadio" onclick="enableUntil('1');"/> Never<span class="clear"></span>
-              <input type="radio" id="eventUntil" name="eventPeriod" value="until" class="inputRadio" onclick="enableUntil('2');"/> Until: <input type="text" name="untilDate" id="untilDate" value="${eventOrder.untilDate}" style="width:80px" class="hasDatepicker"/> <span style="display:inline;">(mm/dd/yyyy)</span>
+              <input type="radio" id="eventUntil" name="eventPeriod" value="until" class="inputRadio" onclick="enableUntil('2');"/> Until: <input type="text" name="untilDate" id="untilDate" value="${eventVal.untilDate}" style="width:80px" class="hasDatepicker"/> <span style="display:inline;">(mm/dd/yyyy)</span>
             </td>
           </tr>
 			  </tbody></table>
@@ -1261,7 +1261,7 @@
         </tr>
         <tr>
             <td>
-                <textarea id="summarydesc" name="summarydesc" rows="5" cols="1">${eventOrder.summarydesc}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
+                <textarea id="summarydesc" name="summarydesc" rows="5" cols="1">${eventVal.summarydesc}</textarea><div class="charleft originalTextareaInfo" style="width: auto;"><span><input readonly="readonly" type="text" id="summarydesc_remLen" name="summarydesc_remLen" size="3" maxlength="3" value="250" class="textcounter" disabled="disabled"/> characters left (including spaces and line breaks)</span></div>
             </td>
         </tr>
     </tbody></table>
@@ -1272,7 +1272,7 @@
         </tr>
         <tr>
             <td>
-                <textarea name="description" rows="5">${eventOrder.description}</textarea>
+                <textarea name="description" rows="5">${eventVal.description}</textarea>
             </td>
         </tr>
     </tbody></table>
@@ -1300,7 +1300,7 @@
     </tr>
     <tr>
         <td>
-            <textarea name="keyword" rows="5">${eventOrder.keyword}</textarea>
+            <textarea name="keyword" rows="5">${eventVal.keyword}</textarea>
         </td>
     </tr>
 </tbody></table>
@@ -1327,7 +1327,7 @@
 									<c:forEach var="cat" items="${catMap.value}">
 										<c:if test="${cat.name != catMap.key.name}">
 											<c:choose>
-												<c:when test="${commonManagedBean.compareCategories(eventOrder.categories, cat.id)}">
+												<c:when test="${commonManagedBean.compareCategories(eventVal.categories, cat.id)}">
 													<option value="${cat.id}" selected="selected">&nbsp;&nbsp;${cat.name}</option>
 												</c:when>
 												<c:otherwise>
@@ -1340,7 +1340,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-									<c:when test="${commonManagedBean.compareCategories(eventOrder.categories, catMap.key.id)}">
+									<c:when test="${commonManagedBean.compareCategories(eventVal.categories, catMap.key.id)}">
 										<option value="${catMap.key.id}" selected="selected">${catMap.key.name}</option>
 									</c:when>
 									<c:otherwise>
@@ -1361,7 +1361,7 @@
 			</tr>
 							<tr>
 					<th>Code:</th>
-					<td><input type="text" name="promotionCode" value="${eventOrder.promotionCode}" maxlength="10"/></td>
+					<td><input type="text" name="promotionCode" value="${eventVal.promotionCode}" maxlength="10"/></td>
 				</tr>
 					</tbody></table>
 

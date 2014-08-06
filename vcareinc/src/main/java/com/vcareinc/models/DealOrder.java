@@ -1,5 +1,7 @@
 package com.vcareinc.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,13 +13,20 @@ public class DealOrder extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message="Title is required")
 	private String title;
 	private String listingTitle;
 	private String summaryDescription;
 	private String description;
 	private String conditions;
 	private String keyword;
+
+	@NotEmpty(message="Start Date is required")
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String startDate;
+
+	@NotEmpty(message="End Date is required")
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String endDate;
 	private Integer visibility;
 	private String startHour;
@@ -26,12 +35,19 @@ public class DealOrder extends BaseModel {
 	private String endHour;
 	private String endMinute;
 	private String endAmPm;
+
+	@NotEmpty(message="Item Value is required")
 	private Integer priceNumber;
 	private Integer priceDecimal;
 	private DiscountType discountType;
+
+	@NotEmpty(message="Discount Value is required")
 	private Integer discountPriceNumber;
 	private Integer discountPriceDecimal;
+
+	@NotEmpty(message="Total Deal is required")
 	private Integer totalDeal;
+
 	private MultipartFile imageUpload;
 	public String getTitle() {
 		return title;
