@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.vcareinc.constants.OptionType;
+import com.vcareinc.constants.SortingOrder;
 import com.vcareinc.services.CommonService;
 import com.vcareinc.services.ListingService;
 import com.vcareinc.services.UserService;
@@ -65,9 +66,13 @@ public class ListingController extends MultiActionController {
 
 	@RequestMapping("/listingList")
 	public String listingList(ModelMap map, @RequestParam("categoryId") Long categoryId,
-			@RequestParam("optionType") String optionType) {
+			@RequestParam("optionType") String optionType, @RequestParam(value="orderby", required=false) String orderBy) {
 		if(OptionType.valueOf(optionType).equals(OptionType.LISTING)) {
-			List<Listings> listVal = listingService.getListView(categoryId);
+			SortingOrder sortingOrder = SortingOrder.LEVEL;
+			if(orderBy != null && orderBy.trim().length() > 0) {
+				sortingOrder = SortingOrder.valueOf(orderBy);
+			}
+			List<Listings> listVal = listingService.getListView(categoryId, sortingOrder);
 			Category category = commonService.getCategoryById(categoryId);
 			map.addAttribute("listVal", listVal);
 			map.addAttribute("total", listVal.size());

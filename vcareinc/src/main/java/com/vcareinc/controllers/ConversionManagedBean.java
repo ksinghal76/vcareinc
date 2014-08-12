@@ -14,6 +14,7 @@ import com.vcareinc.constants.PageType;
 import com.vcareinc.constants.PaymentMethodType;
 import com.vcareinc.constants.PriceType;
 import com.vcareinc.constants.RoleType;
+import com.vcareinc.constants.SortingOrder;
 import com.vcareinc.constants.WeekOfMonth;
 
 @Controller
@@ -62,5 +63,9 @@ public class ConversionManagedBean {
 
 	public DateRange[] getDateRange() {
 		return DateRange.values();
+	}
+	
+	public SortingOrder[] getSortingOrder() {
+		return SortingOrder.values();
 	}
 }

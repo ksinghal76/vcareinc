@@ -87,7 +87,10 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 			Address address = null;
 			if(id != null && id > 0) {
 				classified = getClassifiedById(id);
-				address = classified.getAddress();
+				if(classified.getAddress() == null)
+					address = new Address();
+				else
+					address = classified.getAddress();
 				if(classified.getCategory() != null && classified.getCategory().size() > 0) {
 					classified.deleteAllCategory(classified.getCategory());
 				}
@@ -191,6 +194,7 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public ClassifiedOrder getClassifiedOrderById(RequestContext context, Long id) {
 		ClassifiedOrder classifiedOrder = null;
 		ClassifiedOrder classifiedOrderOld = (ClassifiedOrder) context.getFlowScope().get("classifiedOrder");
@@ -211,7 +215,13 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 						classifiedOrder.setSummarydesc(classified.getSummaryDescription());
 
 					if(classified.getAddress() != null) {
-						BeanUtils.copyProperties(classified.getAddress(), classifiedOrder);
+						BeanUtils.copyProperties(classifiedOrder, classified.getAddress());
+						
+						if(classified.getAddress().getState() != null)
+							classifiedOrder.setState(classified.getAddress().getState().getCode());
+						
+						if(classified.getAddress().getCountry() != null)
+							classifiedOrder.setCountry(classified.getAddress().getCountry().getCode());
 					}
 
 					if(classified.getImageUpload() != null) {

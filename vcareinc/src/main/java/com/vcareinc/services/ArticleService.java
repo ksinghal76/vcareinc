@@ -148,6 +148,7 @@ public class ArticleService extends BaseService<ArticleOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public ArticleOrder getArticleOrderById(RequestContext context, Long id) {
 		ArticleOrder articleOrder = null;
 		ArticleOrder articleOrderOld = (ArticleOrder) context.getFlowScope().get("articleOrder");

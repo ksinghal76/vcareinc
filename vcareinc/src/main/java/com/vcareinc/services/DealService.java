@@ -132,6 +132,7 @@ public class DealService extends BaseService<DealOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public DealOrder getDealOrderById(RequestContext context, Long id) {
 		DealOrder dealOrder = null;
 		DealOrder dealOrderOld = (DealOrder) context.getFlowScope().get("dealOrder");

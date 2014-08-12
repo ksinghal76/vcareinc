@@ -175,7 +175,7 @@
 								<option value="0">Select a Country</option>
 								<c:forEach items="${order.countryList}" var="countryList">
 									<c:choose>
-										<c:when test="${countryList.id == listingsVal.country}">
+										<c:when test="${countryList.code == listingsVal.country}">
 											<option value="${countryList.id}" selected="selected">${countryList.name}</option>
 										</c:when>
 										<c:otherwise>
@@ -209,7 +209,7 @@
 								<option value="0">Select a State</option>
 								<c:forEach items="${order.stateList}" var="stateList">
 									<c:choose>
-										<c:when test="${stateList.id == listingsVal.state}">
+										<c:when test="${stateList.code == listingsVal.state}">
 											<option value="${stateList.id}" selected="selected">${stateList.name}</option>
 										</c:when>
 										<c:otherwise>

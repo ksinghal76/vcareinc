@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -24,7 +23,7 @@ public class Category implements Serializable {
 	private String description;
 	private OptionType optionType;
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne
 	private Category parentCategory;
 	private String pageTitle;
 	private Boolean enable;

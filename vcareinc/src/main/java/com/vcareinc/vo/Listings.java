@@ -34,7 +34,6 @@ public class Listings implements Serializable {
 	private Price price;
 	private String title;
 
-//	@Pattern(regexp="^.+@.+\\..+$", message="Email is invalid")
 	@Email(message="Email is invalid")
 	private String email;
 

@@ -19,6 +19,7 @@ import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
+import com.vcareinc.constants.SortingOrder;
 import com.vcareinc.constants.StatusType;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
@@ -87,7 +88,10 @@ public class ListingService extends BaseService<ListingOrder> {
 			Address address = null;
 			if(id != null && id > 0) {
 				listings = getListingById(id);
-				address = listings.getAddress();
+				if(listings.getAddress() ==  null)
+					address = new Address();
+				else
+					address = listings.getAddress();
 				if(listings.getCategory() != null && listings.getCategory().size() > 0) {
 					listings.deleteAllCategory(listings.getCategory());
 				}
@@ -233,6 +237,7 @@ public class ListingService extends BaseService<ListingOrder> {
 			CriteriaQuery<Listings> listingQueries = cb.createQuery(Listings.class);
 			Root<Listings> listingRoot = listingQueries.from(Listings.class);
 			listingRoot.fetch("category");
+			listingRoot.fetch("address");
 			listingQueries.where(cb.equal(listingRoot.get("id"), id));
 
 			listings =  em.createQuery(listingQueries).getSingleResult();
@@ -243,6 +248,7 @@ public class ListingService extends BaseService<ListingOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public ListingOrder getListingOrderById(RequestContext context, Long id) {
 		ListingOrder listingOrder = null;
 		ListingOrder listingOrderOld = (ListingOrder) context.getFlowScope().get("listingOrder");
@@ -259,7 +265,13 @@ public class ListingService extends BaseService<ListingOrder> {
 					}
 
 					if(listings.getAddress() != null) {
-						BeanUtils.copyProperties(listings.getAddress(), listingOrder);
+						BeanUtils.copyProperties(listingOrder, listings.getAddress());
+						
+						if(listings.getAddress().getState() != null)
+							listingOrder.setState(listings.getAddress().getState().getCode());
+						
+						if(listings.getAddress().getCountry() != null)
+							listingOrder.setCountry(listings.getAddress().getCountry().getCode());
 					}
 
 					if(listings.getImageUpload() != null) {
@@ -323,10 +335,12 @@ public class ListingService extends BaseService<ListingOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Listings> getListView(Long categoryId) {
-		return em.createQuery("SELECT l FROM Listings l JOIN l.category c"
-									+ " WHERE c.id = :categoryId")
+	public List<Listings> getListView(Long categoryId, SortingOrder orderBy) {	
+		return em.createQuery("SELECT l FROM Listings l JOIN l.category c JOIN FETCH l.address a JOIN FETCH a.country co JOIN FETCH a.state s"
+									+ " WHERE c.id = :categoryId"
+									+ " ORDER BY :orderBy")
 									.setParameter("categoryId", categoryId)
+									.setParameter("orderBy", "l." + orderBy.getSortingName())
 									.getResultList();
 	}
 
@@ -335,7 +349,7 @@ public class ListingService extends BaseService<ListingOrder> {
 		return em.createNativeQuery("SELECT c.id, c.name, count(*)"
 				+ " FROM Category c"
 				+ " INNER JOIN listings_category lc ON lc.category_id = c.id"
-				+ " WHERE lc.listing_id = :id"
+				+ " WHERE lc.listings_id = :id"
 				+ " GROUP BY c.name"
 				+ " HAVING count(*)  > 0")
 				.setParameter("id", id)

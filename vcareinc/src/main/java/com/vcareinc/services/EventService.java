@@ -95,7 +95,10 @@ public class EventService extends BaseService<EventOrder> {
 			Address address = null;
 			if(id != null && id > 0) {
 				events = getEventById(id);
-				address = events.getAddress();
+				if(events.getAddress() == null)
+					address = new Address();
+				else
+					address = events.getAddress();
 				if(events.getCategory() != null && events.getCategory().size() > 0) {
 					events.deleteAllCategory(events.getCategory());
 				}
@@ -237,6 +240,7 @@ public class EventService extends BaseService<EventOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public EventOrder getEventOrderById(RequestContext context, Long id) {
 		EventOrder eventOrder = null;
 		EventOrder eventOrderOld = (EventOrder) context.getFlowScope().get("eventOrder");
@@ -276,7 +280,13 @@ public class EventService extends BaseService<EventOrder> {
 					}
 
 					if(events.getAddress() != null) {
-						BeanUtils.copyProperties(events.getAddress(), eventOrder);
+						BeanUtils.copyProperties(eventOrder, events.getAddress());
+						
+						if(events.getAddress().getState() != null)
+							eventOrder.setState(events.getAddress().getState().getCode());
+						
+						if(events.getAddress().getCountry() != null)
+							eventOrder.setCountry(events.getAddress().getCountry().getCode());
 					}
 
 					if(events.getImageUpload() != null) {
