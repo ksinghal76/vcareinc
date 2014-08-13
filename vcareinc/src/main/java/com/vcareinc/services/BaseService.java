@@ -18,6 +18,7 @@ import com.vcareinc.constants.UploadFileType;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.BaseModel;
 import com.vcareinc.services.amazonws.AmazonS3Service;
+import com.vcareinc.services.googleApi.GoogleMapApi;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.FileUpload;
 
@@ -30,6 +31,9 @@ public class BaseService<T> {
 
 	@Autowired
 	private AmazonS3Service amazonS3Service;
+	
+	@Autowired
+	protected GoogleMapApi googleMapApi;
 
 	@PersistenceContext
 	protected void setEm(EntityManager em) {
@@ -93,5 +97,13 @@ public class BaseService<T> {
 			}
 		}
 		return categoryMap;
+	}
+
+	public GoogleMapApi getGoogleMapApi() {
+		return googleMapApi;
+	}
+
+	public void setGoogleMapApi(GoogleMapApi googleMapApi) {
+		this.googleMapApi = googleMapApi;
 	}
 }

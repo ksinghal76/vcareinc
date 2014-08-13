@@ -87,7 +87,8 @@
 
 
                 <div class="span7">
-
+				<c:choose>
+					<c:when test="${not empty listings.imageUpload}">
 
                                             <div>
                             <div id="galleria" class="galleria"><div class="galleria-container notouch" style="width: 358px; height: 220px;"><div class="galleria-stage"><div class="galleria-images" style="position: relative; top: 0px; left: 0px; width: 100%; height: 100%;"><div class="galleria-image" style="overflow: hidden; position: absolute; top: 0px; left: 0px; opacity: 0; -webkit-transition: none; transition: none; z-index: 0;"><div class="galleria-layer" style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 2;"></div></div><div class="galleria-image" style="overflow: hidden; position: absolute; top: 0px; left: 0px; opacity: 1; width: 338px; height: 159px; -webkit-transition: none; transition: none; z-index: 1;"><div class="galleria-layer" style="position: absolute; top: 12px; left: 0px; right: 0px; bottom: 0px; z-index: 2; display: none; width: 338px; height: 136px;"></div><img src="http://www.beautypro411.com/custom/domain_1/image_files/sitemgr_photo_6023.jpg" width="338" style="display: block; opacity: 1; min-width: 0px; min-height: 0px; max-width: none; max-height: none; width: 338px; height: 136px; position: absolute; top: 12px; left: 0px; cursor: pointer;" height="136"/></div></div><div class="galleria-loader" style="display: none; opacity: 0.4;"></div><div class="galleria-counter" style="position: absolute; left: -10000px; opacity: 0; -webkit-transition: none; transition: none;"><span class="galleria-current">1</span> / <span class="galleria-total">3</span></div><div class="galleria-image-nav"><div class="galleria-image-nav-right" style="right: -50px; -webkit-transition: none; transition: none;"></div><div class="galleria-image-nav-left" style="left: -50px; -webkit-transition: none; transition: none;"></div></div></div><div class="galleria-thumbnails-container"><div class="galleria-thumb-nav-left disabled"></div><div class="galleria-thumbnails-list" style="overflow: hidden; position: relative;"><div class="galleria-thumbnails" style="overflow: hidden; position: relative; width: 215px; height: 44px;"><div class="galleria-image active" style="overflow: hidden; position: relative; visibility: visible; width: 100px; height: 40px;"><img src="http://www.beautypro411.com/custom/domain_1/image_files/sitemgr_photo_6023.jpg" width="100" style="display: block; opacity: 1; min-width: 0px; min-height: 0px; max-width: none; max-height: none; width: 100px; height: 40px; position: absolute; top: 0px; left: 0px;" height="40"/></div><div class="galleria-image" style="overflow: hidden; position: relative; visibility: visible; width: 38px; height: 40px;"><img src="http://www.beautypro411.com/custom/domain_1/image_files/sitemgr_photo_6027.jpg" width="38" style="display: block; opacity: 0.6; min-width: 0px; min-height: 0px; max-width: none; max-height: none; width: 38px; height: 40px; position: absolute; top: 0px; left: 0px;" height="40"/></div><div class="galleria-image" style="overflow: hidden; position: relative; visibility: visible; width: 50px; height: 40px;"><img src="http://www.beautypro411.com/custom/domain_1/image_files/sitemgr_photo_6025.jpg" width="50" style="display: block; opacity: 0.6; min-width: 0px; min-height: 0px; max-width: none; max-height: none; width: 50px; height: 40px; position: absolute; top: 0px; left: 0px;" height="40"/></div></div></div><div class="galleria-thumb-nav-right disabled"></div></div><div class="galleria-info" style="display: none;"><div class="galleria-info-text"><div class="galleria-info-title" style="display: none;"></div><div class="galleria-info-description" style="display: none;"></div></div><div class="galleria-info-link"></div><div class="galleria-info-close"></div></div><div class="galleria-tooltip" style="opacity: 0;"></div></div></div>    <script type="text/javascript">
@@ -111,7 +112,14 @@
 
                             //]]>
                             </script>                        </div>
-
+					</c:when>
+					<c:otherwise>
+						<div class="image-shadow">
+                            <div class="image">
+                                <span class="no-image no-link"></span>                            </div>
+                        </div>
+					</c:otherwise>
+				</c:choose>
                     <div>
 
 
@@ -131,13 +139,13 @@
                                             <span itemprop="streetAddress">${listings.address.address1}</span>
 
 
-                                            <br/><span>${listings.address.city}, ${listings.address.state.name} ${listings.address.zipCode} <br/>${listings.address.country.name}</span>
+                                            <br/><span>${listings.address.city}, ${listings.address.state.name} ${listings.address.zipcode} <br/>${listings.address.country.name}</span>
 
 
                                                 <meta itemprop="addressCountry" content="${listings.address.country.name}"/>
                                                                         <meta itemprop="addressRegion" content="${listings.address.state.name}"/>
                                                                         <meta itemprop="addressLocality" content="${listings.address.city}"/>
-                                                                        <meta itemprop="postalCode" content="${listings.address.zipCode}"/>
+                                                                        <meta itemprop="postalCode" content="${listings.address.zipcode}"/>
 
 
                     </address>

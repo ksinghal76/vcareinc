@@ -11,12 +11,14 @@ import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.execution.RequestContext;
 
+import com.google.code.geocoder.model.GeocodeResponse;
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
 import com.vcareinc.constants.SortingOrder;
@@ -83,6 +85,7 @@ public class ListingService extends BaseService<ListingOrder> {
 
 		log.info(listingOrder.toString());
 		Listings listings = new Listings();
+		String googleAddress = "";
 		try {
 			validate(listingOrder);
 			Address address = null;
@@ -122,14 +125,39 @@ public class ListingService extends BaseService<ListingOrder> {
 			if(listingOrder.getFacebookPage() != null && listingOrder.getFacebookPage().trim().length() > 0)
 				listings.setFacebookPage(listingOrder.getFacebookPage());
 
-			if(listingOrder.getAddress1() != null && listingOrder.getAddress1().trim().length() > 0)
+			if(listingOrder.getAddress1() != null && listingOrder.getAddress1().trim().length() > 0) {
 				address.setAddress1(listingOrder.getAddress1());
+				googleAddress += listingOrder.getAddress1();
+			}
 
-			if(listingOrder.getAddress2() != null && listingOrder.getAddress2().trim().length() > 0)
+			if(listingOrder.getAddress2() != null && listingOrder.getAddress2().trim().length() > 0) {
 				address.setAddress2(listingOrder.getAddress2());
+				googleAddress += (StringUtils.isNotBlank(googleAddress) ? "," : "") + listingOrder.getAddress2();
+			}
 
-			if(listingOrder.getCity() != null && listingOrder.getCity().trim().length() > 0)
+			if(listingOrder.getCity() != null && listingOrder.getCity().trim().length() > 0) {
 				address.setCity(listingOrder.getCity());
+				googleAddress += (StringUtils.isNotBlank(googleAddress) ? "," : "") + listingOrder.getCity();
+			}
+			
+			if(listingOrder.getState() != null && Long.valueOf(listingOrder.getState().trim()) > 0) {
+				State state = orderService.getStateById(Long.valueOf(listingOrder.getState()));
+				address.setState(state);
+				googleAddress += (StringUtils.isNotBlank(googleAddress) ? "," : "") + state.getCode();
+			}
+			
+			if(StringUtils.isNotBlank(googleAddress)) {
+				GeocodeResponse response = googleMapApi.getGoogleResponse(googleAddress);
+				if(response.getStatus().equals("OK")) {
+					address.setLatitude(response.getResults().get(0).getGeometry().getLocation().getLat().floatValue());
+					address.setLongitude(response.getResults().get(0).getGeometry().getLocation().getLng().floatValue());
+				}
+			}
+
+			if(listingOrder.getCountry() != null && Long.valueOf(listingOrder.getCountry().trim()) > 0) {
+				Country country = orderService.getCountryById(Long.valueOf(listingOrder.getCountry()));
+				address.setCountry(country);
+			}
 
 			if(listingOrder.getZipcode() != null && listingOrder.getZipcode().trim().length() > 0)
 				address.setZipcode(listingOrder.getZipcode());
@@ -140,15 +168,7 @@ public class ListingService extends BaseService<ListingOrder> {
 			if(listingOrder.getLongitude() != null)
 				address.setLongitude(listingOrder.getLongitude());
 
-			if(listingOrder.getState() != null && Long.valueOf(listingOrder.getState().trim()) > 0) {
-				State state = orderService.getStateById(Long.valueOf(listingOrder.getState()));
-				address.setState(state);
-			}
-
-			if(listingOrder.getCountry() != null && Long.valueOf(listingOrder.getCountry().trim()) > 0) {
-				Country country = orderService.getCountryById(Long.valueOf(listingOrder.getCountry()));
-				address.setCountry(country);
-			}
+			
 			em.persist(address);
 
 			if( id != null && id > 0)

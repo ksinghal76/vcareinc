@@ -4,27 +4,26 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderRequest;
 
+@Component
 public class GoogleMapApi {
 
-	@Value("${google.api.key}")
-	private String googleKey;
+	@Value("#{googleApi['google.api.client.id']}")
+	private String googleClientId;
+	
+	@Value("#{googleApi['google.api.client.key']}")
+	private String googleClientKey;
 
-	@Value("${google.geocode.url}")
-	private String geoCodeUrl;
-
-	@Value("${google.output.type}")
-	private String outputType;
-
-	public GeocodeResponse getGoogleCode(String address) {
+	public GeocodeResponse getGoogleResponse(String address) {
 		GeocodeResponse response = null;
 		try {
-			final Geocoder geocoder = new Geocoder("clientId", googleKey);
+			final Geocoder geocoder = new Geocoder(googleClientId, googleClientKey);
 			GeocoderRequest request = new GeocoderRequestBuilder().setAddress(address).setLanguage("en").getGeocoderRequest();
 			response = geocoder.geocode(request);
 		} catch (InvalidKeyException | IOException e) {
@@ -34,45 +33,25 @@ public class GoogleMapApi {
 		return response;
 	}
 
-	/**
-	 * @return the googleKey
-	 */
-	public String getGoogleKey() {
-		return googleKey;
+	public String getGoogleClientId() {
+		return googleClientId;
+	}
+
+	public void setGoogleClientId(String googleClientId) {
+		this.googleClientId = googleClientId;
 	}
 
 	/**
-	 * @param googleKey the googleKey to set
+	 * @return the googleClientKey
 	 */
-	public void setGoogleKey(String googleKey) {
-		this.googleKey = googleKey;
+	public String getGoogleClientKey() {
+		return googleClientKey;
 	}
 
 	/**
-	 * @return the geoCodeUrl
+	 * @param googleClientKey the googleKey to set
 	 */
-	public String getGeoCodeUrl() {
-		return geoCodeUrl;
-	}
-
-	/**
-	 * @param geoCodeUrl the geoCodeUrl to set
-	 */
-	public void setGeoCodeUrl(String geoCodeUrl) {
-		this.geoCodeUrl = geoCodeUrl;
-	}
-
-	/**
-	 * @return the outputType
-	 */
-	public String getOutputType() {
-		return outputType;
-	}
-
-	/**
-	 * @param outputType the outputType to set
-	 */
-	public void setOutputType(String outputType) {
-		this.outputType = outputType;
+	public void setGoogleClientKey(String googleClientKey) {
+		this.googleClientKey = googleClientKey;
 	}
 }
