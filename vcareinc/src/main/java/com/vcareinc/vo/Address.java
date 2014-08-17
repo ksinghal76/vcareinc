@@ -91,7 +91,7 @@ public class Address implements Serializable {
 		this.latitude = latitude;
 	}
 
-	public Float getLongtitude() {
+	public Float getLongitude() {
 		return longitude;
 	}
 

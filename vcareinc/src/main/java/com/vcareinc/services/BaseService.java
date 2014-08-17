@@ -34,6 +34,8 @@ public class BaseService<T> {
 	
 	@Autowired
 	protected GoogleMapApi googleMapApi;
+	
+	protected static final int PAGE_SIZE = 50;
 
 	@PersistenceContext
 	protected void setEm(EntityManager em) {

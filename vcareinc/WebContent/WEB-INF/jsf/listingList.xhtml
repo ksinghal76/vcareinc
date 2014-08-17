@@ -11,6 +11,10 @@
 	template="includes/template.xhtml">
 
 	<ui:define name="bodyContent">
+	<c:set var="url" value="listingList?"/>
+	<c:set var="categoryParam" value="categoryId=${categoryId}&"/>
+	<c:set var="orderByParam" value="orderBy=${orderBy}&"/>
+	<c:set var="pageNumberParam" value="pageNumber=${pageNumbaer}&"/>
 		<div class="well container">
 
             <div class="container-fluid">
@@ -193,13 +197,40 @@
                 <form name="pages" id="dropDownOrder" method="post" action="listingList" class="form">
 <label for="orderBydd">Order by </label><select id="orderby" name="orderby" style="display: none;" onchange="this.submit();" class="select">
 <c:forEach var="sortingOrd" items="${conversionManagedBean.sortingOrder}">
-	<option value="${sortingOrd}">${sortingOrd} a</option>
+	<option value="${sortingOrd}">${sortingOrd}</option>
 </c:forEach>
 <!-- <option value="level">Level</option>
 <option value="characters">Alphabetically</option>
 <option value="popular">Popular</option>
 <option value="rating">Rating</option> -->
-</select><div class="btn-group bootstrap-select select"><button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-id="orderBydd"><div class="filter-option pull-left">Level</div>&nbsp;<div class="caret"></div></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">Level</span><i class="icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">Alphabetically</span><i class="icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">Popular</span><i class="icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">Rating</span><i class="icon-ok check-mark"></i></a></li></ul></div></div>
+</select>
+	<div class="btn-group bootstrap-select select">
+		<c:forEach var="sortingOrd" items="${conversionManagedBean.sortingOrder}">
+			<c:if test="${sortingOrd == orderBy}">
+				<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-id="orderBydd">
+					<div class="filter-option pull-left">${sortingOrd}</div>&nbsp;<div class="caret"></div>
+				</button>
+			</c:if>
+		</c:forEach>
+		<div class="dropdown-menu open">
+			<ul class="dropdown-menu inner" role="menu">
+				<c:set var="ddCount" value="0"/>
+				<c:forEach var="sortingOrd" items="${conversionManagedBean.sortingOrder}">
+					<c:choose>
+						<c:when test="${sortingOrd == orderBy}">
+							<li rel="${ddCount}" class="selected">
+								<a href="${url}${categoryIdParam}orderby=${sortingOrd}&${pageNumberParam}" tabindex="0" class="" style=""><span class="text" style="text-transform: capitalize;">${sortingOrd}</span><i class="icon-ok check-mark"></i></a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li rel="${ddCount}">
+								<a href="${url}${categoryIdParam}orderby=${sortingOrd}&${pageNumberParam}" tabindex="0" class="" style=""><span class="text" style="text-transform: capitalize;">${sortingOrd}</span><i class="icon-ok check-mark"></i></a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:set var="ddCount" value="${ddCount + 1}"/>
+				</c:forEach>
+			</ul></div></div>
 </form>
             </div>
         </div>
@@ -230,8 +261,8 @@
                     <a rel="nofollow" onclick="$('content_listView').show();$('content_mapView').hide();">List View</a>
                 </li>
 
-                <li id="tab_mapView" class="mapView " onclick="$('content_listView').hide();$('content_mapView').show();" data-original-title="" title="">
-                    <a rel="nofollow" href="javascript: void(0);">Map View</a>
+                <li id="tab_mapView" class="mapView "  data-original-title="" title="">
+                    <a rel="nofollow" onclick="$('content_listView').hide();$('content_mapView').show();">Map View</a>
                 </li>
 
 
@@ -358,7 +389,7 @@
 
                 <div class="icons text-right">
 
-                                            <span class="button-send"><a rel="nofollow" href="http://www.beautypro411.com/popup/popup.php?pop_type=sendtophonepopup&amp;module=Listing&amp;module_id=53621" class="iframe fancy_window_twilio"><img src="${request.contextPath}/resources/css/images/icon-send-phone.png" title="" data-original-title="Send to Phone"/></a></span>
+                                            <span class="button-send"><a rel="nofollow" href="http://www.beautypro411.com/popup/popup.php?pop_type=sendtophonepopup&amp;module=Listing&amp;module_id=53621" class="iframe fancy_window_twilio"><img src="${request.contextPath}/resources/images/icon-send-phone.png" title="" data-original-title="Send to Phone"/></a></span>
 
 
                 </div>
@@ -394,7 +425,42 @@
 
 
                 <ul class="pages">
-                    <li class="disabled"><a href="javascript:void(0);">«</a></li>                                        <li><a class="active" href="http://www.beautypro411.com/listing/guide/barber/page/1">1</a></li><li><a href="http://www.beautypro411.com/listing/guide/barber/page/2">2</a></li>                                        <li><a title="next" href="http://www.beautypro411.com/listing/guide/barber/page/2">»</a></li>                </ul>
+                    
+                   	<c:choose>
+                   		<c:when test="${currentIndex == 1}">
+                   			<li class="disabled">
+                   				<a href="javascript:void(0);">«</a>
+                   			</li>
+                   		</c:when>
+                   		<c:otherwise>
+                   			<li>
+                   				<a title="previous" href="${url}${categoryIdParam}${orderByParam}pageNumber=${currentIndex - 1}">«</a>
+                   			</li>
+                   		</c:otherwise>
+                   	</c:choose>
+                    <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+                    	<c:choose>
+                    		<c:when test="${currentIndex == i}">
+                    			<li><a class="active" href="${url}${categoryIdParam}${orderByParam}pageNumber=${i}">${i}</a></li>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<li><a href="${url}${categoryIdParam}${orderByParam}pageNumber=${i}">${i}</a></li>
+                    		</c:otherwise>
+                    	</c:choose>
+                    </c:forEach>
+                    <c:choose>
+                    	<c:when test="${currentIndex == pageable.totalPages}">
+                    		<li class="disabled">
+                    			<a title="next" href="javascript:void(0);">»</a>
+                    		</li> 
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li>
+                    			<a title="next" href="${url}${categoryIdParam}${orderByParam}pageNumber=${currentIndex + 1}">»</a>
+                    		</li>
+                    	</c:otherwise>
+                    </c:choose>                                        
+               </ul>
 
 
             </div>
@@ -407,10 +473,23 @@
 
             <div id="content_mapView">
 
-                <div id="resultsVars" style="display:none;">
-                   	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+                <div id="resultsVars">
+                   	<script src="https://maps.googleapis.com/maps/api/js?v=3"></script>
                    	<c:set var="mapCount" value="0"/>
 				    <script>
+				    var beaches = new Array();
+					<c:forEach var="lstVal" items="${listVal}">
+					<c:if test="${not empty lstVal.address.latitude &amp;&amp; not empty lstVal.address.longitude}">
+						<c:set var="mapCount" value="${mapCount + 1}"/>
+							beaches.push("${lstVal.address.address1}");
+							beaches.push(${lstVal.address.latitude});
+							beaches.push(${lstVal.address.longitude});
+							beaches.push(${mapCount});
+						</c:if>
+					</c:forEach>
+					</script>
+					<script>
+					<!--
 						// The following example creates complex markers to indicate beaches near
 						// Sydney, NSW, Australia. Note that the anchor is set to
 						// (0,32) to correspond to the base of the flagpole.
@@ -431,16 +510,7 @@
 						 * the order in which these markers should display on top of each
 						 * other.
 						 */
-						var beaches = new Array();
-						<c:forEach var="lstVal" items="${listVal}">
-						<c:if test="${not empty lstVal.latitude &amp;&amp; lstVal.longitude}">
-							<c:set var="mapCount" value="${mapCount + 1}"/>
-								beaches.push(${lstVal.address1});
-								beaches.push(${lstVal.latitude});
-								beaches.push(${lstVal.longitude});
-								beaches.push(${mapCount});
-							</c:if>
-						</c:forEach>
+						
 						function setMarkers(map, locations) {
 						  // Add markers to the map
 						
@@ -469,7 +539,7 @@
 						      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
 						      type: 'poly'
 						  };
-						  for (var i = 0; i < locations.length; i++) {
+						  for(var i = 0; i < locations.length; i++) {
 						    var beach = locations[i];
 						    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
 						    var marker = new google.maps.Marker({
@@ -483,12 +553,12 @@
 						}
 						
 						google.maps.event.addDomListener(window, 'load', initialize);
-				
+						-->
 				    </script>
                     
                 </div>
 
-						<div id="map-canvas" style="display:none;"></div>
+						<div id="map-canvas"></div>
 
 							<div id="summary_map" style="display: none;">
         
@@ -582,7 +652,7 @@
 
                 <div class="icons text-right">
 
-                                            <span class="button-send"><a rel="nofollow" href="http://www.beautypro411.com/popup/popup.php?pop_type=sendtophonepopup&amp;module=Listing&amp;module_id=53642" class="iframe fancy_window_twilio"><img src="http://www.beautypro411.com/images/icon-send-phone.png" title="" data-original-title="Send to Phone"/></a></span>
+                                            <span class="button-send"><a rel="nofollow" href="http://www.beautypro411.com/popup/popup.php?pop_type=sendtophonepopup&amp;module=Listing&amp;module_id=53642" class="iframe fancy_window_twilio"><img src="${request.contextPath}/resources/images/icon-send-phone.png" title="" data-original-title="Send to Phone"/></a></span>
                     
                                         
                 </div>

@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,11 +15,14 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.execution.RequestContext;
 
 import com.google.code.geocoder.model.GeocodeResponse;
+import com.google.code.geocoder.model.GeocoderStatus;
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
 import com.vcareinc.constants.SortingOrder;
@@ -27,6 +31,7 @@ import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ListingOrder;
+import com.vcareinc.services.repositories.ListingRepository;
 import com.vcareinc.vo.Address;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Country;
@@ -47,6 +52,9 @@ public class ListingService extends BaseService<ListingOrder> {
 
 	@Autowired
 	private UserService userService;
+	
+	@Inject
+	private ListingRepository listingRepository;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -148,7 +156,7 @@ public class ListingService extends BaseService<ListingOrder> {
 			
 			if(StringUtils.isNotBlank(googleAddress)) {
 				GeocodeResponse response = googleMapApi.getGoogleResponse(googleAddress);
-				if(response.getStatus().equals("OK")) {
+				if(response.getStatus().equals(GeocoderStatus.OK)) {
 					address.setLatitude(response.getResults().get(0).getGeometry().getLocation().getLat().floatValue());
 					address.setLongitude(response.getResults().get(0).getGeometry().getLocation().getLng().floatValue());
 				}
@@ -362,6 +370,16 @@ public class ListingService extends BaseService<ListingOrder> {
 									.setParameter("categoryId", categoryId)
 									.setParameter("orderBy", "l." + orderBy.getSortingName())
 									.getResultList();
+	}
+	
+	public Page<Listings> getListingsByCategoryOrderbyPriceType(Long categoryId, Integer pageNumber) {
+		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE);
+		return listingRepository.findListingsByCategoryOrderByPriceType(request, categoryId);
+	}
+	
+	public Page<Listings> getListingsByCategoryOrderByTitle(Long categoryId, Integer pageNumber) {
+		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE);
+		return listingRepository.findListingsByCategoryOrderByTitle(request, categoryId);
 	}
 
 	@SuppressWarnings("unchecked")

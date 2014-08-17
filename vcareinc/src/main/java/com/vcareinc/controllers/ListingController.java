@@ -2,9 +2,12 @@ package com.vcareinc.controllers;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import com.vcareinc.constants.SortingOrder;
 import com.vcareinc.services.CommonService;
 import com.vcareinc.services.ListingService;
 import com.vcareinc.services.UserService;
+import com.vcareinc.services.repositories.ListingRepository;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Listings;
 import com.vcareinc.vo.User;
@@ -31,6 +35,11 @@ public class ListingController extends MultiActionController {
 
 	@Autowired
 	private CommonService commonService;
+	
+	@Inject
+	private ListingRepository listingRepository;
+	
+	private static final int PAGE_SIZE = 50;
 
 	public UserService getUserService() {
 		return userService;
@@ -65,20 +74,40 @@ public class ListingController extends MultiActionController {
 	}
 
 	@RequestMapping("/listingList")
-	public String listingList(ModelMap map, @RequestParam("categoryId") Long categoryId,
-			@RequestParam("optionType") String optionType, @RequestParam(value="orderby", required=false) String orderBy) {
-		if(OptionType.valueOf(optionType).equals(OptionType.LISTING)) {
-			SortingOrder sortingOrder = SortingOrder.LEVEL;
-			if(orderBy != null && orderBy.trim().length() > 0) {
-				sortingOrder = SortingOrder.valueOf(orderBy);
-			}
-			List<Listings> listVal = listingService.getListView(categoryId, sortingOrder);
-			Category category = commonService.getCategoryById(categoryId);
-			map.addAttribute("listVal", listVal);
-			map.addAttribute("total", listVal.size());
-			map.addAttribute("categoryName", category.getName());
-			map.addAttribute("optionType", OptionType.LISTING.name());
+	public String listingList(Pageable pageable, ModelMap map, @RequestParam("categoryId") Long categoryId,
+			@RequestParam("optionType") String optionType, @RequestParam(value="orderby", required=false) String orderBy, 
+			@RequestParam(value="pageNumber") Integer pageNumber) {
+		SortingOrder sortingOrder = null;
+		if(orderBy == null || orderBy.trim().length() <= 0) {
+			orderBy = SortingOrder.LEVEL.toString();
 		}
+		
+		if(orderBy != null && orderBy.trim().length() > 0) {
+			sortingOrder = SortingOrder.valueOf(orderBy);
+		}
+		
+		Page<Listings> listings = null;
+		
+		if(SortingOrder.LEVEL.equals(sortingOrder))
+			listings = listingService.getListingsByCategoryOrderbyPriceType(categoryId, pageNumber);
+		else if(SortingOrder.ALPHABETICALLY.equals(sortingOrder))
+			listings = listingService.getListingsByCategoryOrderByTitle(categoryId, pageNumber);
+		
+		int current = listings.getNumber() + 1;
+		int begin = Math.max(1, current - 5);
+		int end = Math.min(begin + 10, listings.getTotalPages());
+		
+		List<Listings> listVal = listingService.getListView(categoryId, sortingOrder);
+		Category category = commonService.getCategoryById(categoryId);
+		map.addAttribute("listVal", listings.getContent());
+		map.addAttribute("pageable", listings);
+		map.addAttribute("beginIndex", begin);
+		map.addAttribute("endIndex", end);
+		map.addAttribute("currentIndex", current);
+		map.addAttribute("total", listVal.size());
+		map.addAttribute("orderBy", orderBy);
+		map.addAttribute("categoryId", categoryId);
+		map.addAttribute("categoryName", category.getName());
 		return "listingList";
 	}
 
