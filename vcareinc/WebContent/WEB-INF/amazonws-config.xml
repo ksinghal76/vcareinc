@@ -8,7 +8,7 @@
 	</bean>
 
 	<bean id="basicAWSCrendentials" class="com.amazonaws.auth.BasicAWSCredentials">
-		<constructor-arg value="AKIAJXI3O462OK7BVOQQ"/>
+		<constructor-arg value="AKIAJ564PPOGMHLENEIQ"/>
 		<constructor-arg value="ZngE8f2+lvAcY+JTQ4sEE0zgd6UqxvY4P0GYIupu"/>
 	</bean>
 
