@@ -8,6 +8,7 @@ import com.vcareinc.constants.DateRange;
 import com.vcareinc.constants.DayOfWeek;
 import com.vcareinc.constants.DiscountType;
 import com.vcareinc.constants.MonthOfYear;
+import com.vcareinc.constants.NumberOfRecordPerPage;
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.ListingType;
 import com.vcareinc.constants.PageType;
@@ -64,8 +65,12 @@ public class ConversionManagedBean {
 	public DateRange[] getDateRange() {
 		return DateRange.values();
 	}
-	
+
 	public SortingOrder[] getSortingOrder() {
 		return SortingOrder.values();
+	}
+
+	public NumberOfRecordPerPage[] getNumberOfRecordPerPages() {
+		return NumberOfRecordPerPage.values();
 	}
 }

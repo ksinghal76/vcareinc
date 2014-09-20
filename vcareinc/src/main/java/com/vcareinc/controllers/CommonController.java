@@ -1,5 +1,7 @@
 package com.vcareinc.controllers;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,6 +48,8 @@ public class CommonController extends MultiActionController {
 		map.addAttribute("articleLists", articleService.getTopArticlesLists(1));
 		map.addAttribute("dealLists", dealService.getTopDealsLists(1));
 		map.addAttribute("cityLists", commonService.getAllCity());
+//		map.addAttribute("months", commonService.getWholeMonth());
+		map.addAttribute("now", Calendar.getInstance());
 		return "home";
 	}
 

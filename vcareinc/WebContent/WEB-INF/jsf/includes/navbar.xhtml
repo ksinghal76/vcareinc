@@ -29,6 +29,9 @@
 
 
 					<li><a href="listing" style="line-height: 20px;">Listings</a></li>
+					<sec:authorize ifAnyGranted="ROLE_USER">
+					<li><a href="memberUser">Manage Account</a></li>
+					</sec:authorize>
 
 				</ul>
 				<!--cachemarkerUserNavbar-->

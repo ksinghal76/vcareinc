@@ -35,13 +35,12 @@
 												class="calendar-header">
 												<tbody>
 													<tr>
-														<th align="left"><a class="calendar-button left"
-															href="http://beautypro411.com/event/results.php?month=201404&amp;this_date=20140401"></a></th>
+														<th align="left"><a class="calendar-button left" href="http://beautypro411.com/event/results.php?month=201404&amp;this_date=20140401">&lt;</a></th>
 														<th><a
 															href="http://beautypro411.com/event/results.php?month=201405&amp;this_date=20140501">May
 																2014</a></th>
 														<th align="right"><a class="calendar-button right"
-															href="http://beautypro411.com/event/results.php?month=201406&amp;this_date=20140601"></a></th>
+															href="http://beautypro411.com/event/results.php?month=201406&amp;this_date=20140601">&gt;</a></th>
 													</tr>
 												</tbody>
 											</table></td>
@@ -56,80 +55,22 @@
 										<th class="calendar-weekday">S</th>
 									</tr>
 									<tr>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140501')" class="normal">01</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140502')" class="normal">02</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140503')" class="normal">03</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140504')" class="normal">04</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140505')" class="normal">05</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140506')" class="normal">06</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140507')" class="normal">07</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140508')" class="normal">08</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140509')" class="today">09</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140510')" class="normal">10</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140511')" class="normal">11</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140512')" class="normal">12</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140513')" class="normal">13</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140514')" class="normal">14</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140515')" class="normal">15</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140516')" class="normal">16</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140517')" class="normal">17</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140518')" class="normal">18</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140519')" class="normal">19</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140520')" class="normal">20</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140521')" class="normal">21</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140522')" class="normal">22</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140523')" class="normal">23</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140524')" class="normal">24</a></td>
-									</tr>
-									<tr>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140525')" class="normal">25</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140526')" class="normal">26</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140527')" class="normal">27</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140528')" class="normal">28</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140529')" class="normal">29</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140530')" class="normal">30</a></td>
-										<td align="center" width="22" class="calendar-day"><a
-											href="javascript:set_cal_date('20140531')" class="normal">31</a></td>
+									<c:set var="monCount" value="0"/>
+									<c:forEach var="month" items="${months}">
+										<c:if test="${monCount % 7 == 0}">
+											<h:outputText value="&lt;/tr&gt;&lt;tr&gt;" escape="false"/>
+										</c:if>
+										<c:set var="monCount" value="${monCount + 1}"/>
+										<c:choose>
+											<c:when test="${month == ''}">
+												<td>&nbsp;</td>
+											</c:when>
+											<c:otherwise>
+												<td align="center" width="22" class="calendar-day"><a
+												href="javascript:set_cal_date('20140501')" class="normal">${month}</a></td>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 									</tr>
 								</tbody>
 							</table>

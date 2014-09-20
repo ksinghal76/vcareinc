@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -52,7 +48,7 @@ public class ListingService extends BaseService<ListingOrder> {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Inject
 	private ListingRepository listingRepository;
 
@@ -147,13 +143,13 @@ public class ListingService extends BaseService<ListingOrder> {
 				address.setCity(listingOrder.getCity());
 				googleAddress += (StringUtils.isNotBlank(googleAddress) ? "," : "") + listingOrder.getCity();
 			}
-			
+
 			if(listingOrder.getState() != null && Long.valueOf(listingOrder.getState().trim()) > 0) {
 				State state = orderService.getStateById(Long.valueOf(listingOrder.getState()));
 				address.setState(state);
 				googleAddress += (StringUtils.isNotBlank(googleAddress) ? "," : "") + state.getCode();
 			}
-			
+
 			if(StringUtils.isNotBlank(googleAddress)) {
 				GeocodeResponse response = googleMapApi.getGoogleResponse(googleAddress);
 				if(response.getStatus().equals(GeocoderStatus.OK)) {
@@ -176,7 +172,7 @@ public class ListingService extends BaseService<ListingOrder> {
 			if(listingOrder.getLongitude() != null)
 				address.setLongitude(listingOrder.getLongitude());
 
-			
+
 			em.persist(address);
 
 			if( id != null && id > 0)
@@ -257,22 +253,30 @@ public class ListingService extends BaseService<ListingOrder> {
 		return em.createQuery("SELECT l FROM Listings l WHERE l.user = :user").setParameter("user", user).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public Listings getListingById(Long id) {
 		Listings listings = null;
-		try {
-
-			CriteriaBuilder cb = em.getCriteriaBuilder();
-			CriteriaQuery<Listings> listingQueries = cb.createQuery(Listings.class);
-			Root<Listings> listingRoot = listingQueries.from(Listings.class);
-			listingRoot.fetch("category");
-			listingRoot.fetch("address");
-			listingQueries.where(cb.equal(listingRoot.get("id"), id));
-
-			listings =  em.createQuery(listingQueries).getSingleResult();
-		} catch (NoResultException e) {
-			e.printStackTrace();
-		}
+		List<Listings> listingsLst = em.createQuery("SELECT l FROM Listings l LEFT JOIN FETCH l.category c LEFT JOIN FETCH l.address a LEFT JOIN FETCH a.country co LEFT JOIN FETCH a.state s WHERE l.id = :id")
+				.setParameter("id", id)
+				.getResultList();
+		if(listingsLst != null && listingsLst.size() > 0)
+			listings = listingsLst.get(0);
 		return listings;
+//		Listings listings = null;
+//		try {
+//
+//			CriteriaBuilder cb = em.getCriteriaBuilder();
+//			CriteriaQuery<Listings> listingQueries = cb.createQuery(Listings.class);
+//			Root<Listings> listingRoot = listingQueries.from(Listings.class);
+//			listingRoot.fetch("category");
+//			listingRoot.fetch("address");
+//			listingQueries.where(cb.equal(listingRoot.get("id"), id));
+//
+//			listings =  em.createQuery(listingQueries).getSingleResult();
+//		} catch (NoResultException e) {
+//			e.printStackTrace();
+//		}
+//		return listings;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -294,10 +298,10 @@ public class ListingService extends BaseService<ListingOrder> {
 
 					if(listings.getAddress() != null) {
 						BeanUtils.copyProperties(listingOrder, listings.getAddress());
-						
+
 						if(listings.getAddress().getState() != null)
 							listingOrder.setState(listings.getAddress().getState().getCode());
-						
+
 						if(listings.getAddress().getCountry() != null)
 							listingOrder.setCountry(listings.getAddress().getCountry().getCode());
 					}
@@ -363,23 +367,23 @@ public class ListingService extends BaseService<ListingOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Listings> getListView(Long categoryId, SortingOrder orderBy) {	
-		return em.createQuery("SELECT l FROM Listings l JOIN l.category c JOIN FETCH l.address a JOIN FETCH a.country co JOIN FETCH a.state s"
+	public List<Listings> getListView(Long categoryId, SortingOrder orderBy) {
+		return em.createQuery("SELECT l FROM Listings l JOIN FETCH l.category c JOIN FETCH l.address a JOIN FETCH a.country co JOIN FETCH a.state s"
 									+ " WHERE c.id = :categoryId"
 									+ " ORDER BY :orderBy")
 									.setParameter("categoryId", categoryId)
 									.setParameter("orderBy", "l." + orderBy.getSortingName())
 									.getResultList();
 	}
-	
-	public Page<Listings> getListingsByCategoryOrderbyPriceType(Long categoryId, Integer pageNumber) {
-		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE);
-		return listingRepository.findListingsByCategoryOrderByPriceType(request, categoryId);
+
+	public Page<Listings> getListingsByCategoryOrderbyPriceType(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return listingRepository.findListingsByCategoryOrderByPriceType(categoryId, request);
 	}
-	
-	public Page<Listings> getListingsByCategoryOrderByTitle(Long categoryId, Integer pageNumber) {
-		PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE);
-		return listingRepository.findListingsByCategoryOrderByTitle(request, categoryId);
+
+	public Page<Listings> getListingsByCategoryOrderByTitle(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return listingRepository.findListingsByCategoryOrderByTitle(categoryId, request);
 	}
 
 	@SuppressWarnings("unchecked")

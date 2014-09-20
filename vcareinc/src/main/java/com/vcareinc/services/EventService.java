@@ -1,6 +1,7 @@
 package com.vcareinc.services;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -281,10 +282,10 @@ public class EventService extends BaseService<EventOrder> {
 
 					if(events.getAddress() != null) {
 						BeanUtils.copyProperties(eventOrder, events.getAddress());
-						
+
 						if(events.getAddress().getState() != null)
 							eventOrder.setState(events.getAddress().getState().getCode());
-						
+
 						if(events.getAddress().getCountry() != null)
 							eventOrder.setCountry(events.getAddress().getCountry().getCode());
 					}
@@ -359,9 +360,17 @@ public class EventService extends BaseService<EventOrder> {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Events> getEventsByDate(Timestamp date) {
+		return em.createQuery("SELECT e FROM Events e WHERE e.status = :status and e.startDate >= :selectedDate and e.endDate <= :selectedDate")
+				.setParameter("status", StatusType.PENDING)
+				.setParameter("selectedDate", date)
+				.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Events> getTopEventLists(Integer numberOfLists) {
 		return em.createQuery("SELECT e FROM Events e WHERE e.status = :status")
-				.setParameter("status", StatusType.ACTIVE)
+				.setParameter("status", StatusType.PENDING)
 				.setMaxResults(numberOfLists)
 				.getResultList();
 	}

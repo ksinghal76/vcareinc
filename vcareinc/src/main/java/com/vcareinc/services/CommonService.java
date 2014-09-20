@@ -1,5 +1,7 @@
 package com.vcareinc.services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -24,5 +26,29 @@ public class CommonService extends BaseService {
 			category = categoryLst.get(0);
 		}
 		return category;
+	}
+
+	public List<String> getWholeMonth(Calendar selectCalendar) {
+		List<String> dayOfMonth = new ArrayList<String>();
+		Integer leadSpaces = selectCalendar.get(Calendar.DAY_OF_WEEK);
+		Integer maxDay = selectCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		if(leadSpaces > 0) {
+			for(int i=0; i< leadSpaces; i++) {
+				dayOfMonth.add("");
+			}
+		}
+
+		for(int i=0; i<maxDay; i++) {
+			dayOfMonth.add(String.valueOf(i+1));
+		}
+		return dayOfMonth;
+	}
+
+	public static void main(String[] args)  {
+		CommonService com = new CommonService();
+		Calendar calendar = Calendar.getInstance();
+		for(String str : com.getWholeMonth(calendar)) {
+			System.out.println("++ " + str + " ++");
+		}
 	}
 }
