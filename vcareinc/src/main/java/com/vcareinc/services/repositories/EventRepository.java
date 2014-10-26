@@ -42,9 +42,9 @@ public interface EventRepository extends JpaRepository<Events, Long> {
 
 	@Query(value="SELECT e FROM Events e "
 			+ "JOIN FETCH e.category c "
-			+ "JOIN FETCH e.address a "
-			+ "JOIN FETCH a.country co "
-			+ "JOIN FETCH a.state s "
+			+ "LEFT OUTER JOIN FETCH e.address a "
+			+ "LEFT OUTER JOIN FETCH a.country co "
+			+ "LEFT OUTER JOIN FETCH a.state s "
 			+ "WHERE e.startDate <= :date and e.endDate >= :date"
 			+ " ORDER BY e.title",
 			countQuery="SELECT count(e) FROM Events e "
