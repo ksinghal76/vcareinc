@@ -68,7 +68,7 @@ function easyFriendlyUrl(strToReplace, target, validchars, separator) {
     var str_accent = LETTERS_CHARS_ACCENT;
     var str_no_accent = LETTERS_CHARS_NO_ACCENT;
     var str_new = "";
-    
+
     for (i = 0; i < strToReplace.length; i++) {
         if (str_accent.indexOf(strToReplace.charAt(i)) != -1) {
             str_new += str_no_accent.substr(str_accent.search(strToReplace.substr(i,1)),1);
@@ -80,15 +80,15 @@ function easyFriendlyUrl(strToReplace, target, validchars, separator) {
     var exp_reg = new RegExp("[" + validchars + separator + "]");
     var exp_reg_space = new RegExp("[ ]");
     name2friendlyurl = str_new;
-    name2friendlyurl.toString(); 
+    name2friendlyurl.toString();
     name2friendlyurl = name2friendlyurl.replace(/^ +/, "");
-    
+
     for (i = 0 ; i < name2friendlyurl.length; i++) {
-        if (exp_reg.test(name2friendlyurl.charAt(i))) { 
+        if (exp_reg.test(name2friendlyurl.charAt(i))) {
             str = str+name2friendlyurl.charAt(i);
         } else {
             if (exp_reg_space.test(name2friendlyurl.charAt(i))) {
-                if (str.charAt(str.length-1) != separator) { 
+                if (str.charAt(str.length-1) != separator) {
                     str = str + separator;
                 }
             }
@@ -143,7 +143,7 @@ function displayMap() {
 }
 
 function displayGraphics(path) {
-	if ($.cookie('showGraphics') == 1) {		
+	if ($.cookie('showGraphics') == 1) {
 		$('#chart_1').slideUp('slow');
 		$('#chart_2').slideUp('slow');
 		$('#chart_3').slideUp('slow');
@@ -192,27 +192,27 @@ function dialogBox(pType, pText, pId, pForm ,pHeight, ok_button, cancel_button, 
 		$('#alertMsg').remove();
 		$('body').append(" <div id=\"alertMsg\" style=\"display:none\" ></div> ");
 		$('#alertMsg').append(" <p class=\"informationMessage\">"+text+"</p> ");
-		
+
 		if ( type == 'confirm' || type == 'confirm_theme' || type == 'confirm_redirect') {
 
 			/**
 			 * Prepare labels to buttons of dialog box
 			 */
-            
+
             if (type == 'confirm_redirect') {
-                
+
                 btns[button1] = function(){
 								document.location.href = urlRedir;
 							};
-            
+
                 btns[button2] = function(){
                                     $(this).dialog('close');
                                     $("#listingtemplate_id").val(lastTemplateId);
                                     $("#level").val(lastLevel);
                                 };
-                
+
             } else {
-            
+
                 btns[button1] = function(){
                                     if ( formName ) {
                                         $("input[name='hiddenValue']").attr('value', id);
@@ -238,7 +238,7 @@ function dialogBox(pType, pText, pId, pForm ,pHeight, ok_button, cancel_button, 
                 }
             }
 			/****************************************/
-			
+
 			$("form").bind("submit", function(event) {event.preventDefault();});
 		   	$('#alertMsg').dialog({
 				autoOpen: false,
@@ -256,11 +256,11 @@ function dialogBox(pType, pText, pId, pForm ,pHeight, ok_button, cancel_button, 
 			});
 			$('.ui-dialog-titlebar-close').css('display', 'none');
 			$('#alertMsg').dialog('open');
-			
+
 		}
-                
+
 		else if ( type == 'alert' ) {
-		
+
 			$('#alertMsg').dialog({
 				autoOpen: false,
 				bgiframe: true,
@@ -273,10 +273,10 @@ function dialogBox(pType, pText, pId, pForm ,pHeight, ok_button, cancel_button, 
 					opacity: 0.5
 				}
 			});
-			$('#alertMsg').dialog('open');	
-		
+			$('#alertMsg').dialog('open');
+
 		}
-	
+
 	});
 
 }
@@ -374,7 +374,7 @@ function JS_removeCategory(feed, order) {
             orderCalculate();
         }
     }
-    
+
 	if(feed.length == 0){
     	$('#removeCategoriesButton').hide();
     }
@@ -428,7 +428,7 @@ function fancy_alert(msg, msgStyle, auto, width, height, modal) {
 
 function itemInQuicklist (action, user, item, type) {
 	if (user && item && type) {
-        
+
         $.post(DEFAULT_URL + "/quicklist.php", {
 			type_action: 'check',
             from: 'Quicklist',
@@ -450,15 +450,15 @@ function itemInQuicklist (action, user, item, type) {
                         fancy_alert(showText(LANG_JS_FAVORITEADD), "informationMessage", false, 350, 'auto', false);
                     } else {
                         fancy_alert(showText(LANG_JS_FAVORITEDEL), "informationMessage", false, 350, 'auto', false);
-                        setTimeout("window.location.reload()", 2000);    
+                        setTimeout("window.location.reload()", 2000);
                     }
                 });
 			} else {
                 fancy_alert(showText(LANG_JS_FAVORITES_ADDED), "errorMessage", false, 350, 'auto', false);
 			}
 		});
-        
-		
+
+
 	}
 }
 
@@ -496,8 +496,8 @@ function populateField(field_value, field_id){
 }
 
 function in_array (x, matriz) {
-	var txt = "¬" + matriz.join("¬") + "¬";
-	var er = new RegExp ("¬" + x + "¬", "gim");
+	var txt = "ï¿½" + matriz.join("ï¿½") + "ï¿½";
+	var er = new RegExp ("ï¿½" + x + "ï¿½", "gim");
 	return ( (txt.match (er)) ? true : false );
 }
 
@@ -637,7 +637,7 @@ function displayMediaFront(type){
 function subscribeNewsletter() {
     var name = $("#newsname").val();
     var email = $("#newsemail").val();
-    
+
     $.post(DEFAULT_URL + "/arcamailer_signup.php", {
         name:       name,
         email:      email,
@@ -668,9 +668,9 @@ function contactSiderbar(part1, part2) {
 }
 
 function rateReview(review_id, action, div_name) {
-    
+
     var div_name2 = "";
-    
+
     if (!div_name) {
         div_name = "ratings_";
         div_name2 = "ratingsAjax_";
@@ -681,7 +681,7 @@ function rateReview(review_id, action, div_name) {
             div_name2 = "ratings_";
         }
     }
-    
+
     $.post(DEFAULT_URL + "/rateReview.php", {
         id:         review_id,
         action:     action,
@@ -729,7 +729,7 @@ function loadReviews(item_type, item_id, screen, source) {
             $("#all_reviews").html(response);
             $(".all_reviews_preview").html(response);
         });
-        
+
         reviewsLoaded = true;
     }
 }
@@ -755,10 +755,10 @@ function showMapResults(module) {
 
     $("ul.tabs li").removeClass("active"); //Remove all "active" class
     $("#tab_mapView").addClass("active"); //Add "active" class to selected tab
-    
+
     $("#content_listView").hide(); //Hide list view content
     $("#resultsInfo_list").hide(); //Hide list view content
-    
+
     $("#content_mapView").fadeIn(); //Fade in the active content
     $("#resultsInfo_map").show(); //Fade in the active content
 
@@ -771,7 +771,7 @@ function showMapResults(module) {
         "arrayGet[]": getInfo,
         "module": module
     };
-    
+
     $("#control_openMap").attr("value", "true");
 
     $.post(DEFAULT_URL + "/loadmap.php", parameters, function (ret) {
@@ -785,15 +785,15 @@ function showMapResults(module) {
 
 function collapseBrowseBy(obj, id, type, changeClass, children) {
     var auxObj;
-    
+
     if (changeClass) {
-        
+
         if (children) {
             auxObj = obj.find("a");
         } else {
             auxObj = obj;
         }
-        
+
         collapseChangeClass(auxObj);
     }
 
@@ -806,7 +806,7 @@ function collapseBrowseBy(obj, id, type, changeClass, children) {
 }
 
 function collapseChangeClass(obj) {
-    
+
     if ((obj).hasClass("icon-caret-right")) {
         obj.removeClass("icon-caret-right");
         obj.addClass("icon-caret-down");
@@ -814,18 +814,18 @@ function collapseChangeClass(obj) {
         obj.removeClass("icon-caret-down");
         obj.addClass("icon-caret-right");
     }
-    
+
 }
 
 function collapseMenu(item) {
     if (item == "search") {
-        
-        if ($('#nav-collapse').hasClass('in')) { 
+
+        if ($('#nav-collapse').hasClass('in')) {
             $('#nav-collapse').collapse('hide');
         }
-        
+
     } else if (item == "menu") {
-        
+
         if ($('#search-collapse').hasClass('in')) {
             $('#search-collapse').collapse('hide');
         }
@@ -833,11 +833,11 @@ function collapseMenu(item) {
 }
 
 function getEventsCalendar(day, month, year) {
-    
+
     if ($("#last_day_click").val() != day+month+year) {
-    
+
         $("#last_day_click").attr("value", day+month+year);
-    
+
         $(".calendar_loading").css("display", "");
         $("#calendar_event").html("");
 
@@ -860,49 +860,49 @@ function getEventsCalendar(day, month, year) {
             "day":          day,
             "month":        month,
             "year":         year,
-            "front_cal" :   '1' 
+            "front_cal" :   '1'
         };
 
         $.get(DEFAULT_URL + "/getEvent.php", parameters, function(ret) {
             $(".calendar_loading").css("display", "none");
             $("#calendar_event").html(ret);
         });
-    
+
     }
-    
+
 }
 
 function loadToolTip(area) {
     if (area == "general") {
-        
+
         $('#priceTip, .symbol a, .summary-price a, .list-search label, .button-call img, .button-send img, .share-social img, .summary-icons span a.map-link, #tip_rss').tooltip({
             animation: true
         });
-        
+
         $('#tab_mapView').tooltip({
             animation: true,
             placement: 'bottom'
         })
-        
+
     } else if (area == "detail") {
-        
+
         $('#priceTip, .list-search label, .button-call img, .button-send img, .share-social img').tooltip({
             animation: true
         });
-        
+
     } else if (area == "summary_ajax") {
-        
+
         $('.summary-price a, .button-call img, .button-send img, .share-social img').tooltip({
             animation: true
         });
-        
+
     }
 }
 
 function showAdvancedSearch(item_type, template_id, load_cat, category_id) {
-	
+
 	var aux_data = "category_id="+category_id+"&fnct=categories&type="+item_type;
-	
+
 	if (load_cat){
 		/*
 		 * Load dropdown using ajax
@@ -921,7 +921,7 @@ function showAdvancedSearch(item_type, template_id, load_cat, category_id) {
                 $('.selectpicker .select').selectpicker();
             }
 		  }
-		});	
+		});
 	}
 
 	if (document.getElementById("locations_default_where")) {
@@ -931,18 +931,18 @@ function showAdvancedSearch(item_type, template_id, load_cat, category_id) {
             }
         }
 	}
-    
+
     document.getElementById("advanced-search-button").onclick = function() {
 		closeAdvancedSearch(item_type, template_id, category_id);
 	}
-    
+
 	$('#advanced-search').slideDown('slow');
 	$('#advanced-search-label').hide();
 	$('#advanced-search-label-close').show();
 }
 
 function closeAdvancedSearch(item_type, template_id, category_id) {
-	
+
     $('#advanced-search').slideUp('slow', function() {
         document.getElementById("advanced-search-button").onclick = function() {
             showAdvancedSearch(item_type, template_id, false, category_id);
@@ -950,7 +950,7 @@ function closeAdvancedSearch(item_type, template_id, category_id) {
     });
 	$('#advanced-search-label').show();
 	$('#advanced-search-label-close').hide();
-    
+
 }
 
 function clearAdvancedOptions() {
@@ -968,3 +968,20 @@ function checkRadio(obj) {
     });
     obj.find("label").addClass("active");
 }
+
+function get_nth_suffix(date) {
+   switch (date) {
+     case 1:
+     case 21:
+     case 31:
+        return 'st';
+     case 2:
+     case 22:
+        return 'nd';
+     case 3:
+     case 23:
+        return 'rd';
+     default:
+        return 'th';
+   }
+ }

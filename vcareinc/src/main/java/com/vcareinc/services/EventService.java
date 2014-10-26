@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,6 +17,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.execution.RequestContext;
@@ -31,6 +34,7 @@ import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.EventOrder;
+import com.vcareinc.services.repositories.EventRepository;
 import com.vcareinc.utils.DateUtils;
 import com.vcareinc.vo.Address;
 import com.vcareinc.vo.Category;
@@ -52,6 +56,9 @@ public class EventService extends BaseService<EventOrder> {
 
 	@Autowired
 	private UserService userService;
+
+	@Inject
+	private EventRepository eventRepository;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -88,7 +95,7 @@ public class EventService extends BaseService<EventOrder> {
 		Price price = orderService.getPriceByType(optionType, priceType);
 		Long id = null;
 		if(context.getFlowScope().get("optionTypeId") != null)
-			id = (Long) context.getFlowScope().get("optionTypeId");
+			id = Long.valueOf((String) context.getFlowScope().get("optionTypeId"));
 
 		try {
 			validate(eventOrder);
@@ -174,10 +181,12 @@ public class EventService extends BaseService<EventOrder> {
 				events.setEndDate(DateUtils.getTimestamp(eventOrder.getEndDate() + " " + eventOrder.getEndHour() + ":" + eventOrder.getEndMinute() + " " + eventOrder.getEndAmPm(), "MM/dd/yyyy HH:mm a"));
 			}
 
-			if(eventOrder.getRecurring() != null)
-				events.setRecurring(eventOrder.getRecurring());
+			if(eventOrder.getRecurring() != null && eventOrder.getRecurring().trim().length() > 0)
+				events.setRecurring(Boolean.valueOf(eventOrder.getRecurring()));
+			else
+				events.setRecurring(Boolean.FALSE);
 
-			if(eventOrder.getRecurring() != null && eventOrder.getRecurring()) {
+			if(eventOrder.getRecurring() != null) {
 				if(eventOrder.getEventPeriod().equalsIgnoreCase("until")) {
 					if(eventOrder.getUntilDate() != null && eventOrder.getUntilDate().trim().length() > 0)
 						events.setUntilDate(DateUtils.getTimestamp(eventOrder.getUntilDate()));
@@ -267,7 +276,7 @@ public class EventService extends BaseService<EventOrder> {
 						for(String datOfWk : datOfWkArr) {
 							dayOfWeek[i++] = DayOfWeek.valueOf(datOfWk);
 						}
-						eventOrder.setDayOfWeekcb(dayOfWeek);
+//						eventOrder.setDayOfWeekcb(dayOfWeek);
 					}
 
 					if(events.getWeekOfMonth() != null && events.getWeekOfMonth().trim().length() > 0) {
@@ -277,7 +286,7 @@ public class EventService extends BaseService<EventOrder> {
 						for(String wkOfMth : wkOfMthArr) {
 							weekOfMonth[i++] = WeekOfMonth.valueOf(wkOfMth);
 						}
-						eventOrder.setWeekOfMonth(weekOfMonth);
+//						eventOrder.setWeekOfMonth(weekOfMonth);
 					}
 
 					if(events.getAddress() != null) {
@@ -372,6 +381,33 @@ public class EventService extends BaseService<EventOrder> {
 		return em.createQuery("SELECT e FROM Events e WHERE e.status = :status")
 				.setParameter("status", StatusType.PENDING)
 				.setMaxResults(numberOfLists)
+				.getResultList();
+	}
+
+	public Page<Events> getEventsByCategoryOrderByPriceType(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return eventRepository.findEventsByCategoryOrderByPriceType(categoryId, request);
+	}
+
+	public Page<Events> getEventsByCategoryOrderByTitle(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return eventRepository.findEventsByCategoryOrderByTitle(categoryId, request);
+	}
+
+	public Page<Events> getEventsByDateOrderByTitle(Timestamp date, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber -1, numberPerPage);
+		return eventRepository.findEventsByDateOrderByPriceType(date, request);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getCategoriesById(Long id) {
+		return em.createNativeQuery("SELECT c.id, c.name, count(*)"
+				+ " FROM Category c"
+				+ " INNER JOIN events_category ec ON ec.category_id = c.id"
+				+ " WHERE ec.events_id = :id"
+				+ " GROUP BY c.name"
+				+ " HAVING count(*)  > 0")
+				.setParameter("id", id)
 				.getResultList();
 	}
 }

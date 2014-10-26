@@ -625,22 +625,16 @@
 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 						<script src="${request.contextPath}/resources/js/jquery-ui-datepicker.min.js" type="text/javascript"></script>
 						<script>
-							var date = new Date();
-							var today = date.getTime();
-							var OneDay = 86400000
-							var SecondDay = today + (OneDay * 1);
-							var ThirdDay = today + (OneDay * 2);
-							var FouthDay = today + (OneDay * 3);
-							var FifthDay = today + (OneDay * 4);
-
 						    $('#calendar').datepicker({
 						        inline: true,
 						        firstDay: 0,
 						        showOtherMonths: false,
 						        dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 						        dateFormat: "yymmdd",
+						        prevText: "&lt;",
+						        nextText: "&gt;",
 						        onSelect: function () {
-						        	window.location.href="event?date=" + this.value;
+						        	window.location.href="eventList?date=" + this.value;
 						        }
 						    });
 						</script>
@@ -650,36 +644,52 @@
 							<ul class="calendar-event">
 
 
-								<li id="952014" onclick="getEventsCalendar('9', '5', '2014');"
+								<li onclick="getEventsCalendar('9', '5', '2014');"
 									class="active"><b></b><br/>
-								<span>th</span></li>
+								<span id="FirstDay"></span></li>
 
 
-								<li id="1052014" onclick="getEventsCalendar('10', '5', '2014');">
+								<li onclick="getEventsCalendar('10', '5', '2014');">
 									<b></b><br/>
-								<span>10th</span>
+								<span id="SecondDay"></span>
 								</li>
 
 
-								<li id="1152014" onclick="getEventsCalendar('11', '5', '2014');">
+								<li onclick="getEventsCalendar('11', '5', '2014');">
 									<b></b><br/>
-								<span>11th</span>
+								<span id="ThirdDay"></span>
 								</li>
 
 
-								<li id="1252014" onclick="getEventsCalendar('12', '5', '2014');">
+								<li onclick="getEventsCalendar('12', '5', '2014');">
 									<b></b><br/>
-								<span>12th</span>
+								<span id="FourthDay"></span>
 								</li>
 
 
-								<li id="1452014" onclick="getEventsCalendar('14', '5', '2014');">
+								<li onclick="getEventsCalendar('14', '5', '2014');">
 									<b></b><br/>
-								<span>14th</span>
+								<span id="FifthDay"></span>
 								</li>
 
 
 							</ul>
+
+							<script>
+							var date = new Date();
+							var today = date.getTime();
+							var OneDay = 86400000
+							var SecondDay = today + (OneDay * 1);
+							var ThirdDay = today + (OneDay * 2);
+							var FouthDay = today + (OneDay * 3);
+							var FifthDay = today + (OneDay * 4);
+
+							document.getElementById("FirstDay").innerHTML = date.getDate() + get_nth_suffix(date.getDate());
+							//document.getElementById("SecondDay").innerHTML = SecondDay.getDate() + get_nth_suffix(SecondDay.getDate());
+							//document.getElementById("ThirdDay").innerHTML = ThirdDay.getDate() + get_nth_suffix(ThirdDay.getDate());
+							//document.getElementById("FourthDay").innerHTML = FouthDay.getDate() + get_nth_suffix(FouthDay.getDate());
+							//document.getElementById("FifthDay").innerHTML = FifthDay.getDate() + get_nth_suffix(FifthDay.getDate());
+							</script>
 
 							<p class="calendar_loading" style="display: none;"></p>
 

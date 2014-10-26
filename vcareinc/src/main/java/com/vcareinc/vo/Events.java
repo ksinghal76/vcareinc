@@ -52,6 +52,8 @@ public class Events implements Serializable {
 	private DateRange period;
 	private MonthOfYear month;
 	private MonthOfYear month2;
+	private String precison;
+	private String day;
 
 	private String dayOfWeek;
 	private String weekOfMonth;
@@ -192,6 +194,34 @@ public class Events implements Serializable {
 
 	public void setMonth2(MonthOfYear month2) {
 		this.month2 = month2;
+	}
+
+	/**
+	 * @return the precison
+	 */
+	public String getPrecison() {
+		return precison;
+	}
+
+	/**
+	 * @param precison the precison to set
+	 */
+	public void setPrecison(String precison) {
+		this.precison = precison;
+	}
+
+	/**
+	 * @return the day
+	 */
+	public String getDay() {
+		return day;
+	}
+
+	/**
+	 * @param day the day to set
+	 */
+	public void setDay(String day) {
+		this.day = day;
 	}
 
 	public String getDayOfWeek() {

@@ -26,4 +26,19 @@ public class DateUtils {
 	public static String getStringforDate(Timestamp time, String dateFormat) {
 		return (new SimpleDateFormat(dateFormat)).format(time);
 	}
+
+	public static boolean isValidDateString(String date) {
+		return isValidDateString(date, DATE_FORMAT);
+	}
+
+	public static boolean isValidDateString(String date, String dateFormat) {
+		boolean isValid = false;
+		try {
+			new SimpleDateFormat(dateFormat).parse(date);
+			isValid = true;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return isValid;
+	}
 }

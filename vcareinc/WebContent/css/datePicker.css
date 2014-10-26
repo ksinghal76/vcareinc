@@ -30,16 +30,21 @@
 }
 .ui-datepicker-header {
     position: relative;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 0px;
+    border-bottom: 1px solid #ffffff;
+    background-color: #ffffff;
 }
 
-.ui-datepicker-title { text-align: center; }
+.ui-datepicker-title {
+	text-align: center;
+	background-color: #ffffff;
+}
 
 .ui-datepicker-month {
     position: relative;
     padding-right: 15px;
     color: #2980b9;
+    background-color: #ffffff;
 }
 
 .ui-datepicker-year {

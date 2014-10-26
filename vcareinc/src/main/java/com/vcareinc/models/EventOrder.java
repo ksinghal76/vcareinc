@@ -8,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vcareinc.constants.DateRange;
-import com.vcareinc.constants.DayOfWeek;
-import com.vcareinc.constants.WeekOfMonth;
+import com.vcareinc.validators.DateEvent;
 import com.vcareinc.validators.PromotionCode;
 
 @SuppressWarnings("rawtypes")
 @Controller
+@DateEvent(startDate="startDate", endDate="endDate", period="period", month="month", month2="month2", dayOfWeekcb="dayOfWeekcb", weekOfMonth="weekOfMonth", eventPeriod="eventPeriod", untilDate="untilDate", day = "day", precision = "precision", recurring = "recurring")
 public class EventOrder extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
@@ -44,6 +44,7 @@ public class EventOrder extends BaseModel {
 	private String country;
 
 	private String startDate;
+
 	private String endDate;
 	private String startHour;
 	private String startMinute;
@@ -53,13 +54,15 @@ public class EventOrder extends BaseModel {
 	private String endMinute;
 	private String endAmPm;
 
-	private Boolean recurring;
+	private String recurring;
 	private DateRange period;
 	private String month;
 	private String month2;
+	private String precision;
+	private String day;
 
-	private DayOfWeek[] dayOfWeekcb;
-	private WeekOfMonth[] weekOfMonth;
+	private String[] dayOfWeekcb;
+	private String[] weekOfMonth;
 	private String eventPeriod;
 	private String untilDate;
 
@@ -260,11 +263,11 @@ public class EventOrder extends BaseModel {
 		this.endAmPm = endAmPm;
 	}
 
-	public Boolean getRecurring() {
+	public String getRecurring() {
 		return recurring;
 	}
 
-	public void setRecurring(Boolean recurring) {
+	public void setRecurring(String recurring) {
 		this.recurring = recurring;
 	}
 	public DateRange getPeriod() {
@@ -303,19 +306,47 @@ public class EventOrder extends BaseModel {
 		this.month2 = month2;
 	}
 
-	public DayOfWeek[] getDayOfWeekcb() {
+	/**
+	 * @return the precision
+	 */
+	public String getPrecision() {
+		return precision;
+	}
+
+	/**
+	 * @param precision the precision to set
+	 */
+	public void setPrecision(String precision) {
+		this.precision = precision;
+	}
+
+	/**
+	 * @return the day
+	 */
+	public String getDay() {
+		return day;
+	}
+
+	/**
+	 * @param day the day to set
+	 */
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public String[] getDayOfWeekcb() {
 		return dayOfWeekcb;
 	}
 
-	public void setDayOfWeekcb(DayOfWeek[] dayOfWeekcb) {
+	public void setDayOfWeekcb(String[] dayOfWeekcb) {
 		this.dayOfWeekcb = dayOfWeekcb;
 	}
 
-	public WeekOfMonth[] getWeekOfMonth() {
+	public String[] getWeekOfMonth() {
 		return weekOfMonth;
 	}
 
-	public void setWeekOfMonth(WeekOfMonth[] weekOfMonth) {
+	public void setWeekOfMonth(String[] weekOfMonth) {
 		this.weekOfMonth = weekOfMonth;
 	}
 
