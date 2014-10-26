@@ -24,12 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.execution.RequestContext;
 
 import com.vcareinc.constants.DateRange;
-import com.vcareinc.constants.DayOfWeek;
 import com.vcareinc.constants.MonthOfYear;
 import com.vcareinc.constants.OptionType;
 import com.vcareinc.constants.PriceType;
 import com.vcareinc.constants.StatusType;
-import com.vcareinc.constants.WeekOfMonth;
 import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
@@ -167,18 +165,24 @@ public class EventService extends BaseService<EventOrder> {
 			if(id != null && id > 0)
 				events.setAddress(address);
 
-			if(eventOrder.getStartDate() != null && eventOrder.getStartDate().trim().length() > 0
-					&& eventOrder.getStartHour() != null && eventOrder.getStartHour().trim().length() > 0
+			if(eventOrder.getStartDate() != null && eventOrder.getStartDate().trim().length() > 0) {
+				if(eventOrder.getStartHour() != null && eventOrder.getStartHour().trim().length() > 0
 					&& eventOrder.getStartMinute() != null && eventOrder.getStartMinute().trim().length() > 0
 					&& eventOrder.getStartAmPm() != null && eventOrder.getStartAmPm().trim().length() > 0) {
 					events.setStartDate(DateUtils.getTimestamp(eventOrder.getStartDate() + " " + eventOrder.getStartHour() + ":" + eventOrder.getStartMinute() + " " + eventOrder.getStartAmPm(), "MM/dd/yyyy HH:mm a"));
+				} else {
+					events.setStartDate(DateUtils.getTimestamp(eventOrder.getStartDate()));
+				}
 			}
 
-			if(eventOrder.getEndDate() != null && eventOrder.getEndDate().trim().length() > 0
-					&& eventOrder.getEndHour() != null && eventOrder.getEndHour().trim().length() > 0
+			if(eventOrder.getEndDate() != null && eventOrder.getEndDate().trim().length() > 0) {
+				if(eventOrder.getEndHour() != null && eventOrder.getEndHour().trim().length() > 0
 					&& eventOrder.getEndMinute() != null && eventOrder.getEndMinute().trim().length() > 0
 					&& eventOrder.getEndAmPm() != null && eventOrder.getEndAmPm().trim().length() > 0) {
-				events.setEndDate(DateUtils.getTimestamp(eventOrder.getEndDate() + " " + eventOrder.getEndHour() + ":" + eventOrder.getEndMinute() + " " + eventOrder.getEndAmPm(), "MM/dd/yyyy HH:mm a"));
+					events.setEndDate(DateUtils.getTimestamp(eventOrder.getEndDate() + " " + eventOrder.getEndHour() + ":" + eventOrder.getEndMinute() + " " + eventOrder.getEndAmPm(), "MM/dd/yyyy HH:mm a"));
+				} else {
+					events.setEndDate(DateUtils.getTimestamp(eventOrder.getEndDate()));
+				}
 			}
 
 			if(eventOrder.getRecurring() != null && eventOrder.getRecurring().trim().length() > 0)
@@ -269,24 +273,44 @@ public class EventService extends BaseService<EventOrder> {
 					if(events.getSummaryDescription() != null && events.getSummaryDescription().trim().length() > 0)
 						eventOrder.setSummarydesc(events.getSummaryDescription());
 
-					if(events.getDayOfWeek() != null && events.getDayOfWeek().trim().length() > 0) {
-						String[] datOfWkArr = events.getDayOfWeek().split(":");
-						DayOfWeek[] dayOfWeek = new DayOfWeek[datOfWkArr.length];
-						int i = 0;
-						for(String datOfWk : datOfWkArr) {
-							dayOfWeek[i++] = DayOfWeek.valueOf(datOfWk);
-						}
-//						eventOrder.setDayOfWeekcb(dayOfWeek);
+					if(events.getStartDate() != null) {
+						eventOrder.setStartDate(DateUtils.getStringforDate(events.getStartDate()));
+						eventOrder.setStartHour(DateUtils.getStringforDate(events.getStartDate(), "HH"));
+						eventOrder.setStartMinute(DateUtils.getStringforDate(events.getStartDate(), "mm"));
+						eventOrder.setStartAmPm(DateUtils.getStringforDate(events.getStartDate(), "a"));
 					}
 
-					if(events.getWeekOfMonth() != null && events.getWeekOfMonth().trim().length() > 0) {
-						String[] wkOfMthArr = events.getWeekOfMonth().split(":");
-						WeekOfMonth[] weekOfMonth = new WeekOfMonth[wkOfMthArr.length];
-						int i = 0;
-						for(String wkOfMth : wkOfMthArr) {
-							weekOfMonth[i++] = WeekOfMonth.valueOf(wkOfMth);
+					if(events.getEndDate() != null) {
+						eventOrder.setEndDate(DateUtils.getStringforDate(events.getEndDate()));
+						eventOrder.setEndHour(DateUtils.getStringforDate(events.getEndDate(), "HH"));
+						eventOrder.setEndMinute(DateUtils.getStringforDate(events.getEndDate(), "mm"));
+						eventOrder.setEndAmPm(DateUtils.getStringforDate(events.getEndDate(), "a"));
+					}
+
+					if(events.getRecurring() != null && events.getRecurring()) {
+						eventOrder.setPeriod(events.getPeriod().name());
+						eventOrder.setMonth(events.getMonth().name());
+						eventOrder.setMonth2(events.getMonth2().name());
+
+						if(events.getDayOfWeek() != null && events.getDayOfWeek().trim().length() > 0) {
+							String[] datOfWkArr = events.getDayOfWeek().split(":");
+	//						DayOfWeek[] dayOfWeek = new DayOfWeek[datOfWkArr.length];
+	//						int i = 0;
+	//						for(String datOfWk : datOfWkArr) {
+	//							dayOfWeek[i++] = DayOfWeek.valueOf(datOfWk);
+	//						}
+							eventOrder.setDayOfWeekcb(datOfWkArr);
 						}
-//						eventOrder.setWeekOfMonth(weekOfMonth);
+
+						if(events.getWeekOfMonth() != null && events.getWeekOfMonth().trim().length() > 0) {
+							String[] wkOfMthArr = events.getWeekOfMonth().split(":");
+	//						WeekOfMonth[] weekOfMonth = new WeekOfMonth[wkOfMthArr.length];
+	//						int i = 0;
+	//						for(String wkOfMth : wkOfMthArr) {
+	//							weekOfMonth[i++] = WeekOfMonth.valueOf(wkOfMth);
+	//						}
+							eventOrder.setWeekOfMonth(wkOfMthArr);
+						}
 					}
 
 					if(events.getAddress() != null) {

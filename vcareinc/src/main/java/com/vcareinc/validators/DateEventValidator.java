@@ -52,6 +52,7 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext  ctx) {
+		boolean isValid = true;
 		try {
 			String startDt = BeanUtils.getProperty(value, startDate);
 			String endDt = BeanUtils.getProperty(value, endDate);
@@ -64,8 +65,10 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 
 			if(startDt == null || startDt.trim().length() <= 0) {
 				ctx.buildConstraintViolationWithTemplate("Please enter valid start date").addConstraintViolation();
+				isValid = false;
 			} else if(!DateUtils.isValidDateString(startDt)) {
 				ctx.buildConstraintViolationWithTemplate("Start Date format should be MM\\dd\\yyyy").addConstraintViolation();
+				isValid = false;
 			}
 
 			Integer cntDyofWk = 0;
@@ -87,10 +90,13 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 			if(rec != null && Boolean.valueOf(rec)) {
 				if(eventPeriod != null && eventPeriod.trim().length() > 0) {
 					if(eventPeriod.trim().equalsIgnoreCase("until")) {
-						if(untilDate == null || untilDate.trim().length() <= 0)
+						if(untilDate == null || untilDate.trim().length() <= 0) {
 							ctx.buildConstraintViolationWithTemplate("Until Date is required").addConstraintViolation();
-						else if(!DateUtils.isValidDateString(untilDate))
+							isValid = false;
+						} else if(!DateUtils.isValidDateString(untilDate)) {
 							ctx.buildConstraintViolationWithTemplate("Invalid Until Date").addConstraintViolation();
+							isValid = false;
+						}
 					}
 				}
 
@@ -98,9 +104,12 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 					if(prd.equalsIgnoreCase(DateRange.MONTHLY.toString()) || prd.equalsIgnoreCase(DateRange.WEEKLY.toString()) || prd.equalsIgnoreCase(DateRange.YEARLY.toString())) {
 						if(prc == null || prc.trim().length() <= 0) {
 							ctx.buildConstraintViolationWithTemplate("Please select precision").addConstraintViolation();
+							isValid = false;
 						} else if(prc.equals("weekday")) {
-							if(cntDyofWk <= 0)
+							if(cntDyofWk <= 0) {
 								ctx.buildConstraintViolationWithTemplate("Day of the Week Required").addConstraintViolation();
+								isValid = false;
+							}
 						}
 
 					}
@@ -109,12 +118,15 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 						if(prc != null && prc.equals("weekday")) {
 							if(cntWkOfMth <=0) {
 								ctx.buildConstraintViolationWithTemplate("Week of the Month Required").addConstraintViolation();
+								isValid = false;
 							}
 						} else if(prc.equals("day")) {
 							if(dy == null || dy.trim().length() <= 0) {
 								ctx.buildConstraintViolationWithTemplate("Day required").addConstraintViolation();
+								isValid = false;
 							} else if(!dy.matches("^[1-7]")) {
 								ctx.buildConstraintViolationWithTemplate("Day must be between 1 and 7").addConstraintViolation();
+								isValid = false;
 							}
 						}
 					}
@@ -122,28 +134,35 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 					if(prd.equalsIgnoreCase(DateRange.YEARLY.toString())) {
 						if((mth == null || mth.trim().length() <= 0) && (mth2 == null || mth2.trim().length() <=0)) {
 							ctx.buildConstraintViolationWithTemplate("Month is required").addConstraintViolation();
+							isValid = false;
 						}
 
-						if(MonthOfYear.valueOf(mth) == null && MonthOfYear.valueOf(mth2) == null) {
+						if(isExistsMonthOfYear(mth) && isExistsMonthOfYear(mth2)) {
 							ctx.buildConstraintViolationWithTemplate("Month is required").addConstraintViolation();
+							isValid = false;
 						}
 					}
 
 					if(evtPrd == null || evtPrd.trim().length() <= 0) {
 						ctx.buildConstraintViolationWithTemplate("Please select end on").addConstraintViolation();
+						isValid = false;
 					} else if(evtPrd.trim().equalsIgnoreCase("until")) {
 						if(unDt == null || unDt.trim().length() <= 0) {
 							ctx.buildConstraintViolationWithTemplate("Please select until Date").addConstraintViolation();
+							isValid = false;
 						} else if(!DateUtils.isValidDateString(unDt)) {
 							ctx.buildConstraintViolationWithTemplate("Until Date format should be MM\\dd\\yyyy").addConstraintViolation();
+							isValid = false;
 						}
 					}
 				}
 			} else {
 				if(endDt == null || endDt.trim().length() <= 0) {
 					ctx.buildConstraintViolationWithTemplate("Please enter valid end date").addConstraintViolation();
+					isValid = false;
 				} else if(!DateUtils.isValidDateString(endDt)) {
 					ctx.buildConstraintViolationWithTemplate("End Date format should be MM\\dd\\yyyy").addConstraintViolation();
+					isValid = false;
 				}
 			}
 		} catch (IllegalAccessException e) {
@@ -155,6 +174,14 @@ public class DateEventValidator implements ConstraintValidator<DateEvent, Object
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		return isValid;
+	}
+
+	private boolean isExistsMonthOfYear(String val) {
+		for(MonthOfYear moy : conversionManagedBean.getMonthOfYear()) {
+			if(moy.name().equalsIgnoreCase(val))
+				return true;
 		}
 		return false;
 	}

@@ -347,7 +347,9 @@
 
                     <td>
                         <span title="" style="cursor:default">
-                            06/14/2014                        </span>
+                        <h:outputText value="#{eventsList.startDate}">
+                        	<f:convertDateTime pattern="MM/dd/yyyy"/>
+                        </h:outputText>                      </span>
                     </td>
 
                     <td>
@@ -361,10 +363,10 @@
                     <td nowrap="nowrap">&nbsp;</td>
 
                     <td nowrap="" class="main-options">
-                        <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[0]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
+                        <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[1]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
                             View                        </a>
                         <b>|</b>
-                        <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[0]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
+                        <a href="orderListing-flow?id=${eventsList.id}&amp;optionType=${conversionManagedBean.optionTypes[1]}&amp;priceType=${eventsList.price.priceType}" class="link-table">
                             Edit                        </a>
                     </td>
 

@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.vcareinc.constants.DateRange;
 import com.vcareinc.validators.DateEvent;
 import com.vcareinc.validators.PromotionCode;
 
@@ -55,7 +54,7 @@ public class EventOrder extends BaseModel {
 	private String endAmPm;
 
 	private String recurring;
-	private DateRange period;
+	private String period;
 	private String month;
 	private String month2;
 	private String precision;
@@ -270,11 +269,11 @@ public class EventOrder extends BaseModel {
 	public void setRecurring(String recurring) {
 		this.recurring = recurring;
 	}
-	public DateRange getPeriod() {
+	public String getPeriod() {
 		return period;
 	}
 
-	public void setPeriod(DateRange period) {
+	public void setPeriod(String period) {
 		this.period = period;
 	}
 

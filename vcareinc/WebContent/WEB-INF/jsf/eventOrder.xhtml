@@ -967,7 +967,7 @@
 
 <select id="startHour" name="startHour" style="width: 50px;">
 <option value=""></option>
-<c:forEach begin="1" end="12" var="stHr">
+<c:forEach begin="0" end="12" var="stHr">
 	<c:choose>
 		<c:when test="${stHr == eventVal.startHour}">
 			<option value="${stHr}" selected="selected">${stHr}</option>
@@ -993,7 +993,7 @@
 </c:forEach>
 </select>
 <c:choose>
-	<c:when test="${eventVal.startAmPm == 'am'}">
+	<c:when test="${eventVal.startAmPm == 'am' || eventVal.startAmPm == 'AM'}">
 		<input type="radio" name="startAmPm" value="am" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1001,7 +1001,7 @@
 	</c:otherwise>
 </c:choose> AM
 <c:choose>
-	<c:when test="${eventVal.startAmPm == 'pm'}">
+	<c:when test="${eventVal.startAmPm == 'pm' || eventVal.startAmPm == 'PM'}">
 		<input type="radio" name="startAmPm" value="pm" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1017,7 +1017,7 @@
 
 <select id="endHour" name="endHour" style="width: 50px;">
 <option value=""></option>
-<c:forEach begin="1" end="12" var="edHr">
+<c:forEach begin="0" end="12" var="edHr">
 	<c:choose>
 		<c:when test="${edHr == eventVal.endHour}">
 			<option value="${edHr}" selected="selected">${edHr}</option>
@@ -1044,7 +1044,7 @@
 </c:forEach>
 </select>
 <c:choose>
-	<c:when test="${eventVal.endAmPm == 'am'}">
+	<c:when test="${eventVal.endAmPm == 'am' || eventVal.endAmPm == 'AM'}">
 		<input type="radio" name="endAmPm" value="am" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>
@@ -1052,7 +1052,7 @@
 	</c:otherwise>
 </c:choose> AM
 <c:choose>
-	<c:when test="${eventVal.endAmPm == 'pm'}">
+	<c:when test="${eventVal.endAmPm == 'pm' || eventVal.endAmPm == 'PM'}">
 		<input type="radio" name="endAmPm" value="pm" class="inputRadio" checked="checked"/>
 	</c:when>
 	<c:otherwise>

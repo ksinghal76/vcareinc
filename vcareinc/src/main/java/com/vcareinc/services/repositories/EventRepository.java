@@ -45,10 +45,10 @@ public interface EventRepository extends JpaRepository<Events, Long> {
 			+ "JOIN FETCH e.address a "
 			+ "JOIN FETCH a.country co "
 			+ "JOIN FETCH a.state s "
-			+ "WHERE e.startDate >= :date and e.endDate <= :date "
+			+ "WHERE e.startDate <= :date and e.endDate >= :date"
 			+ " ORDER BY e.title",
 			countQuery="SELECT count(e) FROM Events e "
 					+ "JOIN e.category c "
-					+ "WHERE e.startDate >= :date and e.endDate <= :date")
+					+ "WHERE e.startDate <= :date and e.endDate >= :date")
 	Page<Events> findEventsByDateOrderByPriceType(@Param("date") Timestamp date, Pageable pageable);
 }
