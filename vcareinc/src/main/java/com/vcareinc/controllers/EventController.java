@@ -125,6 +125,6 @@ public class EventController extends BaseMultiActionController {
 		Events events = eventService.getEventById(id);
 		map.addAttribute("events", events);
 		map.addAttribute("categories", eventService.getCategoriesById(id));
-		return "listingDescription";
+		return "eventDescription";
 	}
 }

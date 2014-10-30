@@ -16,9 +16,9 @@ public interface ListingRepository extends JpaRepository<Listings, Long> {
 	@Query(value="SELECT l FROM Listings l "
 			+ "JOIN FETCH l.category c "
 			+ "JOIN l.price p "
-			+ "JOIN FETCH l.address a "
-			+ "JOIN FETCH a.country co "
-			+ "JOIN FETCH a.state s "
+			+ "LEFT OUTER JOIN FETCH l.address a "
+			+ "LEFT OUTER JOIN FETCH a.country co "
+			+ "LEFT OUTER JOIN FETCH a.state s "
 			+ "WHERE c.id = :categoryId "
 			+ "ORDER BY p.priceType",
 		countQuery="SELECT count(l) FROM Listings l "
@@ -28,9 +28,9 @@ public interface ListingRepository extends JpaRepository<Listings, Long> {
 
 	@Query(value="SELECT l FROM Listings l "
 			+ "JOIN FETCH l.category c "
-			+ "JOIN FETCH l.address a "
-			+ "JOIN FETCH a.country co "
-			+ "JOIN FETCH a.state s "
+			+ "LEFT OUTER JOIN FETCH l.address a "
+			+ "LEFT OUTER JOIN FETCH a.country co "
+			+ "LEFT OUTER JOIN FETCH a.state s "
 			+ "WHERE c.id = :categoryId "
 			+ "ORDER BY l.title",
 		countQuery="SELECT count(l) FROM Listings l "

@@ -1,9 +1,11 @@
 package com.vcareinc.services;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.execution.RequestContext;
@@ -24,6 +28,7 @@ import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ClassifiedOrder;
+import com.vcareinc.services.repositories.ClassifiedRepository;
 import com.vcareinc.vo.Address;
 import com.vcareinc.vo.Category;
 import com.vcareinc.vo.Classified;
@@ -44,6 +49,9 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 
 	@Autowired
 	private UserService userService;
+
+	@Inject
+	private ClassifiedRepository classifiedRepository;
 
 
 	public OrderService getOrderService() {
@@ -79,7 +87,7 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 		Price price = orderService.getPriceByType(optionType, priceType);
 		Long id = null;
 		if(context.getFlowScope().get("optionTypeId") != null)
-			id = (Long) context.getFlowScope().get("optionTypeId");
+			id = Long.valueOf((String) context.getFlowScope().get("optionTypeId"));
 
 		Classified classified = new Classified();
 		try {
@@ -214,12 +222,18 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 					if(classified.getSummaryDescription() != null && classified.getSummaryDescription().trim().length() > 0)
 						classifiedOrder.setSummarydesc(classified.getSummaryDescription());
 
+					if(classified.getAmount() != null) {
+						classifiedOrder.setAmountDollar(Integer.valueOf((new DecimalFormat("#").format(classified.getAmount()))));
+						String amount = new DecimalFormat(".##").format(classified.getAmount());
+						classifiedOrder.setAmountCent(Integer.valueOf((amount.substring(amount.indexOf(".") + 1))));
+					}
+
 					if(classified.getAddress() != null) {
 						BeanUtils.copyProperties(classifiedOrder, classified.getAddress());
-						
+
 						if(classified.getAddress().getState() != null)
 							classifiedOrder.setState(classified.getAddress().getState().getCode());
-						
+
 						if(classified.getAddress().getCountry() != null)
 							classifiedOrder.setCountry(classified.getAddress().getCountry().getCode());
 					}
@@ -300,5 +314,27 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 				.setParameter("status", StatusType.ACTIVE)
 				.setMaxResults(numberOfLists)
 				.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getCategoriesById(Long id) {
+		return em.createNativeQuery("SELECT c.id, c.name, count(*)"
+				+ " FROM Category c"
+				+ " INNER JOIN classified_category cc ON cc.category_id = c.id"
+				+ " WHERE cc.classified_id = :id"
+				+ " GROUP BY c.name"
+				+ " HAVING count(*)  > 0")
+				.setParameter("id", id)
+				.getResultList();
+	}
+
+	public Page<Classified> getClassifiedByCategoryOrderByPriceType(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return classifiedRepository.findClassifiedByCategoryOrderByPriceType(categoryId, request);
+	}
+
+	public Page<Classified> getClassifiedByCategoryOrderByTitle(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return classifiedRepository.findClassifiedByCategoryOrderByTitle(categoryId, request);
 	}
 }

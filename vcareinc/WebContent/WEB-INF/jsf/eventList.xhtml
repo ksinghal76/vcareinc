@@ -11,7 +11,7 @@
 	template="includes/template.xhtml">
 
 	<ui:define name="bodyContent">
-	<c:set var="url" value="listingList?"/>
+	<c:set var="url" value="eventList?"/>
 	<c:set var="categoryParam" value="categoryId=${categoryId}&amp;"/>
 	<c:set var="optionTypeParam" value="optionType=${optionType}&amp;"/>
 	<c:set var="orderByParam" value="orderBy=${orderBy}&amp;"/>
@@ -33,44 +33,78 @@
 		 <div class="span3">
 
             <div class="hidden-phone">
-		 	    <div class="calendar"><h2>Browse Events by Date</h2><table class="table-calendar" border="0" cellspacing="4" cellpadding="0" width="100%"><tbody><tr><td colspan="7" class="pd-0"><table border="0" cellspacing="0" cellpadding="0" width="100%" class="calendar-header"><tbody><tr><th align="left"><a class="calendar-button left" href="http://www.beautypro411.com/event/results.php?month=201409&amp;this_date=20140901"></a></th><th><a href="http://www.beautypro411.com/event/results.php?month=201410&amp;this_date=20141001">October 2014</a></th><th align="right"><a class="calendar-button right" href="http://www.beautypro411.com/event/results.php?month=201411&amp;this_date=20141101"></a></th></tr></tbody></table></td></tr><tr><th class="calendar-weekday">S</th><th class="calendar-weekday">M</th><th class="calendar-weekday">T</th><th class="calendar-weekday">W</th><th class="calendar-weekday">T</th><th class="calendar-weekday">F</th><th class="calendar-weekday">S</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141001')" class="selected">01</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141002')" class="normal">02</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141003')" class="normal">03</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141004')" class="normal">04</a></td></tr><tr><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141005')" class="normal">05</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141006')" class="normal">06</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141007')" class="normal">07</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141008')" class="normal">08</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141009')" class="normal">09</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141010')" class="normal">10</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141011')" class="today">11</a></td></tr><tr><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141012')" class="normal">12</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141013')" class="normal">13</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141014')" class="normal">14</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141015')" class="normal">15</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141016')" class="normal">16</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141017')" class="normal">17</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141018')" class="normal">18</a></td></tr><tr><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141019')" class="normal">19</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141020')" class="normal">20</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141021')" class="normal">21</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141022')" class="normal">22</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141023')" class="normal">23</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141024')" class="normal">24</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141025')" class="normal">25</a></td></tr><tr><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141026')" class="normal">26</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141027')" class="normal">27</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141028')" class="normal">28</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141029')" class="normal">29</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141030')" class="normal">30</a></td><td align="center" width="22" class="calendar-day"><a href="javascript:set_cal_date('20141031')" class="normal">31</a></td><td>&nbsp;</td></tr></tbody></table>
-</div>
-            <div class="flex-box-group daily-calendar" style="float: none;">
+		 	    <div class="calendar">
+							<h2>Browse Events by Date</h2>
+							<div id="calendar2">
+						</div>
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+						<script src="${request.contextPath}/resources/js/jquery-ui-datepicker.min.js" type="text/javascript"></script>
+						<script>
+						    $('#calendar2').datepicker({
+						        inline: true,
+						        firstDay: 0,
+						        showOtherMonths: false,
+						        dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+						        dateFormat: "yymmdd",
+						        prevText: "&lt;",
+						        nextText: "&gt;",
+						        onSelect: function () {
+						        	window.location.href="eventList?date=" + this.value;
+						        }
+						    });
+						</script>
+						</div>
+						<div class="flex-box-group daily-calendar" style="float: none;">
 
-                <ul class="calendar-event">
-
-
-                    <li id="11102014" onclick="getEventsCalendar('11', '10', '2014');" class="active">
-                        <b></b><br/>
-                        <span>11th</span>
-                    </li>
-
-
-                    <li id="12102014" onclick="getEventsCalendar('12', '10', '2014');">
-                        <b></b><br/>
-                        <span>12th</span>
-                    </li>
-
-
-                    <li id="15102014" onclick="getEventsCalendar('15', '10', '2014');">
-                        <b></b><br/>
-                        <span>15th</span>
-                    </li>
-
-
-                    <li id="17102014" onclick="getEventsCalendar('17', '10', '2014');">
-                        <b></b><br/>
-                        <span>17th</span>
-                    </li>
+							<ul class="calendar-event">
 
 
-                    <li id="18102014" onclick="getEventsCalendar('18', '10', '2014');">
-                        <b></b><br/>
-                        <span>18th</span>
-                    </li>
+								<li onclick="getEventsCalendar('9', '5', '2014');"
+									class="active"><b></b><br/>
+								<span id="FirstDay"></span></li>
 
 
-                </ul>
+								<li onclick="getEventsCalendar('10', '5', '2014');">
+									<b></b><br/>
+								<span id="SecondDay"></span>
+								</li>
+
+
+								<li onclick="getEventsCalendar('11', '5', '2014');">
+									<b></b><br/>
+								<span id="ThirdDay"></span>
+								</li>
+
+
+								<li onclick="getEventsCalendar('12', '5', '2014');">
+									<b></b><br/>
+								<span id="FourthDay"></span>
+								</li>
+
+
+								<li onclick="getEventsCalendar('14', '5', '2014');">
+									<b></b><br/>
+								<span id="FifthDay"></span>
+								</li>
+
+
+							</ul>
+
+							<script>
+							var date = new Date();
+							var today = date.getTime();
+							var OneDay = 86400000
+							var SecondDay = new Date(today + (OneDay * 1));
+							var ThirdDay = new Date(today + (OneDay * 2));
+							var FouthDay = new Date(today + (OneDay * 3));
+							var FifthDay = new Date(today + (OneDay * 4));
+
+							document.getElementById("FirstDay").innerHTML = date.getDate() + get_nth_suffix(date.getDate());
+							document.getElementById("SecondDay").innerHTML = SecondDay.getDate() + get_nth_suffix(SecondDay.getDate());
+							document.getElementById("ThirdDay").innerHTML = ThirdDay.getDate() + get_nth_suffix(ThirdDay.getDate());
+							document.getElementById("FourthDay").innerHTML = FouthDay.getDate() + get_nth_suffix(FouthDay.getDate());
+							document.getElementById("FifthDay").innerHTML = FifthDay.getDate() + get_nth_suffix(FifthDay.getDate());
+							</script>
 
                 <p class="calendar_loading" style="display: none;"></p>
 
@@ -442,13 +476,15 @@
                         <h3><a href="eventDescription?id=${evtVal.id}">${evtVal.contactName}</a></h3>
 
                                                     <p id="showCategory_121">
-                                in <a href="eventList?category=${evtVal.category.categoryId}">${evtVal.category.categoryId}</a>                            </p>
+                                in<ui:repeat var="ctg" value="${evtVal.category.toArray()}"> <a href="eventList?category=${ctg.id}">${ctg.name}</a> </ui:repeat>                      </p>
 
                     </div>
 
                     <div class="span5 text-right">
-                                                    <h4>${evtVal.startDate} - ${evtVal.endDate}</h4>
-													<em>07:00 pm - 12:00 pm</em>
+                                                    <h4><h:outputText value="${evtVal.startDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText> - <h:outputText value="${evtVal.endDate}"><f:convertDateTime pattern="MM/dd/yyyy"/></h:outputText></h4>
+													<em><h:outputText value="${evtVal.startDate}"><f:convertDateTime pattern="HH:mm a"/></h:outputText> - <h:outputText value="${evtVal.endDate}"><f:convertDateTime pattern="HH:mm a"/></h:outputText></em>
                                             </div>
 
                 </div>
@@ -493,8 +529,8 @@
 
 
                                         <div>
-                                            <a href="http://beautypro411.com" target="_blank">
-                                                http://beautypro411.com                                            </a>
+                                            <a href="${evtVal.url}" target="_blank">
+                                               ${evtVal.url}                                            </a>
                                         </div>
 
 
@@ -549,7 +585,42 @@
 
 
                 <ul class="pages">
-                    <li class="disabled"><a href="javascript:void(0);">«</a></li>                                        <li><a class="active" href="http://www.beautypro411.com/event/results.php?this_date=20141001&amp;search_by_day=true&amp;screen=1">1</a></li><li><a href="http://www.beautypro411.com/event/results.php?this_date=20141001&amp;search_by_day=true&amp;screen=2">2</a></li><li><a href="http://www.beautypro411.com/event/results.php?this_date=20141001&amp;search_by_day=true&amp;screen=3">3</a></li>                                        <li><a title="next" href="http://www.beautypro411.com/event/results.php?this_date=20141001&amp;search_by_day=true&amp;screen=2">»</a></li>                </ul>
+
+                   	<c:choose>
+                   		<c:when test="${currentIndex == 1}">
+                   			<li class="disabled">
+                   				<a href="javascript:void(0);">«</a>
+                   			</li>
+                   		</c:when>
+                   		<c:otherwise>
+                   			<li>
+                   				<a title="previous" href="${url}${categoryParam}${optionTypeParam}${orderByParam}${numberPerPageParam}pageNumber=${currentIndex - 1}">«</a>
+                   			</li>
+                   		</c:otherwise>
+                   	</c:choose>
+                    <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+                    	<c:choose>
+                    		<c:when test="${currentIndex == i}">
+                    			<li><a class="active" href="${url}${categoryParam}${optionTypeParam}${orderByParam}${numberPerPageParam}pageNumber=${i}">${i}</a></li>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<li><a href="${url}${categoryParam}${optionTypeParam}${orderByParam}${numberPerPageParam}pageNumber=${i}">${i}</a></li>
+                    		</c:otherwise>
+                    	</c:choose>
+                    </c:forEach>
+                    <c:choose>
+                    	<c:when test="${currentIndex == pageable.totalPages}">
+                    		<li class="disabled">
+                    			<a title="next" href="javascript:void(0);">»</a>
+                    		</li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li>
+                    			<a title="next" href="${url}${categoryParam}${optionTypeParam}${orderByParam}${numberPerPageParam}pageNumber=${currentIndex + 1}">»</a>
+                    		</li>
+                    	</c:otherwise>
+                    </c:choose>
+               </ul>
 
 
             </div>

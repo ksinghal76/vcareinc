@@ -1,0 +1,16 @@
+{
+  "name": "vcareinc",
+  "version": "1.0.0",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "jquery-ui":"~1.10.4",
+    "jquery-cookie":"~1.4.1",
+    "fancybox":"~2.1.5",
+    "font-awesome":"~4.2.0",
+    "Jcrop":"~0.9.12"
+  }
+}

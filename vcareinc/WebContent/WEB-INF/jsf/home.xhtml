@@ -679,16 +679,16 @@
 							var date = new Date();
 							var today = date.getTime();
 							var OneDay = 86400000
-							var SecondDay = today + (OneDay * 1);
-							var ThirdDay = today + (OneDay * 2);
-							var FouthDay = today + (OneDay * 3);
-							var FifthDay = today + (OneDay * 4);
+							var SecondDay = new Date(today + (OneDay * 1));
+							var ThirdDay = new Date(today + (OneDay * 2));
+							var FouthDay = new Date(today + (OneDay * 3));
+							var FifthDay = new Date(today + (OneDay * 4));
 
 							document.getElementById("FirstDay").innerHTML = date.getDate() + get_nth_suffix(date.getDate());
-							//document.getElementById("SecondDay").innerHTML = SecondDay.getDate() + get_nth_suffix(SecondDay.getDate());
-							//document.getElementById("ThirdDay").innerHTML = ThirdDay.getDate() + get_nth_suffix(ThirdDay.getDate());
-							//document.getElementById("FourthDay").innerHTML = FouthDay.getDate() + get_nth_suffix(FouthDay.getDate());
-							//document.getElementById("FifthDay").innerHTML = FifthDay.getDate() + get_nth_suffix(FifthDay.getDate());
+							document.getElementById("SecondDay").innerHTML = SecondDay.getDate() + get_nth_suffix(SecondDay.getDate());
+							document.getElementById("ThirdDay").innerHTML = ThirdDay.getDate() + get_nth_suffix(ThirdDay.getDate());
+							document.getElementById("FourthDay").innerHTML = FouthDay.getDate() + get_nth_suffix(FouthDay.getDate());
+							document.getElementById("FifthDay").innerHTML = FifthDay.getDate() + get_nth_suffix(FifthDay.getDate());
 							</script>
 
 							<p class="calendar_loading" style="display: none;"></p>

@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 		xmlns:c="http://java.sun.com/jsp/jstl/core"
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:sec="http://www.springframework.org/security/tags"
@@ -45,6 +46,9 @@
 <title>${title}</title>
 </h:head>
 <body>
+	<c:set var="servletPath" value="${pageContext.request.servletPath}"/>
+	<c:set var="splitURI" value="${fn:split(servletPath, '/')}"/>
+	<c:set var="currentPage" value="${splitURI[fn:length(splitURI)-1]}"/>
 	<div class="navbar navbar-static-top">
 	<ui:insert name="header">
 		<ui:include src="header.xhtml"/>

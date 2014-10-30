@@ -2,6 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="includes/template.xhtml">
 
@@ -122,17 +123,17 @@
 						<div class="row-fluid" style="margin: 0; padding: 0;">
 
 
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[0] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2 class="h2Header2">
 									<a
-										href="http://beautypro411.com/classified/consulting-business.html" style="color: #fff;text-decoration: none;">
-										Consulting Business </a>
+										href="classifiedDescription?id=${classifiedLists[0].id}" style="color: #fff;text-decoration: none;">
+										${classifiedLists[0].title} </a> <span>${classifiedLists[0].amount}</span>
 								</h2>
 
 								<a
-									href="http://beautypro411.com/classified/consulting-business.html">
+									href="classifiedDescription?id=${classifiedLists[0].id}">
 									<img width="217" height="122"
 									src="http://beautypro411.com/custom/domain_1/image_files/sitemgr_photo_3792.png"
 									alt="Consulting Business" title="Consulting Business"
@@ -141,40 +142,35 @@
 
 								<section style="padding: 10px;">
 
-								<p style="color: #080808;">This is example text for the overview section. Hey there
-									where ya goin', not exactly knowin', who says you have to call
-									just one place home. He's goin' everywhere, B.J. McKay and his
-									best friend Bear.</p>
+								<p style="color: #080808;">${classifiedLists[0].summaryDescription}</p>
 
 								</section>
 
 							</div>
+							</c:if>
 
-
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[1] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2 class="h2Header2">
 									<a
-										href="http://beautypro411.com/classified/cosmetics-and-make-up.html" style="color: #fff;text-decoration: none;">
-										Cosmetics and Make up </a> <span>$79.00</span>
+										href="classifiedDescription?id=${classifiedLists[1].id}" style="color: #fff;text-decoration: none;">
+										${classifiedLists[1].title} </a> <span>$${classifiedLists[1].amount}</span>
 								</h2>
 
 								<a
-									href="http://beautypro411.com/classified/cosmetics-and-make-up.html">
+									href="classifiedDescription?id=${classifiedLists[1].id}">
 									<span class="no-image" style="height: 131px;background: url(${request.contextPath}/resources/images/no-image.png) no-repeat 49% 50%;"></span>
 								</a>
 
 								<section style="padding: 10px;">
 
-								<p style="color: #080808;">This is example text for the overview section. Our
-									food-getters were called freemen. This was a joke. We of the
-									ruling classes owned all the land, all the machines,
-									everything. These food-getters were our slaves.</p>
+								<p style="color: #080808;">${classifiedLists[1].summaryDescription}</p>
 
 								</section>
 
 							</div>
+							</c:if>
 
 
 						</div>
@@ -183,56 +179,51 @@
 						<div class="row-fluid">
 
 
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[2] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2 class="h2Header2">
 									<a
-										href="http://beautypro411.com/classified/fashion-jewelry.html" style="color: #fff;text-decoration: none;">
-										Fashion Jewelry </a> <span>$1500.00</span>
+										href="classifiedDescription?id=${classifiedLists[2].id}" style="color: #fff;text-decoration: none;">
+										${classifiedLists[2].title} </a> <span>$${classifiedLists[2].amount}</span>
 								</h2>
 
 								<a
-									href="http://beautypro411.com/classified/fashion-jewelry.html">
+									href="classifiedDescription?id=${classifiedLists[2].id}">
 									<span class="no-image" style="height: 131px;background: url(${request.contextPath}/resources/images/no-image.png) no-repeat 49% 50%;"></span>
 								</a>
 
 								<section style="padding: 10px;">
 
-								<p style="color: #080808;">This is example text for the overview section. Presently
-									they dragged me within the village, which consisted of several
-									hundred rude shelters of boughs and leaves supported upon the
-									branches of the trees.</p>
+								<p style="color: #080808;">${classifiedLists[2].summaryDescription}</p>
 
 								</section>
 
 							</div>
+							</c:if>
 
-
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[3] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2 class="h2Header2">
 									<a
-										href="http://beautypro411.com/classified/antique-watches.html" style="color: #fff;text-decoration: none;">
-										Antique Watches </a> <span>$150.00</span>
+										href="classifiedDescription?id=${classifiedLists[3].id}" style="color: #fff;text-decoration: none;">
+										${classifiedLists[3].title} </a> <span>$${classifiedLists[3].amount}</span>
 								</h2>
 
 								<a
-									href="http://beautypro411.com/classified/antique-watches.html">
+									href="classifiedDescription?id=${classifiedLists[3].id}">
 									<span class="no-image" style="height: 131px;background: url(${request.contextPath}/resources/images/no-image.png) no-repeat 49% 50%;"></span>
 								</a>
 
 								<section style="padding: 10px;">
 
-								<p style="color: #080808;">This is example text for the overview section. The
-									distance between Fort Kearney and Omaha, as the birds fly, is
-									at most two hundred miles. If the wind held good, the distance
-									might be traversed in five hours.</p>
+								<p style="color: #080808;">${classifiedLists[3].summaryDescription}</p>
 
 								</section>
 
 							</div>
+							</c:if>
 
 
 						</div>
@@ -241,55 +232,51 @@
 						<div class="row-fluid">
 
 
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[4] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2 class="h2Header2">
 									<a
-										href="http://beautypro411.com/classified/amazing-chairs.html" style="color: #fff;text-decoration: none;">
-										Amazing Chairs </a> <span>$500.00</span>
+										href="classifiedDescription?id=${classifiedLists[4].id}" style="color: #fff;text-decoration: none;">
+										${classifiedLists[4].title} </a> <span>$${classifiedLists[4].amount}</span>
 								</h2>
 
-								<a href="http://beautypro411.com/classified/amazing-chairs.html">
+								<a href="classifiedDescription?id=${classifiedLists[4].id}">
 									<span class="no-image" style="height: 131px;background: url(${request.contextPath}/resources/images/no-image.png) no-repeat 49% 50%;"></span>
 								</a>
 
 								<section style="padding: 10px;">
 
-								<p style="color: #080808;">This is example text for the overview section. The Lion
-									at once passed through the door, and glancing around saw, to
-									his surprise, that before the throne was a Ball of Fire, so
-									fierce and glowing he could scarcely bear to gaze upon it.</p>
+								<p style="color: #080808;">${classifiedLists[4].summaryDescription}</p>
 
 								</section>
 
 							</div>
+							</c:if>
 
 
-
+							<c:if test="${classifiedLists != null &amp;&amp; classifiedLists[5] != null}">
 							<div class="span6 flex-box color-2">
 
 								<h2 class="h2Header2">
 									<a
-										href="http://beautypro411.com/classified/setup-your-table-for-special-events.html" style="color: #fff;text-decoration: none;">
-										Special Events </a> <span>$250.00</span>
+										href="classifiedDescription?id=${classifiedLists[5].id}" style="color: #fff;text-decoration: none;">
+										${classifiedLists[5].title} </a> <span>$${classifiedLists[5].amount}</span>
 								</h2>
 
 								<a
-									href="http://beautypro411.com/classified/setup-your-table-for-special-events.html">
+									href="classifiedDescription?id=${classifiedLists[5].id}">
 									<span class="no-image" style="height: 131px;background: url(${request.contextPath}/resources/images/no-image.png) no-repeat 49% 50%;"></span>
 								</a>
 
 								<section style="padding: 10px;">
 
-								<p style="color: #080808;">This is example text for the overview section. This is my
-									boss, Jonathan Hart, a self-made millionaire, he's quite a guy.
-									This is Mrs H., she's gorgeous, she's one lady who knows how to
-									take care of herself. By the way, my name is Max.</p>
+								<p style="color: #080808;">${classifiedLists[5].summaryDescription}</p>
 
 								</section>
 
 							</div>
+							</c:if>
 
 
 						</div>
