@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="includes/template.xhtml">
 
@@ -58,10 +58,6 @@
             <div class="bulkupdate-form">
 
                 <form name="article_setting" id="article_setting" action="/members/article/index.php" method="post">
-
-                    <input type="hidden" name="account_search_bulk" id="account_search_bulk" value=""/>
-                    <input type="hidden" name="bulkSubmit" id="bulkSubmit" value=""/>
-
                     <div id="table_bulk" style="display: none" class="table-bulkupdate">
 
 
@@ -294,10 +290,10 @@
 
             </tr>
 
-
+			<c:forEach items="${articleList}" var="articleLst">
                 <tr>
                     <td>
-                       <a title="My Article" href="orderListing-flow?optionType=ARTICLE&amp;id=${articleList.id}&amp;priceType=${articleList.price.priceType}" class="link-table">
+                       <a title="My Article" href="orderListing-flow?optionType=ARTICLE&amp;id=${articleLst.id}&amp;priceType=${articleLst.price.priceType}" class="link-table">
                             My Article                        </a>
                     </td>
 
@@ -306,21 +302,21 @@
                                             </td>
 
                     <td>
-                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">${articleList.status}</span> </a>
+                                                <a title="Pending" href="javascript:void(0)" style="cursor:default" class="link-table"> <span class="status-pending">${articleLst.status}</span> </a>
                     </td>
 
                     <td nowrap="">&nbsp;</td>
 
                     <td nowrap="" class="main-options">
-                        <a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleList.id}&amp;priceType=${articleList.price.priceType}" class="link-table">
+                        <a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleLst.id}&amp;priceType=${articleLst.price.priceType}" class="link-table">
                             View                        </a>
                         <b>|</b>
-                        <a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleList.id}&amp;priceType=${articleList.price.priceType}" class="link-table">
+                        <a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleLst.id}&amp;priceType=${articleLst.price.priceType}" class="link-table">
                             Edit                        </a>
                     </td>
 
                 </tr>
-
+	</c:forEach>
 
         </tbody></table>
 

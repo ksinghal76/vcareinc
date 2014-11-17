@@ -31,15 +31,26 @@ public class BaseService<T> {
 
 	@Autowired
 	private AmazonS3Service amazonS3Service;
-	
+
 	@Autowired
 	protected GoogleMapApi googleMapApi;
-	
+
+	@Autowired
+	protected Boolean isProduction;
+
 	protected static final int PAGE_SIZE = 50;
 
 	@PersistenceContext
 	protected void setEm(EntityManager em) {
 		this.em = em;
+	}
+
+	public Boolean getIsProduction() {
+		return isProduction;
+	}
+
+	public void setIsProduction(Boolean isProduction) {
+		this.isProduction = isProduction;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

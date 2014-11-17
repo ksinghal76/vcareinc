@@ -73,239 +73,239 @@ WHERE NOT EXISTS(
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty and Fitness', 0, 'Beauty and Fitness', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty and Fitness'
+  SELECT * FROM category WHERE name = 'Beauty and Fitness' and optionType = 0
 ) LIMIT 1;
 
-SELECT @CatBAFID := ID FROM category WHERE name = 'Beauty and Fitness';
+SELECT @CatBAFID := ID FROM category WHERE name = 'Beauty and Fitness' and optionType = 0;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty Salons', 0, 'Beauty Salons', @CatBAFID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty Salons'
+  SELECT * FROM category WHERE name = 'Beauty Salons' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Gyms', 0, 'Gyms', @CatBAFID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Gyms'
+  SELECT * FROM category WHERE name = 'Gyms' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Spas', 0, 'Spas', @CatBAFID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Spas'
+  SELECT * FROM category WHERE name = 'Spas' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Massage', 0, 'Massage', @CatBAFID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Massage'
+  SELECT * FROM category WHERE name = 'Massage' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty Distributor', 0, 'Beauty Distributor', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty Distributor'
+  SELECT * FROM category WHERE name = 'Beauty Distributor' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty Schools', 0, 'Beauty Schools', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty Schools'
+  SELECT * FROM category WHERE name = 'Beauty Schools' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty Students/ Apprentice', 0, 'Beauty Students/ Apprentice', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty Students/ Apprentice'
+  SELECT * FROM category WHERE name = 'Beauty Students/ Apprentice' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty Supply', 0, 'Beauty Supply', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty Supply'
+  SELECT * FROM category WHERE name = 'Beauty Supply' and optionType = 0
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Animals', 1, 'Animals', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Animals'
+  SELECT * FROM category WHERE name = 'Animals' and optionType = 1
 ) LIMIT 1;
 
-SELECT @CatAnimID := ID FROM category WHERE name = 'Animals';
+SELECT @CatAnimID := ID FROM category WHERE name = 'Animals' and optionType = 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Exotics', 1, 'Exotics', @CatAnimID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Exotics'
+  SELECT * FROM category WHERE name = 'Exotics' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Presentations', 1, 'Presentations', @CatAnimID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Presentations'
+  SELECT * FROM category WHERE name = 'Presentations' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Arts', 1, 'Arts', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Arts'
+  SELECT * FROM category WHERE name = 'Arts' and optionType = 1
 ) LIMIT 1;
 
-SELECT @CatArtsID := ID FROM category WHERE name = 'Arts';
+SELECT @CatArtsID := ID FROM category WHERE name = 'Arts' and optionType = 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Galleries', 1, 'Galleries', @CatArtsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Galleries'
+  SELECT * FROM category WHERE name = 'Galleries' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Shows', 1, 'Shows', @CatArtsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Shows'
+  SELECT * FROM category WHERE name = 'Shows' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty Conventions / Shows', 1, 'Beauty Conventions / Shows', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty Conventions / Shows'
+  SELECT * FROM category WHERE name = 'Beauty Conventions / Shows' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Entertainment', 1, 'Entertainment', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Entertainment'
+  SELECT * FROM category WHERE name = 'Entertainment' and optionType = 1
 ) LIMIT 1;
 
-SELECT @CatEntID := ID FROM category WHERE name = 'Entertainment';
+SELECT @CatEntID := ID FROM category WHERE name = 'Entertainment' and optionType = 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Championship', 1, 'Championship', @CatEntID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Championship'
+  SELECT * FROM category WHERE name = 'Championship' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Cinema', 1, 'Cinema', @CatEntID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Cinema'
+  SELECT * FROM category WHERE name = 'Cinema' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Concerts', 1, 'Concerts', @CatEntID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Concerts'
+  SELECT * FROM category WHERE name = 'Concerts' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Night Clubs', 1, 'Night Clubs', @CatEntID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Night Clubs'
+  SELECT * FROM category WHERE name = 'Night Clubs' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Presentations', 1, 'Presentations', @CatEntID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Presentations'
+  SELECT * FROM category WHERE name = 'Presentations' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Fair', 1, 'Fair', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Fair'
+  SELECT * FROM category WHERE name = 'Fair' and optionType = 1
 ) LIMIT 1;
 
-SELECT @CatFairID := ID FROM category WHERE name = 'Fair';
+SELECT @CatFairID := ID FROM category WHERE name = 'Fair' and optionType = 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Antiquities', 1, 'Antiquities', @CatFairID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Antiquities'
+  SELECT * FROM category WHERE name = 'Antiquities' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Beauty', 1, 'Beauty', @CatFairID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Beauty'
+  SELECT * FROM category WHERE name = 'Beauty' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Cars', 1, 'Cars', @CatFairID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Cars'
+  SELECT * FROM category WHERE name = 'Cars' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Technology', 1, 'Technology', @CatFairID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Technology'
+  SELECT * FROM category WHERE name = 'Technology' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Food and Dining', 1, 'Food and Dining', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Food and Dining'
+  SELECT * FROM category WHERE name = 'Food and Dining' and optionType = 1
 ) LIMIT 1;
 
-SELECT @CatFODID := ID FROM category WHERE name = 'Food and Dining';
+SELECT @CatFODID := ID FROM category WHERE name = 'Food and Dining' and optionType = 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Drinks', 1, 'Drinks', @CatFODID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Drinks'
+  SELECT * FROM category WHERE name = 'Drinks' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Festivals', 1, 'Festivals', @CatFODID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Festivals'
+  SELECT * FROM category WHERE name = 'Festivals' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Leisure', 1, 'Leisure', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Leisure'
+  SELECT * FROM category WHERE name = 'Leisure' and optionType = 1
 ) LIMIT 1;
 
-SELECT @CatLeisID := ID FROM category WHERE name = 'Leisure';
+SELECT @CatLeisID := ID FROM category WHERE name = 'Leisure' and optionType = 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Sports', 1, 'Sports', @CatLeisID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Sports'
+  SELECT * FROM category WHERE name = 'Sports' and optionType = 1
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Jobs', 2, 'Jobs', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Jobs'
+  SELECT * FROM category WHERE name = 'Jobs' and optionType = 2
 ) LIMIT 1;
 
-SELECT @CatJobsID := ID FROM category WHERE name = 'Jobs';
+SELECT @CatJobsID := ID FROM category WHERE name = 'Jobs' and optionType = 2;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'General', 2, 'General', @CatJobsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'General'
+  SELECT * FROM category WHERE name = 'General' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Office', 2, 'Office', @CatJobsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Office'
+  SELECT * FROM category WHERE name = 'Office' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Sales', 2, 'Sales', @CatJobsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Sales'
+  SELECT * FROM category WHERE name = 'Sales' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Merchandise', 2, 'Merchandise', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Merchandise'
+  SELECT * FROM category WHERE name = 'Merchandise' and optionType = 2
 ) LIMIT 1;
 
 SELECT @CatMerchID := ID FROM category WHERE name = 'Merchandise';
@@ -313,211 +313,211 @@ SELECT @CatMerchID := ID FROM category WHERE name = 'Merchandise';
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Clothing', 2, 'Clothing', @CatMerchID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Clothing'
+  SELECT * FROM category WHERE name = 'Clothing' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Health & Beauty', 2, 'Health & Beauty', @CatMerchID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Health & Beauty'
+  SELECT * FROM category WHERE name = 'Health & Beauty' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Notices', 2, 'Notices', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Notices'
+  SELECT * FROM category WHERE name = 'Notices' and optionType = 2
 ) LIMIT 1;
 
-SELECT @CatNoticesID := ID FROM category WHERE name = 'Notices';
+SELECT @CatNoticesID := ID FROM category WHERE name = 'Notices' and optionType = 2;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Announcements', 2, 'Announcements', @CatNoticesID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Announcements'
+  SELECT * FROM category WHERE name = 'Announcements' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Lost & Found', 2, 'Lost & Found', @CatNoticesID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Lost & Found'
+  SELECT * FROM category WHERE name = 'Lost & Found' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Obituaries', 2, 'Obituaries', @CatNoticesID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Obituaries'
+  SELECT * FROM category WHERE name = 'Obituaries' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Personals', 2, 'Personals', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Personals'
+  SELECT * FROM category WHERE name = 'Personals' and optionType = 2
 ) LIMIT 1;
 
-SELECT @CatPersoID := ID FROM category WHERE name = 'Personals';
+SELECT @CatPersoID := ID FROM category WHERE name = 'Personals' and optionType = 2;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Agency Services', 2, 'Agency Services', @CatPersoID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Agency Services'
+  SELECT * FROM category WHERE name = 'Agency Services' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Friends', 2, 'Friends', @CatPersoID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Friends'
+  SELECT * FROM category WHERE name = 'Friends' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Pets', 2, 'Pets', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Pets'
+  SELECT * FROM category WHERE name = 'Pets' and optionType = 2
 ) LIMIT 1;
 
-SELECT @CatPetsID := ID FROM category WHERE name = 'Pets';
+SELECT @CatPetsID := ID FROM category WHERE name = 'Pets' and optionType = 2;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Exotic Animals', 2, 'Exotic Animals', @CatPetsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Exotic Animals'
+  SELECT * FROM category WHERE name = 'Exotic Animals' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Pet Supplies', 2, 'Pet Supplies', @CatPetsID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Pet Supplies'
+  SELECT * FROM category WHERE name = 'Pet Supplies' and optionType = 2
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Business', 3, 'Business', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Business'
+  SELECT * FROM category WHERE name = 'Business' and optionType = 3
 ) LIMIT 1;
 
-SELECT @CatBussID := ID FROM category WHERE name = 'Business';
+SELECT @CatBussID := ID FROM category WHERE name = 'Business' and optionType = 3;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Marketing', 3, 'Marketing', @CatBussID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Marketing'
+  SELECT * FROM category WHERE name = 'Marketing' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Small Business', 3, 'Small Business', @CatBussID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Small Business'
+  SELECT * FROM category WHERE name = 'Small Business' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Strategy', 3, 'Strategy', @CatBussID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Strategy'
+  SELECT * FROM category WHERE name = 'Strategy' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Finance', 3, 'Finance', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Finance'
+  SELECT * FROM category WHERE name = 'Finance' and optionType = 3
 ) LIMIT 1;
 
-SELECT @CatFinaID := ID FROM category WHERE name = 'Finance';
+SELECT @CatFinaID := ID FROM category WHERE name = 'Finance' and optionType = 3;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Consulting Finance', 3, 'Consulting Finance', @CatFinaID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Consulting Finance'
+  SELECT * FROM category WHERE name = 'Consulting Finance' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Personal Finance', 3, 'Personal Finance', @CatFinaID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Personal Finance'
+  SELECT * FROM category WHERE name = 'Personal Finance' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Fitness', 3, 'Fitness', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Fitness'
+  SELECT * FROM category WHERE name = 'Fitness' and optionType = 3
 ) LIMIT 1;
 
-SELECT @CatFitnID := ID FROM category WHERE name = 'Fitness';
+SELECT @CatFitnID := ID FROM category WHERE name = 'Fitness' and optionType = 3;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Exercise', 3, 'Exercise', @CatFitnID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Exercise'
+  SELECT * FROM category WHERE name = 'Exercise' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Nutrition', 3, 'Nutrition', @CatFitnID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Nutrition'
+  SELECT * FROM category WHERE name = 'Nutrition' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Life Style', 3, 'Life Style', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Life Style'
+  SELECT * FROM category WHERE name = 'Life Style' and optionType = 3
 ) LIMIT 1;
 
-SELECT @CatListyID := ID FROM category WHERE name = 'Life Style';
+SELECT @CatListyID := ID FROM category WHERE name = 'Life Style' and optionType = 3;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Career', 3, 'Career', @CatListyID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Career'
+  SELECT * FROM category WHERE name = 'Career' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Relationship', 3, 'Relationship', @CatListyID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Relationship'
+  SELECT * FROM category WHERE name = 'Relationship' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Technology', 3, 'Technology', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Technology'
+  SELECT * FROM category WHERE name = 'Technology' and optionType = 3
 ) LIMIT 1;
 
-SELECT @CatTechID := ID FROM category WHERE name = 'Technology';
+SELECT @CatTechID := ID FROM category WHERE name = 'Technology' and optionType = 3;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Equipment', 3, 'Equipment', @CatTechID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Equipment'
+  SELECT * FROM category WHERE name = 'Equipment' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Games', 3, 'Games', @CatTechID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Games'
+  SELECT * FROM category WHERE name = 'Games' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Internet', 3, 'Internet', @CatTechID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Internet'
+  SELECT * FROM category WHERE name = 'Internet' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Volunteer', 3, 'Volunteer', NULL FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Volunteer'
+  SELECT * FROM category WHERE name = 'Volunteer' and optionType = 3
 ) LIMIT 1;
 
-SELECT @CatVolunID := ID FROM category WHERE name = 'Volunteer';
+SELECT @CatVolunID := ID FROM category WHERE name = 'Volunteer' and optionType = 3;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Organizations', 3, 'Organizations', @CatVolunID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Organizations'
+  SELECT * FROM category WHERE name = 'Organizations' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO category(created, description, enable, name, optionType, pageTitle, parentCategory_id)
 SELECT CURDATE(), NULL, 1, 'Volunteer Opportunities', 3, 'Volunteer Opportunities', @CatVolunID FROM DUAL
 WHERE NOT EXISTS(
-  SELECT * FROM category WHERE name = 'Volunteer Opportunities'
+  SELECT * FROM category WHERE name = 'Volunteer Opportunities' and optionType = 3
 ) LIMIT 1;
 
 INSERT INTO country(name, code)

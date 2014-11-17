@@ -53,7 +53,6 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 	@Inject
 	private ClassifiedRepository classifiedRepository;
 
-
 	public OrderService getOrderService() {
 		return orderService;
 	}
@@ -182,6 +181,8 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 				PromotionCode promotionCode = orderService.getPromotionCode(classifiedOrder.getPromotionCode());
 				classified.setPromotionCode(promotionCode);
 			}
+
+
 			em.persist(classified);
 
 			if(classifiedOrder.getImageUpload() != null && classifiedOrder.getImageUpload().getSize() > 0) {
@@ -193,6 +194,11 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 				classified.setStatus(StatusType.ACTIVE);
 			else
 				classified.setStatus(StatusType.PENDING);
+
+			if(!isProduction) {
+				classified.setStatus(StatusType.ACTIVE);
+			}
+
 			em.persist(classified);
 		} catch (ValidationException e) {
 			throw new ValidationException(e);
@@ -319,13 +325,27 @@ public class ClassifiedService extends BaseService<ClassifiedOrder> {
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getCategoriesById(Long id) {
 		return em.createNativeQuery("SELECT c.id, c.name, count(*)"
-				+ " FROM Category c"
+				+ " FROM category c"
 				+ " INNER JOIN classified_category cc ON cc.category_id = c.id"
 				+ " WHERE cc.classified_id = :id"
 				+ " GROUP BY c.name"
 				+ " HAVING count(*)  > 0")
 				.setParameter("id", id)
 				.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getAllCategories() {
+		List<Object[]> result = em.createNativeQuery("SELECT c.id, c.name, \"CLASSIFIED\" as optionType, count(*)"
+								+ " FROM category c"
+								+ " INNER JOIN classified_category cc ON cc.category_id = c.id"
+								+ " INNER JOIN classified cls ON cls.id = cc.Classified_id"
+//								+ " WHERE cls.status = :status"
+								+ " GROUP BY c.id, c.name, optionType"
+								+ " HAVING count(*) > 0")
+//								.setParameter("status", StatusType.ACTIVE)
+								.getResultList();
+		return result;
 	}
 
 	public Page<Classified> getClassifiedByCategoryOrderByPriceType(Long categoryId, Integer pageNumber, Integer numberPerPage) {

@@ -239,6 +239,9 @@ public class ListingService extends BaseService<ListingOrder> {
 			else
 				listings.setStatus(StatusType.PENDING);
 
+			if(!isProduction) {
+				listings.setStatus(StatusType.ACTIVE);
+			}
 			em.persist(listings);
 
 		} catch (ValidationException e) {

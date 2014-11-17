@@ -54,7 +54,14 @@ public class ClassifiedController extends BaseMultiActionController {
 	@RequestMapping("/classified")
 	public String classified(ModelMap modelMap) {
 		modelMap.addAttribute("classifiedLists", classifiedService.getTopClassifiedLists(6));
+		modelMap.addAttribute("classifiedCategory", classifiedService.getAllCategories());
 		return "classified";
+	}
+	
+	@RequestMapping("/allClassifiedCategories")
+	public String allClassifiedCategories(ModelMap modelMap) {
+		modelMap.addAttribute("classifiedCategory", classifiedService.getAllCategories());
+		return "allClassifiedCategories";
 	}
 
 	@RequestMapping("/classifiedDescription")

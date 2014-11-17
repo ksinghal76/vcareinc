@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="includes/template.xhtml">
 
@@ -27,7 +27,7 @@
 
 						<!--cachemarkerFeaturedArticle2-->
 						<div class="row-fluid">
-
+							<c:if test="${articlesLists != null &amp;&amp; articlesLists[0] != null}">
 							<div class="span8 flex-box color-2" style="width: 65.81196581196582%; float: left;">
 
 								<h2 style="background-color: #c235de;">Featured Article</h2>
@@ -37,41 +37,56 @@
 
 
 
-								<section> <aside> <a
-									href="http://beautypro411.com/article/the-future-of-recycling.html">
-									<span class="no-image" style='background: url("(${request.contextPath}/resources/images/no-image.png") no-repeat scroll center center transparent;'></span>
-								</a> </aside>
+								<section> <aside>
+								<c:choose>
+                                		<c:when test="${not empty articlesLists[0].imageUpload}">
+                                			<a href="articlesDescription?id=${articlesLists[0].id}" class="image"><img width="217" height="122"
+									src="${articlesLists[0].imageUpload}"
+									alt="" title=""
+									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<a href="articlesDescription?id=${articlesLists[0].id}" class="image"><span class="no-image"></span></a>
+                                		</c:otherwise>
+                                	</c:choose>
+                            </aside>
 
 
 								<h5>
 									<a
-										href="http://beautypro411.com/article/the-future-of-recycling.html" style="color: #353535;font-size: 14px;">
-										The future of recycling </a>
+										href="articlesDescription?id=${articlesLists[0].id}" style="color: #353535;font-size: 14px;">
+										${articlesLists[0].title} </a>
 								</h5>
 
-								<time>On 07/04/2009 by <a
-									href="http://www.edirectory.com/directory_ad.php"
-									target="_blank"> Mark Loan</a> </time>
+								<time>On ${articlesLists[0].publicationDate} by <a
+									href="${articlesLists[0].url}"
+									target="_blank"> ${articlesLists[0].author}</a> </time>
 
 
-								<p>This is example text for the overview section. Mutley,
-									you snickering, floppy eared hound. When courage is needed,
-									you're never around. Those medals you wear on your moth-eaten
-									chest should be there for bungling at which you are best.</p>
+								<p>${articlesLists[0].description}</p>
 
 
 								</section>
 
 							</div>
+							</c:if>
+							<c:if test="${articlesLists != null &amp;&amp; articlesLists[1] != null}">
 							<div class="span4 flex-box color-2" style="width: 30.623931623931625%;">
 
 								<h2 style="background-color: #c235de;">Featured Article</h2>
 
 
-								<a
-									href="http://beautypro411.com/article/habits-for-healthy.html" style="color: #c235de;">
-									<span class="no-image" style='background: url("(${request.contextPath}/resources/images/no-image.png") no-repeat scroll center center transparent;'></span>
-								</a>
+								<c:choose>
+                                		<c:when test="${not empty articlesLists[1].imageUpload}">
+                                			<a href="articlesDescription?id=${articlesLists[1].id}" class="image"><img width="217" height="122"
+									src="${articlesLists[1].imageUpload}"
+									alt="" title=""
+									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<a href="articlesDescription?id=${articlesLists[1].id}" class="image"><span class="no-image"></span></a>
+                                		</c:otherwise>
+                                	</c:choose>
 
 
 								<section>
@@ -79,13 +94,16 @@
 
 								<h5>
 									<a
-										href="http://beautypro411.com/article/habits-for-healthy.html">
-										Habits For Healthy </a>
+										href="articlesDescription?id=${articlesLists[1].id}">
+										${articlesLists[1].title} </a>
 								</h5>
 
-								<time>On 01/23/2009 by Abigail Joshua</time> </section>
-
+								<time>On ${articlesLists[1].publicationDate} by <a
+									href="${articlesLists[1].url}"
+									target="_blank"> ${articlesLists[1].author}</a> </time> </section>
+								<p>${articlesLists[1].description}</p>
 							</div>
+						</c:if>
 
 
 						</div>
@@ -94,79 +112,103 @@
 
 						<div class="row-fluid">
 
-
+						<c:if test="${articlesLists != null &amp;&amp; articlesLists[2] != null}">
 							<div class="span4 flex-box color-2">
 
 								<h2 style="background-color: #c235de;">Featured Article</h2>
 
-								<a href="http://beautypro411.com/article/personal-growth.html">
-									<span class="no-image" style='background: url("(${request.contextPath}/resources/images/no-image.png") no-repeat scroll center center transparent;'></span>
-								</a>
+								<c:choose>
+                                		<c:when test="${not empty articlesLists[2].imageUpload}">
+                                			<a href="articlesDescription?id=${articlesLists[2].id}" class="image"><img width="217" height="122"
+									src="${articlesLists[2].imageUpload}"
+									alt="" title=""
+									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<a href="articlesDescription?id=${articlesLists[2].id}" class="image"><span class="no-image"></span></a>
+                                		</c:otherwise>
+                                	</c:choose>
 
 								<section>
 								<h5>
-									<a href="http://beautypro411.com/article/personal-growth.html">
-										Personal Growth </a>
+									<a href="articlesDescription?id=${articlesLists[2].id}">
+										${articlesLists[2].title} </a>
 								</h5>
 
-								<time>On 01/01/2010 by Mattew Madison</time>
+								<time>On ${articlesLists[2].publicationDate} by <a
+									href="${articlesLists[2].url}"
+									target="_blank"> ${articlesLists[2].author}</a> </time>
 
-								<p>This is example text for the overview section. Mutley,
-									you snickering, floppy eared hou...</p>
+								<p>${articlesLists[2].description}</p>
 								</section>
 							</div>
+							</c:if>
 
+						<c:if test="${articlesLists != null &amp;&amp; articlesLists[3] != null}">
+							<div class="span4 flex-box color-2">
 
+								<h2 style="background-color: #c235de;">Featured Article</h2>
+								<c:choose>
+                                		<c:when test="${not empty articlesLists[3].imageUpload}">
+                                			<a href="articlesDescription?id=${articlesLists[3].id}" class="image"><img width="217" height="122"
+									src="${articlesLists[3].imageUpload}"
+									alt="" title=""
+									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<a href="articlesDescription?id=${articlesLists[3].id}" class="image"><span class="no-image"></span></a>
+                                		</c:otherwise>
+                                	</c:choose>
 
+								<section>
+								<h5>
+									<a href="articlesDescription?id=${articlesLists[3].id}">
+										${articlesLists[3].title} </a>
+								</h5>
+
+								<time>On ${articlesLists[3].publicationDate} by <a
+									href="${articlesLists[3].url}"
+									target="_blank"> ${articlesLists[3].author}</a> </time>
+
+								<p>${articlesLists[3].description}</p>
+								</section>
+							</div>
+							</c:if>
+
+							<c:if test="${articlesLists != null &amp;&amp; articlesLists[4] != null}">
 							<div class="span4 flex-box color-2">
 
 								<h2 style="background-color: #c235de;">Featured Article</h2>
 
-								<a href="http://beautypro411.com/article/business-tips.html">
-									<span class="no-image" style='background: url("(${request.contextPath}/resources/images/no-image.png") no-repeat scroll center center transparent;'></span>
-								</a>
+								<c:choose>
+                                		<c:when test="${not empty articlesLists[4].imageUpload}">
+                                			<a href="articlesDescription?id=${articlesLists[4].id}" class="image"><img width="217" height="122"
+									src="${articlesLists[4].imageUpload}"
+									alt="" title=""
+									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<a href="articlesDescription?id=${articlesLists[4].id}" class="image"><span class="no-image"></span></a>
+                                		</c:otherwise>
+                                	</c:choose>
 
 								<section>
 								<h5>
-									<a href="http://beautypro411.com/article/business-tips.html">
-										Business Tips </a>
+									<a href="articlesDescription?id=${articlesLists[4].id}">
+										${articlesLists[4].title} </a>
 								</h5>
 
-								<time>On 01/13/2008 by <a
-									href="http://www.edirectory.com/directory_ad.php"
-									target="_blank"> Amanda Jackson</a> </time>
+								<time>On ${articlesLists[4].publicationDate} by <a
+									href="${articlesLists[4].url}"
+									target="_blank"> ${articlesLists[4].author}</a> </time>
 
-								<p>This is example text for the overview section. This is my
-									boss, Jonathan Hart, a self-m...</p>
+								<p>${articlesLists[4].description}</p>
 								</section>
 							</div>
-
-
-
-							<div class="span4 flex-box color-2">
-
-								<h2 style="background-color: #c235de;">Featured Article</h2>
-
-								<a href="http://beautypro411.com/article/health-for-kids.html">
-									<span class="no-image" style='background: url("(${request.contextPath}/resources/images/no-image.png") no-repeat scroll center center transparent;'></span>
-								</a>
-
-								<section>
-								<h5>
-									<a href="http://beautypro411.com/article/health-for-kids.html">
-										Health for kids </a>
-								</h5>
-
-								<time>On 12/21/2009 by Emily Jacob</time>
-
-								<p>This is example text for the overview section. Children
-									of the sun, see your time has j...</p>
-								</section>
-							</div>
-
+						</c:if>
 
 						</div>
-
+						<c:if test="${not empty articlesCategory}">
 						<!--cachemarkerFeaturedArticle2-->
 						<div class="row-fluid">
 
@@ -179,43 +221,18 @@
 
 								<ul class="browse-category">
 
-
+									<c:forEach items="${articlesCategory}" var="articlesCat">
 									<li><a
-										href="http://beautypro411.com/article/guide/business">
-											Business </a> <span>(2)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/article/guide/finance">
-											Finance </a> <span>(1)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/article/guide/fitness">
-											Fitness </a> <span>(3)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/article/guide/life-style">
-											Life Style </a> <span>(1)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/article/guide/technology">
-											Technology </a> <span>(1)</span></li>
-
-
-									<li><a
-										href="http://beautypro411.com/article/guide/volunteer">
-											Volunteer </a> <span>(1)</span></li>
-
+										href="articlesList?id=${articlesCat[0]}&amp;optionType=${articlesCat[2]}">
+											${articlesCat[1]} </a> <span>(${articlesCat[3]})</span></li>
+									</c:forEach>
 
 								</ul>
 
 							</div>
 
 						</div>
-
+						</c:if>
 					</div>
 
 					<div class="span3 sidebar" style="width: 23.076923076923077%;">

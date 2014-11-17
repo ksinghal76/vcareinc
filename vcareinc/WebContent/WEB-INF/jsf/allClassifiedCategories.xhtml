@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sf="http://www.springframework.org/tags/faces"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form"
+	template="includes/template.xhtml">
+
+	<ui:define name="bodyContent">
+		<div class="well container">
+
+            <div class="container-fluid">
+
+                		<p class="breadcrumb"><a href="home" title="Home">Home</a><span class="split">&nbsp;&nbsp;/&nbsp;&nbsp;</span><a href="classified" title="Classified">Classified</a><span class="split">&nbsp;&nbsp;/&nbsp;&nbsp;</span>Categories and sub-categories</p>
+
+	<!--cachemarkerBannerTop-->
+
+		<div class="advertisement-space"></div>
+
+    	<!--cachemarkerBannerTop-->	<div class="row-fluid">
+
+		<div class="row-fluid">
+                    </div>
+
+        <div class="row-fluid">
+	        <div class="box-title color-4">
+
+        <h3>
+            <b class="title-filter">Browse by Category </b>
+                    </h3>
+
+        <ul id="browse_category_" class="item-select">
+
+			<c:if test="${not empty allCategories}">
+				<c:forEach var="category" items="${allCategories}">
+					<li>
+
+
+		                <a href="classifiedView?categoryId=${categories[0]}&amp;optionType=${categories[2]}">${categories[1]}</a>
+
+		                                    <em>${categories[3]} </em>
+
+
+		            </li>
+				</c:forEach>
+			</c:if>
+        </ul>
+
+    	        </div>
+
+            <div row-fluid="">
+	                         </div>
+        </div>
+
+	</div>
+                </div><!-- Close container-fluid div -->
+        </div>
+	</ui:define>
+</ui:composition>

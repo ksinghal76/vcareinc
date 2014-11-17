@@ -245,6 +245,9 @@ public class EventService extends BaseService<EventOrder> {
 				FileUpload fileUpload = saveFileUpload(events.getId(), filename, eventOrder.getImageUpload());
 				events.setImageUpload(fileUpload);
 			}
+			if(!isProduction) {
+				events.setStatus(StatusType.ACTIVE);
+			}
 			em.persist(events);
 		} catch (ValidationException | ParseException e) {
 			throw new ValidationException(e);

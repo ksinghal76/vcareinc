@@ -51,11 +51,11 @@ public class UserController extends BaseMultiActionController {
 		List<Classified> classifiedList = classifiedService.getClassifiedByUser(user);
 		List<Deals> dealsList = dealService.getDealsByUser(user);
 
-		modelMap.addAttribute("listingList", listingsList);
-		modelMap.addAttribute("eventList", eventList);
-		modelMap.addAttribute("articleList", articlesList);
-		modelMap.addAttribute("classifiedList", classifiedList);
-		modelMap.addAttribute("dealsList", dealsList);
+		modelMap.addAttribute("listingList", (listingsList != null && listingsList.size() > 0 ? listingsList : null));
+		modelMap.addAttribute("eventList", (eventList != null && eventList.size() > 0 ? eventList : null));
+		modelMap.addAttribute("articleList", (articlesList != null && articlesList.size() > 0 ? articlesList : null));
+		modelMap.addAttribute("classifiedList", (classifiedList != null && classifiedList.size() > 0 ? classifiedList : null));
+		modelMap.addAttribute("dealsList", (dealsList != null && dealsList.size() > 0 ? dealsList : null));
 		return "members";
 	}
 

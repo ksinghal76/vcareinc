@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="includes/template.xhtml">
 
@@ -68,82 +68,82 @@
 					</blockquote>
 					<div class="domainItems">
 						<h2 class="domainItemsTitle">beautypro411</h2>
-						<c:forEach items="${listingList}" var="listingLst">
-							<div class="domainItemsList">
-								<div class="itemName">
+						<c:if test="${not empty listingList}">
+							<c:forEach items="${listingList}" var="listingLst">
+								<div class="domainItemsList">
+									<div class="itemName">
 
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
-										${listingLst.title} </a>
+										<a href="orderListing-flow?id=${listingLst.id}&amp;optionType=${conversionManagedBean.optionTypes[0]}&amp;priceType=${listingLst.price.priceType}">
+											${listingLst.title} </a>
+									</div>
+									<div class="moduleName">Listing ${listingLst.price.priceType}</div>
+									<div class="statusName">
+										<span class="status-expired">${listingLst.status}</span>
+									</div>
+									<div class="itemCheckOut">
+										<a href="billing-flow">
+											Make Your Payment </a>
+									</div>
 								</div>
-								<div class="moduleName">Listing ${listingLst.price.priceType}</div>
-								<div class="statusName">
-									<span class="status-expired">${listingLst.status}</span>
-								</div>
-								<div class="itemCheckOut">
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
-										Make Your Payment </a>
-								</div>
-							</div>
-						</c:forEach>
-						<c:forEach items="${eventList}" var="eventLst">
-							<div class="domainItemsList">
-								<div class="itemName">
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty eventList}">
+							<c:forEach items="${eventList}" var="eventLst">
+								<div class="domainItemsList">
+									<div class="itemName">
 
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
-										${eventLst.title} </a>
+										<a href="orderListing-flow?id=${eventLst.id}&amp;optionType=${conversionManagedBean.optionTypes[1]}&amp;priceType=${eventLst.price.priceType}">
+											${eventLst.title} </a>
+									</div>
+									<div class="moduleName">Event ${eventLst.price.priceType}</div>
+									<div class="statusName">
+										<span class="status-expired">${eventLst.status}</span>
+									</div>
+									<div class="itemCheckOut">
+										<a href="billing-flow">
+											Make Your Payment </a>
+									</div>
 								</div>
-								<div class="moduleName">Event ${eventLst.price.priceType}</div>
-								<div class="statusName">
-									<span class="status-expired">Expired</span>
-								</div>
-								<div class="itemCheckOut">
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
-										Make Your Payment </a>
-								</div>
-							</div>
-						</c:forEach>
-						<c:forEach items="${articleList}" var="articleLst">
-							<div class="domainItemsList">
-								<div class="itemName">
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty articleList}">
+							<c:forEach items="${articleList}" var="articleLst">
+								<div class="domainItemsList">
+									<div class="itemName">
 
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
-										${articleLst.title} </a>
+										<a href="orderListing-flow?optionType=ARTICLE&amp;id=${articleLst.id}&amp;priceType=${articleLst.price.priceType}">
+											${articleLst.title} </a>
+									</div>
+									<div class="moduleName">Article ${articleLst.price.priceType}</div>
+									<div class="statusName">
+										<span class="status-expired">${articleLst.status}</span>
+									</div>
+									<div class="itemCheckOut">
+										<a href="billing-flow">
+											Make Your Payment </a>
+									</div>
 								</div>
-								<div class="moduleName">Article ${articleLst.price.priceType}</div>
-								<div class="statusName">
-									<span class="status-expired">Expired</span>
-								</div>
-								<div class="itemCheckOut">
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
-										Make Your Payment </a>
-								</div>
-							</div>
-						</c:forEach>
-						<c:forEach items="${classifiedList}" var="classifiedLst">
-							<div class="domainItemsList">
-								<div class="itemName">
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty classifiedList}">
+							<c:forEach items="${classifiedList}" var="classifiedLst">
+								<div class="domainItemsList">
+									<div class="itemName">
 
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/listing/listing.php?id=53565','?id=53565',true)">
-										${classifiedLst.title} </a>
+										<a href="orderListing-flow?optionType=CLASSIFIED&amp;id=${classifiedLst.id}&amp;priceType=${classifiedLst.price.priceType}">
+											${classifiedLst.title} </a>
+									</div>
+									<div class="moduleName">Classified ${classifiedLst.price.priceType}</div>
+									<div class="statusName">
+										<span class="status-expired">${classifiedLst.status}</span>
+									</div>
+									<div class="itemCheckOut">
+										<a href="billing-flow">
+											Make Your Payment </a>
+									</div>
 								</div>
-								<div class="moduleName">Classified ${classifiedLst.price.priceType}</div>
-								<div class="statusName">
-									<span class="status-expired">Expired</span>
-								</div>
-								<div class="itemCheckOut">
-									<a href="javascript:void(0)"
-										onclick="changeDomainInfo(1,'http://beautypro411.com/members','/billing/index.php','',true)">
-										Make Your Payment </a>
-								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</c:if>
 					</div>
 				</div>
 

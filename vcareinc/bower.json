@@ -11,6 +11,7 @@
     "jquery-cookie":"~1.4.1",
     "fancybox":"~2.1.5",
     "font-awesome":"~4.2.0",
-    "Jcrop":"~0.9.12"
+    "Jcrop":"~0.9.12",
+    "tinymce":"4.1.6"
   }
 }

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.execution.RequestContext;
@@ -25,6 +28,7 @@ import com.vcareinc.exceptions.CommonException;
 import com.vcareinc.exceptions.DBException;
 import com.vcareinc.exceptions.ValidationException;
 import com.vcareinc.models.ArticleOrder;
+import com.vcareinc.services.repositories.ArticlesRepository;
 import com.vcareinc.utils.DateUtils;
 import com.vcareinc.vo.Articles;
 import com.vcareinc.vo.Category;
@@ -36,13 +40,16 @@ import com.vcareinc.vo.User;
 @Controller
 public class ArticleService extends BaseService<ArticleOrder> {
 
-	private Logger log = Logger.getLogger(ClassifiedService.class);
+	private Logger log = Logger.getLogger(ArticleService.class);
 
 	@Autowired
 	private OrderService orderService;
 
 	@Autowired
 	private UserService userService;
+
+	@Inject
+	private ArticlesRepository articlesRepository;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -137,6 +144,10 @@ public class ArticleService extends BaseService<ArticleOrder> {
 				articles.setStatus(StatusType.ACTIVE);
 			else
 				articles.setStatus(StatusType.PENDING);
+
+			if(!isProduction) {
+				articles.setStatus(StatusType.ACTIVE);
+			}
 			em.persist(articles);
 
 			clearObject(articleOrder);
@@ -239,5 +250,40 @@ public class ArticleService extends BaseService<ArticleOrder> {
 			.setParameter("status", StatusType.ACTIVE)
 			.setMaxResults(numberOfLists)
 			.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getCategoriesById(Long id) {
+		return em.createNativeQuery("SELECT c.id, c.name, count(*)"
+				+ " FROM Category c"
+				+ " INNER JOIN articles_category ac ON ac.category_id = c.id"
+				+ " WHERE ac.articles_id = :id"
+				+ " GROUP BY c.name"
+				+ " HAVING count(*)  > 0")
+				.setParameter("id", id)
+				.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getAllCategories() {
+		return em.createNativeQuery("SELECT c.id, c.name, \"ARTICLE\" as optionType, count(*)"
+								+ " FROM Category c"
+								+ " INNER JOIN articles_category ac ON ac.category_id = c.id"
+								+ " INNER JOIN Articles art ON art.id = ac.articles_id"
+//								+ " WHERE art.status = :status"
+								+ " GROUP BY c.id, c.name, optionType"
+								+ " HAVING count(*) > 0")
+//								.setParameter("status", StatusType.ACTIVE)
+								.getResultList();
+	}
+
+	public Page<Articles> getArticlesByCategoryOrderByPriceType(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return articlesRepository.findArticlesByCategoryOrderByPriceType(categoryId, request);
+	}
+
+	public Page<Articles> getArticlesByCategoryOrderByTitle(Long categoryId, Integer pageNumber, Integer numberPerPage) {
+		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);
+		return articlesRepository.findArticlesByCategoryOrderByTitle(categoryId, request);
 	}
 }

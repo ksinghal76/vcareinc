@@ -426,7 +426,7 @@
 							<select class="select" id="country" name="country">
 								<c:forEach items="${order.countryList}" var="countryList">
 									<c:choose>
-										<c:when test="${countryList.id == listingOrder.country}">
+										<c:when test="${countryList.code == classifiedVal.country}">
 											<option value="${countryList.id}" selected="selected">${countryList.name}</option>
 										</c:when>
 										<c:otherwise>
@@ -457,10 +457,10 @@
 							</td>
 							<td id="div_select_3" class="field locationSelect">
 							<select class="select" id="state" name="state">
+								<option value="0">Select a State</option>
 								<c:forEach items="${order.stateList}" var="stateList">
-									<option value="0">Select a State</option>
 									<c:choose>
-										<c:when test="${stateList.id == listingOrder.state}">
+										<c:when test="${stateList.code == classifiedVal.state}">
 											<option value="${stateList.id}" selected="selected">${stateList.name}</option>
 										</c:when>
 										<c:otherwise>

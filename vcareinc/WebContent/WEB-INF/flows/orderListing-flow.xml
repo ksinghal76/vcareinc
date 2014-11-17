@@ -27,40 +27,6 @@
 		<if then="levelType" test="orderService.isLevelRequired(optionType, priceType)" else="pageType"/>
 	</decision-state>
 
-	<!-- <action-state id="getOptionTypeValue">
-		<evaluate expression="orderService.getPageType(optionType)"/>
-		<transition on="LISTING" to="getListings"/>
-		<transition on="EVENT" to="getEvents"/>
-		<transition on="CLASSIFIED" to="getClassified"/>
-		<transition on="ARTICLE" to="getArticles"/>
-		<transition on="DEAL" to="getDeals"/>
-	</action-state>
- -->
-	<!-- <action-state id="getListings">
-		<evaluate expression="listingService.getListingOrderById(optionTypeId)" result="flowScope.listingOrder2"/>
-		<transition to="listingOrder"/>
-	</action-state>
-
-	<action-state id="getEvents">
-		<evaluate expression="eventService.getEventOrderById(optionTypeId)" result="eventOrder"/>
-		<transition to="eventOrder"/>
-	</action-state>
-
-	<action-state id="getClassified">
-		<evaluate expression="classifiedService.getClassifiedOrderById(optionTypeId)" result="flowScope.classifiedOrder"/>
-		<transition to="classifiedOrder"/>
-	</action-state>
-
-	<action-state id="getArticles">
-		<evaluate expression="articleService.getArticleOrderById(optionTypeId)" result="flowScope.articleOrder"/>
-		<transition to="articleOrder"/>
-	</action-state>
-
-	<action-state id="getDeals">
-		<evaluate expression="dealService.getDealOrderById(optionTypeId)" result="flowScope.dealOrder"/>
-		<transition to="dealOrder"/>
-	</action-state> -->
-
 	<action-state id="pageType">
 		<evaluate expression="orderService.getPageType(optionType)"/>
 		<transition on="LISTING" to="listingOrderView"/>

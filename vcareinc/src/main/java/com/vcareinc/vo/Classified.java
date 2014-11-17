@@ -7,8 +7,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Email;
@@ -48,10 +48,12 @@ public class Classified implements Serializable {
 	private String summaryDescription;
 	private String detailDescription;
 	private String keyword;
+
+	@ManyToOne
 	private PromotionCode promotionCode;
 	private StatusType status;
 
-	@OneToMany
+	@ManyToMany
 	private final Set<Category> category = new HashSet<Category>();
 
 	public Long getId() {

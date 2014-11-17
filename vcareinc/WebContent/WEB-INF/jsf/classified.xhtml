@@ -25,34 +25,24 @@
 
 					<div class="span4 order-2" style="margin-left: 0;">
 
-
-						<div class="span12 flex-box-list color-4">
-
-							<h2 class="h2Header" style="background-color: #727980;">
-								Browse by Category <span><a class="view-more"
-									href="http://beautypro411.com/classified/allcategories.php">more</a></span>
-							</h2>
-
-							<ul class="browse-category" style="padding: 0;">
-
-
-								<li style="width: 45%"><a href="http://beautypro411.com/classified/guide/jobs" style="color: #080808;text-decoration: none;">
-										Jobs </a> <span>(2)</span></li>
-
-
-								<li style="width: 45%"><a
-									href="http://beautypro411.com/classified/guide/merchandise" style="color: #080808;text-decoration: none;">
-										Merchandise </a> <span>(5)</span></li>
-
-
-								<li style="width: 45%"><a
-									href="http://beautypro411.com/classified/guide/personals" style="color: #080808;text-decoration: none;">
-										Personals </a> <span>(1)</span></li>
-
-
-							</ul>
-
-						</div>
+						<c:if test="${not empty classifiedCategory}">
+							<div class="span12 flex-box-list color-4">
+	
+								<h2 class="h2Header" style="background-color: #727980;">
+									Browse by Category <span><a class="view-more"
+										href="allClassifiedCategories">more</a></span>
+								</h2>
+	
+								<ul class="browse-category" style="padding: 0;">
+	
+									<c:forEach items="${classifiedCategory}" var="classifiedCat">
+										<li style="width: 45%"><a href="classifiedList?categoryId=${classifiedCat[0]}&amp;optionType=${classifiedCat[2]}" style="color: #080808;text-decoration: none;">
+												${classifiedCat[1]} </a> <span>${classifiedCat[3]}</span></li>
+									</c:forEach>
+								</ul>
+	
+							</div>
+						</c:if>
 
 
 						<div>
@@ -132,14 +122,17 @@
 										${classifiedLists[0].title} </a> <span>${classifiedLists[0].amount}</span>
 								</h2>
 
-								<a
-									href="classifiedDescription?id=${classifiedLists[0].id}">
-									<img width="217" height="122"
-									src="http://beautypro411.com/custom/domain_1/image_files/sitemgr_photo_3792.png"
-									alt="Consulting Business" title="Consulting Business"
-									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/>
-								</a>
-
+								<c:choose>
+                                		<c:when test="${not empty classifiedLists[0].imageUpload}">
+                                			<a href="classifiedDescription?id=${classifiedLists[0].id}" class="image"><img width="217" height="122"
+									src="${classifiedLists[0].imageUpload}"
+									alt="" title=""
+									border="0" style="display: inline; width: 100%;height: auto;max-width: 100%;vertical-align: middle;"/></a>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<a href="classifiedDescription?id=${classifiedLists[0].id}" class="image"><span class="no-image"></span></a>
+                                		</c:otherwise>
+                                	</c:choose>
 								<section style="padding: 10px;">
 
 								<p style="color: #080808;">${classifiedLists[0].summaryDescription}</p>
