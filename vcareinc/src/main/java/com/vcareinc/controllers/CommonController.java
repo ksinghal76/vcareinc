@@ -48,7 +48,6 @@ public class CommonController extends MultiActionController {
 		map.addAttribute("articleLists", articleService.getTopArticlesLists(1));
 		map.addAttribute("dealLists", dealService.getTopDealsLists(1));
 		map.addAttribute("cityLists", commonService.getAllCity());
-//		map.addAttribute("months", commonService.getWholeMonth());
 		map.addAttribute("now", Calendar.getInstance());
 		return "home";
 	}

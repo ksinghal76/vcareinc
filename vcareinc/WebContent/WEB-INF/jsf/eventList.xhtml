@@ -35,7 +35,31 @@
             <div class="hidden-phone">
 		 	    <div class="calendar">
 							<h2>Browse Events by Date</h2>
-							<div id="calendar2">
+							<div id="my-calendar"></div>
+							<script type="application/javascript">
+							    $(document).ready(function () {
+							        $("#my-calendar").zabuto_calendar(
+							        		{
+							        			language: "en",
+							        			cell_border: true,
+							        			today: true,
+							        			show_days: false,
+							        			weekstarton:0,
+							        			nav_icon: {
+							        				prev: '<i class="fa fa-chevron-circle-left"></i>',
+							        				next: '<i class="fa fa-chevron-circle-right"></i>',
+							        			},
+							        			action: function() {
+							        				return myDateFunction(this.id);
+							        			},
+							        			action_nav: function() {
+							        				return myNavFunction(this.id);
+							        			}
+							        		});
+							    });
+							</script>
+						</div>
+							<!-- <div id="calendar2">
 						</div>
 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 						<script src="${request.contextPath}/resources/js/jquery-ui-datepicker.min.js" type="text/javascript"></script>
@@ -53,7 +77,7 @@
 						        }
 						    });
 						</script>
-						</div>
+						</div> -->
 						<div class="flex-box-group daily-calendar" style="float: none;">
 
 							<ul class="calendar-event">
@@ -109,7 +133,7 @@
                 <p class="calendar_loading" style="display: none;"></p>
 
                 <div id="calendar_event">
-            <section class="item-preview">
+            <!-- <section class="item-preview">
 
                 <h5><a href="http://www.beautypro411.com/event/san-francisco-symphony.html">San Francisco Symphony</a></h5>
 
@@ -137,7 +161,7 @@
                 <p>This is example text for the overview section. Hey there where ya goin', not exactly knowin', who says you have to call just one place home. He's goin' everywhere, B.J. McKay and his best friend Bear.</p>
 
 
-            </section>    </div>
+            </section>  -->   </div>
 
 
                 <div id="return_filter" class="sidebar-filters">
@@ -213,7 +237,7 @@
                 </h3>
 
                 <ul id="list_category" class="item-select">
-                    <div id="postCats" style="display:none;"></div><li>
+                    <div id="postCats" style="display:none;"></div><!-- <li>
 
                                     <a href="javascript:void(0);" onclick="filter_loadCategory('event_', 'EventCategory', 13, 'event');" class="icon-caret-right" id="event_opencategorytree_id_13"></a>
                                     <a href="javascript:void(0);" onclick="filter_closeCategory('event_', 13);" class="icon-caret-down" id="event_closecategorytree_id_13" style="display: none;"></a>
@@ -302,7 +326,7 @@
 
 
 
-                                            </li>
+                                            </li> -->
                 </ul>
 
 
@@ -323,7 +347,7 @@
                 <ul id="list_location" class="item-select">
 
 
-                    <li>
+                    <!-- <li>
 
 
                         <a href="javascript:void(0);" onclick="filter_loadLocation('event_', 5, 3, 'event');" class="icon-caret-right" id="event_openlocationtree_id_5"></a>
@@ -362,7 +386,7 @@
                         <ul class="child" id="event_locationtree_id_1" style="display: none;">&nbsp;</ul>
 
 
-                    </li>
+                    </li> -->
 
 
                 </ul>
@@ -446,16 +470,7 @@
                     <i>${pageable.totalElements}</i> Results
                                             for <strong id="selectedDate">${date}</strong>                                    </p>
 
-<script>
-		$(document).ready(function () {
-		    $('#selectedDate').each(function() {
-		        var dateFormat = Date.parseLocale($(this).text(), 'yyyyMMdd');
-		        var dateFormat = $.datepicker.formatDate('MM dd, yy', new Date(dateFormat));
-		        //alert(dateFormat);
-		        $(this).html(dateFormat);
-		    });
-		});
-		</script>
+
         </div>
 
                                                         </div>

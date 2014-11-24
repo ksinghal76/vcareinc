@@ -378,6 +378,15 @@ public class ListingService extends BaseService<ListingOrder> {
 									.setParameter("orderBy", "l." + orderBy.getSortingName())
 									.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getAllCity() {
+		return em.createQuery("SELECT distinct a.city FROM Listings l JOIN FETCH l.address a"
+				+ " WHERE l.status = :status"
+				+ " ORDER BY a.city")
+				.setParameter("status", StatusType.ACTIVE)
+				.getResultList();
+	}
 
 	public Page<Listings> getListingsByCategoryOrderbyPriceType(Long categoryId, Integer pageNumber, Integer numberPerPage) {
 		PageRequest request = new PageRequest(pageNumber - 1, numberPerPage);

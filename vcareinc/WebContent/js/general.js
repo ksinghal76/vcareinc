@@ -985,3 +985,13 @@ function get_nth_suffix(date) {
         return 'th';
    }
  }
+
+function myDateFunction(id) {
+	var date = $("#" + id).data("date");
+	window.location.href="eventList?date=" + moment(date, "YYYY-MM-DD").format("YYYYMMDD");
+}
+
+function myNavFunction(id) {
+  var nav = $("#" + id).data("navigation");
+  var to = $("#" + id).data("to");
+}

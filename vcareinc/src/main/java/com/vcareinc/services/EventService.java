@@ -437,4 +437,17 @@ public class EventService extends BaseService<EventOrder> {
 				.setParameter("id", id)
 				.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getAllCategories() {
+		return em.createNativeQuery("SELECT c.id, c.name, \"EVENTS\" as optionType, count(*)"
+								+ " FROM Category c"
+								+ " INNER JOIN events_category ec ON ec.category_id = c.id"
+								+ " INNER JOIN Events evt ON evt.id = ec.events_id"
+//								+ " WHERE art.status = :status"
+								+ " GROUP BY c.id, c.name, optionType"
+								+ " HAVING count(*) > 0")
+//								.setParameter("status", StatusType.ACTIVE)
+								.getResultList();
+	}
 }

@@ -63,8 +63,6 @@
 
 
 
-<script type="text/javascript" src="http://beautypro411.com/scripts/accountsearch.js"></script>
-
 
 <div id="change_account" style="display:none">
 				<div id="table_accounts_search" style="display: none; width: 96%" class="table_accounts_search">
@@ -78,18 +76,18 @@
 						<tr>
 							<th>LANG_SITEMGR_LABEL_COMPANY: </th>
 							<td>
-								<input type="text" id="acct_search_company" style="width:250px" name="acct_search_company" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }"/>
+								<input type="text" id="acct_search_company" style="width:250px" name="acct_search_company" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'home', 0, 0); }"/>
 							</td>
 						</tr>
 						<tr>
 							<th class="first_line" style="padding-top: 10px">LANG_SITEMGR_LABEL_USERNAME: </th>
 							<td style="padding-top: 10px">
-								<input type="text" id="acct_search_username" style="width:250px" name="acct_search_username" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'http://beautypro411.com', 0, 0); }"/>
+								<input type="text" id="acct_search_username" style="width:250px" name="acct_search_username" value="" onkeypress="if(event.keyCode == 13) { searchAccount(this.form, 'home', 0, 0); }"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" style="text-align: center; padding-bottom: 5px;">
-								<input style="width:80px" class="input-button-form" type="button" name="acct_search_btn" id="acct_search_btn" value="LANG_SITEMGR_SEARCH" onclick="searchAccount(this.form, 'http://beautypro411.com', 0, 0);"/>         <input style="width:80px" class="input-button-form" type="button" name="acct_cancel_btn" id="acct_reset_btn" value="LANG_SITEMGR_CANCEL" onclick="cancelSearchAccount(0);"/>
+								<input style="width:80px" class="input-button-form" type="button" name="acct_search_btn" id="acct_search_btn" value="LANG_SITEMGR_SEARCH" onclick="searchAccount(this.form, 'home', 0, 0);"/>         <input style="width:80px" class="input-button-form" type="button" name="acct_cancel_btn" id="acct_reset_btn" value="LANG_SITEMGR_CANCEL" onclick="cancelSearchAccount(0);"/>
 								<input style="width:100px" class="input-button-form" type="button" name="acct_empty_btn" id="acct_empty_btn" value="LANG_SITEMGR_ACCOUNTSEARCH_EMPTY" onclick="emptySearchAccount(0);"/>
 							</td>
 						</tr>
@@ -233,9 +231,9 @@
             <div id="bulk_check" style="display:none">
 
                  <div class="bulk-checkall">
-                    <input type="checkbox" id="check_all" name="check_all" onclick="checkAll('article', document.getElementById('check_all'), false, 1); removeCategoryDropDown('article', 'http://beautypro411.com');"/>
+                    <input type="checkbox" id="check_all" name="check_all" onclick="checkAll('article', document.getElementById('check_all'), false, 1); removeCategoryDropDown('article', 'home');"/>
 
-                    <a class="CheckUncheck" href="javascript:void(0);" onclick="checkAll('article', document.getElementById('check_all'), true, 1); removeCategoryDropDown('article', 'http://beautypro411.com');">
+                    <a class="CheckUncheck" href="javascript:void(0);" onclick="checkAll('article', document.getElementById('check_all'), true, 1); removeCategoryDropDown('article', 'home');">
                         Check / Uncheck All                    </a>
                 </div>
 

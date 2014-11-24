@@ -55,6 +55,13 @@ public class EventController extends BaseMultiActionController {
 		modelMap.addAttribute("eventsList", eventsList);
 		return "eventManage";
 	}
+	
+	@RequestMapping("/event")
+	public String event(ModelMap modelMap) {
+		modelMap.addAttribute("eventsLists", eventService.getTopEventLists(5));
+		modelMap.addAttribute("eventsCategory", eventService.getAllCategories());
+		return "event";
+	}
 
 	@RequestMapping("eventList")
 	public String eventList(Pageable pageable, ModelMap map,

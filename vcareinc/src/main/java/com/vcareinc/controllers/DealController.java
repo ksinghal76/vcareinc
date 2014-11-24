@@ -44,5 +44,10 @@ public class DealController extends BaseMultiActionController {
 		modelMap.addAttribute("dealsList", dealsList);
 		return "dealManage";
 	}
+	
+	@RequestMapping("/deal")
+	public String deal(ModelMap modelMap) {
+		return "comingsoon";
+	}
 
 }

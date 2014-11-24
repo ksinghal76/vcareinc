@@ -12,7 +12,7 @@
 			<div class="container-fluid">
 
 				<p class="breadcrumb">
-					<a href="http://beautypro411.com/" title="Home">Home</a><span
+					<a href="home" title="Home">Home</a><span
 						class="split">&nbsp;&nbsp;/&nbsp;&nbsp;</span>Events
 				</p>
 
@@ -27,90 +27,81 @@
 
 						<div class="calendar">
 							<h2>Browse Events by Date</h2>
-							<table class="table-calendar" border="0" cellspacing="4"
-								cellpadding="0" width="100%">
-								<tbody>
-									<tr>
-										<td colspan="7" class="pd-0"><table border="0"
-												cellspacing="0" cellpadding="0" width="100%"
-												class="calendar-header">
-												<tbody>
-													<tr>
-														<th align="left"><a class="calendar-button left" href="http://beautypro411.com/event/results.php?month=201404&amp;this_date=20140401">&lt;</a></th>
-														<th><a
-															href="http://beautypro411.com/event/results.php?month=201405&amp;this_date=20140501">May
-																2014</a></th>
-														<th align="right"><a class="calendar-button right"
-															href="http://beautypro411.com/event/results.php?month=201406&amp;this_date=20140601">&gt;</a></th>
-													</tr>
-												</tbody>
-											</table></td>
-									</tr>
-									<tr>
-										<th class="calendar-weekday">S</th>
-										<th class="calendar-weekday">M</th>
-										<th class="calendar-weekday">T</th>
-										<th class="calendar-weekday">W</th>
-										<th class="calendar-weekday">T</th>
-										<th class="calendar-weekday">F</th>
-										<th class="calendar-weekday">S</th>
-									</tr>
-									<tr>
-									<c:set var="monCount" value="0"/>
-									<c:forEach var="month" items="${months}">
-										<c:if test="${monCount % 7 == 0}">
-											<h:outputText value="&lt;/tr&gt;&lt;tr&gt;" escape="false"/>
-										</c:if>
-										<c:set var="monCount" value="${monCount + 1}"/>
-										<c:choose>
-											<c:when test="${month == ''}">
-												<td>&nbsp;</td>
-											</c:when>
-											<c:otherwise>
-												<td align="center" width="22" class="calendar-day"><a
-												href="javascript:set_cal_date('20140501')" class="normal">${month}</a></td>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-									</tr>
-								</tbody>
-							</table>
+							<div id="my-calendar"></div>
+							<script type="application/javascript">
+							    $(document).ready(function () {
+							        $("#my-calendar").zabuto_calendar(
+							        		{
+							        			language: "en",
+							        			cell_border: true,
+							        			today: true,
+							        			show_days: false,
+							        			weekstarton:0,
+							        			nav_icon: {
+							        				prev: '<i class="fa fa-chevron-circle-left"></i>',
+							        				next: '<i class="fa fa-chevron-circle-right"></i>',
+							        			},
+							        			action: function() {
+							        				return myDateFunction(this.id);
+							        			},
+							        			action_nav: function() {
+							        				return myNavFunction(this.id);
+							        			}
+							        		});
+							    });
+							</script>
 						</div>
 						<div class="flex-box-group daily-calendar" style="float: none;">
 
 							<ul class="calendar-event">
 
 
-								<li id="952014" onclick="getEventsCalendar('9', '5', '2014');"
+								<li onclick="getEventsCalendar('9', '5', '2014');"
 									class="active"><b></b><br/>
-								<span>9th</span></li>
+								<span id="FirstDay"></span></li>
 
 
-								<li id="1052014" onclick="getEventsCalendar('10', '5', '2014');">
+								<li onclick="getEventsCalendar('10', '5', '2014');">
 									<b></b><br/>
-								<span>10th</span>
+								<span id="SecondDay"></span>
 								</li>
 
 
-								<li id="1152014" onclick="getEventsCalendar('11', '5', '2014');">
+								<li onclick="getEventsCalendar('11', '5', '2014');">
 									<b></b><br/>
-								<span>11th</span>
+								<span id="ThirdDay"></span>
 								</li>
 
 
-								<li id="1252014" onclick="getEventsCalendar('12', '5', '2014');">
+								<li onclick="getEventsCalendar('12', '5', '2014');">
 									<b></b><br/>
-								<span>12th</span>
+								<span id="FourthDay"></span>
 								</li>
 
 
-								<li id="1452014" onclick="getEventsCalendar('14', '5', '2014');">
+								<li onclick="getEventsCalendar('14', '5', '2014');">
 									<b></b><br/>
-								<span>14th</span>
+								<span id="FifthDay"></span>
 								</li>
 
 
 							</ul>
+
+							<script>
+							var date = new Date();
+							var today = date.getTime();
+							var OneDay = 86400000
+							var SecondDay = new Date(today + (OneDay * 1));
+							var ThirdDay = new Date(today + (OneDay * 2));
+							var FouthDay = new Date(today + (OneDay * 3));
+							var FifthDay = new Date(today + (OneDay * 4));
+
+							document.getElementById("FirstDay").innerHTML = date.getDate() + get_nth_suffix(date.getDate());
+							document.getElementById("SecondDay").innerHTML = SecondDay.getDate() + get_nth_suffix(SecondDay.getDate());
+							document.getElementById("ThirdDay").innerHTML = ThirdDay.getDate() + get_nth_suffix(ThirdDay.getDate());
+							document.getElementById("FourthDay").innerHTML = FouthDay.getDate() + get_nth_suffix(FouthDay.getDate());
+							document.getElementById("FifthDay").innerHTML = FifthDay.getDate() + get_nth_suffix(FifthDay.getDate());
+							</script>
 
 							<p class="calendar_loading"></p>
 
@@ -141,13 +132,13 @@
 
 								<h2>
 									Browse by Location <span><a class="view-more"
-										href="http://beautypro411.com/event/alllocations.php">more</a></span>
+										href="">more</a></span>
 								</h2>
 
 								<ul class="list-home">
 
 
-									<li><a
+									<!--<li><a
 										href="http://beautypro411.com/event/location/spain/teruel/albarracin">Albarracin</a>
 									</li>
 
@@ -172,7 +163,7 @@
 									</li>
 
 
-									<li><a
+									<li><a 
 										href="http://beautypro411.com/event/location/united-states/california/carlsbad">Carlsbad</a>
 									</li>
 
@@ -264,7 +255,7 @@
 
 									<li><a
 										href="http://beautypro411.com/event/location/united-states/california/san-francisco">San
-											Francisco</a></li>
+											Francisco</a></li> -->
 
 
 								</ul>
@@ -279,33 +270,39 @@
 					<div class="span8">
 
 						<!--cachemarkerFeaturedEvent2-->
+						<c:if test="${eventsLists != null &amp;&amp; eventsLists[0] != null}">
 						<div class="row-fluid flex-box color-4">
 
 							<h2>
 								Featured Event
-								<time>12/02/2012 - 12/31/2014</time>
+								<time><h:outputText value="${eventsLists[0].startDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText> - <h:outputText value="${eventsLists[0].endDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText></time>
 							</h2>
 
 							<div class="row-fluid">
 
 								<div class="span12">
 
-									<aside> <a
-										href="http://beautypro411.com/event/theater-night.html"> <img
-										width="217" height="122"
-										src="http://beautypro411.com/custom/domain_1/image_files/218_photo_3598.png"
-										alt="Theater night!" title="Theater night!" border="0"
-										style="display: inline"/></a> </aside>
+									<aside> <a href="${eventsLists[0].url}">
+	                                	<c:choose>
+	                                		<c:when test="${not empty eventsLists[0].imageUpload.filename}">
+	                                    		<img src="${eventsLists[0].imageUpload.filename}" alt="Dinner Party" title="Dinner Party" border="0"/>
+	                                    	</c:when>
+	                                    	<c:otherwise>
+	                                    		<span class="no-image"/>
+	                                    	</c:otherwise>
+	                                   	</c:choose>
+	                                </a> </aside>
 
 									<section>
 									<h5>
-										<a href="http://beautypro411.com/event/theater-night.html">
-											Theater night! </a>
+										<a href="${eventsLists[0].url}" target="_blank">
+                                               ${eventsLists[0].url}</a>
 									</h5>
-									<p>This is example text for the overview section. Just the
-										good ol' boys, never meanin' no harm. Beats all you've ever
-										saw, been in trouble with the law since the day they was born.
-										Straight'nin' the curve, flat'nin' the hills.</p>
+									<p>${eventsLists[0].description}</p>
 									</section>
 
 								</div>
@@ -314,67 +311,77 @@
 							</div>
 
 						</div>
+						</c:if>
 
-
+						
 						<div class="row-fluid">
 
-
+							<c:if test="${eventsLists != null &amp;&amp; eventsLists[1] != null}">
 							<div class="span6 flex-box color-4">
 
 								<h2>
 									Featured Event
-									<time>Every Friday Every Last Week of the Month</time>
+									<time><h:outputText value="${eventsLists[1].startDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText> - <h:outputText value="${eventsLists[1].endDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText></time>
 								</h2>
 
-								<a
-									href="http://beautypro411.com/event/japanese-food-festival.html">
-									<img width="217" height="122"
-									src="http://beautypro411.com/custom/domain_1/image_files/15_photo_3586.png"
-									alt="Japanese Food Festival" title="Japanese Food Festival"
-									border="0" style="display: inline"/>
-								</a>
+								<a href="${eventsLists[1].url}">
+	                                	<c:choose>
+	                                		<c:when test="${not empty eventsLists[1].imageUpload.filename}">
+	                                    		<img src="${eventsLists[1].imageUpload.filename}" alt="Dinner Party" title="Dinner Party" border="0"/>
+	                                    	</c:when>
+	                                    	<c:otherwise>
+	                                    		<span class="no-image"/>
+	                                    	</c:otherwise>
+	                                   	</c:choose>
+	                                </a>
 
 								<section>
 								<h5>
-									<a
-										href="http://beautypro411.com/event/japanese-food-festival.html">
-										Japanese Food Festival </a>
+									<a href="${eventsLists[1].url}" target="_blank">
+                                               ${eventsLists[1].url}</a>
 								</h5>
 
-								<p>This is example text for the overview section. Ten years
-									ago a crack commando unit was sent to prison by a military
-									court for a crime they didn't commit. These men promptly
-									escaped from a maximum security stockade to the Los Angeles
-									underground.</p>
+								<p>${eventsLists[1].description}</p>
 								</section>
 							</div>
+							</c:if>
 
-
+							<c:if test="${eventsLists != null &amp;&amp; eventsLists[2] != null}">
 							<div class="span6 flex-box color-4">
 
 								<h2>
 									Featured Event
-									<time>12/10/2012 - 12/31/2014</time>
+									<time><h:outputText value="${eventsLists[2].startDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText> - <h:outputText value="${eventsLists[2].endDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText></time>
 								</h2>
 
-								<a href="http://beautypro411.com/event/yard-sale.html"> <img
-									width="217" height="122"
-									src="http://beautypro411.com/custom/domain_1/image_files/282_photo_3570.png"
-									alt="Yard Sale" title="Yard Sale" border="0"
-									style="display: inline"/></a>
-
+								<a href="${eventsLists[2].url}">
+	                                	<c:choose>
+	                                		<c:when test="${not empty eventsLists[2].imageUpload.filename}">
+	                                    		<img src="${eventsLists[2].imageUpload.filename}" alt="Dinner Party" title="Dinner Party" border="0"/>
+	                                    	</c:when>
+	                                    	<c:otherwise>
+	                                    		<span class="no-image"/>
+	                                    	</c:otherwise>
+	                                   	</c:choose>
+	                                </a>
 								<section>
 								<h5>
-									<a href="http://beautypro411.com/event/yard-sale.html">
-										Yard Sale </a>
+									<a href="${eventsLists[2].url}" target="_blank">
+                                               ${eventsLists[2].url}</a>
 								</h5>
 
-								<p>This is example text for the overview section. 80 days
-									around the world, we'll find a pot of gold just sitting where
-									the rainbow's ending. Time - we'll fight against the time, and
-									we'll fly on the white wings of the wind.</p>
+								<p>${eventsLists[2].description}</p>
 								</section>
 							</div>
+							</c:if>
 
 
 						</div>
@@ -382,61 +389,73 @@
 
 						<div class="row-fluid">
 
-
+							<c:if test="${eventsLists != null &amp;&amp; eventsLists[3] != null}">
 							<div class="span6 flex-box color-4">
 
 								<h2>
 									Featured Event
-									<time>Every Wednesday </time>
+									<time><h:outputText value="${eventsLists[3].startDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText> - <h:outputText value="${eventsLists[3].endDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText></time>
 								</h2>
 
-								<a href="http://beautypro411.com/event/open-gallery.html"> <span
-									class="no-image"></span>
-								</a>
+								<a href="${eventsLists[3].url}">
+	                                	<c:choose>
+	                                		<c:when test="${not empty eventsLists[3].imageUpload.filename}">
+	                                    		<img src="${eventsLists[3].imageUpload.filename}" alt="Dinner Party" title="Dinner Party" border="0"/>
+	                                    	</c:when>
+	                                    	<c:otherwise>
+	                                    		<span class="no-image"/>
+	                                    	</c:otherwise>
+	                                   	</c:choose>
+	                                </a>
 
 								<section>
 								<h5>
-									<a href="http://beautypro411.com/event/open-gallery.html">
-										Open Gallery </a>
+									<a href="${eventsLists[3].url}" target="_blank">
+                                               ${eventsLists[3].url}</a>
 								</h5>
 
-								<p>This is example text for the overview section. Children
-									of the sun, see your time has just begun, searching for your
-									ways, through adventures every day. Every day and night, with
-									the condor in flight, with all your friends in tow.</p>
+								<p>${eventsLists[3].description}</p>
 								</section>
 							</div>
+							</c:if>
 
-
+							<c:if test="${eventsLists != null &amp;&amp; eventsLists[4] != null}">
 							<div class="span6 flex-box color-4">
 
 								<h2>
 									Featured Event
-									<time>Every Monday </time>
+									<time><h:outputText value="${eventsLists[4].startDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText> - <h:outputText value="${eventsLists[4].endDate}">
+                                                    		<f:convertDateTime pattern="MM/dd/yyyy"/>
+                                                    	</h:outputText></time>
 								</h2>
 
-								<a
-									href="http://beautypro411.com/event/brazilian-music-festival.html">
-									<img width="217" height="122"
-									src="http://beautypro411.com/custom/domain_1/image_files/8_photo_3568.png"
-									alt="Brazilian Music Festival" title="Brazilian Music Festival"
-									border="0" style="display: inline"/>
-								</a>
+								<a href="${eventsLists[4].url}">
+	                                	<c:choose>
+	                                		<c:when test="${not empty eventsLists[4].imageUpload.filename}">
+	                                    		<img src="${eventsLists[4].imageUpload.filename}" alt="Dinner Party" title="Dinner Party" border="0"/>
+	                                    	</c:when>
+	                                    	<c:otherwise>
+	                                    		<span class="no-image"/>
+	                                    	</c:otherwise>
+	                                   	</c:choose>
+	                                </a>
 
 								<section>
 								<h5>
-									<a
-										href="http://beautypro411.com/event/brazilian-music-festival.html">
-										Brazilian Music Festival </a>
+									<a href="${eventsLists[4].url}" target="_blank">
+                                               ${eventsLists[4].url}</a>
 								</h5>
 
-								<p>This is example text for the overview section. Receiving
-									the brimming pewter, and turning to the harpooneers, he ordered
-									them to produce their weapons. Then ranging them before him
-									near the capstan, with their harpoons in their hands, while his
-									three</p>
+								<p>${eventsLists[4].description}</p>
 								</section>
 							</div>
+							</c:if>
 
 
 						</div>
@@ -448,13 +467,13 @@
 
 								<h2>
 									Browse by Category <span><a class="view-more"
-										href="http://beautypro411.com/event/allcategories.php">more</a></span>
+										href="">more</a></span>
 								</h2>
 
 								<ul class="browse-category">
 
 
-									<li><a href="http://beautypro411.com/event/guide/animals">
+									<!-- <li><a href="http://beautypro411.com/event/guide/animals">
 											Animals </a> <span>(3)</span></li>
 
 
@@ -482,7 +501,7 @@
 
 
 									<li><a href="http://beautypro411.com/event/guide/leisure">
-											Leisure </a> <span>(11)</span></li>
+											Leisure </a> <span>(11)</span></li> -->
 
 
 								</ul>
